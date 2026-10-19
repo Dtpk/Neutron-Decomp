@@ -59,5 +59,5 @@ While a lot of the initial experimental code is messy, the core foundation is la
 I may include a pre-compiled experimental build in a `build/` folder. If you want to try launching it locally on Linux, run:
 
 ```bash
-./neutron
+./neutron or ./run.sh
 ```
