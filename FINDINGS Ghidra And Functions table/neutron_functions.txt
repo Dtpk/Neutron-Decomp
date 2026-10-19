@@ -1,0 +1,1820 @@
+089d433c T abs
+089d5ef4 T __adddf3
+089568c8 T add_to_pathlist
+0894b474 T AllocInstruments
+08968b00 T AllocLinear
+0894b5cc T AllocPatterns
+0894b6dc T AllocPositions
+0894b3a4 T AllocSamples
+0894b560 T AllocTracks
+08968dd0 T antialiasing
+08992f68 T __any_on
+089530fc T apply_envelope_to_amp
+089839b4 T atexit
+089839c8 T atof
+089839dc T atoi
+089839d0 T _atoi_r
+08992c00 T __b2d
+08993008 T _Balloc
+08992998 T _Bfree
+08972694 T _book_maptype1_quantvals
+08972b9c T _book_unquantize
+089839e8 T bsearch
+089836b4 T callbackFin
+089836d0 T callbackSig
+0898fc00 T __call_exitprocs
+08983ab0 T calloc
+08983ac8 T _calloc_r
+08994aac T chdir
+08984388 T _cleanup
+08987e60 T cleanup_glue
+08984378 T _cleanup_r
+089946e0 T _close
+089569f0 T close_file
+08942c14 T close_music
+0898fd80 T _close_r
+08956dc4 T convert_envelope_offset
+08956d50 T convert_envelope_rate
+08956cf0 T convert_envelope_rate_attack
+08956ee8 T convert_tremolo_rate
+08956dd0 T convert_tremolo_sweep
+08956f30 T convert_vibrato_rate
+08956e20 T convert_vibrato_sweep
+08992efc T __copybits
+0897ea14 T copysign
+089cd204 T __cxa_allocate_exception
+089c4934 T __cxa_begin_catch
+089cd2e4 T __cxa_call_terminate
+089c4f6c T __cxa_call_unexpected
+089d2ca8 T __cxa_current_exception_type
+089d2b9c T __cxa_demangle
+089c487c T __cxa_end_catch
+089cd1ac T __cxa_free_exception
+089c4850 T __cxa_get_exception_ptr
+089cd10c T __cxa_get_globals
+089cd100 T __cxa_get_globals_fast
+089c5544 T __cxa_rethrow
+089c55c4 T __cxa_throw
+089930cc T __d2b
+089d9bb4 T __deregister_frame
+089d9bac T __deregister_frame_info
+089d9ab4 T __deregister_frame_info_bases
+08995a94 T div
+089d6314 T __divdf3
+089d47cc T __divdi3
+0898267c T drawRegion
+0899005c T _dtoa_r
+0894aa30 T DupStr
+089c5f6c T __dynamic_cast
+08944d90 T _Eff_build_volume_table_s8
+08944ec4 T _Eff_build_volume_table_u8
+0897fc44 T eglChooseConfig
+0897fea8 T eglCreateContext
+08980064 T eglCreateWindowSurface
+08980230 T eglDestroyContext
+08980390 T eglDestroySurface
+08980444 T eglGetDisplay
+08980430 T eglGetError
+08980450 T eglInitialize
+089804d4 T eglMakeCurrent
+089806a4 T eglSwapBuffers
+089806bc T eglTerminate
+08991640 T __env_lock
+08991648 T __env_unlock
+089d6578 T __eqdf2
+08983b8c T __errno
+0892cb1c T EventUpdate
+0898ef8c T _exit
+08983b9c T exit
+0897909c T exp
+089d5af0 T __extendsfdf2
+0897e2f8 T fabs
+08983d1c T fclose
+08983bd8 T _fclose_r
+089d43c4 T _fcntl
+089d4348 T _fcntl_r
+089d2de4 T fdopen
+089d2cd8 T _fdopen_r
+08983d30 T fflush
+08983f30 T fgetc
+08983fc0 T _fgetc_r
+08984208 T fgets
+08984058 T _fgets_r
+089d2dfc T fileno
+0898578c T _findenv
+089857a4 T _findenv_r
+089db2e8 T _fini
+0897e310 T finite
+089d474c T __fixdfdi
+089d69ec T __fixdfsi
+089daa30 T __fixunsdfdi
+089d46a4 T __fixunsdfsi
+089d6910 T __floatsidf
+0897e32c T floor
+08984600 T fopen
+089844fc T _fopen_r
+0898ef5c T __fout
+089dafbc T __fpcmp_parts_d
+08984360 T __fp_lock_all
+08983964 T fprintf
+08984348 T __fp_unlock_all
+08984618 T fputc
+08984698 T _fputc_r
+089d2eec T fputs
+089d2e54 T _fputs_r
+089d77d4 T __frame_state_for
+089849b4 T fread
+08984718 T _fread_r
+08985c58 T free
+08957288 T free_instruments
+08968ac0 T FreeLinear
+08984b0c T _free_r
+089852e0 T fseek
+08984e20 T _fseek_r
+0898efe8 T _fstat
+089d4238 T fstat
+08985300 T _fstat_r
+0898546c T ftell
+0898536c T _ftell_r
+08900040 T _ftext
+08985588 T _fwalk
+08985480 T _fwalk_reent
+0898573c T fwrite
+08985680 T _fwrite_r
+089d6744 T __gedf2
+089d2f04 T getc
+089d2f94 T _getc_r
+08985764 T getenv
+089858e4 T _getenv_r
+08983430 T getExp
+089454a4 T getfrequency
+08991d04 T __gethex
+08945090 T getlinearperiod
+0898f18c T _getpid
+089885ac T _getpid_r
+089d4614 T getsockopt
+0898f1b4 T _gettimeofday
+0898aedc T gettimeofday
+08995af0 T __gettzinfo
+08911424 T glBegin
+08918a74 T glBindTexture
+0891148c T glBlendFunc
+08911668 T glClear
+08911a54 T glColor3f
+089118e8 T glColor3ub
+08911940 T glColor4f
+08911a60 T glColor4fv
+089118c0 T glColor4ub
+08911910 T glColor4ubv
+08981b80 T glColorMask
+0892c24c T glCopyTexImage1D
+08981c34 T glDepthRange
+08981c84 T glDepthRangef
+08911ea0 T glDisable
+08911fa0 T glDisableClientState
+08911b84 T glDrawArrays
+08911ea8 T glEnable
+08911fa8 T glEnableClientState
+08911fb0 T glEnd
+08917bb4 T glFinish
+089806dc T glFlush
+089120c4 T glFrustum
+08917bd8 T glFrustumf
+089806e4 T glGenTextures
+089807bc T glGetString
+089121b4 T glLoadIdentity
+08912264 T glLockArraysEXT
+08912558 T glMatrixMode
+0891264c T glMultMatrixf
+0898082c T glOrtho
+0898091c T glOrthof
+08980b74 T glPixelStoref
+08980a2c T glPixelStorei
+08918c98 T glPopAttrib
+08980b84 T glPopClientAttrib
+08912720 T glPopMatrix
+08918fc4 T glPushAttrib
+08980db0 T glPushClientAttrib
+08912814 T glPushMatrix
+089128f4 T glRotatef
+08912be8 T glScissor
+08912c04 T glShadeModel
+08981dac T glStencilMask
+0898100c T glTexCoord2f
+08981020 T glTexCoord2fv
+0898103c T glTexCoord4fv
+089812a4 T glTexEnvf
+08981068 T glTexEnvfv
+0898127c T glTexEnvi
+08918448 T glTexImage2D
+089819b0 T glTexParameterf
+089816dc T glTexParameterfv
+08981988 T glTexParameteri
+089812c4 T glTexSubImage2D
+08912c7c T glTranslatef
+08912324 T glUnlockArraysEXT
+08913038 T glVertex2f
+089819d0 T glVertex2i
+08912d74 T glVertex3f
+08913028 T glVertex3fv
+089819e8 T glVertex3i
+08912ffc T glVertex4fv
+08913044 T glVertexPointer
+08913168 T glViewport
+089d66b8 T __gtdf2
+089832ac T guSwapBuffersBehaviour
+089832b8 T guSwapBuffersCallback
+089c5060 T __gxx_personality_v0
+08991bdc T __hexdig_init
+0899254c T __hexnan
+089929c4 T __hi0bits
+0899375c T __i2b
+08979ac0 T __ieee754_exp
+0897a0d4 T __ieee754_log
+0897a850 T __ieee754_pow
+0897baa0 T __ieee754_rem_pio2
+0897c270 T __ieee754_sqrt
+0897261c T _ilog
+08999a78 T iniparser_dump
+08999ce8 T iniparser_dump_ini
+089992c0 T iniparser_find_entry
+08998db8 T iniparser_free
+089992e4 T iniparser_getboolean
+089999d4 T iniparser_getdouble
+08999a30 T iniparser_getint
+08999c2c T iniparser_getnsec
+08999b54 T iniparser_getsecname
+08999390 T iniparser_getstr
+089991c0 T iniparser_getstring
+08999720 T iniparser_new
+08999650 T iniparser_setstr
+08998fc8 T iniparser_unset
+08900018 T _init
+08988314 T _init_signal
+089882ac T _init_signal_r
+08968cb0 T init_tables
+0898fa80 T isatty
+08992838 T isdigit
+08993b60 T __isinfd
+0897e598 T __isnand
+0899b290 T iswspace
+0895e2d0 T IT_Cleanup
+0895bf14 T IT_Init
+0895c1c8 T IT_Load
+0895bea8 T IT_LoadTitle
+0895e3a0 T IT_Test
+0893a2e0 T JoystickUpdate
+0897c568 T __kernel_cos
+0897ca8c T __kernel_rem_pio2
+0897d884 T __kernel_sin
+0897db8c T __kernel_tan
+08998b30 T keymap_decode
+08998bd8 T keymap_reset_state
+0898f26c T _kill
+089885b4 T _kill_r
+089d43b8 T labs
+089d6870 T __ledf2
+08992a4c T __lo0bits
+08958b2c T load_missing_instruments
+08992850 T __locale_charset
+08992870 T localeconv
+08992860 T _localeconv_r
+08979254 T log
+08994804 T _lseek
+089d4240 T lseek
+08992928 T _lseek_r
+089933f0 T __lshift
+089d67d0 T __ltdf2
+08900184 T _main
+08900918 T main
+089d6aac T __make_dp
+089dabdc T __make_fp
+0897295c T _make_words
+08985c6c T malloc
+0898696c T __malloc_lock
+08985c80 T _malloc_r
+089849dc T _malloc_trim_r
+08986974 T __malloc_unlock
+08997708 T maptable_entry
+08997db8 T maptable_load_map
+08997770 T maptable_unload_map
+0897e5cc T matherr
+0899b334 T mbrtowc
+0899b2b8 T _mbrtowc_r
+0899b35c T _mbtowc_r
+08992b1c T __mcmp
+08977168 T mdct_backward
+0894d8bc T MD_GetAtom
+0899325c T __mdiff
+0894cf20 T MD_SampleLength
+0894e314 T MD_SampleLoad
+0894ced0 T MD_SampleSpace
+0894cfe8 T MD_SampleUnload
+08985a88 T memalign
+08985aa0 T _memalign_r
+089864e4 T memchr
+089865d8 T memcmp
+08986668 T memcpy
+08986794 T memmove
+089868a8 T memset
+0894d610 T MikMod_Active
+0894d604 T MikMod_Active_internal
+0894d5fc T MikMod_DisableOutput
+0894d5cc T MikMod_DisableOutput_internal
+0894e398 T MikMod_DriverFromAlias
+0894d5c4 T MikMod_EnableOutput
+0894d550 T MikMod_EnableOutput_internal
+0894daac T MikMod_Exit
+0894da08 T MikMod_Exit_internal
+0894d884 T MikMod_GetVersion
+0894e410 T MikMod_InfoDriver
+0894ba08 T MikMod_InfoLoader
+0894de84 T MikMod_Init
+0894d890 T MikMod_InitThreads
+0894d8b4 T MikMod_Lock
+0894ce78 T MikMod_RegisterAllDrivers
+0894cec8 T MikMod_RegisterAllLoaders
+0894ce88 T MikMod_RegisterAllLoaders_internal
+0894cfc4 T MikMod_RegisterDriver
+0894c920 T MikMod_RegisterErrorHandler
+0894a8d8 T MikMod_RegisterLoader
+0894cffc T MikMod_RegisterPlayer
+0894dd04 T MikMod_Reset
+0894e30c T MikMod_SetNumVoices
+0894de8c T MikMod_SetNumVoices_internal
+0894c8ec T MikMod_strerror
+0894d8ac T MikMod_Unlock
+0894ce48 T MikMod_UnregisterAllDrivers
+0894ce80 T MikMod_UnregisterAllLoaders
+0894d00c T MikMod_Update
+08941ef4 T Mix_AllocateChannels
+089407e8 T Mix_ChannelFinished
+08941944 T Mix_CloseAudio
+08941680 T Mix_ExpireChannel
+089414a8 T Mix_FadeInChannelTimed
+089431d8 T Mix_FadeInMusic
+08943090 T Mix_FadeInMusicPos
+08941274 T Mix_FadeOutChannel
+089413b0 T Mix_FadeOutGroup
+089428fc T Mix_FadeOutMusic
+08940408 T Mix_FadingChannel
+089428b4 T Mix_FadingMusic
+08940d80 T Mix_FreeChunk
+089431e4 T Mix_FreeMusic
+089404c8 T Mix_GetChunk
+08940288 T Mix_GetMusicHookData
+08942988 T Mix_GetMusicType
+089427e0 T Mix_GetSynchroValue
+08940584 T Mix_GroupAvailable
+089406d0 T Mix_GroupChannel
+08940758 T Mix_GroupChannels
+089405e8 T Mix_GroupCount
+08940648 T Mix_GroupNewer
+08941048 T Mix_GroupOldest
+08940a60 T Mix_HaltChannel
+08940b54 T Mix_HaltGroup
+08942bd4 T Mix_HaltMusic
+08940814 T Mix_HookMusic
+089429e0 T Mix_HookMusicFinished
+08945010 T _Mix_InitEffects
+08940218 T Mix_Linked_Version
+0895acc0 T Mix_LoadAIFF_RW
+08943330 T Mix_LoadMUS
+0894267c T Mix_LoadMUS_RW
+0895bb88 T Mix_LoadOGG_RW
+0895b7b8 T Mix_LoadVOC_RW
+08941be4 T Mix_LoadWAV_RW
+0894201c T Mix_OpenAudio
+089411e0 T Mix_Pause
+08940504 T Mix_Paused
+0894266c T Mix_PausedMusic
+08942648 T Mix_PauseMusic
+08941798 T Mix_PlayChannelTimed
+08940428 T Mix_Playing
+08942acc T Mix_PlayingMusic
+089431c8 T Mix_PlayMusic
+0894023c T Mix_QuerySpec
+08940fb4 T Mix_QuickLoad_RAW
+08941ad0 T Mix_QuickLoad_WAV
+08940e30 T Mix_RegisterEffect
+08940294 T Mix_ReserveChannels
+08941100 T Mix_Resume
+08942658 T Mix_ResumeMusic
+08942efc T Mix_RewindMusic
+08942c40 T Mix_SetMusicCMD
+08942e58 T Mix_SetMusicPosition
+08940884 T Mix_SetPostMix
+08942840 T Mix_SetSynchroValue
+089425c4 T MIX_string_equals
+08940958 T Mix_UnregisterAllEffects
+08940bfc T Mix_UnregisterEffect
+089537dc T mix_voice
+08940318 T Mix_Volume
+089403ec T Mix_VolumeChunk
+08942d48 T Mix_VolumeMusic
+08994eb0 T mktime
+089954f8 T _mktm_r
+0894f4e4 T _mm_calloc
+0894c5cc T _mm_delete_file_reader
+0894c5b4 T _mm_delete_file_writer
+0894c5e4 T _mm_delete_rwops_reader
+0894c8b0 T _mm_FileExists
+0894c84c T _mm_fopen
+0894bc08 T _mm_iobase_revert
+0894bbd0 T _mm_iobase_setcur
+0894f548 T _mm_malloc
+0894c65c T _mm_new_file_reader
+0894c5fc T _mm_new_file_writer
+0894c6c8 T _mm_new_rwops_reader
+0894c1d0 T _mm_read_I_SLONG
+0894c478 T _mm_read_I_SLONGS
+0894c1a8 T _mm_read_I_SWORD
+0894c2b8 T _mm_read_I_SWORDS
+0894c148 T _mm_read_I_ULONG
+0894c4e8 T _mm_read_I_ULONGS
+0894c0bc T _mm_read_I_UWORD
+0894c328 T _mm_read_I_UWORDS
+0894c1c8 T _mm_read_M_SLONG
+0894c398 T _mm_read_M_SLONGS
+0894c188 T _mm_read_M_SWORD
+0894c1d8 T _mm_read_M_SWORDS
+0894c10c T _mm_read_M_ULONG
+0894c408 T _mm_read_M_ULONGS
+0894c070 T _mm_read_M_UWORD
+0894c248 T _mm_read_M_UWORDS
+0894c054 T _mm_read_string
+0894ce50 T _mm_registeralldrivers
+0894cf70 T _mm_registerdriver
+0894c910 T _mm_registererrorhandler
+0894a884 T _mm_registerloader
+0894cf9c T _mm_unregisterdrivers
+0894a8b0 T _mm_unregisterloaders
+0894bd4c T _mm_write_I_SLONG
+0894bf94 T _mm_write_I_SLONGS
+0894bd3c T _mm_write_I_SWORD
+0894be14 T _mm_write_I_SWORDS
+0894bcf8 T _mm_write_I_ULONG
+0894bff4 T _mm_write_I_ULONGS
+0894bc74 T _mm_write_I_UWORD
+0894be74 T _mm_write_I_UWORDS
+0894bd44 T _mm_write_M_SLONG
+0894bed4 T _mm_write_M_SLONGS
+0894bd34 T _mm_write_M_SWORD
+0894bd54 T _mm_write_M_SWORDS
+0894bcbc T _mm_write_M_ULONG
+0894bf34 T _mm_write_M_ULONGS
+0894bc2c T _mm_write_M_UWORD
+0894bdb4 T _mm_write_M_UWORDS
+0894c558 T _mm_write_string
+08992e54 T _mprec_log10
+089d5f68 T __muldf3
+08993790 T __multadd
+08993540 T __multiply
+08943944 T music_mixer
+08993ba4 T nanf
+089d6618 T __nedf2
+08997e80 T novaets_kis2_cycle_decode
+0896e0e4 T ogg_buffer_dup
+08943ea0 T OGG_delete
+08943db4 T OGG_init
+08943e68 T OGG_jump_to_time
+08944218 T OGG_new
+0894410c T OGG_new_RW
+08973bc0 T oggpack_adv
+08973fdc T oggpack_bits
+08973f94 T oggpack_bytes
+08973cc0 T oggpack_eop
+0896dd28 T ogg_packet_release
+08973948 T oggpack_look
+08973cd4 T oggpack_read
+08974010 T oggpack_readinit
+0896d974 T ogg_page_bos
+0896d9a4 T ogg_page_continued
+0896e174 T ogg_page_dup
+0896d944 T ogg_page_eos
+0896d868 T ogg_page_granulepos
+0896d768 T ogg_page_packets
+0896d810 T ogg_page_pageno
+0896dbe0 T ogg_page_release
+0896d83c T ogg_page_serialno
+0896d9d4 T ogg_page_version
+08943e4c T OGG_play
+08943ef4 T OGG_playAudio
+08943e58 T OGG_playing
+08943df4 T OGG_setvolume
+08943e60 T OGG_stop
+0896e734 T ogg_stream_create
+0896de38 T ogg_stream_destroy
+0896e72c T ogg_stream_packetout
+0896e724 T ogg_stream_packetpeek
+0896dc28 T ogg_stream_pagein
+0896dd78 T ogg_stream_reset
+0896de00 T ogg_stream_reset_serialno
+0896eca8 T ogg_sync_bufferin
+0896e76c T ogg_sync_create
+0896decc T ogg_sync_destroy
+0896eb58 T ogg_sync_pageout
+0896e7c8 T ogg_sync_pageseek
+0896de88 T ogg_sync_reset
+0896d63c T ogg_sync_wrote
+0898f294 T _open
+08956a04 T open_file
+08943688 T open_music
+0898697c T _open_r
+0896990c T ov_bitrate
+089694dc T ov_bitrate_instant
+0896c878 T ov_clear
+08969d90 T ov_comment
+08969d30 T ov_info
+0896d2fc T ov_open
+0896d29c T ov_open_callbacks
+0896bd38 T ov_pcm_seek
+0896b0f4 T ov_pcm_seek_page
+08969b10 T ov_pcm_tell
+08969700 T ov_pcm_total
+0896ac54 T ov_raw_seek
+08969ae8 T ov_raw_tell
+089695f8 T ov_raw_total
+0896a7d8 T ov_read
+089694d4 T ov_seekable
+0896959c T ov_serialnumber
+089694cc T ov_streams
+0896d258 T ov_test
+0896d21c T ov_test_callbacks
+0896d058 T ov_test_open
+0896c244 T ov_time_seek
+0896baf0 T ov_time_seek_page
+08969b38 T ov_time_tell
+089697e4 T ov_time_total
+089dac08 T __pack_d
+089db0ec T __pack_f
+08993e90 T pipe
+08946104 T Player_Active
+08946c38 T Player_Exit
+08946bbc T Player_Exit_internal
+0894aeac T Player_Free
+0894ae6c T Player_Free_internal
+089461b8 T Player_GetChannelPeriod
+0894616c T Player_GetChannelVoice
+089460f8 T Player_GetModule
+089462d0 T Player_GetSynchroValue
+0894a4d8 T Player_HandleTick
+08946c40 T Player_Init
+0894b334 T Player_Load
+0894b2cc T Player_LoadFP
+0894b25c T Player_LoadGeneric
+0894aeb4 T Player_LoadGeneric_internal
+0894b264 T Player_LoadRW
+0894a8fc T Player_LoadTitle
+08946484 T Player_Mute
+08946128 T Player_Muted
+089469c8 T Player_NextPosition
+08946218 T Player_Paused
+089461fc T Player_Paused_internal
+089468d4 T Player_PrevPosition
+08946798 T Player_SetPosition
+08946244 T Player_SetSpeed
+089462c4 T Player_SetSynchroValue
+0894627c T Player_SetTempo
+089460a8 T Player_SetVolume
+08946b14 T Player_Start
+08946b0c T Player_Stop
+08946ac0 T Player_Stop_internal
+089462dc T Player_ToggleMute
+08946220 T Player_TogglePause
+08946614 T Player_Unmute
+08979400 T pow
+089938a0 T __pow5mult
+08955680 T pre_resample
+0898f9bc T pspDisableInterrupts
+0898fa20 T pspEnableInterrupts
+0892c8d4 T PSP_EventInit
+0892c878 T PSP_EventQuit
+0898f718 T __psp_fdman_get_dup_descriptor
+0898f834 T __psp_fdman_get_new_descriptor
+0898f8e4 T __psp_fdman_init
+0898f658 T __psp_fdman_release_descriptor
+0898f430 T __psp_free_heap
+08994130 T __psp_get_drive
+08915610 T __pspgl_assert_fail
+08913aa0 T __pspgl_buffer_dlist_sync
+089139ec T __pspgl_buffer_free
+08913730 T __pspgl_buffer_map
+08913c18 T __pspgl_buffer_new
+089133d4 T __pspgl_bufferobj_deref
+089138b0 T __pspgl_bufferobj_for_target
+08913b34 T __pspgl_bufferobj_free
+08913870 T __pspgl_bufferobj_map
+08913bbc T __pspgl_bufferobj_new
+0891370c T __pspgl_bufferobj_unmap
+08913650 T __pspgl_buffer_unmap
+08913608 T __pspgl_buffer_want_vidmem
+0891239c T __pspgl_cache_arrays
+08915590 T __pspgl_calloc
+0891415c T __pspgl_context_flush_pending_state_changes
+0891464c T __pspgl_context_pin_buffers
+08914720 T __pspgl_context_render_prim
+0891422c T __pspgl_context_render_setup
+08913e78 T __pspgl_context_writereg
+08913ecc T __pspgl_context_writereg_masked
+08913f30 T __pspgl_context_writereg_uncached
+08918968 T __pspgl_copy_memory
+08918690 T __pspgl_copy_pixels
+08914908 T __pspgl_dlist_await_completion
+08914894 T __pspgl_dlist_cancel
+089152d0 T __pspgl_dlist_dump
+08914d2c T __pspgl_dlist_enqueue_cmd
+08914dc8 T __pspgl_dlist_init
+08914bd8 T __pspgl_dlist_insert_space
+08914990 T __pspgl_dlist_pin_buffer
+08914a18 T __pspgl_dlist_submit
+0891628c T __pspgl_enabled_array_bits
+08911b8c T __pspgl_enable_state
+089154cc T __pspgl_free
+08981a0c T __pspgl_ge_init
+0891541c T __pspgl_ge_matrix_dump
+0891675c T __pspgl_gen_varray
+089153b8 T __pspgl_ge_register_dump
+0892c254 T PSP_GL_GetAttribute
+0892c4e8 T PSP_GL_GetProcAddress
+08916c58 T __pspgl_ge_vertex_fmt
+089162dc T __pspgl_glprim2geprim
+089161c4 T __pspgl_gl_sizeof
+08915c2c T __pspgl_hardware_format
+08919398 T __pspgl_hash_foreach_free
+08919478 T __pspgl_hash_insert
+089192f0 T __pspgl_hash_lookup
+08919418 T __pspgl_hash_remove
+08919334 T __pspgl_hash_uniquekey
+0892c25c T PSP_GL_Init
+08915480 T __pspgl_log
+0892c498 T PSP_GL_MakeCurrent
+08914e58 T __pspgl_matrix_load
+08914f4c T __pspgl_matrix_select
+08914ee0 T __pspgl_matrix_sync
+08917d90 T __pspgl_moved_textures
+08915510 T __pspgl_realloc
+08912b4c T __pspgl_set_scissor
+089182c4 T __pspgl_set_texture_image
+0892c488 T PSP_GL_SwapBuffers
+08915a0c T __pspgl_teximg_free
+08915a44 T __pspgl_teximg_from_buffer
+08915d18 T __pspgl_teximg_new
+08915930 T __pspgl_texobj_cmap
+08916108 T __pspgl_texobj_free
+08915af4 T __pspgl_texobj_new
+0891590c T __pspgl_texobj_unswizzle
+089122d8 T __pspgl_uncache_arrays
+08915638 T __pspgl_uncached
+08917e0c T __pspgl_update_mipmaps
+08915980 T __pspgl_update_texenv
+08916578 T __pspgl_varray_bind_buffer
+08916940 T __pspgl_varray_convert
+08916300 T __pspgl_varray_convert_indices
+08917288 T __pspgl_varray_draw
+08916634 T __pspgl_vertex_is_native
+08917990 T __pspgl_vidmem_alloc
+08917874 T __pspgl_vidmem_avail
+08917a78 T __pspgl_vidmem_compact
+089174ac T __pspgl_vidmem_evict
+08917750 T __pspgl_vidmem_free
+089175c4 T __pspgl_vidmem_setup_write_and_display_buffer
+08915060 T __pspgl_vram_dump
+08994648 T __psp_init_cwd
+0892c588 T PSP_InitOSKeymap
+089975d0 T pspIrKeybFinish
+08995b20 T pspIrKeybGetOutputMode
+08995b2c T pspIrKeybInit
+08995b00 T pspIrKeybOutputMode
+08998c00 T pspIrKeybRawkeyName
+0899763c T pspIrKeybReadinput
+0898ef6c T __psp_libc_init
+089944bc T __psp_path_absolute
+089941f8 T __psp_path_normalize
+08993dc0 T __psp_pipe_close
+08994030 T __psp_pipe_nonblocking_read
+08993bbc T __psp_pipe_nonblocking_write
+08993fac T __psp_pipe_peekmsgsize
+08993d20 T __psp_pipe_read
+08993c80 T __psp_pipe_write
+0892c99c T PSP_PumpEvents
+089941d4 T __psp_safe_strcat
+08994190 T __psp_safe_strcpy
+08994698 T __psp_set_errno
+08981dec T pspvfpu_deletecontext
+08981e2c T pspvfpu_initcontext
+08981e78 T pspvfpu_use_matrices
+089475dc T pt_EffectsPass1
+08946ccc T pt_EffectsPass2
+08946dd4 T pt_NNA
+08949710 T pt_Notes
+08947020 T pt_SetupVoices
+08949ce0 T pt_UpdateVoices
+089869ec T putc
+08986af4 T _putc_r
+08986c88 T puts
+08986c00 T _puts_r
+08986c9c T qsort
+089884e0 T raise
+089883f8 T _raise_r
+089876a8 T rand
+08992d90 T __ratio
+0899487c T _read
+089d4248 T read
+0894ab38 T ReadComment
+0894b730 T ReadLinedComment
+08959ef8 T read_midi_file
+08993af0 T _read_r
+08987720 T realloc
+08987738 T _realloc_r
+08987ea8 T _reclaim_reent
+08953000 T recompute_envelope
+0898fae8 T __register_exitproc
+089d9a68 T __register_frame
+089d9a5c T __register_frame_info
+089d9a18 T __register_frame_info_bases
+089d93ac T __register_frame_info_table
+089d937c T __register_frame_info_table_bases
+089d99e8 T __register_frame_table
+089764a8 T res0_free_info
+089763b0 T res0_free_look
+089760ac T res0_inverse
+08976104 T res0_look
+089764f0 T res0_unpack
+08976054 T res1_inverse
+08975a54 T res2_inverse
+08955f1c T resample_voice
+0898372c T resetValues
+0897e5d4 T rint
+089939cc T __s2b
+08955510 T s32tos16
+0895558c T s32tos16x
+0895548c T s32tos8
+0895554c T s32tou16
+089555dc T s32tou16x
+089554cc T s32tou8
+08955630 T s32toulaw
+0895f2d4 T S3M_Cleanup
+0895e4d0 T S3M_Init
+08968448 T S3MIT_CreateOrders
+08968564 T S3MIT_ProcessCmd
+0895e550 T S3M_Load
+0895e3f4 T S3M_LoadTitle
+0895e460 T S3M_Test
+08956834 T safe_malloc
+0894d868 T Sample_Play
+0894d618 T Sample_Play_internal
+0898f450 T _sbrk
+08988244 T _sbrk_r
+0897e804 T scalbn
+0899b398 T __sccl
+089db3c8 T sceAudioChRelease
+089db3c0 T sceAudioChReserve
+089db3b0 T sceAudioOutputBlocking
+089db3b8 T sceAudioOutputPannedBlocking
+089db318 T sceCtrlPeekBufferPositive
+089db320 T sceCtrlReadBufferPositive
+089db308 T sceCtrlSetSamplingCycle
+089db310 T sceCtrlSetSamplingMode
+089db390 T sceDisplayGetVcount
+089db388 T sceDisplaySetFrameBuf
+089db380 T sceDisplaySetMode
+089db398 T sceDisplayWaitVblankStart
+089db368 T sceGeDrawSync
+089db330 T sceGeEdramGetAddr
+089db328 T sceGeEdramGetSize
+089db338 T sceGeGetCmd
+089db340 T sceGeGetMtx
+089db350 T sceGeListDeQueue
+089db348 T sceGeListEnQueue
+089db360 T sceGeListSync
+089db358 T sceGeListUpdateStallAddr
+089db370 T sceGeSetCallback
+089db378 T sceGeUnsetCallback
+089822d8 T sceGuClear
+089824c8 T sceGuClutLoad
+08982524 T sceGuClutMode
+08982544 T sceGuColor
+08983818 T sceGuColorMaterial
+08982550 T sceGuCopyImage
+089826ec T sceGuDispBuffer
+089827b0 T sceGuDisplay
+08982834 T sceGuDrawArray
+089828f4 T sceGuDrawBuffer
+089829e0 T sceGuEnable
+08982d64 T sceGuFinish
+08982c7c T sceGuFinishId
+08982e4c T sceGuFrontFace
+08982e68 T sceGuGetMemory
+08982ef8 T sceGuInit
+08982fbc T sceGuMaterial
+08983070 T sceGuOffset
+08983824 T sceGuPatchDivide
+089830a8 T sceGuScissor
+08983834 T sceGuSetDither
+08983950 T sceGuSpecular
+08983144 T sceGuStart
+089832c4 T sceGuSwapBuffers
+08983370 T sceGuSync
+089833b4 T sceGuTerm
+089833e4 T sceGuTexFilter
+08983958 T sceGuTexFlush
+089833f4 T sceGuTexFunc
+08983444 T sceGuTexImage
+08983508 T sceGuTexMode
+08983570 T sceGuTexScale
+089835a0 T sceGuTexSync
+089835ac T sceGuViewport
+089db3a0 T sceHprmPeekCurrentKey
+089db408 T sceIoChdir
+089db3d0 T sceIoClose
+089db400 T sceIoDclose
+089db3f8 T sceIoDopen
+089db410 T sceIoGetstat
+089db3f0 T sceIoLseek
+089db3d8 T sceIoOpen
+089db3e0 T sceIoRead
+089db3e8 T sceIoWrite
+089db440 T sceKernelAllocPartitionMemory
+089db528 T sceKernelChangeCurrentThreadAttr
+089db530 T sceKernelChangeThreadPriority
+089db458 T sceKernelCreateCallback
+089db4b0 T sceKernelCreateEventFlag
+089db4c8 T sceKernelCreateMsgPipe
+089db480 T sceKernelCreateSema
+089db500 T sceKernelCreateThread
+089db548 T sceKernelDcacheInvalidateRange
+089db560 T sceKernelDcacheWritebackAll
+089db568 T sceKernelDcacheWritebackInvalidateRange
+089db470 T sceKernelDelayThread
+089db478 T sceKernelDelayThreadCB
+089db4b8 T sceKernelDeleteEventFlag
+089db4d0 T sceKernelDeleteMsgPipe
+089db488 T sceKernelDeleteSema
+089db508 T sceKernelDeleteThread
+089db570 T sceKernelExitGame
+089db518 T sceKernelExitThread
+089db448 T sceKernelFreePartitionMemory
+089db450 T sceKernelGetBlockHeadAddr
+089db538 T sceKernelGetThreadId
+089db558 T sceKernelLibcGettimeofday
+089db550 T sceKernelLibcTime
+089db438 T sceKernelMaxFreeMemSize
+089db4a0 T sceKernelPollSema
+089db4e8 T sceKernelReceiveMsgPipe
+089db4f8 T sceKernelReferMsgPipeStatus
+089db4a8 T sceKernelReferSemaStatus
+089db540 T sceKernelReferThreadStatus
+089db578 T sceKernelRegisterExitCallback
+089db418 T sceKernelSelfStopUnloadModule
+089db4d8 T sceKernelSendMsgPipe
+089db4c0 T sceKernelSetEventFlag
+089db490 T sceKernelSignalSema
+089db460 T sceKernelSleepThreadCB
+089db510 T sceKernelStartThread
+089db430 T sceKernelStderr
+089db420 T sceKernelStdin
+089db428 T sceKernelStdout
+089db520 T sceKernelTerminateDeleteThread
+089db4f0 T sceKernelTryReceiveMsgPipe
+089db4e0 T sceKernelTrySendMsgPipe
+089db498 T sceKernelWaitSema
+089db468 T sceKernelWaitThreadEnd
+089db598 T sceNetInetGetErrno
+089db588 T sceNetInetGetsockopt
+089db590 T sceNetInetSetsockopt
+089db580 T scePowerTick
+089db3a8 T sceRtcGetCurrentTick
+08988710 T __sclose
+08924bd8 T SDL_AddTimer
+08928250 T SDL_AllocAudioMem
+0891e534 T SDL_AllocBlitMap
+0891e950 T SDL_AllocFormat
+08925014 T SDL_AllocRW
+08939fcc T SDL_AppActiveInit
+0891e2a4 T SDL_ApplyGamma
+0891a52c T SDL_AudioDriverName
+0891a598 T SDL_AudioInit
+0891a18c T SDL_AudioQuit
+08927a6c T SDL_BuildAudioCVT
+0893ffd8 T SDL_CalculateAlphaBlit
+0891a100 T SDL_CalculateAudioSpec
+08928258 T SDL_CalculateBlit
+0892c0c0 T SDL_CalculateBlit0
+08939e30 T SDL_CalculateBlit1
+08937404 T SDL_CalculateBlitN
+0891de5c T SDL_CalculatePitch
+08923774 T SDL_CDClose
+089237c0 T SDL_CDEject
+08923d48 T SDL_CDName
+08923dcc T SDL_CDNumDrives
+08923e00 T SDL_CDOpen
+08923908 T SDL_CDPause
+08923988 T SDL_CDPlay
+089239ec T SDL_CDPlayTracks
+08923888 T SDL_CDResume
+08923ed0 T SDL_CDROMInit
+089236d4 T SDL_CDROMQuit
+08923c28 T SDL_CDStatus
+08923804 T SDL_CDStop
+08922570 T SDL_CheckKeyRepeat
+089198ac T SDL_ClearError
+0891a248 T SDL_CloseAudio
+08926990 T SDL_Convert16LSB
+08926a08 T SDL_Convert16MSB
+08926a80 T SDL_Convert8
+089281f0 T SDL_ConvertAudio
+08926bf8 T SDL_ConvertEndian
+0892559c T SDL_ConvertMono
+08926b2c T SDL_ConvertSign
+08925f54 T SDL_ConvertStereo
+0892594c T SDL_ConvertStrip
+08925c50 T SDL_ConvertStrip_2
+089202cc T SDL_ConvertSurface
+08926044 T SDL_ConvertSurround
+0892653c T SDL_ConvertSurround_4
+0892b170 T SDL_CreateCursor
+08924718 T SDL_CreateMutex
+0891ffc4 T SDL_CreateRGBSurface
+08920644 T SDL_CreateRGBSurfaceFrom
+0893a6f0 T SDL_CreateSemaphore
+0892438c T SDL_CreateThread
+0892b36c T SDL_CursorInit
+08929ef0 T SDL_CursorPaletteChanged
+0892b404 T SDL_CursorQuit
+08924edc T SDL_Delay
+089246cc T SDL_DestroyMutex
+0893a6a0 T SDL_DestroySemaphore
+0891c9e8 T SDL_DisplayFormat
+0891ca64 T SDL_DisplayFormatAlpha
+0891dde8 T SDL_DitherColors
+0892ab70 T SDL_DrawCursor
+0892a2d0 T SDL_DrawCursorNoLock
+089219a4 T SDL_EnableKeyRepeat
+08921920 T SDL_EnableUNICODE
+0892a1dc T SDL_EraseCursor
+0892a024 T SDL_EraseCursorNoLock
+08919e54 T SDL_Error
+089213d0 T SDL_EventState
+08920e54 T SDL_EventThreadID
+0891f34c T SDL_FillRect
+0891dee4 T SDL_FindColor
+0891a0a0 T SDL_FirstAudioFormat
+0891c83c T SDL_Flip
+0891e3b0 T SDL_FormatChanged
+08928248 T SDL_FreeAudioMem
+0891e35c T SDL_FreeBlitMap
+0892b0b8 T SDL_FreeCursor
+0891e3dc T SDL_FreeFormat
+08924fe8 T SDL_FreeRW
+0891f10c T SDL_FreeSurface
+0897ee70 T SDL_FreeWAV
+08939fe0 T SDL_GetAppState
+08919fac T SDL_GetAudioStatus
+0891efc8 T SDL_GetClipRect
+08929ee4 T SDL_GetCursor
+08924038 T SDL_GetErrBuf
+08919c88 T SDL_GetError
+08919bc4 T SDL_GetErrorMsg
+089198cc T SDL_GetErrorMsgUNICODE
+08920e60 T SDL_GetEventFilter
+0892196c T SDL_GetKeyName
+08921938 T SDL_GetKeyState
+08921954 T SDL_GetModState
+0892071c T SDL_GetMouseState
+0892075c T SDL_GetRelativeMouseState
+0891e1c8 T SDL_GetRGB
+0891e0b4 T SDL_GetRGBA
+08924020 T SDL_GetThreadID
+08924f78 T SDL_GetTicks
+0891ae08 T SDL_GetVideoInfo
+0891adec T SDL_GetVideoSurface
+0891b75c T SDL_GetWMInfo
+0891beb0 T SDL_GL_GetAttribute
+0891c008 T SDL_GL_GetProcAddress
+0891c064 T SDL_GL_LoadLibrary
+0891b160 T SDL_GL_Lock
+0891bf04 T SDL_GL_SetAttribute
+0891be7c T SDL_GL_SwapBuffers
+0891b3d8 T SDL_GL_Unlock
+0891ae68 T SDL_GL_UpdateRects
+0891b454 T SDL_GL_UpdateRectsLock
+0893a858 T SDL_Has3DNow
+0893a838 T SDL_Has3DNowExt
+0893a7d8 T SDL_HasAltiVec
+0893a898 T SDL_HasMMX
+0893a878 T SDL_HasMMXExt
+0893a8b8 T SDL_HasRDTSC
+0893a818 T SDL_HasSSE
+0893a7f8 T SDL_HasSSE2
+08919804 T SDL_Init
+08919670 T SDL_InitSubSystem
+08919f1c T SDL_InstallParachute
+0891e314 T SDL_InvalidateMap
+08922e80 T SDL_JoystickClose
+08922a40 T SDL_JoystickEventState
+089231a0 T SDL_JoystickGetAxis
+08923054 T SDL_JoystickGetBall
+08922fd4 T SDL_JoystickGetButton
+08923120 T SDL_JoystickGetHat
+089232f4 T SDL_JoystickIndex
+08923620 T SDL_JoystickInit
+089235d0 T SDL_JoystickName
+089232c0 T SDL_JoystickNumAxes
+08923258 T SDL_JoystickNumBalls
+08923224 T SDL_JoystickNumButtons
+0892328c T SDL_JoystickNumHats
+08923328 T SDL_JoystickOpen
+089229f0 T SDL_JoystickOpened
+08922de0 T SDL_JoystickQuit
+08922b00 T SDL_JoystickUpdate
+08921a00 T SDL_KeyboardInit
+08924270 T SDL_KillThread
+08919544 T SDL_Linked_Version
+0891ae24 T SDL_ListModes
+0897ef28 T SDL_LoadWAV_RW
+08919ff8 T SDL_LockAudio
+08921560 T SDL_Lock_EventThread
+0891eff8 T SDL_LockSurface
+0891f90c T SDL_LowerBlit
+0891df7c T SDL_MapRGB
+0891e00c T SDL_MapRGBA
+0891e5b8 T SDL_MapSurface
+0897ea38 T SDL_MixAudio
+089206e8 T SDL_MouseInit
+08929f00 T SDL_MouseRect
+0892ac64 T SDL_MoveCursor
+08924634 T SDL_mutexP
+089245a4 T SDL_mutexV
+0891a050 T SDL_NextAudioFormat
+089229e4 T SDL_NumJoysticks
+0891a250 T SDL_OpenAudio
+08919fe0 T SDL_PauseAudio
+08920ed8 T SDL_PeepEvents
+08921394 T SDL_PollEvent
+08939fec T SDL_PrivateAppActive
+08922d4c T SDL_PrivateJoystickAxis
+08922c0c T SDL_PrivateJoystickBall
+08922b54 T SDL_PrivateJoystickButton
+08922cbc T SDL_PrivateJoystickHat
+08922640 T SDL_PrivateKeyboard
+0892082c T SDL_PrivateMouseButton
+08920ad8 T SDL_PrivateMouseMotion
+08939ee0 T SDL_PrivateQuit
+08920d34 T SDL_PrivateResize
+08921284 T SDL_PrivateSysWMEvent
+08920e6c T SDL_PumpEvents
+08921254 T SDL_PushEvent
+08919654 T SDL_Quit
+08939f48 T SDL_QuitInit
+08919550 T SDL_QuitSubSystem
+08927294 T SDL_RateDIV2
+08927388 T SDL_RateDIV2_c2
+08927488 T SDL_RateDIV2_c4
+089275b4 T SDL_RateDIV2_c6
+08926c64 T SDL_RateMUL2
+08926d9c T SDL_RateMUL2_c2
+08926ee4 T SDL_RateMUL2_c4
+0892708c T SDL_RateMUL2_c6
+0892771c T SDL_RateSLOW
+0897f914 T SDL_ReadBE16
+0897fb20 T SDL_ReadBE32
+0897fbb0 T SDL_ReadBE64
+0897f8e8 T SDL_ReadLE16
+0897f950 T SDL_ReadLE32
+0897f97c T SDL_ReadLE64
+0891ef34 T SDL_ReallocFormat
+089247a0 T SDL_RemoveTimer
+08929fe8 T SDL_ResetCursor
+08922944 T SDL_ResetKeyboard
+08920a58 T SDL_ResetMouse
+0892d2b8 T SDL_RLEAlphaBlit
+0892dd10 T SDL_RLEBlit
+089303c0 T SDL_RLESurface
+0891a7c4 T SDL_RunAudio
+089242b4 T SDL_RunThread
+08925064 T SDL_RWFromConstMem
+08925548 T SDL_RWFromFile
+0892514c T SDL_RWFromFP
+089250d8 T SDL_RWFromMem
+0893a528 T SDL_SemPost
+0893a698 T SDL_SemTryWait
+0893a57c T SDL_SemValue
+0893a690 T SDL_SemWait
+0893a5d8 T SDL_SemWaitTimeout
+0891fc24 T SDL_SetAlpha
+0891f230 T SDL_SetAlphaChannel
+0891ff20 T SDL_SetClipRect
+0891fddc T SDL_SetColorKey
+0891c824 T SDL_SetColors
+0892ae04 T SDL_SetCursor
+08919c98 T SDL_SetError
+089214ec T SDL_SetEventFilter
+08921960 T SDL_SetModState
+0891c4ec T SDL_SetPalette
+0892491c T SDL_SetTimer
+08924cc8 T SDL_SetTimerThreaded
+0891cb98 T SDL_SetVideoMode
+0892afdc T SDL_ShowCursor
+089217a8 T SDL_StartEventLoop
+08924fd8 T SDL_StartTicks
+08921730 T SDL_StopEventLoop
+08923f08 T SDL_SYS_CDInit
+08923f10 T SDL_SYS_CDQuit
+08923f60 T SDL_SYS_CreateThread
+0893a134 T SDL_SYS_JoystickClose
+0893a354 T SDL_SYS_JoystickInit
+0893a2ac T SDL_SYS_JoystickName
+0893a118 T SDL_SYS_JoystickOpen
+0893a13c T SDL_SYS_JoystickQuit
+0893a170 T SDL_SYS_JoystickUpdate
+08923f20 T SDL_SYS_KillThread
+08923f18 T SDL_SYS_SetupThread
+08924e24 T SDL_SYS_StartTimer
+08924e1c T SDL_SYS_StopTimer
+08924e8c T SDL_SYS_TimerInit
+08924e48 T SDL_SYS_TimerQuit
+08923f28 T SDL_SYS_WaitThread
+08924a50 T SDL_ThreadedTimerCheck
+08923f58 T SDL_ThreadID
+08924348 T SDL_ThreadsInit
+08924324 T SDL_ThreadsQuit
+08924d7c T SDL_TimerInit
+08924d10 T SDL_TimerQuit
+08919eb0 T SDL_UninstallParachute
+0891a024 T SDL_UnlockAudio
+08921514 T SDL_Unlock_EventThread
+0891f0a4 T SDL_UnlockSurface
+089300dc T SDL_UnRLESurface
+0891c478 T SDL_UpdateRect
+0891c1dc T SDL_UpdateRects
+0891fa4c T SDL_UpperBlit
+0891daac T SDL_VideoDriverName
+0891db18 T SDL_VideoInit
+0891b78c T SDL_VideoModeOK
+0891c0bc T SDL_VideoQuit
+08921304 T SDL_WaitEvent
+08924208 T SDL_WaitThread
+0892ad64 T SDL_WarpMouse
+0891952c T SDL_WasInit
+0891b490 T SDL_WM_GetCaption
+0891b5a0 T SDL_WM_GrabInput
+0891b638 T SDL_WM_IconifyWindow
+0891bd80 T SDL_WM_SetCaption
+0891b960 T SDL_WM_SetIcon
+0891b65c T SDL_WM_ToggleFullScreen
+0897fb74 T SDL_WriteBE16
+0897facc T SDL_WriteBE32
+0897fa34 T SDL_WriteBE64
+0897f9ac T SDL_WriteLE16
+0897f9d8 T SDL_WriteLE32
+0897fa04 T SDL_WriteLE64
+08983654 T sendCommandf
+08983624 T sendCommandi
+08983660 T sendCommandiStall
+089585c8 T set_default_instrument
+08992910 T setlocale
+08992880 T _setlocale_r
+089d4508 T setsockopt
+089d302c T setvbuf
+08991650 T __sflags
+08984398 T __sfmoreglue
+08984408 T __sfp
+08984280 T __sfp_lock_acquire
+08984288 T __sfp_lock_release
+089916f0 T __sfvwrite_r
+08988594 T signal
+089884f4 T _signal_r
+089883e4 T __sigtramp
+08988324 T __sigtramp_r
+08978edc T sin
+089842a0 T __sinit
+08984290 T __sinit_lock_acquire
+08984298 T __sinit_lock_release
+0895692c T skip
+0894e95c T SL_Exit
+0894e5d0 T SL_HalveSample
+0894eaac T SL_Init
+0894eb34 T SL_Load
+0894e8c8 T SL_LoadSamples
+0894e9b8 T SL_RegisterSample
+0894e540 T SL_Sample16to8
+0894e564 T SL_Sample8to16
+0894e588 T SL_SampleSigned
+0894e5ac T SL_SampleUnsigned
+08985900 T __smakebuf
+089d4258 T snprintf
+089d42b0 T __sout
+08968954 T speed_to_finetune
+08988620 T sprintf
+089886a0 T _sprintf_r
+08979960 T sqrt
+08987694 T srand
+08988818 T __sread
+08987ff4 T __srefill_r
+08988230 T __srget
+089881e4 T __srget_r
+08999f78 T sscanf
+08999ee0 T _sscanf_r
+08988724 T __sseek
+08900040 T _start
+08994994 T _stat
+08993bb4 T stat
+0898888c T strcasecmp
+08988930 T strcat
+089889d4 T strchr
+08988ac8 T strcmp
+089d31f0 T strcoll
+08988b34 T strcpy
+08988bc0 T strdup
+08988bd4 T _strdup_r
+08988c40 T strerror
+089d3360 T strftime
+089891e4 T strlen
+089891fc T strncmp
+0898932c T strncpy
+089894c8 T strrchr
+08989530 T strstr
+0898abe4 T strtod
+089895d4 T _strtod_r
+0898ab6c T strtof
+0898abfc T strtok
+0898ac10 T __strtok_r
+0898acb8 T strtok_r
+0898aebc T strtol
+0899b468 T _strtoll_r
+0898acc0 T _strtol_r
+0899b9a4 T strtoul
+0899b9c4 T _strtoull_r
+0899b7b4 T _strtoul_r
+089d41dc T strxfrm
+089d5e74 T __subdf3
+0899bce8 T __submore
+0899b140 T __svfscanf
+0899a008 T __svfscanf_r
+0898d1d8 T __swbuf
+0898d0a8 T __swbuf_r
+0898879c T __swrite
+0898d8f8 T __swsetup
+08979008 T tan
+08950d10 T Timidity_Active
+0895489c T Timidity_Error
+08950d28 T Timidity_FreeSong
+089551cc T Timidity_Init
+08950dd0 T Timidity_LoadSong
+0895210c T Timidity_PlaySome
+08950e7c T Timidity_SetVolume
+08950d68 T Timidity_Start
+08950d1c T Timidity_Stop
+089d6ae0 T __truncdfsf2
+08995290 T __tzcalc_limits
+08995a84 T __tz_lock
+08995a8c T __tz_unlock
+089d4e74 T __udivdi3
+08992b80 T __ulp
+089d5498 T __umoddi3
+0899bfb4 T ungetc
+0899be0c T _ungetc_r
+0894cad8 T UniCleanup
+0894cbd4 T UniDup
+08968388 T UniEffect
+0894ca3c T UniFindRow
+0894c95c T UniGetByte
+0894c98c T UniGetWord
+0894cb10 T UniInit
+0894cc68 T UniNewline
+0896841c T UniPTEffect
+0894caac T UniReset
+0894c928 T UniSetRow
+0894c9c0 T UniSkipOpcode
+08968328 T UniVolEffect
+0894cdfc T UniWriteByte
+0894cd9c T UniWriteWord
+089dae98 T __unpack_d
+089dab0c T __unpack_f
+089d88ec T _Unwind_Backtrace
+089d6c14 T _Unwind_DeleteException
+089d6eb4 T _Unwind_FindEnclosingFunction
+089da888 T _Unwind_Find_FDE
+089d9168 T _Unwind_ForcedUnwind
+089d6bdc T _Unwind_GetCFA
+089d6c04 T _Unwind_GetDataRelBase
+089d6c84 T _Unwind_GetGR
+089d6be4 T _Unwind_GetIP
+089d6bf4 T _Unwind_GetLanguageSpecificData
+089d6bfc T _Unwind_GetRegionStart
+089d6c0c T _Unwind_GetTextRelBase
+089d8b10 T _Unwind_RaiseException
+089d8fe4 T _Unwind_Resume
+089d8e64 T _Unwind_Resume_or_Rethrow
+089d6c34 T _Unwind_SetGR
+089d6bec T _Unwind_SetIP
+0898aee4 T _user_strerror
+089608c4 T VC1_Exit
+08960944 T VC1_Init
+08960548 T VC1_PlayStart
+08960240 T VC1_PlayStop
+08960138 T VC1_SampleLength
+08961fc4 T VC1_SampleLoad
+08960130 T VC1_SampleSpace
+08960420 T VC1_SampleUnload
+08960484 T VC1_SetNumVoices
+08961ef0 T VC1_SilenceBytes
+0895ffc0 T VC1_VoiceGetFrequency
+0895ff78 T VC1_VoiceGetPanning
+08960070 T VC1_VoiceGetPosition
+0895ff54 T VC1_VoiceGetVolume
+0895ffe4 T VC1_VoicePlay
+0896016c T VC1_VoiceRealVolume
+0895ff9c T VC1_VoiceSetFrequency
+089600ec T VC1_VoiceSetPanning
+089600a4 T VC1_VoiceSetVolume
+08960024 T VC1_VoiceStop
+08960048 T VC1_VoiceStopped
+08961f60 T VC1_WriteBytes
+08960a28 T VC1_WriteSamples
+08963b0c T VC2_Exit
+08963b8c T VC2_Init
+08963780 T VC2_PlayStart
+08963438 T VC2_PlayStop
+08963330 T VC2_SampleLength
+08965548 T VC2_SampleLoad
+08963328 T VC2_SampleSpace
+08963648 T VC2_SampleUnload
+089636ac T VC2_SetNumVoices
+08965474 T VC2_SilenceBytes
+089631b8 T VC2_VoiceGetFrequency
+08963170 T VC2_VoiceGetPanning
+08963268 T VC2_VoiceGetPosition
+0896314c T VC2_VoiceGetVolume
+089631dc T VC2_VoicePlay
+08963364 T VC2_VoiceRealVolume
+08963194 T VC2_VoiceSetFrequency
+089632e4 T VC2_VoiceSetPanning
+0896329c T VC2_VoiceSetVolume
+0896321c T VC2_VoiceStop
+08963240 T VC2_VoiceStopped
+089654e4 T VC2_WriteBytes
+08963cc0 T VC2_WriteSamples
+0894f5c0 T VC_Exit
+0894f5b0 T VC_Init
+0894f600 T VC_PlayStart
+0894f610 T VC_PlayStop
+0894f5f0 T VC_SampleLength
+0894f620 T VC_SampleLoad
+0894f5e0 T VC_SampleSpace
+0894f644 T VC_SampleUnload
+0894f5d0 T VC_SetNumVoices
+0894f744 T VC_SetupPointers
+0894f664 T VC_SilenceBytes
+0894f6bc T VC_VoiceGetFrequency
+0894f6dc T VC_VoiceGetPanning
+0894f724 T VC_VoiceGetPosition
+0894f688 T VC_VoiceGetVolume
+0894f6ec T VC_VoicePlay
+0894f734 T VC_VoiceRealVolume
+0894f6ac T VC_VoiceSetFrequency
+0894f6cc T VC_VoiceSetPanning
+0894f674 T VC_VoiceSetVolume
+0894f704 T VC_VoiceStop
+0894f714 T VC_VoiceStopped
+0894f654 T VC_WriteBytes
+0898cfd8 T vfprintf
+0898af48 T _vfprintf_r
+0899b1f8 T vfscanf
+0899b160 T _vfscanf_r
+089290f0 T vidmem_alloc
+08928eb0 T vidmem_free
+0894d260 T Voice_GetFrequency
+0894d344 T Voice_GetPanning
+0894d4e0 T Voice_GetPosition
+0894d194 T Voice_GetVolume
+0894d408 T Voice_Play
+0894d37c T Voice_Play_internal
+0894d518 T Voice_RealVolume
+0894d258 T Voice_SetFrequency
+0894d1e8 T Voice_SetFrequency_internal
+0894d33c T Voice_SetPanning
+0894d298 T Voice_SetPanning_internal
+0894d188 T Voice_SetVolume
+0894d064 T Voice_SetVolume_internal
+0894d498 T Voice_Stop
+0894d428 T Voice_Stop_internal
+0894d4d8 T Voice_Stopped
+0894d4a0 T Voice_Stopped_internal
+0896fbc0 T _vorbis_apply_window
+0896f968 T _vorbis_block_alloc
+0896faac T vorbis_block_clear
+0896f6d4 T vorbis_block_init
+0896fa14 T _vorbis_block_ripcord
+08972810 T vorbis_book_clear
+089710ec T vorbis_book_decode
+08971c44 T vorbis_book_decodev_add
+0897209c T vorbis_book_decodevs_add
+089717b0 T vorbis_book_decodev_set
+0897130c T vorbis_book_decodevv_add
+089732ec T vorbis_book_init_decode
+0897017c T vorbis_comment_clear
+08970118 T vorbis_comment_init
+08970b90 T vorbis_comment_query
+08970a70 T vorbis_comment_query_count
+0896f544 T vorbis_dsp_clear
+08970098 T vorbis_info_blocksize
+08970234 T vorbis_info_clear
+0897012c T vorbis_info_init
+08975098 T vorbis_lsp_to_curve
+0896fd6c T vorbis_packet_blocksize
+089728c8 T vorbis_staticbook_clear
+08972934 T vorbis_staticbook_destroy
+08970d7c T vorbis_staticbook_unpack
+0896fe04 T vorbis_synthesis
+0896ee24 T vorbis_synthesis_blockin
+0897044c T vorbis_synthesis_headerin
+0896f720 T vorbis_synthesis_init
+0896f490 T vorbis_synthesis_pcmout
+0896f50c T vorbis_synthesis_read
+0896edb0 T vorbis_synthesis_restart
+0896faf8 T _vorbis_window
+0898d048 T vsprintf
+0898cff8 T _vsprintf_r
+08998c54 T vt100_output_map
+0898dae8 T vxprintf
+08944388 T WAVStream_Active
+089443c8 T WAVStream_FreeSong
+08944330 T WAVStream_Init
+089446f4 T WAVStream_LoadSong
+08944428 T WAVStream_PlaySome
+08944370 T WAVStream_SetVolume
+089445d4 T WAVStream_Start
+0894437c T WAVStream_Stop
+0898d264 T wcrtomb
+0898d1f0 T _wcrtomb_r
+0898d3e8 T wcsrtombs
+0898d284 T _wcsrtombs_r
+0898d410 T _wctomb_r
+08987d94 T _wrapup_reent
+0898f594 T _write
+089d4250 T write
+0898d888 T _write_r
+08966558 T XM_Cleanup
+08968298 T XM_Init
+08967bc8 T XM_Load
+089664ec T XM_LoadTitle
+089682c0 T XM_Test
+08900624 T SDL_SetupAudio()
+08900488 T SDL_SetupVideo()
+0890070c T controls()
+089005c4 T SDL_Setup()
+089cd3b8 T __cxxabiv1::__terminate(void (*)())
+089cd408 T __cxxabiv1::__unexpected(void (*)())
+089c57bc T __cxxabiv1::__class_type_info::~__class_type_info()
+089c57f0 T __cxxabiv1::__class_type_info::~__class_type_info()
+089c5800 T __cxxabiv1::__class_type_info::~__class_type_info()
+089c5864 T __cxxabiv1::__si_class_type_info::~__si_class_type_info()
+089c5898 T __cxxabiv1::__si_class_type_info::~__si_class_type_info()
+089c58a8 T __cxxabiv1::__si_class_type_info::~__si_class_type_info()
+089c5810 T __cxxabiv1::__vmi_class_type_info::~__vmi_class_type_info()
+089c5844 T __cxxabiv1::__vmi_class_type_info::~__vmi_class_type_info()
+089c5854 T __cxxabiv1::__vmi_class_type_info::~__vmi_class_type_info()
+08909784 T glinterface::solid_cube(float, float, float, int, int, int, int, float)
+08909d84 T glinterface::perspective(float, float, float, float)
+08909548 T glinterface::cube_skeleton(float, float, float, int, int, int, int, float)
+08909974 T glinterface::cube(float, float, float, int, int, int, int, float)
+089094b4 T glinterface::line(float, float, float, float, float, float, int*)
+08909b64 T glinterface::lookat(float, float, float, float, float, float, float, float, float)
+0890935c T glinterface::square(float, float, float, int, int, int, int, float)
+0890918c T glinterface::square_3D(float, float, float, int, int, int, int, float, int)
+0890bd38 T sound_mixer::play_music(int)
+0890bd18 T sound_mixer::play_effect(int)
+0890bd80 T sound_mixer::stop_all(int)
+0890b718 T stage_interface::print_intro(int)
+0890ab4c T stage_interface::print_staff(int)
+0890aa7c T stage_interface::activate_buttons(int*, int)
+0890afc0 T stage_interface::print_game_interface(int, int, int)
+0890b364 T stage_interface::print_menu_interface(int)
+0890ab54 T stage_interface::print_solo_interface(int)
+0890ae50 T stage_interface::print_train_interface(int)
+0890ac94 T stage_interface::print_tutorial_interface(int, bool)
+0890a8d4 T stage_interface::who_is(int, int)
+0890a948 T stage_interface::catch_key(int)
+0890a9a8 T stage_interface::catch_tap(int, int, int)
+08907f4c T ship::look_for_pos(float, float, float, plane**, int)
+08906814 T ship::set_position(float, float, float)
+08906950 T ship::change_direction(int)
+0890659c T ship::tell_me_the_cost(float, float, float, plane**, int, int, int, int)
+08906824 T ship::arrange_direction_to(int)
+08907560 T ship::init(plane**)
+08908260 T ship::go_to(float, float, float, plane**, int)
+08906b84 T ship::do_step(plane**)
+089074ec T ship::init_pos(int, int, int)
+08907e94 T ship::where_is(float, float, float, plane**, int)
+08907600 T ship::find_path(int, int, int, int, int)
+08908394 T enemy::move(plane**, int)
+08908924 T enemy::print(int, bool)
+089063b8 T enemy::predict(plane**)
+0890635c T enemy::restart()
+08908f10 T piece::change_state(int*, int)
+08908f9c T piece::print(int, bool)
+08908f48 T piece::restart()
+08904bbc T plane::longest_way(int, int, int, int, int)
+08904ef8 T plane::available_ways(int, int, int, int)
+08904a68 T plane::find_piece_index(float, float, float)
+08905c80 T plane::generate_positions(int, int, int, int)
+08904930 T plane::get_cam_position_x(int)
+08904990 T plane::get_cam_position_y(int)
+089049fc T plane::get_cam_position_z(int)
+08905b7c T plane::print(bool)
+08904b4c T plane::has_piece(float, float, float)
+08909ecc T button::change_color(int, int, int, int)
+08909ee0 T button::show_skeleton()
+0890a534 T button::print(float, float, float, int)
+0890a370 T button::print_2D(float, float, float)
+0890a008 T button::print_3D(float, float, float, int, int)
+0890a594 T button::load_text(char*, int)
+089061d4 T camera::update_pos(int, int, int, float, float, float)
+089061a0 T camera::set_coordinates(float, float, float, float, float, float)
+08906250 T camera::locate()
+08906220 T camera::restart()
+08906298 T player::change_color(int)
+08908bc8 T player::print_guides(int, int)
+08908730 T player::move(plane**, int)
+08908a2c T player::print(int, bool)
+08906304 T player::restart()
+0890c274 T neutron::game_intro()
+0890f74c T neutron::load_stage(int, bool)
+08910178 T neutron::next_level()
+0890c0c4 T neutron::show_staff()
+0890dbd8 T neutron::show_stage()
+0890f380 T neutron::stage_over()
+0890eda8 T neutron::load_proton(bool)
+0890bee0 T neutron::move_camera(camera*, float, float, float, int)
+0890bde0 T neutron::move_lookat(camera*, float, float, float, int)
+0890d4c4 T neutron::print_stage()
+0890d254 T neutron::print_stars()
+0890c024 T neutron::wait_option()
+0890c0bc T neutron::are_you_sure()
+0890fc90 T neutron::change_stage(int, bool)
+0890f180 T neutron::unload_stage()
+0890dac4 T neutron::change_option()
+0890e524 T neutron::load_artifact(int)
+089101ec T neutron::step_tutorial()
+0890cb2c T neutron::delay_artifact()
+08910b20 T neutron::execute_action(int)
+0890bfe0 T neutron::level_complete()
+0890ec88 T neutron::load_new_enemy()
+0890c2d0 T neutron::load_miniatures()
+0890c02c T neutron::show_miniatures()
+0890de00 T neutron::execute_artifact()
+0890d308 T neutron::print_background()
+0890e5e8 T neutron::autoload_eletrons(int)
+0890c40c T neutron::create_miniatures()
+0890c168 T neutron::on_miniature_change()
+0890e4dc T neutron::run()
+0890cba8 T neutron::delay(int, int)
+0890d8cc T neutron::print()
+0890de9c T neutron::combat()
+0890de08 T neutron::restart()
+0890e37c T neutron::navigate()
+08910634 T neutron::tutorial()
+0891094c T neutron::main_loop()
+0890cc60 T neutron::menu_move(int)
+089036c4 T terrain::am_i_clear()
+08903188 T terrain::wich_union(int, int, int, int, int)
+089038b0 T terrain::combat_mode()
+08903754 T terrain::fire_up_cue(int)
+08903998 T terrain::change_color(int, int, int, int)
+08902ec0 T terrain::create_unions()
+089041ac T terrain::build_skeleton(bool)
+08903d28 T terrain::print_skeleton()
+0890391c T terrain::navigation_mode()
+08903ba8 T terrain::create_from_array(int, int const (*) [7])
+089032a8 T terrain::set_unions_of_plane(int)
+089039ac T terrain::create_from_miniature(miniature*)
+08904818 T terrain::init(int, int, int, int)
+0890471c T terrain::print(bool, int, bool)
+08903848 T terrain::restart()
+089037d4 T terrain::clear_cue(int)
+089c32c0 T __gnu_cxx::__atomic_add(int volatile*, int)
+089c32a8 T __gnu_cxx::__exchange_and_add(int volatile*, int)
+089cd438 T __gnu_cxx::__verbose_terminate_handler()
+0890b830 T miniature::change_color(int, int, int, int)
+0890b844 T miniature::convert_to_plane(int, int, int, int)
+0890bb84 T miniature::print()
+089c56a8 T __cxxabiv1::__class_type_info::__do_catch(std::type_info const*, void**, unsigned int) const
+089c5974 T __cxxabiv1::__class_type_info::__do_upcast(__cxxabiv1::__class_type_info const*, void const*, __cxxabiv1::__class_type_info::__upcast_result&) const
+089c570c T __cxxabiv1::__class_type_info::__do_upcast(__cxxabiv1::__class_type_info const*, void**) const
+089c5a1c T __cxxabiv1::__class_type_info::__do_dyncast(int, __cxxabiv1::__class_type_info::__sub_kind, __cxxabiv1::__class_type_info const*, void const*, __cxxabiv1::__class_type_info const*, void const*, __cxxabiv1::__class_type_info::__dyncast_result&) const
+089c5778 T __cxxabiv1::__class_type_info::__do_find_public_src(int, void const*, __cxxabiv1::__class_type_info const*, void const*) const
+089c59a4 T __cxxabiv1::__si_class_type_info::__do_upcast(__cxxabiv1::__class_type_info const*, void const*, __cxxabiv1::__class_type_info::__upcast_result&) const
+089c5a90 T __cxxabiv1::__si_class_type_info::__do_dyncast(int, __cxxabiv1::__class_type_info::__sub_kind, __cxxabiv1::__class_type_info const*, void const*, __cxxabiv1::__class_type_info const*, void const*, __cxxabiv1::__class_type_info::__dyncast_result&) const
+089c5a5c T __cxxabiv1::__si_class_type_info::__do_find_public_src(int, void const*, __cxxabiv1::__class_type_info const*, void const*) const
+089c5cb0 T __cxxabiv1::__vmi_class_type_info::__do_upcast(__cxxabiv1::__class_type_info const*, void const*, __cxxabiv1::__class_type_info::__upcast_result&) const
+089c60bc T __cxxabiv1::__vmi_class_type_info::__do_dyncast(int, __cxxabiv1::__class_type_info::__sub_kind, __cxxabiv1::__class_type_info const*, void const*, __cxxabiv1::__class_type_info const*, void const*, __cxxabiv1::__class_type_info::__dyncast_result&) const
+089c5b44 T __cxxabiv1::__vmi_class_type_info::__do_find_public_src(int, void const*, __cxxabiv1::__class_type_info const*, void const*) const
+089c8824 T std::logic_error::what() const
+089c3d90 T std::__timepunct<char>::_M_put(char*, unsigned int, char const*, tm const*) const
+089c3f04 T std::__basic_file<char>::is_open() const
+089c8c0c T std::runtime_error::what() const
+089c71bc T std::ctype<char>::do_tolower(char) const
+089c6d54 T std::ctype<char>::do_tolower(char*, char const*) const
+089c6cb0 T std::ctype<char>::do_toupper(char) const
+089c6ce0 T std::ctype<char>::do_toupper(char*, char const*) const
+0899c9b0 T std::locale::id::_M_id() const
+0899cc38 T std::locale::name() const
+0899cf6c T std::locale::operator==(std::locale const&) const
+089c6658 T std::codecvt<char, char, _mbstate_t>::do_unshift(_mbstate_t&, char*, char*, char*&) const
+089c6674 T std::codecvt<char, char, _mbstate_t>::do_encoding() const
+089c6684 T std::codecvt<char, char, _mbstate_t>::do_max_length() const
+089c667c T std::codecvt<char, char, _mbstate_t>::do_always_noconv() const
+089c6664 T std::codecvt<char, char, _mbstate_t>::do_in(_mbstate_t&, char const*, char const*, char const*&, char*, char*, char*&) const
+089c6648 T std::codecvt<char, char, _mbstate_t>::do_out(_mbstate_t&, char const*, char const*, char const*&, char*, char*, char*&) const
+089c668c T std::codecvt<char, char, _mbstate_t>::do_length(_mbstate_t&, char const*, char const*, unsigned int) const
+089c32d8 T std::collate<char>::_M_compare(char const*, char const*) const
+089c32c8 T std::collate<char>::_M_transform(char*, char const*, unsigned int) const
+089c83e4 T std::ios_base::failure::what() const
+089c3304 T std::messages<char>::do_get(int, int, int, std::string const&) const
+089cd118 T std::exception::what() const
+089c5960 T std::type_info::__do_catch(std::type_info const*, void**, unsigned int) const
+089c56a0 T std::type_info::__do_upcast(__cxxabiv1::__class_type_info const*, void**) const
+089c5690 T std::type_info::__is_pointer_p() const
+089c5698 T std::type_info::__is_function_p() const
+089c69c4 T std::istream::ignore(int)
+089a3c54 T std::istream::ignore(int, int)
+089a2d58 T std::istream::getline(char*, int, char)
+089c58b8 T std::bad_typeid::~bad_typeid()
+089c58ec T std::bad_typeid::~bad_typeid()
+089c58fc T std::bad_typeid::~bad_typeid()
+089c3330 T std::money_base::_S_construct_pattern(char, char, char)
+089c35dc T std::moneypunct<char, false>::_M_initialize_moneypunct(int*, char const*)
+089c3374 T std::moneypunct<char, false>::~moneypunct()
+089c33e0 T std::moneypunct<char, false>::~moneypunct()
+089c3444 T std::moneypunct<char, false>::~moneypunct()
+089c3700 T std::moneypunct<char, true>::_M_initialize_moneypunct(int*, char const*)
+089c34a8 T std::moneypunct<char, true>::~moneypunct()
+089c3514 T std::moneypunct<char, true>::~moneypunct()
+089c3578 T std::moneypunct<char, true>::~moneypunct()
+089c875c T std::__num_base::_S_format_float(std::ios_base const&, char*, char)
+089c882c T std::logic_error::logic_error(std::string const&)
+089c887c T std::logic_error::logic_error(std::string const&)
+089c8c14 T std::logic_error::~logic_error()
+089c8dfc T std::logic_error::~logic_error()
+089c8d5c T std::logic_error::~logic_error()
+089c8bac T std::range_error::range_error(std::string const&)
+089c8bdc T std::range_error::range_error(std::string const&)
+089c3a78 T std::__timepunct<char>::_M_initialize_timepunct(int*)
+089c4100 T std::__basic_file<char>::fd()
+089c3f10 T std::__basic_file<char>::file()
+089c43e0 T std::__basic_file<char>::open(char const*, std::_Ios_Openmode, int)
+089c3f18 T std::__basic_file<char>::sync()
+089c4054 T std::__basic_file<char>::close()
+089c434c T std::__basic_file<char>::xsgetn(char*, int)
+089c4310 T std::__basic_file<char>::xsputn(char const*, int)
+089c4180 T std::__basic_file<char>::seekoff(long long, std::_Ios_Seekdir)
+089c4464 T std::__basic_file<char>::sys_open(int, std::_Ios_Openmode)
+089c3f20 T std::__basic_file<char>::sys_open(__sFILE*, std::_Ios_Openmode)
+089c4248 T std::__basic_file<char>::xsputn_2(char const*, int, char const*, int)
+089c4108 T std::__basic_file<char>::showmanyc()
+089c3ef8 T std::__basic_file<char>::__basic_file(int*)
+089c3eec T std::__basic_file<char>::__basic_file(int*)
+089c40f0 T std::__basic_file<char>::~__basic_file()
+089c40f8 T std::__basic_file<char>::~__basic_file()
+089c89ec T std::domain_error::domain_error(std::string const&)
+089c8a1c T std::domain_error::domain_error(std::string const&)
+089c892c T std::length_error::length_error(std::string const&)
+089c895c T std::length_error::length_error(std::string const&)
+089c88cc T std::out_of_range::out_of_range(std::string const&)
+089c88fc T std::out_of_range::out_of_range(std::string const&)
+089cd158 T std::bad_exception::~bad_exception()
+089cd18c T std::bad_exception::~bad_exception()
+089cd19c T std::bad_exception::~bad_exception()
+089c8a4c T std::runtime_error::runtime_error(std::string const&)
+089c8a9c T std::runtime_error::runtime_error(std::string const&)
+089c8e9c T std::runtime_error::~runtime_error()
+089c8f44 T std::runtime_error::~runtime_error()
+089c8cbc T std::runtime_error::~runtime_error()
+089c8b4c T std::overflow_error::overflow_error(std::string const&)
+089c8b7c T std::overflow_error::overflow_error(std::string const&)
+089c8aec T std::underflow_error::underflow_error(std::string const&)
+089c8b1c T std::underflow_error::underflow_error(std::string const&)
+089c898c T std::invalid_argument::invalid_argument(std::string const&)
+089c89bc T std::invalid_argument::invalid_argument(std::string const&)
+089c6ca0 T std::ctype<char>::classic_table()
+089c703c T std::ctype<char>::ctype(int*, char const*, bool, unsigned int)
+089c6f1c T std::ctype<char>::ctype(char const*, bool, unsigned int)
+089c6e8c T std::ctype<char>::ctype(int*, char const*, bool, unsigned int)
+089c6fac T std::ctype<char>::ctype(char const*, bool, unsigned int)
+089c70cc T std::ctype<char>::~ctype()
+089c7148 T std::ctype<char>::~ctype()
+089c6dd8 T std::ctype<char>::~ctype()
+0899e4f0 T std::locale::_S_initialize()
+0899e4a4 T std::locale::_S_initialize_once()
+0899c9f8 T std::locale::_S_normalize_category(int)
+0899c9a4 T std::locale::facet::_S_get_c_name()
+0899cad4 T std::locale::facet::_S_get_c_locale()
+089c4528 T std::locale::facet::_S_clone_c_locale(int*&)
+089c4530 T std::locale::facet::_S_create_c_locale(int*&, char const*, int*)
+0899cabc T std::locale::facet::_S_initialize_once()
+089c4520 T std::locale::facet::_S_destroy_c_locale(int*&)
+0899ca8c T std::locale::facet::~facet()
+0899ca9c T std::locale::facet::~facet()
+0899caac T std::locale::facet::~facet()
+0899cba0 T std::locale::_Impl::_M_install_cache(std::locale::facet const*, unsigned int)
+0899dabc T std::locale::_Impl::_M_install_facet(std::locale::id const*, std::locale::facet const*)
+0899dd74 T std::locale::_Impl::_M_replace_facet(std::locale::_Impl const*, std::locale::id const*)
+0899ddf0 T std::locale::_Impl::_M_replace_category(std::locale::_Impl const*, std::locale::id const* const*)
+0899de4c T std::locale::_Impl::_Impl(unsigned int)
+0899d370 T std::locale::_Impl::_Impl(std::locale::_Impl const&, unsigned int)
+0899e754 T std::locale::_Impl::_Impl(unsigned int)
+0899d558 T std::locale::_Impl::_Impl(std::locale::_Impl const&, unsigned int)
+0899d19c T std::locale::_Impl::~_Impl()
+0899d8e8 T std::locale::_Impl::~_Impl()
+0899e534 T std::locale::global(std::locale const&)
+0899e510 T std::locale::classic()
+0899d828 T std::locale::operator=(std::locale const&)
+0899c99c T std::locale::locale(std::locale::_Impl*)
+0899cb18 T std::locale::locale(std::locale const&)
+0899e68c T std::locale::locale()
+0899c994 T std::locale::locale(std::locale::_Impl*)
+0899cb5c T std::locale::locale(std::locale const&)
+0899e6f0 T std::locale::locale()
+0899d740 T std::locale::~locale()
+0899d7b4 T std::locale::~locale()
+089c66d8 T std::codecvt<char, char, _mbstate_t>::codecvt(unsigned int)
+089c680c T std::codecvt<char, char, _mbstate_t>::codecvt(int*, unsigned int)
+089c673c T std::codecvt<char, char, _mbstate_t>::codecvt(unsigned int)
+089c6878 T std::codecvt<char, char, _mbstate_t>::codecvt(int*, unsigned int)
+089c68e4 T std::codecvt<char, char, _mbstate_t>::~codecvt()
+089c6958 T std::codecvt<char, char, _mbstate_t>::~codecvt()
+089c67a0 T std::codecvt<char, char, _mbstate_t>::~codecvt()
+089c590c T std::bad_cast::~bad_cast()
+089c5940 T std::bad_cast::~bad_cast()
+089c5950 T std::bad_cast::~bad_cast()
+089c8220 T std::ios_base::_M_grow_words(int, bool)
+0899c810 T std::ios_base::sync_with_stdio(bool)
+089c7eac T std::ios_base::_M_call_callbacks(std::ios_base::event)
+089c7f80 T std::ios_base::register_callback(void (*)(std::ios_base::event, std::ios_base&, int), int)
+089c7e44 T std::ios_base::_M_dispose_callbacks()
+0899c498 T std::ios_base::Init::Init()
+0899c120 T std::ios_base::Init::Init()
+0899c038 T std::ios_base::Init::~Init()
+0899c0ac T std::ios_base::Init::~Init()
+089c86a4 T std::ios_base::imbue(std::locale const&)
+089c7f3c T std::ios_base::xalloc()
+089c84f4 T std::ios_base::failure::failure(std::string const&)
+089c83ec T std::ios_base::failure::failure(std::string const&)
+089c855c T std::ios_base::failure::~failure()
+089c8454 T std::ios_base::failure::~failure()
+089c8604 T std::ios_base::failure::~failure()
+089c870c T std::ios_base::_M_init()
+089c81c0 T std::ios_base::ios_base()
+089c8160 T std::ios_base::ios_base()
+089c7fd8 T std::ios_base::~ios_base()
+089c8060 T std::ios_base::~ios_base()
+089c80e0 T std::ios_base::~ios_base()
+089c3958 T std::numpunct<char>::_M_initialize_numpunct(int*)
+089c3824 T std::numpunct<char>::~numpunct()
+089c3890 T std::numpunct<char>::~numpunct()
+089c38f4 T std::numpunct<char>::~numpunct()
+089cd344 T std::bad_alloc::~bad_alloc()
+089cd378 T std::bad_alloc::~bad_alloc()
+089cd388 T std::bad_alloc::~bad_alloc()
+089cd128 T std::exception::~exception()
+089cd138 T std::exception::~exception()
+089cd148 T std::exception::~exception()
+089c578c T std::type_info::~type_info()
+089c579c T std::type_info::~type_info()
+089c57ac T std::type_info::~type_info()
+089cd420 T std::unexpected()
+089cd398 T std::set_terminate(void (*)())
+089c4770 T void std::__convert_to_v<double>(char const*, double&, std::_Ios_Iostate&, int* const&)
+089c4664 T void std::__convert_to_v<long double>(char const*, long double&, std::_Ios_Iostate&, int* const&)
+089c4568 T void std::__convert_to_v<float>(char const*, float&, std::_Ios_Iostate&, int* const&)
+089cd3a8 T std::set_unexpected(void (*)())
+089cd334 T std::set_new_handler(void (*)())
+089c7254 T std::__throw_bad_cast()
+089bf8fc T int std::__copy_streambufs<char, std::char_traits<char> >(std::basic_streambuf<char, std::char_traits<char> >*, std::basic_streambuf<char, std::char_traits<char> >*)
+089c7288 T std::__throw_bad_alloc()
+089c7220 T std::__throw_bad_typeid()
+089c4858 T std::uncaught_exception()
+089c73bc T std::__throw_ios_failure(char const*)
+089c7b68 T std::__throw_logic_error(char const*)
+089c7568 T std::__throw_range_error(char const*)
+089c7a68 T std::__throw_domain_error(char const*)
+089c7868 T std::__throw_length_error(char const*)
+089c7768 T std::__throw_out_of_range(char const*)
+089c71ec T std::__throw_bad_exception()
+089c7668 T std::__throw_runtime_error(char const*)
+089c7468 T std::__throw_overflow_error(char const*)
+089c72bc T std::__throw_underflow_error(char const*)
+089c7968 T std::__throw_invalid_argument(char const*)
+089a30c8 T std::basic_istream<char, std::char_traits<char> >& std::getline<char, std::char_traits<char>, std::allocator<char> >(std::basic_istream<char, std::char_traits<char> >&, std::basic_string<char, std::char_traits<char>, std::allocator<char> >&, char)
+089cd3f0 T std::terminate()
+089c6e4c T std::ctype<char> const& std::use_facet<std::ctype<char> >(std::locale const&)
+089a38c0 T std::basic_istream<char, std::char_traits<char> >& std::operator>><char, std::char_traits<char> >(std::basic_istream<char, std::char_traits<char> >&, char*)
+089a346c T std::basic_istream<char, std::char_traits<char> >& std::operator>><char, std::char_traits<char>, std::allocator<char> >(std::basic_istream<char, std::char_traits<char> >&, std::basic_string<char, std::char_traits<char>, std::allocator<char> >&)
+089f1330 V VTT for std::iostream
+089ef730 V VTT for std::istream
+089f0380 V VTT for std::ostream
+089f1068 V VTT for std::basic_fstream<char, std::char_traits<char> >
+089f11a8 V VTT for std::basic_ifstream<char, std::char_traits<char> >
+089f1148 V VTT for std::basic_ofstream<char, std::char_traits<char> >

@@ -1,0 +1,137 @@
+// ========================================================
+// 0x08908f10: piece::change_state(int*, int)
+// ========================================================
+// Function: change_state @ 08908f10
+
+/* DWARF original prototype: void change_state(piece * this, int * material, int type) */
+
+void __thiscall piece::change_state(piece *this,int *material,int type)
+
+{
+  int iVar1;
+  
+  this->material[0] = *material;
+  iVar1 = material[1];
+  this->state = true;
+  this->material[1] = iVar1;
+  this->material[2] = material[2];
+  iVar1 = material[3];
+  this->status = 1;
+  this->type = type;
+  this->material[3] = iVar1;
+  return;
+}
+
+// ========================================================
+// 0x08908f48: piece::restart()
+// ========================================================
+// Function: restart @ 08908f48
+
+/* DWARF original prototype: void restart(piece * this) */
+
+void __thiscall piece::restart(piece *this)
+
+{
+  float fVar1;
+  float fVar2;
+  
+  fVar1 = DAT_089dc360;
+  this->owner = -2;
+  this->material[3] = 200;
+  fVar2 = DAT_089dc43c;
+  this->material[2] = 0xff;
+  this->effect_size = fVar1;
+  this->effect_alpha = fVar2;
+  this->state = false;
+  this->size = fVar1;
+  *(undefined4 *)&this->prints_counter = 0;
+  *(undefined4 *)((int)&this->prints_counter + 4) = 0;
+  this->material[0] = 0xff;
+  this->material[1] = 0xff;
+  this->type = 0;
+  this->status = 0;
+  return;
+}
+
+// ========================================================
+// 0x08908f9c: piece::print(int, bool)
+// ========================================================
+// Function: print @ 08908f9c
+
+/* DWARF original prototype: void print(piece * this, int axis, bool low_quality) */
+
+void __thiscall piece::print(piece *this,int axis,bool low_quality)
+
+{
+  SItype SVar1;
+  undefined4 extraout_v0;
+  undefined4 extraout_v1;
+  glinterface *this_00;
+  GLfloat x;
+  GLfloat y;
+  GLfloat z;
+  undefined4 in_f12;
+  undefined4 in_f13;
+  undefined4 in_f14;
+  undefined4 in_f15;
+  int in_stack_00000000;
+  int in_stack_00000004;
+  int in_stack_00000008;
+  int in_stack_0000000c;
+  GLfloat in_stack_00000010;
+  int in_stack_00000014;
+  int in_stack_00000018;
+  int in_stack_0000001c;
+  GLfloat in_stack_00000020;
+  
+  if (this->temporal == false) {
+    if (this->status != 2) {
+      if (low_quality) {
+        glinterface::cube(this->printer,(GLfloat)this->material[0],(GLfloat)this->material[1],
+                          (GLfloat)this->material[2],(int)in_stack_00000010,in_stack_00000014,
+                          in_stack_00000018,in_stack_0000001c,in_stack_00000020);
+        return;
+      }
+      glinterface::solid_cube
+                (this->printer,(GLfloat)this->material[0],(GLfloat)this->material[1],
+                 (GLfloat)this->material[2],(int)in_stack_00000010,in_stack_00000014,
+                 in_stack_00000018,in_stack_0000001c,in_stack_00000020);
+      return;
+    }
+    glinterface::solid_cube
+              (this->printer,(GLfloat)this->material[0],(GLfloat)this->material[1],
+               (GLfloat)this->material[2],in_stack_00000000,in_stack_00000004,in_stack_00000008,
+               in_stack_0000000c,in_stack_00000010);
+    if (this->effect_size < DAT_089dc43c) {
+      this->effect_size = this->effect_size + DAT_089dc36c;
+    }
+    if (this->effect_alpha <= 0.0) {
+      restart(this);
+      return;
+    }
+    this->effect_alpha = this->effect_alpha - DAT_089dbcec;
+  }
+  else {
+    SVar1 = __gtdf2((FLO_type_conflict)CONCAT44(in_f13,in_f12),
+                    (FLO_type_conflict)CONCAT44(in_f15,in_f14));
+    if (SVar1 < 1) {
+      __adddf3((FLO_type_conflict)CONCAT44(in_f13,in_f12),(FLO_type_conflict)CONCAT44(in_f15,in_f14)
+              );
+      this_00 = this->printer;
+      x = (GLfloat)this->material[0];
+      y = (GLfloat)this->material[1];
+      z = (GLfloat)this->material[2];
+      *(undefined4 *)&this->prints_counter = extraout_v0;
+      *(undefined4 *)((int)&this->prints_counter + 4) = extraout_v1;
+      glinterface::solid_cube
+                (this_00,x,y,z,(int)in_stack_00000010,in_stack_00000014,in_stack_00000018,
+                 in_stack_0000001c,in_stack_00000020);
+      return;
+    }
+    this->state = false;
+    *(undefined4 *)&this->prints_counter = 0;
+    *(undefined4 *)((int)&this->prints_counter + 4) = 0;
+  }
+  return;
+}
+

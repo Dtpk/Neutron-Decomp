@@ -1,0 +1,110 @@
+// ========================================================
+// 0x089061a0: camera::set_coordinates(float, float, float, float, float, float)
+// ========================================================
+// Function: set_coordinates @ 089061a0
+
+/* DWARF original prototype: void set_coordinates(camera * this, GLfloat x, GLfloat y, GLfloat z,
+   GLfloat x_dir, GLfloat y_dir, GLfloat z_dir) */
+
+void __thiscall
+camera::set_coordinates
+          (camera *this,GLfloat x,GLfloat y,GLfloat z,GLfloat x_dir,GLfloat y_dir,GLfloat z_dir)
+
+{
+  GLfloat in_f12;
+  GLfloat in_f13;
+  GLfloat in_f14;
+  GLfloat in_f15;
+  GLfloat in_f16;
+  GLfloat in_f17;
+  
+  this->z_dir = in_f17;
+  this->last_x = this->x;
+  this->last_y = this->y;
+  this->last_z = this->z;
+  this->x = in_f12;
+  this->y = in_f13;
+  this->z = in_f14;
+  this->x_dir = in_f15;
+  this->y_dir = in_f16;
+  return;
+}
+
+// ========================================================
+// 0x089061d4: camera::update_pos(int, int, int, float, float, float)
+// ========================================================
+// Function: update_pos @ 089061d4
+
+/* DWARF original prototype: void update_pos(camera * this, int cam_x, int cam_y, int cam_z, GLfloat
+   x, GLfloat y, GLfloat z) */
+
+void __thiscall
+camera::update_pos(camera *this,int cam_x,int cam_y,int cam_z,GLfloat x,GLfloat y,GLfloat z)
+
+{
+  GLfloat in_f12;
+  GLfloat in_f13;
+  GLfloat in_f14;
+  
+  this->z_dir = in_f14;
+  this->last_x = this->x;
+  this->last_y = this->y;
+  this->last_z = this->z;
+  this->x = (float)cam_x;
+  this->y = (float)cam_y;
+  this->z = (float)cam_z;
+  this->x_dir = in_f12;
+  this->y_dir = in_f13;
+  return;
+}
+
+// ========================================================
+// 0x08906220: camera::restart()
+// ========================================================
+// Function: restart @ 08906220
+
+/* DWARF original prototype: void restart(camera * this) */
+
+void __thiscall camera::restart(camera *this)
+
+{
+  GLfloat GVar1;
+  
+  GVar1 = DAT_089dbce4;
+  this->z_ori = 0.0;
+  this->x = 0.0;
+  this->y_ori = GVar1;
+  this->y = 0.0;
+  this->z = 0.0;
+  this->x_dir = 0.0;
+  this->y_dir = 0.0;
+  this->z_dir = 0.0;
+  this->x_ori = 0.0;
+  return;
+}
+
+// ========================================================
+// 0x08906250: camera::locate()
+// ========================================================
+// Function: locate @ 08906250
+
+/* DWARF original prototype: void locate(camera * this) */
+
+void __thiscall camera::locate(camera *this)
+
+{
+  GLfloat in_a1;
+  GLfloat in_a2;
+  GLfloat in_a3;
+  GLfloat in_stack_00000000;
+  GLfloat in_stack_00000004;
+  GLfloat in_stack_00000008;
+  GLfloat in_stack_0000000c;
+  GLfloat in_stack_00000010;
+  GLfloat in_stack_00000014;
+  
+  glinterface::lookat(this->locator,in_a1,in_a2,in_a3,in_stack_00000000,in_stack_00000004,
+                      in_stack_00000008,in_stack_0000000c,in_stack_00000010,in_stack_00000014);
+  return;
+}
+

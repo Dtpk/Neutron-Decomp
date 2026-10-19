@@ -1,0 +1,2012 @@
+// ========================================================
+// 0x08900b34: stage_interface
+// ========================================================
+// Function: stage_interface @ 08900b34
+
+/* DWARF original prototype: void stage_interface(stage_interface * this, int color, int difficuty,
+   int stage, bool sound) */
+
+void __thiscall
+stage_interface::stage_interface(stage_interface *this,int color,int difficuty,int stage,bool sound)
+
+{
+  int *piVar1;
+  float fVar2;
+  glinterface *pgVar3;
+  button *pbVar4;
+  int iVar5;
+  undefined *puVar6;
+  int iVar7;
+  undefined *puVar8;
+  undefined *puVar9;
+  char *word;
+  stage_interface *psVar10;
+  int (*paiVar11) [4];
+  char in_t0;
+  
+  this->whats[0] = "         original idea           ";
+  this->whats[1] = "      designed and coded by      ";
+  this->whats[2] = "            music by             ";
+  this->whos[2] = "          moish vexler           ";
+  this->whats[3] = "           tested by             ";
+  this->whos[3] = "        benoit duchesne          ";
+  this->whats[4] = "           thanks to             ";
+  this->whos[4] = "         pili and maria          ";
+  this->whats[5] = "          dedicated to           ";
+  this->whos[5] = "        laura miyashiro          ";
+  this->whos[1] = "          josep florit           ";
+  this->actual_staff = 0;
+  this->whos[0] = "          josep florit           ";
+  paiVar11 = ::::INTRO_DATA;
+  psVar10 = this;
+  do {
+    piVar1 = *paiVar11;
+                    /* Unresolved local var: void anon_var_0@[???] */
+    puVar6 = (undefined *)(*paiVar11)[1];
+    puVar8 = (undefined *)(*paiVar11)[2];
+    puVar9 = (undefined *)(*paiVar11)[3];
+    paiVar11 = paiVar11 + 1;
+    psVar10->intro_positions[0][0] = (int)*piVar1;
+    psVar10->intro_positions[0][1] = (int)puVar6;
+    psVar10->intro_positions[0][2] = (int)puVar8;
+    psVar10->intro_positions[0][3] = (int)puVar9;
+    psVar10 = (stage_interface *)(psVar10->buttons + 3);
+  } while (paiVar11 != (int (*) [4])&switchD_089031b8::switchdataD_089dc2d8);
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)this->buttons + iVar5) = 0;
+    iVar5 = iVar7;
+  } while (iVar7 != 0xa0);
+  pgVar3 = operator_new(1);
+  this->locator = pgVar3;
+  this->choosen_color = color;
+  this->max_stages = stage;
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  fVar2 = DAT_089dbcdc;
+  pbVar4->printer = pgVar3;
+  pbVar4->top = 0x110;
+  pbVar4->right = 0xf0;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->bottom = 0xc;
+  pbVar4->size = fVar2;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  pbVar4->left = 0;
+  pbVar4->action = 0;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->key = 3;
+  pbVar4->action_type = 0;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  this->buttons[4] = pbVar4;
+  button::load_text(pbVar4,"<",-1);
+  this->buttons[4]->color[3] = 0;
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  pbVar4->printer = pgVar3;
+  fVar2 = DAT_089dbcdc;
+  pbVar4->left = 0xf0;
+  pbVar4->top = 0x110;
+  pbVar4->right = 0x1e0;
+  pbVar4->bottom = 0xc;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->size = fVar2;
+  pbVar4->action = 1;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->key = 4;
+  pbVar4->action_type = 0;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  this->buttons[5] = pbVar4;
+  button::load_text(pbVar4,">",-1);
+  this->buttons[5]->color[3] = 0;
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  fVar2 = DAT_089dbcdc;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->printer = pgVar3;
+  pbVar4->size = fVar2;
+  pbVar4->action = -1;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  pbVar4->left = 0;
+  pbVar4->top = 0;
+  pbVar4->right = 0;
+  pbVar4->bottom = 0;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->action_type = -1;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  pbVar4->key = 0;
+  this->buttons[6] = pbVar4;
+  button::load_text(pbVar4,"",-1);
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  pbVar4->printer = pgVar3;
+  fVar2 = DAT_089dbcdc;
+  pbVar4->left = 0xf;
+  pbVar4->top = 0x20;
+  pbVar4->right = 300;
+  pbVar4->bottom = -0x1c;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->size = fVar2;
+  pbVar4->action = 0x16;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->key = 2;
+  pbVar4->action_type = 1;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  this->buttons[0x1e] = pbVar4;
+  button::load_text(pbVar4,"tap to select or drag to move",-1);
+  this->buttons[0x1e]->color[3] = 0x96;
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  fVar2 = DAT_089dbcdc;
+  pbVar4->printer = pgVar3;
+  pbVar4->right = 0x1e0;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->top = 0x110;
+  pbVar4->size = fVar2;
+  pbVar4->action = 1;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  pbVar4->left = 0;
+  pbVar4->bottom = 0;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->action_type = 2;
+  this->buttons[0x13] = pbVar4;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  pbVar4->key = 0;
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  fVar2 = DAT_089dbcdc;
+  pbVar4->printer = pgVar3;
+  pbVar4->right = 0x1e0;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->top = 0x110;
+  pbVar4->size = fVar2;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  pbVar4->left = 0;
+  pbVar4->bottom = 0;
+  pbVar4->action = 0;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->action_type = 3;
+  this->buttons[0x14] = pbVar4;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  pbVar4->key = 0;
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  pbVar4->printer = pgVar3;
+  fVar2 = DAT_089dbcdc;
+  pbVar4->left = 0x195;
+  pbVar4->top = 0x20;
+  pbVar4->right = 0x1d1;
+  pbVar4->bottom = -0x1c;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->size = fVar2;
+  pbVar4->action = 8;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->key = 7;
+  pbVar4->action_type = 1;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  this->buttons[0xd] = pbVar4;
+  button::load_text(pbVar4,"exit",-1);
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  fVar2 = DAT_089dbcdc;
+  pbVar4->printer = pgVar3;
+  pbVar4->top = 0x110;
+  pbVar4->right = 0x1e0;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->size = fVar2;
+  pbVar4->action = 0x17;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  pbVar4->left = 0;
+  pbVar4->bottom = 0;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->key = 6;
+  pbVar4->action_type = 4;
+  this->buttons[0x22] = pbVar4;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  fVar2 = DAT_089dbcdc;
+  pbVar4->printer = pgVar3;
+  pbVar4->top = 0x110;
+  pbVar4->right = 0x1e0;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->size = fVar2;
+  pbVar4->action = 0x18;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  pbVar4->left = 0;
+  pbVar4->bottom = 0;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->key = 5;
+  this->buttons[0x23] = pbVar4;
+  pbVar4->action_type = 5;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  fVar2 = DAT_089dbcdc;
+  pbVar4->printer = pgVar3;
+  pbVar4->top = 0x110;
+  pbVar4->right = 0x1e0;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->size = fVar2;
+  pbVar4->action = 0x13;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  pbVar4->left = 0;
+  pbVar4->bottom = 0;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->key = 3;
+  pbVar4->action_type = 2;
+  this->buttons[0x1b] = pbVar4;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  fVar2 = DAT_089dbcdc;
+  pbVar4->printer = pgVar3;
+  pbVar4->top = 0x110;
+  pbVar4->right = 0x1e0;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->size = fVar2;
+  pbVar4->action = 0x14;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  pbVar4->left = 0;
+  pbVar4->bottom = 0;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->key = 4;
+  pbVar4->action_type = 3;
+  this->buttons[0x1c] = pbVar4;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  pbVar4->printer = pgVar3;
+  fVar2 = DAT_089dbcdc;
+  pbVar4->left = 0xf;
+  pbVar4->top = 0x20;
+  pbVar4->right = 0x82;
+  pbVar4->bottom = -0x1c;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->size = fVar2;
+  pbVar4->action = 0x15;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->key = 2;
+  pbVar4->action_type = 1;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  this->buttons[0x1d] = pbVar4;
+  button::load_text(pbVar4,"play",-1);
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  fVar2 = DAT_089dbcdc;
+  pbVar4->color[3] = 0xff;
+  pbVar4->action = -1;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->printer = pgVar3;
+  pbVar4->size = fVar2;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  pbVar4->left = 0;
+  pbVar4->top = 0;
+  pbVar4->right = 0;
+  pbVar4->bottom = 0;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->action_type = -1;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  pbVar4->key = 0;
+  this->buttons[0] = pbVar4;
+  button::load_text(pbVar4,"  score:",-1);
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  fVar2 = DAT_089dbcdc;
+  pbVar4->color[3] = 0xff;
+  pbVar4->action = -1;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->printer = pgVar3;
+  pbVar4->size = fVar2;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  pbVar4->left = 0;
+  pbVar4->top = 0;
+  pbVar4->right = 0;
+  pbVar4->bottom = 0;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->action_type = -1;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  pbVar4->key = 0;
+  this->buttons[1] = pbVar4;
+  button::load_text(pbVar4,"000000",-1);
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  fVar2 = DAT_089dbcdc;
+  pbVar4->color[3] = 0xff;
+  pbVar4->action = -1;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->printer = pgVar3;
+  pbVar4->size = fVar2;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  pbVar4->left = 0;
+  pbVar4->top = 0;
+  pbVar4->right = 0;
+  pbVar4->bottom = 0;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->action_type = -1;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  pbVar4->key = 0;
+  this->buttons[2] = pbVar4;
+  button::load_text(pbVar4,"enemies:",-1);
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  fVar2 = DAT_089dbcdc;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->printer = pgVar3;
+  pbVar4->size = fVar2;
+  pbVar4->action = -1;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  pbVar4->left = 0;
+  pbVar4->top = 0;
+  pbVar4->right = 0;
+  pbVar4->bottom = 0;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->action_type = -1;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  pbVar4->key = 0;
+  this->buttons[3] = pbVar4;
+  button::load_text(pbVar4,"00",-1);
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  pbVar4->printer = pgVar3;
+  fVar2 = DAT_089dbcdc;
+  pbVar4->left = 0x6e;
+  pbVar4->top = 0xc0;
+  pbVar4->right = 0x172;
+  pbVar4->bottom = 0x16;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->size = fVar2;
+  pbVar4->action = 0x12;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->key = 2;
+  pbVar4->action_type = 1;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  this->buttons[0x1a] = pbVar4;
+  button::load_text(pbVar4,"try again",-1);
+  this->buttons[0x1a]->color[3] = 0xff;
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  pbVar4->printer = pgVar3;
+  fVar2 = DAT_089dbcdc;
+  pbVar4->left = 0x5f;
+  pbVar4->top = 0x20;
+  pbVar4->right = 0xbe;
+  pbVar4->bottom = -0x1c;
+  pbVar4->color[3] = 0xff;
+  pbVar4->size = fVar2;
+  pbVar4->action = 0x19;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->key = 2;
+  pbVar4->action_type = 1;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  this->buttons[0x24] = pbVar4;
+  button::load_text(pbVar4," yes ",-1);
+  this->buttons[0x24]->color[3] = 0xff;
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  pbVar4->printer = pgVar3;
+  fVar2 = DAT_089dbcdc;
+  pbVar4->left = 0xf;
+  pbVar4->top = 0x20;
+  pbVar4->right = 0x55;
+  pbVar4->bottom = -0x1c;
+  pbVar4->color[3] = 0xff;
+  pbVar4->size = fVar2;
+  pbVar4->action = 0x1a;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->key = 7;
+  pbVar4->action_type = 1;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  this->buttons[0x25] = pbVar4;
+  button::load_text(pbVar4," no ",-1);
+  this->buttons[0x25]->color[3] = 0xff;
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  pbVar4->printer = pgVar3;
+  fVar2 = DAT_089dbcdc;
+  pbVar4->left = 0x6e;
+  pbVar4->top = 0xc0;
+  pbVar4->right = 0x172;
+  pbVar4->bottom = 0x16;
+  pbVar4->color[3] = 0xff;
+  pbVar4->size = fVar2;
+  pbVar4->action = 0x11;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->action_type = 1;
+  pbVar4->key = 2;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  this->buttons[0x15] = pbVar4;
+  button::load_text(pbVar4,"sound",-1);
+  this->buttons[0x15]->color[3] = 0x19;
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  fVar2 = DAT_089dbcdc;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->printer = pgVar3;
+  pbVar4->size = fVar2;
+  pbVar4->action = -1;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  pbVar4->left = 0;
+  pbVar4->top = 0;
+  pbVar4->right = 0;
+  pbVar4->bottom = 0;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->action_type = -1;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  pbVar4->key = 0;
+  this->buttons[0x19] = pbVar4;
+  if (in_t0 == '\0') {
+    button::load_text(pbVar4,"off",-1);
+    pbVar4 = this->buttons[0x19];
+  }
+  else {
+    button::load_text(pbVar4,"on",-1);
+    pbVar4 = this->buttons[0x19];
+  }
+  pbVar4->color[3] = 0x19;
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  pbVar4->printer = pgVar3;
+  fVar2 = DAT_089dbcdc;
+  pbVar4->left = 0x6e;
+  pbVar4->top = 0xc0;
+  pbVar4->right = 0x172;
+  pbVar4->bottom = 0x16;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->size = fVar2;
+  pbVar4->action = 0x10;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->action_type = 1;
+  pbVar4->key = 2;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  this->buttons[0x17] = pbVar4;
+  if (difficuty == 0) {
+    button::load_text(pbVar4,"easy",-1);
+    pbVar4 = this->buttons[0x17];
+  }
+  else {
+    button::load_text(pbVar4,"hard",-1);
+    pbVar4 = this->buttons[0x17];
+  }
+  pbVar4->color[3] = 0x19;
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  pbVar4->printer = pgVar3;
+  fVar2 = DAT_089dbcdc;
+  pbVar4->left = 0x6e;
+  pbVar4->top = 0xc0;
+  pbVar4->right = 0x172;
+  pbVar4->bottom = 0x16;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->size = fVar2;
+  pbVar4->action = 0xf;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->action_type = 1;
+  pbVar4->key = 2;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  this->buttons[0x16] = pbVar4;
+  button::load_text(pbVar4,"color",-1);
+  this->buttons[0x16]->color[3] = 0x19;
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  pbVar4->printer = pgVar3;
+  fVar2 = DAT_089dbcdc;
+  pbVar4->left = 0x6e;
+  pbVar4->top = 0xc0;
+  pbVar4->right = 0x172;
+  pbVar4->bottom = 0x16;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->size = fVar2;
+  pbVar4->action = 0xe;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->action_type = 1;
+  pbVar4->key = 2;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  this->buttons[0x18] = pbVar4;
+  button::load_text(pbVar4,"back",-1);
+  this->buttons[0x18]->color[3] = 0x19;
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  pbVar4->printer = pgVar3;
+  fVar2 = DAT_089dbcdc;
+  pbVar4->left = 0x6e;
+  pbVar4->top = 0xc0;
+  pbVar4->right = 0x172;
+  pbVar4->bottom = 0x16;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->size = fVar2;
+  pbVar4->action = 10;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->action_type = 1;
+  pbVar4->key = 2;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  this->buttons[0xf] = pbVar4;
+  button::load_text(pbVar4,"new",-1);
+  this->buttons[0xf]->color[3] = 0x19;
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  fVar2 = DAT_089dbcdc;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->printer = pgVar3;
+  pbVar4->size = fVar2;
+  pbVar4->action = -1;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  pbVar4->left = 0;
+  pbVar4->top = 0;
+  pbVar4->right = 0;
+  pbVar4->bottom = 0;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->action_type = -1;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  pbVar4->key = 0;
+  this->buttons[0x20] = pbVar4;
+  button::load_text(pbVar4,"game",-1);
+  this->buttons[0x20]->color[3] = 0x19;
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  pbVar4->printer = pgVar3;
+  fVar2 = DAT_089dbcdc;
+  pbVar4->left = 0x6e;
+  pbVar4->top = 0xc0;
+  pbVar4->right = 0x172;
+  pbVar4->bottom = 0x16;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->size = fVar2;
+  pbVar4->action = 0xb;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->action_type = 1;
+  pbVar4->key = 2;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  this->buttons[0x10] = pbVar4;
+  button::load_text(pbVar4,"next",-1);
+  this->buttons[0x10]->color[3] = 0x19;
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  fVar2 = DAT_089dbcdc;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->printer = pgVar3;
+  pbVar4->size = fVar2;
+  pbVar4->action = -1;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  pbVar4->left = 0;
+  pbVar4->top = 0;
+  pbVar4->right = 0;
+  pbVar4->bottom = 0;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->action_type = -1;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  pbVar4->key = 0;
+  this->buttons[0x1f] = pbVar4;
+  button::load_text(pbVar4,"stage",-1);
+  this->buttons[0x1f]->color[3] = 0x19;
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  pbVar4->printer = pgVar3;
+  fVar2 = DAT_089dbcdc;
+  pbVar4->left = 0x6e;
+  pbVar4->top = 0xc0;
+  pbVar4->right = 0x172;
+  pbVar4->bottom = 0x16;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->size = fVar2;
+  pbVar4->action = 0xc;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->action_type = 1;
+  pbVar4->key = 2;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  this->buttons[0x11] = pbVar4;
+  button::load_text(pbVar4,"play",-1);
+  this->buttons[0x11]->color[3] = 0x19;
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  fVar2 = DAT_089dbcdc;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->printer = pgVar3;
+  pbVar4->size = fVar2;
+  pbVar4->action = -1;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  pbVar4->left = 0;
+  pbVar4->top = 0;
+  pbVar4->right = 0;
+  pbVar4->bottom = 0;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->action_type = -1;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  pbVar4->key = 0;
+  this->buttons[0x21] = pbVar4;
+  button::load_text(pbVar4,"one",-1);
+  this->buttons[0x21]->color[3] = 0x19;
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  pbVar4->printer = pgVar3;
+  fVar2 = DAT_089dbcdc;
+  pbVar4->left = 0x6e;
+  pbVar4->top = 0xc0;
+  pbVar4->right = 0x172;
+  pbVar4->bottom = 0x16;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->size = fVar2;
+  pbVar4->action = 0xd;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->action_type = 1;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  pbVar4->key = 2;
+  this->buttons[0x12] = pbVar4;
+  button::load_text(pbVar4,"back",-1);
+  this->buttons[0x12]->color[3] = 0x19;
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  fVar2 = DAT_089dbcdc;
+  pbVar4->printer = pgVar3;
+  pbVar4->left = 0x6e;
+  pbVar4->top = 0xc0;
+  pbVar4->bottom = 0x16;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->right = 0x172;
+  pbVar4->size = fVar2;
+  pbVar4->action = 2;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->key = 2;
+  pbVar4->action_type = 1;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  this->buttons[7] = pbVar4;
+  button::load_text(pbVar4,"game",-1);
+  this->buttons[7]->color[3] = 0xff;
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  pbVar4->printer = pgVar3;
+  fVar2 = DAT_089dbcdc;
+  pbVar4->left = 0x6e;
+  pbVar4->top = 0xc0;
+  pbVar4->right = 0x172;
+  pbVar4->bottom = 0x16;
+  pbVar4->color[3] = 0xff;
+  pbVar4->size = fVar2;
+  pbVar4->action = 3;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->action_type = 1;
+  pbVar4->key = 2;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  this->buttons[8] = pbVar4;
+  button::load_text(pbVar4,"setup",-1);
+  this->buttons[8]->color[3] = 0x19;
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  pbVar4->printer = pgVar3;
+  fVar2 = DAT_089dbcdc;
+  pbVar4->left = 0x6e;
+  pbVar4->top = 0xc0;
+  pbVar4->right = 0x172;
+  pbVar4->bottom = 0x16;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->size = fVar2;
+  pbVar4->action = 0x1b;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->action_type = 1;
+  pbVar4->key = 2;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  this->buttons[9] = pbVar4;
+  button::load_text(pbVar4,"staff",-1);
+  this->buttons[9]->color[3] = 0x19;
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  pbVar4->printer = pgVar3;
+  fVar2 = DAT_089dbcdc;
+  pbVar4->left = 0x6e;
+  pbVar4->top = 0xc0;
+  pbVar4->right = 0x172;
+  pbVar4->bottom = 0x16;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->size = fVar2;
+  pbVar4->action = 5;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->action_type = 1;
+  pbVar4->key = 2;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  this->buttons[10] = pbVar4;
+  button::load_text(pbVar4,"train",-1);
+  this->buttons[10]->color[3] = 0x19;
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  fVar2 = DAT_089dbcdc;
+  pbVar4->printer = pgVar3;
+  pbVar4->top = 0x110;
+  pbVar4->right = 0x1e0;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->size = fVar2;
+  pbVar4->action = 6;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  pbVar4->left = 0;
+  pbVar4->bottom = 0;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->key = 3;
+  pbVar4->action_type = 2;
+  this->buttons[0xb] = pbVar4;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  fVar2 = DAT_089dbcdc;
+  pbVar4->printer = pgVar3;
+  pbVar4->top = 0x110;
+  pbVar4->right = 0x1e0;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->size = fVar2;
+  pbVar4->action = 7;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  pbVar4->left = 0;
+  pbVar4->bottom = 0;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->key = 4;
+  pbVar4->action_type = 3;
+  pbVar4->effect_alpha = 0;
+  this->menu_option[1] = 2;
+  this->menu_option[2] = 3;
+  this->menu_option[3] = 5;
+  this->menu_option[4] = 10;
+  this->menu_option[5] = 0xb;
+  this->menu_option[6] = 0xc;
+  this->menu_option[7] = 0xd;
+  this->menu_option[8] = 6;
+  this->menu_option[10] = 8;
+  this->buttons[0xc] = pbVar4;
+  pbVar4->isFadeing = false;
+  this->menu_option[9] = 7;
+  this->menu_option[0] = 0;
+  this->menu_option[0xb] = 9;
+  this->actual_option = 0;
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  fVar2 = DAT_089dbcdc;
+  pbVar4->printer = pgVar3;
+  pbVar4->left = 0xf;
+  pbVar4->top = 0x20;
+  pbVar4->bottom = -0x1c;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->right = 0x96;
+  pbVar4->size = fVar2;
+  pbVar4->action = 9;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->key = 2;
+  pbVar4->action_type = 1;
+  pbVar4->isFadeing = false;
+  pbVar4->effect_alpha = 0;
+  this->buttons[0xe] = pbVar4;
+  button::load_text(pbVar4,"load enemy",-1);
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  fVar2 = DAT_089dbcdc;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->printer = pgVar3;
+  pbVar4->size = fVar2;
+  pbVar4->action = -1;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  pbVar4->left = 0;
+  pbVar4->top = 0;
+  pbVar4->right = 0;
+  pbVar4->bottom = 0;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->action_type = -1;
+  pbVar4->effect_alpha = 0;
+  pbVar4->key = 0;
+  word = this->whats[this->actual_staff];
+  pbVar4->isFadeing = false;
+  this->buttons[0x26] = pbVar4;
+  button::load_text(pbVar4,word,-1);
+  this->buttons[0x26]->color[3] = 200;
+  pbVar4 = operator_new(0x158);
+  pgVar3 = operator_new(1);
+  fVar2 = DAT_089dbcdc;
+  pbVar4->color[3] = 0xff;
+  pbVar4->color[0] = 0xff;
+  pbVar4->color[1] = 0xff;
+  pbVar4->color[2] = 0xff;
+  pbVar4->printer = pgVar3;
+  pbVar4->size = fVar2;
+  pbVar4->action = -1;
+  pbVar4->x = 0.0;
+  pbVar4->y = 0.0;
+  pbVar4->z = 0.0;
+  pbVar4->width = 0.0;
+  pbVar4->height = 0.0;
+  pbVar4->visible = false;
+  pbVar4->enabled = false;
+  pbVar4->left = 0;
+  pbVar4->top = 0;
+  pbVar4->right = 0;
+  pbVar4->bottom = 0;
+  iVar5 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar5 + 4;
+    *(undefined4 *)((int)pbVar4->characters + iVar5) = 0xffffffff;
+    iVar5 = iVar7;
+  } while (iVar7 != 0x104);
+  pbVar4->action_type = -1;
+  pbVar4->effect_alpha = 0;
+  pbVar4->key = 0;
+  iVar5 = this->actual_staff;
+  this->buttons[0x27] = pbVar4;
+  pbVar4->isFadeing = false;
+  button::load_text(pbVar4,this->whos[iVar5],-1);
+  this->buttons[0x27]->color[3] = 200;
+  return;
+}
+
+// ========================================================
+// 0x0890a8d4: stage_interface::who_is(int, int)
+// ========================================================
+// Function: who_is @ 0890a8d4
+
+/* DWARF original prototype: int who_is(stage_interface * this, int x, int y) */
+
+int __thiscall stage_interface::who_is(stage_interface *this,int x,int y)
+
+{
+  button *pbVar1;
+  button **ppbVar2;
+  int iVar3;
+  
+                    /* Unresolved local var: int who@[???] */
+  ppbVar2 = this->buttons;
+  iVar3 = 0;
+                    /* Unresolved local var: int i@[DW_OP_reg11(t3)] */
+  pbVar1 = *ppbVar2;
+  while( true ) {
+    ppbVar2 = ppbVar2 + 1;
+    if ((((0 < pbVar1->left + pbVar1->top + pbVar1->right + pbVar1->bottom) && (pbVar1->left <= x))
+        && (x <= pbVar1->right)) && ((y <= pbVar1->top && (pbVar1->bottom <= y)))) break;
+    iVar3 = iVar3 + 1;
+    if (iVar3 == 0x28) {
+      return -1;
+    }
+    pbVar1 = *ppbVar2;
+  }
+  return iVar3;
+}
+
+// ========================================================
+// 0x0890a948: stage_interface::catch_key(int)
+// ========================================================
+// Function: catch_key @ 0890a948
+
+/* DWARF original prototype: int catch_key(stage_interface * this, int key) */
+
+int __thiscall stage_interface::catch_key(stage_interface *this,int key)
+
+{
+  stage_interface *psVar1;
+  int iVar2;
+  button *pbVar3;
+  
+                    /* Unresolved local var: int who@[???]
+                       Unresolved local var: int action@[???] */
+                    /* Unresolved local var: int i@[???] */
+  psVar1 = this;
+  iVar2 = 0;
+  while( true ) {
+    pbVar3 = psVar1->buttons[0];
+    if ((pbVar3->key == key) && (pbVar3->enabled != false)) break;
+    if (iVar2 + 4 == 0xa0) {
+      pbVar3 = this->buttons[5];
+      this->buttons[4]->color[3] = 0;
+      pbVar3->color[3] = 0;
+      return -1;
+    }
+    psVar1 = (stage_interface *)((int)this->buttons + iVar2);
+    iVar2 = iVar2 + 4;
+  }
+  iVar2 = pbVar3->action;
+  pbVar3 = this->buttons[5];
+  this->buttons[4]->color[3] = 0;
+  pbVar3->color[3] = 0;
+  return iVar2;
+}
+
+// ========================================================
+// 0x0890a9a8: stage_interface::catch_tap(int, int, int)
+// ========================================================
+// Function: catch_tap @ 0890a9a8
+
+/* DWARF original prototype: int catch_tap(stage_interface * this, int x, int y, int type) */
+
+int __thiscall stage_interface::catch_tap(stage_interface *this,int x,int y,int type)
+
+{
+  button *pbVar1;
+  int iVar2;
+  button *pbVar3;
+  button **ppbVar4;
+  int iVar5;
+  int iVar6;
+  
+                    /* Unresolved local var: int who@[DW_OP_reg24(t8)]
+                       Unresolved local var: int action@[???] */
+  ppbVar4 = this->buttons;
+  iVar5 = 0;
+  iVar6 = -1;
+                    /* Unresolved local var: int i@[DW_OP_reg14(t6)] */
+  pbVar3 = *ppbVar4;
+  while( true ) {
+    ppbVar4 = ppbVar4 + 1;
+    if ((((0 < pbVar3->left + pbVar3->top + pbVar3->right + pbVar3->bottom) &&
+         (pbVar3->enabled != false)) && (pbVar3->left <= x)) &&
+       (((x <= pbVar3->right && (y <= pbVar3->top)) &&
+        ((pbVar3->bottom <= y && (iVar6 = iVar5, type == pbVar3->action_type)))))) break;
+    iVar5 = iVar5 + 1;
+    if (iVar5 == 0x28) {
+      iVar2 = -1;
+      iVar5 = iVar6;
+LAB_0890aa28:
+      pbVar3 = this->buttons[5];
+      pbVar1 = this->buttons[4];
+      pbVar1->color[3] = 0;
+      pbVar3->color[3] = 0;
+      if (type == 0) {
+        if (iVar5 == 4) {
+          pbVar1->color[3] = 0x19;
+          return iVar2;
+        }
+        if (iVar5 == 5) {
+          pbVar3->color[3] = 0x19;
+          return iVar2;
+        }
+      }
+      return iVar2;
+    }
+    pbVar3 = *ppbVar4;
+  }
+  iVar2 = pbVar3->action;
+  goto LAB_0890aa28;
+}
+
+// ========================================================
+// 0x0890aa7c: stage_interface::activate_buttons(int*, int)
+// ========================================================
+// Function: activate_buttons @ 0890aa7c
+
+/* DWARF original prototype: void activate_buttons(stage_interface * this, int * id_enableds, int
+   enableds) */
+
+void __thiscall
+stage_interface::activate_buttons(stage_interface *this,int *id_enableds,int enableds)
+
+{
+  int iVar1;
+  int *piVar2;
+  int iVar3;
+  button *pbVar4;
+  int iVar5;
+  stage_interface *psVar6;
+  uint uVar7;
+  
+  iVar5 = 0;
+  uVar7 = 0xfffffffc;
+  psVar6 = this;
+  do {
+    psVar6 = (stage_interface *)psVar6->buttons;
+                    /* Unresolved local var: int i@[DW_OP_reg9(t1)] */
+    pbVar4 = *(button **)psVar6;
+    if (pbVar4->action != -1) {
+      if (1 < uVar7) {
+        pbVar4->color[3] = 0x28;
+      }
+      if (iVar5 == 0x1e) {
+        this->buttons[0x1e]->color[3] = 0x96;
+      }
+                    /* Unresolved local var: int j@[DW_OP_reg7(a3)] */
+      pbVar4->enabled = false;
+      if (0 < enableds) {
+        iVar3 = 0;
+        piVar2 = id_enableds;
+LAB_0890aae4:
+        iVar1 = *piVar2;
+        do {
+          iVar3 = iVar3 + 1;
+          piVar2 = piVar2 + 1;
+          if (iVar1 == iVar5) {
+            pbVar4->enabled = true;
+            if (1 < uVar7) {
+              pbVar4->color[3] = 0xff;
+            }
+            if (iVar5 == 0x1d) goto code_r0x0890ab30;
+          }
+          if (enableds == iVar3) break;
+          iVar1 = *piVar2;
+        } while( true );
+      }
+    }
+LAB_0890ab00:
+    iVar5 = iVar5 + 1;
+    uVar7 = uVar7 + 1;
+    if (iVar5 == 0x28) {
+      return;
+    }
+  } while( true );
+code_r0x0890ab30:
+  this->buttons[0x1e]->color[3] = 0xff;
+  if (enableds == iVar3) goto LAB_0890ab00;
+  goto LAB_0890aae4;
+}
+
+// ========================================================
+// 0x0890ab4c: stage_interface::print_staff(int)
+// ========================================================
+// Function: print_staff @ 0890ab4c
+
+/* DWARF original prototype: void print_staff(stage_interface * this, int zNear) */
+
+void __thiscall stage_interface::print_staff(stage_interface *this,int zNear)
+
+{
+  return;
+}
+
+// ========================================================
+// 0x0890ab54: stage_interface::print_solo_interface(int)
+// ========================================================
+// Function: print_solo_interface @ 0890ab54
+
+/* DWARF original prototype: void print_solo_interface(stage_interface * this, int zNear) */
+
+void __thiscall stage_interface::print_solo_interface(stage_interface *this,int zNear)
+
+{
+  button *this_00;
+  float in_a2;
+  float in_a3;
+  GLfloat unaff_retaddr;
+  GLfloat unaff_f20;
+  GLfloat unaff_f21;
+  GLfloat unaff_f22;
+  int in_stack_00000010;
+  GLfloat in_stack_ffffffec;
+  GLfloat in_stack_fffffffc;
+  
+  glinterface::lookat(this->locator,(GLfloat)zNear,in_a2,in_a3,unaff_retaddr,in_stack_ffffffec,
+                      unaff_f20,unaff_f21,unaff_f22,in_stack_fffffffc);
+  button::print(this->buttons[0xd],0.0,in_a2,in_a3,(int)unaff_retaddr);
+  button::show_skeleton(this->buttons[0xd]);
+  button::print(this->buttons[6],0.0,in_a2,in_a3,(int)unaff_retaddr);
+  button::print(this->buttons[0x1d],0.0,in_a2,in_a3,(int)unaff_retaddr);
+  button::show_skeleton(this->buttons[0x1d]);
+  button::print(this->buttons[0],0.0,in_a2,in_a3,(int)unaff_retaddr);
+  this_00 = this->buttons[1];
+  this_00->color[1] = 0x96;
+  this_00->color[0] = 0;
+  this_00->color[2] = 0;
+  button::print(this_00,0.0,in_a2,in_a3,in_stack_00000010);
+  return;
+}
+
+// ========================================================
+// 0x0890ac94: stage_interface::print_tutorial_interface(int, bool)
+// ========================================================
+// Function: print_tutorial_interface @ 0890ac94
+
+/* DWARF original prototype: void print_tutorial_interface(stage_interface * this, int zNear, bool
+   isTutorial) */
+
+void __thiscall
+stage_interface::print_tutorial_interface(stage_interface *this,int zNear,bool isTutorial)
+
+{
+  button *pbVar1;
+  undefined3 in_register_00000019;
+  float fVar2;
+  float in_a3;
+  GLfloat unaff_s2;
+  GLfloat unaff_s3;
+  GLfloat unaff_retaddr;
+  GLfloat unaff_f20;
+  int in_stack_00000010;
+  int in_stack_00000014;
+  int in_stack_00000018;
+  int in_stack_0000001c;
+  GLfloat in_stack_00000020;
+  GLfloat in_stack_fffffff4;
+  GLfloat in_stack_fffffffc;
+  
+  fVar2 = (float)CONCAT31(in_register_00000019,isTutorial);
+  glinterface::lookat(this->locator,(GLfloat)zNear,fVar2,in_a3,unaff_s2,unaff_s3,unaff_retaddr,
+                      in_stack_fffffff4,unaff_f20,in_stack_fffffffc);
+  button::print(this->buttons[0xd],0.0,fVar2,in_a3,(int)unaff_s2);
+  button::show_skeleton(this->buttons[0xd]);
+  fVar2 = (float)(zNear * -10);
+  button::print(this->buttons[6],0.0,fVar2,in_a3,(int)unaff_s2);
+  if (isTutorial) {
+    button::print(this->buttons[0x1e],0.0,fVar2,in_a3,(int)unaff_s2);
+    button::show_skeleton(this->buttons[0x1e]);
+    pbVar1 = this->buttons[4];
+  }
+  else {
+    pbVar1 = this->buttons[4];
+  }
+  if (0 < pbVar1->color[3]) {
+    glinterface::square(pbVar1->printer,3.57331e-43,0.0,0.0,(int)unaff_s2,(int)unaff_s3,
+                        (int)unaff_retaddr,(int)in_stack_fffffff4,unaff_f20);
+  }
+  if (0 < this->buttons[5]->color[3]) {
+    glinterface::square(this->buttons[5]->printer,0.0,0.0,3.57331e-43,in_stack_00000010,
+                        in_stack_00000014,in_stack_00000018,in_stack_0000001c,in_stack_00000020);
+    return;
+  }
+  return;
+}
+
+// ========================================================
+// 0x0890ae50: stage_interface::print_train_interface(int)
+// ========================================================
+// Function: print_train_interface @ 0890ae50
+
+/* DWARF original prototype: void print_train_interface(stage_interface * this, int zNear) */
+
+void __thiscall stage_interface::print_train_interface(stage_interface *this,int zNear)
+
+{
+  float in_a2;
+  float y;
+  float in_a3;
+  float z;
+  GLfloat unaff_retaddr;
+  GLfloat unaff_f20;
+  GLfloat unaff_f21;
+  GLfloat in_stack_00000000;
+  GLfloat in_stack_00000004;
+  int in_stack_00000010;
+  GLfloat in_stack_fffffff4;
+  
+  glinterface::lookat(this->locator,(GLfloat)zNear,in_a2,in_a3,unaff_retaddr,in_stack_fffffff4,
+                      unaff_f20,unaff_f21,in_stack_00000000,in_stack_00000004);
+  button::print(this->buttons[0xe],0.0,in_a2,in_a3,(int)unaff_retaddr);
+  button::show_skeleton(this->buttons[0xe]);
+  button::print(this->buttons[0xd],0.0,in_a2,in_a3,(int)unaff_retaddr);
+  button::show_skeleton(this->buttons[0xd]);
+  if (0 < this->buttons[4]->color[3]) {
+    glinterface::square(this->buttons[4]->printer,3.57331e-43,0.0,0.0,(int)unaff_retaddr,
+                        (int)in_stack_fffffff4,(int)unaff_f20,(int)unaff_f21,in_stack_00000000);
+  }
+  y = 0.0;
+  z = 3.57331e-43;
+  if (0 < this->buttons[5]->color[3]) {
+    glinterface::square(this->buttons[5]->printer,0.0,0.0,3.57331e-43,(int)unaff_retaddr,
+                        (int)in_stack_fffffff4,(int)unaff_f20,(int)unaff_f21,in_stack_00000000);
+  }
+  button::print(this->buttons[6],0.0,y,z,in_stack_00000010);
+  return;
+}
+
+// ========================================================
+// 0x0890afc0: stage_interface::print_game_interface(int, int, int)
+// ========================================================
+// Function: print_game_interface @ 0890afc0
+
+/* DWARF original prototype: void print_game_interface(stage_interface * this, int zNear, int
+   game_status, int colision) */
+
+void __thiscall
+stage_interface::print_game_interface(stage_interface *this,int zNear,int game_status,int colision)
+
+{
+  button *pbVar1;
+  button *pbVar2;
+  float y;
+  GLfloat unaff_s2;
+  GLfloat unaff_s3;
+  GLfloat unaff_s4;
+  GLfloat unaff_s5;
+  GLfloat unaff_retaddr;
+  GLfloat in_stack_ffffffec;
+  
+  y = (float)game_status;
+  glinterface::lookat(this->locator,(GLfloat)zNear,(GLfloat)game_status,(GLfloat)colision,unaff_s2,
+                      unaff_s3,unaff_s4,unaff_s5,unaff_retaddr,in_stack_ffffffec);
+  if (game_status == 0xc) {
+    button::print(this->buttons[0x25],0.0,y,(float)colision,(int)unaff_s2);
+    button::show_skeleton(this->buttons[0x25]);
+    button::print(this->buttons[0x24],0.0,y,(float)colision,(int)unaff_s2);
+    button::show_skeleton(this->buttons[0x24]);
+    button::print(this->buttons[2],0.0,y,(float)colision,(int)unaff_s2);
+    button::print(this->buttons[0],0.0,y,(float)colision,(int)unaff_s2);
+  }
+  else {
+    button::print(this->buttons[6],0.0,y,(float)colision,(int)unaff_s2);
+    button::print(this->buttons[2],0.0,y,(float)colision,(int)unaff_s2);
+    button::print(this->buttons[0],0.0,y,(float)colision,(int)unaff_s2);
+    if (game_status == 8) {
+      pbVar1 = this->buttons[1];
+      pbVar2 = this->buttons[3];
+      pbVar2->color[0] = 0x96;
+      pbVar2->color[1] = 0;
+      pbVar2->color[2] = 0;
+      pbVar1->color[1] = 0x96;
+      pbVar1->color[2] = 0;
+      pbVar1->color[0] = 0;
+      button::print(pbVar2,0.0,y,(float)colision,(int)unaff_s2);
+      button::print(this->buttons[1],0.0,y,(float)colision,(int)unaff_s2);
+      y = (float)(zNear * -2);
+      button::print(this->buttons[0x1a],0.0,y,(float)colision,(int)unaff_s2);
+      button::show_skeleton(this->buttons[0x1a]);
+      goto LAB_0890b1bc;
+    }
+  }
+  if (0 < this->buttons[4]->color[3]) {
+    y = 0.0;
+    colision = 0;
+    glinterface::square(this->buttons[4]->printer,3.57331e-43,0.0,0.0,(int)unaff_s2,(int)unaff_s3,
+                        (int)unaff_s4,(int)unaff_s5,unaff_retaddr);
+  }
+  if (0 < this->buttons[5]->color[3]) {
+    y = 0.0;
+    colision = 0xff;
+    glinterface::square(this->buttons[5]->printer,0.0,0.0,3.57331e-43,(int)unaff_s2,(int)unaff_s3,
+                        (int)unaff_s4,(int)unaff_s5,unaff_retaddr);
+  }
+  pbVar2 = this->buttons[1];
+  pbVar1 = this->buttons[3];
+  pbVar1->color[2] = 0xff;
+  pbVar1->color[0] = 0xff;
+  pbVar1->color[1] = 0xff;
+  pbVar2->color[2] = 0xff;
+  pbVar2->color[0] = 0xff;
+  pbVar2->color[1] = 0xff;
+  button::print(pbVar2,0.0,y,(float)colision,(int)unaff_s2);
+  button::print(this->buttons[3],0.0,y,(float)colision,(int)unaff_s2);
+LAB_0890b1bc:
+  button::print(this->buttons[0xd],0.0,y,(float)colision,(int)unaff_s2);
+  button::show_skeleton(this->buttons[0xd]);
+  return;
+}
+
+// ========================================================
+// 0x0890b364: stage_interface::print_menu_interface(int)
+// ========================================================
+// Function: print_menu_interface @ 0890b364
+
+/* DWARF original prototype: void print_menu_interface(stage_interface * this, int zNear) */
+
+void __thiscall stage_interface::print_menu_interface(stage_interface *this,int zNear)
+
+{
+  button *pbVar1;
+  float fVar2;
+  float z;
+  int unaff_s0;
+  int unaff_retaddr;
+  int unaff_f20;
+  int unaff_f21;
+  GLfloat unaff_f22;
+  int in_stack_00000010;
+  int in_stack_00000014;
+  int in_stack_00000018;
+  int in_stack_0000001c;
+  GLfloat in_stack_00000020;
+  float local_30 [4];
+  
+                    /* Unresolved local var: int[3] alphas@[???] */
+  z = (float)this->actual_option;
+  local_30[0] = print_menu_interface(int)::C_11;
+  local_30[1] = (float)DAT_089de214;
+  local_30[2] = DAT_089de218;
+  if ((int)z < 4) {
+    fVar2 = DAT_089de218;
+    button::print(this->buttons[7],1.4013e-45,DAT_089de218,z,unaff_s0);
+    button::print(this->buttons[8],5.60519e-45,fVar2,z,unaff_s0);
+    button::print(this->buttons[9],2.8026e-45,fVar2,z,unaff_s0);
+    button::print(this->buttons[10],4.2039e-45,fVar2,z,in_stack_00000010);
+    return;
+  }
+  if ((int)z - 4U < 4) {
+    fVar2 = DAT_089de218;
+    button::print(this->buttons[0xf],1.4013e-45,DAT_089de218,z,unaff_s0);
+    button::print(this->buttons[0x20],1.4013e-45,fVar2,z,unaff_s0);
+    button::print(this->buttons[0x10],5.60519e-45,fVar2,z,unaff_s0);
+    button::print(this->buttons[0x1f],5.60519e-45,fVar2,z,unaff_s0);
+    button::print(this->buttons[0x11],2.8026e-45,fVar2,z,unaff_s0);
+    button::print(this->buttons[0x21],2.8026e-45,fVar2,z,unaff_s0);
+    button::print(this->buttons[0x12],4.2039e-45,fVar2,z,in_stack_00000010);
+    return;
+  }
+  fVar2 = DAT_089de218;
+  button::print(this->buttons[0x15],1.4013e-45,DAT_089de218,z,unaff_s0);
+  if (this->actual_option == 8) {
+    button::print(this->buttons[0x19],1.4013e-45,fVar2,z,unaff_s0);
+  }
+  button::print(this->buttons[0x17],5.60519e-45,fVar2,z,unaff_s0);
+  button::print(this->buttons[0x16],2.8026e-45,fVar2,z,unaff_s0);
+  button::print(this->buttons[0x18],4.2039e-45,fVar2,z,unaff_s0);
+  if (this->actual_option == 10) {
+    pbVar1 = this->buttons[0x16];
+    local_30[this->choosen_color] = 2.10195e-43;
+    glinterface::solid_cube
+              (pbVar1->printer,0.0,1.4013e-43,2.10195e-44,unaff_s0,unaff_retaddr,unaff_f20,unaff_f21
+               ,unaff_f22);
+    glinterface::solid_cube
+              (this->buttons[0x16]->printer,1.4013e-43,1.4013e-44,1.4013e-43,unaff_s0,unaff_retaddr,
+               unaff_f20,unaff_f21,unaff_f22);
+    glinterface::solid_cube
+              (this->buttons[0x16]->printer,0.0,9.80909e-44,2.10195e-43,in_stack_00000010,
+               in_stack_00000014,in_stack_00000018,in_stack_0000001c,in_stack_00000020);
+    return;
+  }
+  return;
+}
+
+// ========================================================
+// 0x0890b718: stage_interface::print_intro(int)
+// ========================================================
+// Function: print_intro @ 0890b718
+
+/* DWARF original prototype: void print_intro(stage_interface * this, int intro_step) */
+
+void __thiscall stage_interface::print_intro(stage_interface *this,int intro_step)
+
+{
+  int iVar1;
+  int unaff_s4;
+  int unaff_s5;
+  int unaff_s6;
+  int unaff_s7;
+  GLfloat unaff_retaddr;
+  int in_stack_fffffffc;
+  
+                    /* Unresolved local var: int x@[???]
+                       Unresolved local var: int y@[???] */
+  iVar1 = 0;
+  do {
+    if (iVar1 <= intro_step) {
+      if ((intro_step == iVar1) || (iVar1 == 0x5d)) {
+        glinterface::square_3D
+                  (this->locator,0.0,3.57331e-43,0.0,unaff_s4,unaff_s5,unaff_s6,unaff_s7,
+                   unaff_retaddr,in_stack_fffffffc);
+      }
+      else {
+                    /* Unresolved local var: int i@[???] */
+        glinterface::square_3D
+                  (this->locator,3.57331e-43,3.57331e-43,3.57331e-43,unaff_s4,unaff_s5,unaff_s6,
+                   unaff_s7,unaff_retaddr,in_stack_fffffffc);
+      }
+    }
+    iVar1 = iVar1 + 1;
+  } while (iVar1 != 0x5e);
+  return;
+}
+

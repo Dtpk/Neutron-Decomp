@@ -1,0 +1,273 @@
+// ========================================================
+// 0x08900450: quit_game
+// ========================================================
+// Function: quit_game @ 08900450
+
+void quit_game(int code)
+
+{
+  Mix_FreeChunk((Mix_Chunk *)::::music);
+  Mix_CloseAudio();
+  SDL_Quit();
+                    /* WARNING: Subroutine does not return */
+  exit(code);
+}
+
+// ========================================================
+// 0x08900488: SDL_SetupVideo()
+// ========================================================
+// Function: SDL_SetupVideo @ 08900488
+
+/* WARNING: Unknown calling convention -- yet parameter storage is locked */
+
+void SDL_SetupVideo(void)
+
+{
+  byte bVar1;
+  SDL_VideoInfo *pSVar2;
+  char *pcVar3;
+  FILE *pOut;
+  SFtype SVar4;
+  DFtype in_f12_13;
+  
+                    /* Unresolved local var: SDL_VideoInfo * info@[???]
+                       Unresolved local var: int bpp@[???]
+                       Unresolved local var: int flags@[???] */
+  pSVar2 = SDL_GetVideoInfo();
+  bVar1 = pSVar2->vfmt->BitsPerPixel;
+  SDL_GL_SetAttribute(SDL_GL_RED_SIZE,5);
+  SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,5);
+  SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,5);
+  SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,0x10);
+  SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
+  ::::screen = SDL_SetVideoMode(0x1e0,0x110,(uint)bVar1,0x80000022);
+  if (::::screen == (SDL_Surface *)0x0) {
+    pOut = _impure_ptr->_stderr;
+    pcVar3 = SDL_GetError();
+    fprintf(pOut,"Video mode set failed: %s\n",pcVar3);
+    quit_game(1);
+  }
+  tan(in_f12_13);
+  SVar4 = __truncdfsf2(in_f12_13);
+  ::::ymax = SVar4 * DAT_089dbcd0;
+  ::::ymin = -::::ymax;
+  ::::xmax = (::::ymax * DAT_089dbcd4) / DAT_089dbcd8;
+  ::::xmin = (::::ymin * DAT_089dbcd4) / DAT_089dbcd8;
+  glEnable(0xbe2);
+  glBlendFunc(0x302,1);
+  glEnableClientState(0x8074);
+  return;
+}
+
+// ========================================================
+// 0x089005c4: SDL_Setup()
+// ========================================================
+// Function: SDL_Setup @ 089005c4
+
+/* WARNING: Unknown calling convention -- yet parameter storage is locked */
+
+void SDL_Setup(void)
+
+{
+  int iVar1;
+  char *pcVar2;
+  FILE *pOut;
+  
+  iVar1 = SDL_Init(0x30);
+  if (-1 < iVar1) {
+    SDL_SetupVideo();
+    return;
+  }
+  pOut = _impure_ptr->_stderr;
+  pcVar2 = SDL_GetError();
+  fprintf(pOut,"Video or Audio initialization failed: %s\n",pcVar2);
+  quit_game(1);
+  SDL_SetupVideo();
+  return;
+}
+
+// ========================================================
+// 0x08900624: SDL_SetupAudio()
+// ========================================================
+// Function: SDL_SetupAudio @ 08900624
+
+/* WARNING: Unknown calling convention -- yet parameter storage is locked */
+
+void SDL_SetupAudio(void)
+
+{
+  int iVar1;
+  SDL_RWops *src;
+  char *pcVar2;
+  FILE *pOut;
+  Uint16 local_18 [2];
+  int local_14 [3];
+  
+                    /* Unresolved local var: int channel@[???]
+                       Unresolved local var: int audio_rate@[???]
+                       Unresolved local var: Uint16 audio_format@[???]
+                       Unresolved local var: int audio_channels@[???]
+                       Unresolved local var: int audio_buffers@[???] */
+  local_14[0] = 0x5622;
+  local_18[0] = 0x8010;
+  local_14[1] = 2;
+  iVar1 = Mix_OpenAudio(0x5622,0x8010,2,0x1000);
+  if (iVar1 != 0) {
+    puts("Unable to open audio!");
+                    /* WARNING: Subroutine does not return */
+    exit(1);
+  }
+  Mix_QuerySpec(local_14,local_18,local_14 + 1);
+  if (::::music == (anon_struct_dwarf_13fd *)0x0) {
+    src = SDL_RWFromFile("music.wav","rb");
+    ::::music = (anon_struct_dwarf_13fd *)Mix_LoadWAV_RW(src,1);
+    iVar1 = Mix_PlayChannelTimed(-1,(Mix_Chunk *)::::music,-1,-1);
+    if (iVar1 == -1) {
+      pOut = _impure_ptr->_stderr;
+      pcVar2 = SDL_GetError();
+      fprintf(pOut,"Unable to play WAV file: %s\n",pcVar2);
+    }
+  }
+  return;
+}
+
+// ========================================================
+// 0x0890070c: controls()
+// ========================================================
+// Function: controls @ 0890070c
+
+/* WARNING: Unknown calling convention -- yet parameter storage is locked */
+
+void controls(void)
+
+{
+  neutron *pnVar1;
+  int iVar2;
+  
+  sceCtrlReadBufferPositive(&::::currentPad,1);
+  pnVar1 = ::::game;
+  if (::::currentPad.Buttons != ::::lastPad.Buttons) {
+    ::::lastPad.TimeStamp = ::::currentPad.TimeStamp;
+    ::::lastPad.Rsrv[2] = ::::currentPad.Rsrv[2];
+    ::::lastPad.Rsrv[3] = ::::currentPad.Rsrv[3];
+    ::::lastPad.Rsrv[4] = ::::currentPad.Rsrv[4];
+    ::::lastPad.Rsrv[5] = ::::currentPad.Rsrv[5];
+    ::::lastPad.Lx = ::::currentPad.Lx;
+    ::::lastPad.Ly = ::::currentPad.Ly;
+    ::::lastPad.Rsrv[0] = ::::currentPad.Rsrv[0];
+    ::::lastPad.Rsrv[1] = ::::currentPad.Rsrv[1];
+    ::::lastPad.Buttons = ::::currentPad.Buttons;
+    if ((::::currentPad.Buttons & 0x40) != 0) {
+      iVar2 = stage_interface::catch_key(::::game->interface,5);
+      neutron::execute_action(pnVar1,iVar2);
+    }
+    pnVar1 = ::::game;
+    if ((::::currentPad.Buttons & 0x10) != 0) {
+      iVar2 = stage_interface::catch_key(::::game->interface,6);
+      neutron::execute_action(pnVar1,iVar2);
+    }
+    pnVar1 = ::::game;
+    if ((::::currentPad.Buttons & 0x80) != 0) {
+      iVar2 = stage_interface::catch_key(::::game->interface,3);
+      neutron::execute_action(pnVar1,iVar2);
+    }
+    pnVar1 = ::::game;
+    if ((::::currentPad.Buttons & 0x20) != 0) {
+      iVar2 = stage_interface::catch_key(::::game->interface,4);
+      neutron::execute_action(pnVar1,iVar2);
+    }
+    pnVar1 = ::::game;
+    if ((::::currentPad.Buttons & 0x4000) != 0) {
+      iVar2 = stage_interface::catch_key(::::game->interface,2);
+      neutron::execute_action(pnVar1,iVar2);
+    }
+    pnVar1 = ::::game;
+    if ((::::currentPad.Buttons & 0x100) != 0) {
+      iVar2 = stage_interface::catch_key(::::game->interface,3);
+      neutron::execute_action(pnVar1,iVar2);
+    }
+    pnVar1 = ::::game;
+    if ((::::currentPad.Buttons & 0x200) != 0) {
+      iVar2 = stage_interface::catch_key(::::game->interface,4);
+      neutron::execute_action(pnVar1,iVar2);
+    }
+    if ((::::currentPad.Buttons & 8) != 0) {
+      quit_game(0);
+    }
+    pnVar1 = ::::game;
+    if ((::::currentPad.Buttons & 1) != 0) {
+      iVar2 = stage_interface::catch_key(::::game->interface,7);
+      neutron::execute_action(pnVar1,iVar2);
+      return;
+    }
+  }
+  return;
+}
+
+// ========================================================
+// 0x08900918: main
+// ========================================================
+// Function: main @ 08900918
+
+int main(int argc,char **argv)
+
+{
+  neutron *this;
+  uint uVar1;
+  uint uVar2;
+  undefined4 unaff_s0;
+  undefined4 unaff_s1;
+  undefined4 unaff_s2;
+  undefined4 unaff_s3;
+  undefined4 unaff_s4;
+  undefined4 unaff_s5;
+  undefined4 unaff_s6;
+  undefined4 unaff_s7;
+  GLfloat GVar3;
+  undefined4 in_f13;
+  GLdouble in_f14_15;
+  
+  this = operator_new(0xbb4);
+  neutron::neutron(this,::::user_color,::::user_difficulty,::::user_stage,SUB41(unaff_s0,0));
+  ::::game = this;
+  neutron::load_stage(this,1000,true);
+  neutron::create_miniatures(::::game);
+  SDL_Setup();
+  do {
+    uVar1 = ::::actualTock - ::::lastTock;
+    uVar2 = uVar1 & 1 | uVar1 >> 1;
+    if ((int)uVar1 < 0) goto LAB_08900afc;
+    while (::::game->speed < (float)(int)uVar1) {
+      while( true ) {
+        ::::lastTock = ::::actualTock;
+        controls();
+        glViewport(0,0,0x1e0,0x110);
+        glClear(0x4000);
+        glMatrixMode(0x1701);
+        glLoadIdentity();
+        __extendsfdf2(::::xmin);
+        __extendsfdf2(::::xmax);
+        __extendsfdf2(::::ymin);
+        GVar3 = ::::ymax;
+        __extendsfdf2(::::ymax);
+        glFrustum((GLdouble)CONCAT44(in_f13,GVar3),in_f14_15,(GLdouble)CONCAT44(unaff_s1,unaff_s0),
+                  (GLdouble)CONCAT44(unaff_s3,unaff_s2),(GLdouble)CONCAT44(unaff_s5,unaff_s4),
+                  (GLdouble)CONCAT44(unaff_s7,unaff_s6));
+        glMatrixMode(0x1700);
+        glLoadIdentity();
+        glShadeModel(0x1d00);
+        neutron::main_loop(::::game);
+        neutron::print(::::game);
+        SDL_GL_SwapBuffers();
+        uVar1 = ::::actualTock - ::::lastTock;
+        uVar2 = uVar1 & 1 | uVar1 >> 1;
+        if (-1 < (int)uVar1) break;
+LAB_08900afc:
+        if ((float)uVar2 + (float)uVar2 <= ::::game->speed) goto LAB_08900b20;
+      }
+    }
+LAB_08900b20:
+    ::::actualTock = SDL_GetTicks();
+  } while( true );
+}
+

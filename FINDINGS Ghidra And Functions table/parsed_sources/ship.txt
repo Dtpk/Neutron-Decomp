@@ -1,0 +1,1373 @@
+// ========================================================
+// 0x0890659c: ship::tell_me_the_cost(float, float, float, plane**, int, int, int, int)
+// ========================================================
+// Function: tell_me_the_cost @ 0890659c
+
+/* DWARF original prototype: int tell_me_the_cost(ship * this, float x, float y, float z, plane * *
+   map, int n_planes, int plane_src, int plane_dest, int cost) */
+
+int __thiscall
+ship::tell_me_the_cost
+          (ship *this,float x,float y,float z,plane **map,int n_planes,int plane_src,int plane_dest,
+          int cost)
+
+{
+  int iVar1;
+  float in_t0;
+  int in_t1;
+  float z_00;
+  int iVar2;
+  plane **unaff_s0;
+  int unaff_s1;
+  int unaff_s2;
+  int unaff_s3;
+  int *piVar3;
+  int unaff_s4;
+  undefined4 local_40;
+  undefined4 local_3c;
+  undefined4 local_38;
+  undefined4 local_34;
+  
+                    /* Unresolved local var: int[4] costs@[???]
+                       Unresolved local var: int min@[???] */
+  if (z != in_t0) {
+    piVar3 = (int *)((int)x + (int)z * 4);
+    iVar2 = *piVar3;
+    local_34 = in_t1 + 1;
+    z_00 = *(float *)(iVar2 + 0x20);
+    if (in_t0 == z_00) {
+      *(undefined1 *)(iVar2 + 0x30) = 0;
+    }
+    else if (in_t0 == *(float *)(iVar2 + 0x24)) {
+      *(undefined1 *)(iVar2 + 0x30) = 0;
+    }
+    else if (in_t0 == *(float *)(iVar2 + 0x2c)) {
+      *(undefined1 *)(iVar2 + 0x30) = 0;
+    }
+    else {
+      if (in_t0 != *(float *)(iVar2 + 0x28)) {
+        iVar1 = *(int *)((int)z_00 * 4 + (int)x);
+        *(undefined1 *)(iVar2 + 0x30) = 1;
+        if (*(char *)(iVar1 + 0x30) == '\0') {
+          local_40 = tell_me_the_cost(this,x,y,z_00,unaff_s0,unaff_s1,unaff_s2,unaff_s3,unaff_s4);
+          iVar2 = *piVar3;
+        }
+        else {
+          local_40 = 0x5a;
+        }
+        if (*(char *)(*(int *)((int)*(float *)(iVar2 + 0x24) * 4 + (int)x) + 0x30) == '\0') {
+          local_3c = tell_me_the_cost(this,x,y,*(float *)(iVar2 + 0x24),unaff_s0,unaff_s1,unaff_s2,
+                                      unaff_s3,unaff_s4);
+          iVar2 = *piVar3;
+        }
+        else {
+          local_3c = 0x5a;
+        }
+        if (*(char *)(*(int *)((int)*(float *)(iVar2 + 0x2c) * 4 + (int)x) + 0x30) == '\0') {
+          local_38 = tell_me_the_cost(this,x,y,*(float *)(iVar2 + 0x2c),unaff_s0,unaff_s1,unaff_s2,
+                                      unaff_s3,unaff_s4);
+          iVar2 = *piVar3;
+        }
+        else {
+          local_38 = 0x5a;
+        }
+        if (*(char *)(*(int *)((int)*(float *)(iVar2 + 0x28) * 4 + (int)x) + 0x30) == '\0') {
+          local_34 = tell_me_the_cost(this,x,y,*(float *)(iVar2 + 0x28),unaff_s0,unaff_s1,unaff_s2,
+                                      unaff_s3,unaff_s4);
+          iVar2 = *piVar3;
+        }
+        else {
+          local_34 = 0x5a;
+        }
+        local_34 = local_40 + local_3c + local_38 + local_34;
+      }
+      *(undefined1 *)(iVar2 + 0x30) = 0;
+    }
+    return local_34;
+  }
+  *(undefined1 *)(*(int *)((int)z * 4 + (int)x) + 0x30) = 0;
+  return in_t1;
+}
+
+// ========================================================
+// 0x08906814: ship::set_position(float, float, float)
+// ========================================================
+// Function: set_position @ 08906814
+
+/* DWARF original prototype: void set_position(ship * this, GLfloat x, GLfloat y, GLfloat z) */
+
+void __thiscall ship::set_position(ship *this,GLfloat x,GLfloat y,GLfloat z)
+
+{
+  GLfloat in_f12;
+  GLfloat in_f13;
+  GLfloat in_f14;
+  
+  this->z = in_f14;
+  this->x = in_f12;
+  this->y = in_f13;
+  return;
+}
+
+// ========================================================
+// 0x08906824: ship::arrange_direction_to(int)
+// ========================================================
+// Function: arrange_direction_to @ 08906824
+
+/* DWARF original prototype: void arrange_direction_to(ship * this, int face_forward) */
+
+void __thiscall ship::arrange_direction_to(ship *this,int face_forward)
+
+{
+  int iVar1;
+  
+  switch(this->actual_face) {
+  default:
+    goto switchD_08906848_caseD_0;
+  case 1:
+  case 4:
+    if (face_forward == 3) {
+LAB_08906920:
+      this->previous_face = 6;
+      return;
+    }
+    if (face_forward < 4) {
+      if (face_forward != 2) {
+        return;
+      }
+      goto LAB_089068a0;
+    }
+    if (face_forward == 5) {
+      this->previous_face = 2;
+      return;
+    }
+    break;
+  case 2:
+  case 5:
+    if (face_forward == 3) goto LAB_08906920;
+    if (face_forward < 4) goto LAB_08906910;
+    if (face_forward == 4) goto LAB_08906944;
+    break;
+  case 3:
+    iVar1 = 2;
+    if (face_forward == 2) {
+LAB_089068a0:
+      this->previous_face = 5;
+      return;
+    }
+    if (2 < face_forward) {
+      if (face_forward == 4) goto LAB_08906944;
+      if (face_forward != 5) {
+        return;
+      }
+      goto LAB_08906908;
+    }
+    goto LAB_08906910;
+  case 6:
+    if (face_forward == 2) goto LAB_089068a0;
+    if (2 < face_forward) {
+      if (face_forward != 4) {
+        if (face_forward != 5) {
+          return;
+        }
+        this->previous_face = 2;
+        return;
+      }
+LAB_08906944:
+      this->previous_face = 1;
+      return;
+    }
+LAB_08906910:
+    if (face_forward == 1) {
+      this->previous_face = 4;
+      return;
+    }
+switchD_08906848_caseD_0:
+    return;
+  }
+  iVar1 = 3;
+  if (face_forward != 6) {
+    return;
+  }
+LAB_08906908:
+  this->previous_face = iVar1;
+  return;
+}
+
+// ========================================================
+// 0x08906950: ship::change_direction(int)
+// ========================================================
+// Function: change_direction @ 08906950
+
+/* DWARF original prototype: void change_direction(ship * this, int turn) */
+
+void __thiscall ship::change_direction(ship *this,int turn)
+
+{
+  int iVar1;
+  int iVar2;
+  int iVar3;
+  
+  if (turn != 0) {
+    switch(this->actual_face) {
+    default:
+      goto switchD_089069a8_caseD_0;
+    case 1:
+      goto switchD_089069a8_caseD_4;
+    case 2:
+      goto switchD_089069a8_caseD_5;
+    case 3:
+      goto switchD_089069a8_caseD_6;
+    case 4:
+      goto switchD_089069a8_caseD_1;
+    case 5:
+      goto switchD_089069a8_caseD_2;
+    case 6:
+      iVar1 = this->previous_face;
+      iVar2 = 2;
+      if (iVar1 == 2) goto LAB_08906b74;
+      if (2 < iVar1) {
+        if (iVar1 != 4) {
+          if (iVar1 != 5) {
+            return;
+          }
+          this->previous_face = 1;
+          return;
+        }
+        goto LAB_08906b58;
+      }
+      goto LAB_08906ab0;
+    }
+  }
+  switch(this->actual_face) {
+  default:
+switchD_089069a8_caseD_0:
+    return;
+  case 1:
+    goto switchD_089069a8_caseD_1;
+  case 2:
+switchD_089069a8_caseD_2:
+    iVar1 = this->previous_face;
+    iVar2 = 3;
+    if (iVar1 == 3) {
+LAB_08906b24:
+      this->previous_face = 1;
+      return;
+    }
+    if (iVar1 < 4) {
+      if (iVar1 != 1) {
+        return;
+      }
+      goto LAB_08906b48;
+    }
+    iVar3 = 4;
+    if (iVar1 == 4) goto LAB_08906b34;
+    break;
+  case 3:
+    iVar1 = this->previous_face;
+    iVar2 = 2;
+    if (iVar1 == 2) goto LAB_08906b74;
+    if (2 < iVar1) {
+      if (iVar1 == 4) goto LAB_08906b58;
+      if (iVar1 != 5) {
+        return;
+      }
+      goto LAB_08906b24;
+    }
+    goto LAB_08906ab0;
+  case 4:
+switchD_089069a8_caseD_4:
+    iVar1 = this->previous_face;
+    if (iVar1 == 3) goto LAB_08906a70;
+    if (iVar1 < 4) {
+      if (iVar1 != 2) {
+        return;
+      }
+      goto LAB_08906b48;
+    }
+    iVar3 = 5;
+    if (iVar1 == 5) {
+      this->previous_face = 3;
+      return;
+    }
+    break;
+  case 5:
+switchD_089069a8_caseD_5:
+    iVar1 = this->previous_face;
+    iVar2 = 3;
+    if (iVar1 == 3) {
+LAB_08906b74:
+      this->previous_face = 4;
+      return;
+    }
+    if (3 < iVar1) {
+      if (iVar1 != 4) {
+        if (iVar1 != 6) {
+          return;
+        }
+        goto LAB_08906b24;
+      }
+      goto LAB_08906b48;
+    }
+LAB_08906ab0:
+    if (iVar1 != 1) {
+      return;
+    }
+LAB_08906b34:
+    this->previous_face = iVar2;
+    return;
+  case 6:
+switchD_089069a8_caseD_6:
+    iVar1 = this->previous_face;
+    iVar2 = 2;
+    if (iVar1 == 2) goto LAB_08906b24;
+    if (iVar1 < 3) {
+      if (iVar1 != 1) {
+        return;
+      }
+      goto LAB_08906b58;
+    }
+    iVar3 = 4;
+    if (iVar1 != 4) {
+      if (iVar1 != 5) {
+        return;
+      }
+      goto LAB_08906aa8;
+    }
+    goto LAB_08906b34;
+  }
+  if (iVar1 != 6) {
+    return;
+  }
+LAB_08906aa8:
+  this->previous_face = iVar3;
+  return;
+switchD_089069a8_caseD_1:
+  iVar1 = this->previous_face;
+  iVar2 = 3;
+  if (iVar1 == 3) {
+LAB_08906b58:
+    this->previous_face = 5;
+    return;
+  }
+  if (3 < iVar1) {
+    if (iVar1 != 5) {
+      if (iVar1 != 6) {
+        return;
+      }
+LAB_08906a70:
+      this->previous_face = 2;
+      return;
+    }
+LAB_08906b48:
+    this->previous_face = 6;
+    return;
+  }
+  if (iVar1 != 2) {
+    return;
+  }
+  goto LAB_08906b34;
+}
+
+// ========================================================
+// 0x08906b84: ship::do_step(plane**)
+// ========================================================
+// Function: do_step @ 08906b84
+
+/* DWARF original prototype: void do_step(ship * this, plane * * map) */
+
+void __thiscall ship::do_step(ship *this,plane **map)
+
+{
+  int iVar1;
+  plane *ppVar2;
+  plane *ppVar3;
+  int iVar4;
+  float fVar5;
+  float fVar6;
+  GLfloat GVar7;
+  float fVar8;
+  float fVar9;
+  
+  iVar4 = this->actual_plane;
+  this->last_plane = iVar4;
+  this->last_advance = this->advance;
+  fVar9 = DAT_089dbce4;
+  switch(this->actual_face) {
+  default:
+    goto switchD_08906bb8_caseD_0;
+  case 1:
+  case 4:
+    iVar1 = this->previous_face;
+    if (iVar1 == 3) {
+      fVar9 = this->x;
+      if (fVar9 != map[iVar4]->pieces[0]->x) {
+LAB_089072b4:
+        fVar8 = DAT_089dbce4;
+        this->advance = -1;
+        this->x = fVar9 - fVar8;
+        return;
+      }
+      iVar4 = map[iVar4]->id_union_left;
+      fVar6 = this->z;
+      ppVar3 = map[iVar4];
+      this->actual_plane = iVar4;
+      fVar8 = ppVar3->pieces[ppVar3->side_size + 1]->z;
+      if (fVar6 < fVar8) {
+LAB_08907420:
+        fVar9 = DAT_089dbce4;
+        this->previous_face = 4;
+        this->advance = 3;
+        iVar4 = ppVar3->face_number;
+        this->z = fVar6 + fVar9;
+        this->actual_face = iVar4;
+        return;
+      }
+      if (fVar8 == fVar6) goto LAB_089072b4;
+LAB_089070e0:
+      fVar9 = DAT_089dbce4;
+      this->previous_face = 1;
+      GVar7 = fVar6 - fVar9;
+    }
+    else {
+      if (iVar1 < 4) {
+        if (iVar1 != 2) {
+          return;
+        }
+        ppVar2 = map[iVar4];
+        fVar8 = this->y;
+        iVar1 = 2;
+        if (fVar8 != ((float)ppVar2->side_size + ppVar2->pieces[0]->y) - DAT_089dbce4) {
+          GVar7 = fVar8 + DAT_089dbce4;
+          goto LAB_08906c8c;
+        }
+        fVar6 = this->z;
+        ppVar3 = map[ppVar2->id_union_top];
+        this->actual_plane = ppVar2->id_union_top;
+        fVar5 = ppVar3->pieces[ppVar3->side_size + 1]->z;
+        if (fVar6 < fVar5) {
+LAB_089074a8:
+          this->previous_face = 4;
+          this->advance = 3;
+          iVar4 = ppVar3->face_number;
+          this->z = fVar6 + fVar9;
+          this->actual_face = iVar4;
+          return;
+        }
+        if (fVar5 == fVar6) {
+          GVar7 = fVar8 + fVar9;
+          goto LAB_08906c8c;
+        }
+      }
+      else {
+        if (iVar1 == 5) {
+          fVar8 = this->y;
+          if (fVar8 != map[iVar4]->pieces[0]->y) goto LAB_08907478;
+          iVar4 = map[iVar4]->id_union_bottom;
+          fVar6 = this->z;
+          ppVar3 = map[iVar4];
+          this->actual_plane = iVar4;
+          fVar9 = ppVar3->pieces[ppVar3->side_size + 1]->z;
+          if (fVar6 < fVar9) goto LAB_08907420;
+          if (fVar9 == fVar6) goto LAB_08907478;
+          goto LAB_089070e0;
+        }
+        if (iVar1 != 6) {
+          return;
+        }
+        ppVar2 = map[iVar4];
+        fVar8 = this->x;
+        if (fVar8 != ((float)ppVar2->side_size + ppVar2->pieces[0]->x) - DAT_089dbce4) {
+          GVar7 = fVar8 + DAT_089dbce4;
+LAB_08907450:
+          this->advance = 1;
+          this->x = GVar7;
+          return;
+        }
+        fVar6 = this->z;
+        ppVar3 = map[ppVar2->id_union_right];
+        this->actual_plane = ppVar2->id_union_right;
+        fVar5 = ppVar3->pieces[ppVar3->side_size + 1]->z;
+        if (fVar6 < fVar5) goto LAB_089074a8;
+        if (fVar5 == fVar6) {
+          GVar7 = fVar8 + fVar9;
+          goto LAB_08907450;
+        }
+      }
+      GVar7 = fVar6 - fVar9;
+      this->previous_face = 1;
+    }
+    this->advance = -3;
+    iVar4 = ppVar3->face_number;
+    this->z = GVar7;
+    this->actual_face = iVar4;
+    return;
+  case 2:
+  case 5:
+    iVar1 = this->previous_face;
+    if (iVar1 == 3) {
+      fVar9 = this->x;
+      if (fVar9 != map[iVar4]->pieces[0]->x) goto LAB_089072b4;
+      iVar4 = map[iVar4]->id_union_left;
+      fVar6 = this->y;
+      ppVar2 = map[iVar4];
+      this->actual_plane = iVar4;
+      fVar8 = ppVar2->pieces[ppVar2->side_size + 1]->y;
+      if (fVar6 < fVar8) {
+LAB_089073fc:
+        fVar9 = DAT_089dbce4;
+        this->advance = 2;
+        this->previous_face = 2;
+        iVar4 = ppVar2->face_number;
+        this->y = fVar6 + fVar9;
+        this->actual_face = iVar4;
+        return;
+      }
+      if (fVar8 == fVar6) goto LAB_089072b4;
+    }
+    else {
+      if (3 < iVar1) {
+        if (iVar1 == 4) {
+          ppVar3 = map[iVar4];
+          if (this->z != ((float)ppVar3->side_size + ppVar3->pieces[0]->z) - DAT_089dbce4) {
+LAB_08907180:
+            this->advance = 3;
+            this->z = this->z + fVar9;
+            return;
+          }
+          fVar8 = this->y;
+          ppVar2 = map[ppVar3->id_union_bottom];
+          this->actual_plane = ppVar3->id_union_bottom;
+          fVar6 = ppVar2->pieces[ppVar2->side_size + 1]->y;
+          if (fVar8 < fVar6) goto LAB_0890748c;
+          if (fVar6 == fVar8) goto LAB_08907180;
+        }
+        else {
+          if (iVar1 != 6) {
+            return;
+          }
+          ppVar3 = map[iVar4];
+          fVar6 = this->x;
+          if (fVar6 != ((float)ppVar3->side_size + ppVar3->pieces[0]->x) - DAT_089dbce4) {
+            GVar7 = fVar6 + DAT_089dbce4;
+            goto LAB_08907450;
+          }
+          fVar8 = this->y;
+          ppVar2 = map[ppVar3->id_union_right];
+          this->actual_plane = ppVar3->id_union_right;
+          fVar5 = ppVar2->pieces[ppVar2->side_size + 1]->y;
+          if (fVar8 < fVar5) {
+LAB_0890748c:
+            this->advance = 2;
+            this->previous_face = 2;
+            iVar4 = ppVar2->face_number;
+            this->y = fVar8 + fVar9;
+            this->actual_face = iVar4;
+            return;
+          }
+          if (fVar5 == fVar8) {
+            GVar7 = fVar6 + fVar9;
+            goto LAB_08907450;
+          }
+        }
+        GVar7 = fVar8 - fVar9;
+        this->previous_face = 5;
+        goto LAB_08906f90;
+      }
+      if (iVar1 != 1) {
+        return;
+      }
+      fVar8 = this->z;
+      if (fVar8 != map[iVar4]->pieces[0]->z) goto LAB_08907348;
+      iVar4 = map[iVar4]->id_union_top;
+      fVar6 = this->y;
+      ppVar2 = map[iVar4];
+      this->actual_plane = iVar4;
+      fVar9 = ppVar2->pieces[ppVar2->side_size + 1]->y;
+      if (fVar6 < fVar9) goto LAB_089073fc;
+      if (fVar9 == fVar6) goto LAB_08907348;
+    }
+    fVar9 = DAT_089dbce4;
+    this->previous_face = 5;
+    GVar7 = fVar6 - fVar9;
+LAB_08906f90:
+    this->advance = -2;
+    iVar4 = ppVar2->face_number;
+    this->y = GVar7;
+    this->actual_face = iVar4;
+    return;
+  case 3:
+    iVar1 = this->previous_face;
+    if (iVar1 != 2) {
+      if (iVar1 < 3) {
+LAB_08906e60:
+        if (iVar1 != 1) {
+switchD_08906bb8_caseD_0:
+          return;
+        }
+        fVar8 = this->z;
+        if (fVar8 != map[iVar4]->pieces[0]->z) {
+LAB_08907348:
+          fVar9 = DAT_089dbce4;
+          this->advance = -3;
+          this->z = fVar8 - fVar9;
+          return;
+        }
+        iVar4 = map[iVar4]->id_union_left;
+        fVar9 = this->x;
+        ppVar3 = map[iVar4];
+        this->actual_plane = iVar4;
+        fVar6 = DAT_089dbce4;
+        fVar5 = ppVar3->pieces[ppVar3->side_size + 1]->x;
+        if (fVar9 < fVar5) {
+          this->previous_face = 6;
+          this->advance = 1;
+          iVar4 = ppVar3->face_number;
+          this->x = fVar9 + fVar6;
+          this->actual_face = iVar4;
+          return;
+        }
+        if (fVar5 == fVar9) goto LAB_08907348;
+      }
+      else {
+        if (iVar1 == 4) goto LAB_0890735c;
+        if (iVar1 != 5) {
+          return;
+        }
+        fVar8 = this->y;
+        if (fVar8 != map[iVar4]->pieces[0]->y) goto LAB_08907478;
+        iVar4 = map[iVar4]->id_union_bottom;
+        fVar9 = this->x;
+        ppVar3 = map[iVar4];
+        this->actual_plane = iVar4;
+LAB_08906e14:
+        fVar6 = DAT_089dbce4;
+        fVar5 = ppVar3->pieces[ppVar3->side_size + 1]->x;
+        if (fVar9 < fVar5) {
+          this->previous_face = 6;
+          GVar7 = fVar9 + fVar6;
+          goto LAB_08906e48;
+        }
+        if (fVar5 == fVar9) {
+LAB_08907478:
+          fVar9 = DAT_089dbce4;
+          this->advance = -2;
+          this->y = fVar8 - fVar9;
+          return;
+        }
+      }
+      fVar8 = DAT_089dbce4;
+      this->previous_face = 3;
+      GVar7 = fVar9 - fVar8;
+      goto LAB_08907224;
+    }
+LAB_0890718c:
+    ppVar2 = map[iVar4];
+    fVar8 = this->y;
+    if (fVar8 != ((float)ppVar2->side_size + ppVar2->pieces[0]->y) - DAT_089dbce4) {
+      GVar7 = fVar8 + DAT_089dbce4;
+LAB_08906c8c:
+      this->advance = iVar1;
+      this->y = GVar7;
+      return;
+    }
+    fVar6 = this->x;
+    ppVar3 = map[ppVar2->id_union_top];
+    this->actual_plane = ppVar2->id_union_top;
+    fVar5 = ppVar3->pieces[ppVar3->side_size + 1]->x;
+    if (fVar5 <= fVar6) {
+      if (fVar5 == fVar6) {
+        GVar7 = fVar8 + fVar9;
+        goto LAB_08906c8c;
+      }
+LAB_0890721c:
+      GVar7 = fVar6 - fVar9;
+      this->previous_face = 3;
+LAB_08907224:
+      this->advance = -1;
+      iVar4 = ppVar3->face_number;
+      this->x = GVar7;
+      this->actual_face = iVar4;
+      return;
+    }
+    break;
+  case 6:
+    iVar1 = this->previous_face;
+    if (iVar1 == 2) goto LAB_0890718c;
+    if (iVar1 < 3) goto LAB_08906e60;
+    if (iVar1 != 4) {
+      if (iVar1 != 5) {
+        return;
+      }
+      fVar8 = this->y;
+      if (fVar8 != map[iVar4]->pieces[0]->y) {
+        this->advance = -2;
+        this->y = fVar8 - fVar9;
+        return;
+      }
+      iVar4 = map[iVar4]->id_union_bottom;
+      fVar9 = this->x;
+      ppVar3 = map[iVar4];
+      this->actual_plane = iVar4;
+      goto LAB_08906e14;
+    }
+LAB_0890735c:
+    ppVar2 = map[iVar4];
+    if (this->z != ((float)ppVar2->side_size + ppVar2->pieces[0]->z) - DAT_089dbce4) {
+LAB_089073ec:
+      this->advance = 3;
+      this->z = this->z + fVar9;
+      return;
+    }
+    fVar6 = this->x;
+    ppVar3 = map[ppVar2->id_union_right];
+    this->actual_plane = ppVar2->id_union_right;
+    fVar8 = ppVar3->pieces[ppVar3->side_size + 1]->x;
+    if (fVar8 <= fVar6) {
+      if (fVar8 == fVar6) goto LAB_089073ec;
+      goto LAB_0890721c;
+    }
+  }
+  GVar7 = fVar6 + fVar9;
+  this->previous_face = 6;
+LAB_08906e48:
+  this->advance = 1;
+  iVar4 = ppVar3->face_number;
+  this->x = GVar7;
+  this->actual_face = iVar4;
+  return;
+}
+
+// ========================================================
+// 0x089074ec: ship::init_pos(int, int, int)
+// ========================================================
+// Function: init_pos @ 089074ec
+
+/* DWARF original prototype: void init_pos(ship * this, int x, int y, int z) */
+
+void __thiscall ship::init_pos(ship *this,int x,int y,int z)
+
+{
+  camera *pcVar1;
+  GLfloat unaff_f22;
+  GLfloat in_stack_00000000;
+  GLfloat in_stack_fffffffc;
+  
+  camera::update_pos(this->cam_ship,x,y,z,unaff_f22,in_stack_fffffffc,in_stack_00000000);
+  pcVar1 = this->cam_ship;
+  pcVar1->last_z = (float)z;
+  pcVar1->last_x = (float)x;
+  pcVar1->last_y = (float)y;
+  return;
+}
+
+// ========================================================
+// 0x08907560: ship::init(plane**)
+// ========================================================
+// Function: init @ 08907560
+
+/* DWARF original prototype: void init(ship * this, plane * * map) */
+
+void __thiscall ship::init(ship *this,plane **map)
+
+{
+  int iVar1;
+  plane *ppVar2;
+  float in_a2;
+  float in_a3;
+  GLfloat in_stack_00000010;
+  GLfloat in_stack_00000014;
+  GLfloat in_stack_00000018;
+  
+                    /* Unresolved local var: int index@[???]
+                       Unresolved local var: int cam_x@[???]
+                       Unresolved local var: int cam_y@[???]
+                       Unresolved local var: int cam_z@[???] */
+  iVar1 = plane::find_piece_index(map[this->actual_plane],(float)map,in_a2,in_a3);
+  ppVar2 = map[this->actual_plane];
+  camera::update_pos(this->cam_ship,ppVar2->cam_positions[iVar1][0],ppVar2->cam_positions[iVar1][1],
+                     ppVar2->cam_positions[iVar1][2],in_stack_00000010,in_stack_00000014,
+                     in_stack_00000018);
+  return;
+}
+
+// ========================================================
+// 0x08907600: ship::find_path(int, int, int, int, int)
+// ========================================================
+// Function: find_path @ 08907600
+
+/* WARNING: Removing unreachable block (ram,0x08907d5c) */
+/* WARNING: Removing unreachable block (ram,0x089079e4) */
+/* WARNING: Removing unreachable block (ram,0x08907dd8) */
+/* WARNING: Removing unreachable block (ram,0x08907c04) */
+/* WARNING: Removing unreachable block (ram,0x08907bc0) */
+/* WARNING: Removing unreachable block (ram,0x08907e44) */
+/* WARNING: Removing unreachable block (ram,0x08907e60) */
+/* WARNING: Removing unreachable block (ram,0x08907b40) */
+/* WARNING: Removing unreachable block (ram,0x08907d30) */
+/* WARNING: Removing unreachable block (ram,0x08907e18) */
+/* WARNING: Removing unreachable block (ram,0x08907e88) */
+/* DWARF original prototype: bool find_path(ship * this, int x, int y, int z, int dead_axis, int
+   polarity) */
+
+bool __thiscall ship::find_path(ship *this,int x,int y,int z,int dead_axis,int polarity)
+
+{
+  int iVar1;
+  int in_t0;
+  int in_t1;
+  bool bVar2;
+  float fVar3;
+  float fVar4;
+  float fVar5;
+  
+                    /* Unresolved local var: bool found@[???] */
+  if (in_t0 == 3) {
+    fVar5 = (float)x;
+    fVar4 = this->y;
+    if (this->x == fVar5) {
+      bVar2 = false;
+      if (fVar4 != (float)y) {
+        if ((float)y <= fVar4) {
+          iVar1 = this->advance;
+          if (iVar1 == 1) goto LAB_08907d74;
+          if (iVar1 == 2) {
+            iVar1 = rand();
+LAB_08907b48:
+            change_direction(this,iVar1 % 2);
+            fVar4 = this->y;
+            bVar2 = true;
+          }
+          else {
+            bVar2 = true;
+            if (iVar1 == -1) goto LAB_08907c70;
+          }
+        }
+        else {
+          iVar1 = this->advance;
+          if (iVar1 == -1) {
+LAB_08907d74:
+            if (0 < in_t1) {
+LAB_08907d7c:
+              change_direction(this,1);
+              fVar4 = this->y;
+              bVar2 = true;
+              goto LAB_0890774c;
+            }
+          }
+          else {
+            if (iVar1 != 1) {
+              if (iVar1 == -2) {
+                iVar1 = rand();
+                goto LAB_08907b48;
+              }
+              bVar2 = true;
+              goto LAB_0890774c;
+            }
+LAB_08907c70:
+            if (in_t1 < 1) goto LAB_08907d7c;
+          }
+          change_direction(this,0);
+          fVar4 = this->y;
+          bVar2 = true;
+        }
+      }
+    }
+    else {
+      bVar2 = false;
+    }
+LAB_0890774c:
+    fVar3 = this->x;
+    if (fVar4 == (float)y) {
+      if (fVar5 != fVar3) {
+        iVar1 = this->advance;
+        if (fVar5 <= fVar3) {
+          if (iVar1 == 1) goto LAB_08907d48;
+          if (iVar1 == 2) {
+LAB_08907af0:
+            if (0 < in_t1) goto LAB_08907af8;
+LAB_08907c5c:
+            change_direction(this,1);
+            fVar4 = this->y;
+            bVar2 = true;
+          }
+          else {
+            bVar2 = true;
+            if (iVar1 == -2) goto LAB_08907c54;
+          }
+        }
+        else if (iVar1 == -1) {
+LAB_08907d48:
+          bVar2 = true;
+          iVar1 = rand();
+          change_direction(this,iVar1 % 2);
+          fVar4 = this->y;
+        }
+        else if (iVar1 == 2) {
+LAB_08907c54:
+          if (0 < in_t1) goto LAB_08907c5c;
+LAB_08907af8:
+          change_direction(this,0);
+          fVar4 = this->y;
+          bVar2 = true;
+        }
+        else {
+          bVar2 = true;
+          if (iVar1 == -2) goto LAB_08907af0;
+        }
+      }
+      if (fVar4 == (float)y) {
+        return bVar2;
+      }
+      fVar3 = this->x;
+    }
+    if (fVar5 == fVar3) {
+      return bVar2;
+    }
+    iVar1 = this->advance;
+    if (fVar3 < fVar5) {
+      if (iVar1 == -1) goto LAB_08907d1c;
+      if (iVar1 != 2) {
+        if (iVar1 != -2) {
+          return bVar2;
+        }
+        if (0 < in_t1) {
+          change_direction(this,0);
+          return bVar2;
+        }
+        goto LAB_08907ac4;
+      }
+    }
+    else {
+      if (iVar1 == 1) {
+LAB_08907d1c:
+        iVar1 = rand();
+        change_direction(this,iVar1 % 2);
+        return bVar2;
+      }
+      if (iVar1 == 2) {
+        if (in_t1 < 1) goto LAB_08907ac4;
+        goto LAB_08907df8;
+      }
+      if (iVar1 != -2) {
+        return bVar2;
+      }
+    }
+    if (0 < in_t1) {
+LAB_08907ac4:
+      change_direction(this,1);
+      return bVar2;
+    }
+LAB_08907df8:
+    change_direction(this,0);
+    return bVar2;
+  }
+  if (in_t0 == 2) {
+    fVar5 = (float)z;
+    fVar4 = this->x;
+    if (this->z == fVar5) {
+      bVar2 = false;
+      if (fVar4 != (float)x) {
+        iVar1 = this->advance;
+        if ((float)x <= fVar4) {
+          if (iVar1 == 1) goto LAB_08907dc8;
+          if (iVar1 == 3) {
+LAB_08907c38:
+            if (0 < in_t1) goto LAB_08907c40;
+LAB_08907cd0:
+            change_direction(this,0);
+            fVar4 = this->x;
+            bVar2 = true;
+          }
+          else {
+            bVar2 = true;
+            if (iVar1 == -3) goto LAB_08907cc8;
+          }
+        }
+        else if (iVar1 == -1) {
+LAB_08907dc8:
+          bVar2 = true;
+          iVar1 = rand();
+          change_direction(this,iVar1 % 2);
+          fVar4 = this->x;
+        }
+        else if (iVar1 == 3) {
+LAB_08907cc8:
+          if (0 < in_t1) goto LAB_08907cd0;
+LAB_08907c40:
+          change_direction(this,1);
+          fVar4 = this->x;
+          bVar2 = true;
+        }
+        else {
+          bVar2 = true;
+          if (iVar1 == -3) goto LAB_08907c38;
+        }
+      }
+    }
+    else {
+      bVar2 = false;
+    }
+    fVar3 = this->z;
+    if (fVar4 == (float)x) {
+      if (fVar5 != fVar3) {
+        iVar1 = this->advance;
+        if (fVar5 <= fVar3) {
+          if (iVar1 == 2) goto LAB_08907dac;
+          if (iVar1 == 3) {
+LAB_08907bf4:
+            bVar2 = true;
+            iVar1 = rand();
+            change_direction(this,iVar1 % 2);
+            fVar4 = this->x;
+          }
+          else {
+            bVar2 = true;
+            if (iVar1 == -2) goto LAB_08907ce4;
+          }
+        }
+        else {
+          if (iVar1 == -2) {
+LAB_08907dac:
+            if (0 < in_t1) {
+LAB_08907db4:
+              change_direction(this,1);
+              fVar4 = this->x;
+              bVar2 = true;
+              goto LAB_0890784c;
+            }
+          }
+          else {
+            if (iVar1 != 2) {
+              if (iVar1 == -3) goto LAB_08907bf4;
+              bVar2 = true;
+              goto LAB_0890784c;
+            }
+LAB_08907ce4:
+            if (in_t1 < 1) goto LAB_08907db4;
+          }
+          change_direction(this,0);
+          fVar4 = this->x;
+          bVar2 = true;
+        }
+      }
+LAB_0890784c:
+      if (fVar4 == (float)x) {
+        return bVar2;
+      }
+      fVar3 = this->z;
+    }
+    if (fVar5 == fVar3) {
+      return bVar2;
+    }
+    iVar1 = this->advance;
+    if (fVar3 < fVar5) goto LAB_089079b8;
+    if (iVar1 != 2) {
+      if (iVar1 == 3) goto LAB_089079d4;
+      goto LAB_08907998;
+    }
+LAB_08907d04:
+    if (0 < in_t1) goto LAB_08907d0c;
+  }
+  else {
+    if (in_t0 != 1) {
+      return false;
+    }
+    fVar5 = (float)z;
+    fVar4 = this->y;
+    if (this->z == fVar5) {
+      bVar2 = false;
+      if (fVar4 != (float)y) {
+        if ((float)y <= fVar4) {
+          iVar1 = this->advance;
+          if (iVar1 == 2) {
+            iVar1 = rand();
+            goto LAB_08907e20;
+          }
+          if (iVar1 == 3) {
+LAB_08907b78:
+            if (0 < in_t1) goto LAB_08907b80;
+LAB_08907c94:
+            change_direction(this,1);
+            fVar4 = this->y;
+            bVar2 = true;
+          }
+          else {
+            bVar2 = true;
+            if (iVar1 == -3) goto LAB_08907c8c;
+          }
+        }
+        else {
+          iVar1 = this->advance;
+          if (iVar1 == -2) {
+            iVar1 = rand();
+LAB_08907e20:
+            change_direction(this,iVar1 % 2);
+            fVar4 = this->y;
+            bVar2 = true;
+          }
+          else if (iVar1 == 3) {
+LAB_08907c8c:
+            if (0 < in_t1) goto LAB_08907c94;
+LAB_08907b80:
+            change_direction(this,0);
+            fVar4 = this->y;
+            bVar2 = true;
+          }
+          else {
+            bVar2 = true;
+            if (iVar1 == -3) goto LAB_08907b78;
+          }
+        }
+      }
+    }
+    else {
+      bVar2 = false;
+    }
+    fVar3 = this->z;
+    if (fVar4 == (float)y) {
+      if (fVar5 != fVar3) {
+        iVar1 = this->advance;
+        if (fVar5 <= fVar3) {
+          if (iVar1 == 2) goto LAB_08907d90;
+          if (iVar1 == 3) {
+LAB_08907bb0:
+            bVar2 = true;
+            iVar1 = rand();
+            change_direction(this,iVar1 % 2);
+            fVar4 = this->y;
+          }
+          else {
+            bVar2 = true;
+            if (iVar1 == -2) goto LAB_08907ca8;
+          }
+        }
+        else {
+          if (iVar1 == -2) {
+LAB_08907d90:
+            if (0 < in_t1) {
+LAB_08907d98:
+              change_direction(this,1);
+              fVar4 = this->y;
+              bVar2 = true;
+              goto LAB_089076e4;
+            }
+          }
+          else {
+            if (iVar1 != 2) {
+              if (iVar1 == -3) goto LAB_08907bb0;
+              bVar2 = true;
+              goto LAB_089076e4;
+            }
+LAB_08907ca8:
+            if (in_t1 < 1) goto LAB_08907d98;
+          }
+          change_direction(this,0);
+          fVar4 = this->y;
+          bVar2 = true;
+        }
+      }
+LAB_089076e4:
+      if (fVar4 == (float)y) {
+        return bVar2;
+      }
+      fVar3 = this->z;
+    }
+    if (fVar5 == fVar3) {
+      return bVar2;
+    }
+    iVar1 = this->advance;
+    if (fVar5 <= fVar3) {
+      if (iVar1 == 2) goto LAB_08907d04;
+      if (iVar1 == 3) {
+        iVar1 = rand();
+        change_direction(this,iVar1 % 2);
+        return bVar2;
+      }
+LAB_08907998:
+      if (iVar1 != -2) {
+        return bVar2;
+      }
+    }
+    else {
+LAB_089079b8:
+      if (iVar1 == -2) goto LAB_08907d04;
+      if (iVar1 != 2) {
+        if (iVar1 != -3) {
+          return bVar2;
+        }
+LAB_089079d4:
+        iVar1 = rand();
+        change_direction(this,iVar1 % 2);
+        return bVar2;
+      }
+    }
+    if (in_t1 < 1) {
+LAB_08907d0c:
+      change_direction(this,1);
+      return bVar2;
+    }
+  }
+  change_direction(this,0);
+  return bVar2;
+}
+
+// ========================================================
+// 0x08907e94: ship::where_is(float, float, float, plane**, int)
+// ========================================================
+// Function: where_is @ 08907e94
+
+/* DWARF original prototype: int where_is(ship * this, float x, float y, float z, plane * * map, int
+   n_planes) */
+
+int __thiscall ship::where_is(ship *this,float x,float y,float z,plane **map,int n_planes)
+
+{
+  bool bVar1;
+  undefined3 extraout_var;
+  plane *this_00;
+  float y_00;
+  undefined4 *puVar2;
+  float fVar3;
+  
+                    /* Unresolved local var: int isIn@[???] */
+                    /* Unresolved local var: int i@[???] */
+  if (0 < (int)y) {
+    fVar3 = 0.0;
+    y_00 = y;
+    puVar2 = (undefined4 *)x;
+    do {
+      this_00 = (plane *)*puVar2;
+      puVar2 = puVar2 + 1;
+      bVar1 = plane::has_piece(this_00,x,y_00,z);
+      if (CONCAT31(extraout_var,bVar1) != 0) {
+        return (int)fVar3;
+      }
+      fVar3 = (float)((int)fVar3 + 1);
+    } while (y != fVar3);
+  }
+  return 0;
+}
+
+// ========================================================
+// 0x08907f4c: ship::look_for_pos(float, float, float, plane**, int)
+// ========================================================
+// Function: look_for_pos @ 08907f4c
+
+/* DWARF original prototype: bool look_for_pos(ship * this, float x, float y, float z, plane * *
+   map, int n_planes) */
+
+bool __thiscall ship::look_for_pos(ship *this,float x,float y,float z,plane **map,int n_planes)
+
+{
+  int iVar1;
+  int iVar2;
+  int iVar3;
+  int iVar4;
+  byte bVar5;
+  plane **unaff_s0;
+  int unaff_s1;
+  int unaff_s2;
+  int unaff_retaddr;
+  int unaff_f20;
+  
+                    /* Unresolved local var: int[4] costs@[???]
+                       Unresolved local var: int min@[???]
+                       Unresolved local var: int best@[???]
+                       Unresolved local var: int iAmOnPlane@[???] */
+  iVar1 = where_is(this,x,y,look_for_pos(float,float,float,plane**,int)::C_9,unaff_s0,unaff_s1);
+  this->plane_path = iVar1;
+  if (iVar1 == this->actual_plane) {
+    *(undefined1 *)(*(int *)(iVar1 * 4 + (int)x) + 0x30) = 0;
+    return true;
+  }
+  iVar2 = tell_me_the_cost(this,x,y,*(float *)(*(int *)(this->actual_plane * 4 + (int)x) + 0x20),
+                           unaff_s0,unaff_s1,unaff_s2,unaff_retaddr,unaff_f20);
+  iVar1 = tell_me_the_cost(this,x,y,*(float *)(*(int *)(this->actual_plane * 4 + (int)x) + 0x24),
+                           unaff_s0,unaff_s1,unaff_s2,unaff_retaddr,unaff_f20);
+  iVar3 = tell_me_the_cost(this,x,y,*(float *)(*(int *)(this->actual_plane * 4 + (int)x) + 0x2c),
+                           unaff_s0,unaff_s1,unaff_s2,unaff_retaddr,unaff_f20);
+  iVar4 = tell_me_the_cost(this,x,y,*(float *)(*(int *)(this->actual_plane * 4 + (int)x) + 0x28),
+                           unaff_s0,unaff_s1,unaff_s2,unaff_retaddr,unaff_f20);
+                    /* Unresolved local var: int i@[???] */
+  bVar5 = iVar1 < iVar2;
+  if (!(bool)bVar5) {
+    iVar1 = iVar2;
+  }
+  if (iVar3 < iVar1) {
+    bVar5 = 2;
+    iVar1 = iVar3;
+  }
+  if (iVar4 < iVar1) {
+    iVar1 = this->actual_plane;
+LAB_08908108:
+    this->plane_path = *(int *)(*(int *)(iVar1 * 4 + (int)x) + 0x28);
+  }
+  else if (bVar5 == 1) {
+    this->plane_path = *(int *)(*(int *)(this->actual_plane * 4 + (int)x) + 0x24);
+  }
+  else if (bVar5 < 2) {
+    if (bVar5 != 0) {
+      iVar1 = this->plane_path;
+      goto LAB_08908120;
+    }
+    this->plane_path = *(int *)(*(int *)(this->actual_plane * 4 + (int)x) + 0x20);
+  }
+  else {
+    if (bVar5 != 2) {
+      if (bVar5 != 3) {
+        iVar1 = this->plane_path;
+        goto LAB_08908120;
+      }
+      iVar1 = this->actual_plane;
+      goto LAB_08908108;
+    }
+    this->plane_path = *(int *)(*(int *)(this->actual_plane * 4 + (int)x) + 0x2c);
+  }
+  iVar1 = this->plane_path;
+LAB_08908120:
+  this->path_found = false;
+  iVar1 = *(int *)(*(int *)(iVar1 * 4 + (int)x) + 0x18);
+  if (iVar1 != this->actual_face) {
+    arrange_direction_to(this,iVar1);
+    return false;
+  }
+  *(undefined1 *)(*(int *)(this->actual_plane * 4 + (int)x) + 0x30) = 0;
+  return true;
+}
+
+// ========================================================
+// 0x08908260: ship::go_to(float, float, float, plane**, int)
+// ========================================================
+// Function: go_to @ 08908260
+
+/* DWARF original prototype: bool go_to(ship * this, float x, float y, float z, plane * * map, int
+   n_planes) */
+
+bool __thiscall ship::go_to(ship *this,float x,float y,float z,plane **map,int n_planes)
+
+{
+  bool bVar1;
+  undefined3 extraout_var;
+  float in_f12;
+  float in_f13;
+  float in_f14;
+  plane **unaff_f20;
+  int unaff_f21;
+  
+                    /* Unresolved local var: bool didArrive@[???]
+                       Unresolved local var: bool onPlane@[???] */
+  if (((this->x == in_f12) && (in_f13 == this->y)) && (in_f14 == this->z)) {
+    this->plane_path = -1;
+    this->path_found = false;
+    return true;
+  }
+  bVar1 = look_for_pos(this,x,y,z,unaff_f20,unaff_f21);
+  if ((CONCAT31(extraout_var,bVar1) != 0) && (this->path_found == false)) {
+    bVar1 = find_path(this,(int)in_f12,(int)in_f13,(int)in_f14,(int)unaff_f20,unaff_f21);
+    this->path_found = bVar1;
+    return false;
+  }
+  return false;
+}
+

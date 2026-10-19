@@ -1,0 +1,867 @@
+// ========================================================
+// 0x08904930: plane::get_cam_position_x(int)
+// ========================================================
+// Function: get_cam_position_x @ 08904930
+
+/* DWARF original prototype: float get_cam_position_x(plane * this, int value) */
+
+float __thiscall plane::get_cam_position_x(plane *this,int value)
+
+{
+  if (this->dead_axis == 1) {
+    return (float)(value + this->side_size * this->axis_polarity);
+  }
+  if (this->dead_axis != 2) {
+    return (float)(value * 3 - this->side_size);
+  }
+  return (float)(value * 3 - this->side_size);
+}
+
+// ========================================================
+// 0x08904990: plane::get_cam_position_y(int)
+// ========================================================
+// Function: get_cam_position_y @ 08904990
+
+/* DWARF original prototype: float get_cam_position_y(plane * this, int value) */
+
+float __thiscall plane::get_cam_position_y(plane *this,int value)
+
+{
+  if (this->dead_axis == 1) {
+    return (float)(value * 3 - this->side_size);
+  }
+  if (this->dead_axis != 2) {
+    return (float)(value * 3 - this->side_size);
+  }
+  return (float)(value + this->side_size * this->axis_polarity);
+}
+
+// ========================================================
+// 0x089049fc: plane::get_cam_position_z(int)
+// ========================================================
+// Function: get_cam_position_z @ 089049fc
+
+/* DWARF original prototype: float get_cam_position_z(plane * this, int value) */
+
+float __thiscall plane::get_cam_position_z(plane *this,int value)
+
+{
+  if (this->dead_axis == 1) {
+    return (float)(value * 3 - this->side_size);
+  }
+  if (this->dead_axis != 2) {
+    return (float)(this->side_size * this->axis_polarity + value);
+  }
+  return (float)(value * 3 - this->side_size);
+}
+
+// ========================================================
+// 0x08904a68: plane::find_piece_index(float, float, float)
+// ========================================================
+// Function: find_piece_index @ 08904a68
+
+/* DWARF original prototype: int find_piece_index(plane * this, float x, float y, float z) */
+
+int __thiscall plane::find_piece_index(plane *this,float x,float y,float z)
+
+{
+  float in_f12;
+  float in_f13;
+  float in_f14;
+  
+                    /* Unresolved local var: int i@[???]
+                       Unresolved local var: int j@[???]
+                       Unresolved local var: int index@[???] */
+  if (this->dead_axis == 1) {
+    return *(int *)((int)this +
+                   (((int)in_f13 - this->i) * 0x14 + ((int)in_f14 - this->j)) * 4 + 0x1970);
+  }
+  if (this->dead_axis == 2) {
+    return *(int *)((int)this +
+                   (((int)in_f12 - this->i) * 0x14 + ((int)in_f14 - this->j)) * 4 + 0x1970);
+  }
+  return *(int *)((int)this +
+                 (((int)in_f12 - this->i) * 0x14 + ((int)in_f13 - this->j)) * 4 + 0x1970);
+}
+
+// ========================================================
+// 0x08904b4c: plane::has_piece(float, float, float)
+// ========================================================
+// Function: has_piece @ 08904b4c
+
+/* DWARF original prototype: bool has_piece(plane * this, float x, float y, float z) */
+
+bool __thiscall plane::has_piece(plane *this,float x,float y,float z)
+
+{
+  int iVar1;
+  piece *ppVar2;
+  int iVar3;
+  float in_f12;
+  float in_f13;
+  float in_f14;
+  
+                    /* Unresolved local var: bool has@[???]
+                       Unresolved local var: int i@[DW_OP_reg5(a1)] */
+  iVar1 = this->side_size * this->side_size;
+  iVar3 = 0;
+  if (0 < iVar1) {
+    ppVar2 = this->pieces[0];
+    while( true ) {
+      iVar3 = iVar3 + 1;
+      if (((ppVar2->x == in_f12) && (ppVar2->y == in_f13)) && (ppVar2->z == in_f14)) {
+        return true;
+      }
+      if (iVar3 == iVar1) break;
+      ppVar2 = this->pieces[1];
+      this = (plane *)&this->i;
+    }
+  }
+  return false;
+}
+
+// ========================================================
+// 0x08904bbc: plane::longest_way(int, int, int, int, int)
+// ========================================================
+// Function: longest_way @ 08904bbc
+
+/* DWARF original prototype: int longest_way(plane * this, int x, int y, int z, int right_advance,
+   int left_advance) */
+
+int __thiscall plane::longest_way(plane *this,int x,int y,int z,int right_advance,int left_advance)
+
+{
+  bool bVar1;
+  bool bVar2;
+  undefined3 extraout_var;
+  int iVar3;
+  undefined3 extraout_var_00;
+  undefined3 extraout_var_01;
+  int iVar4;
+  undefined3 extraout_var_02;
+  undefined4 in_t0;
+  undefined4 in_t1;
+  int iVar5;
+  
+                    /* Unresolved local var: bool obstacle@[???]
+                       Unresolved local var: int right_distance@[???]
+                       Unresolved local var: int left_distance@[???]
+                       Unresolved local var: int right_x@[???]
+                       Unresolved local var: int right_y@[???]
+                       Unresolved local var: int right_z@[???]
+                       Unresolved local var: int left_x@[???]
+                       Unresolved local var: int left_y@[???]
+                       Unresolved local var: int left_z@[???]
+                       Unresolved local var: int index@[???] */
+  iVar5 = 0;
+switchD_08904d94_caseD_0:
+  do {
+    bVar1 = false;
+    bVar2 = has_piece(this,(float)x,(float)y,(float)z);
+    iVar3 = CONCAT31(extraout_var,bVar2);
+    while( true ) {
+      if ((iVar3 == 0) || (bVar1)) {
+        iVar3 = 0;
+        goto switchD_08904d6c_caseD_0;
+      }
+      iVar3 = find_piece_index(this,(float)x,(float)y,(float)z);
+      if (this->pieces[iVar3]->state == false) break;
+      bVar1 = true;
+      bVar2 = has_piece(this,(float)x,(float)y,(float)z);
+      iVar3 = CONCAT31(extraout_var_00,bVar2);
+    }
+    iVar5 = iVar5 + 1;
+    switch(in_t0) {
+    default:
+      goto switchD_08904d94_caseD_0;
+    case 1:
+      break;
+    case 2:
+      break;
+    case 3:
+      break;
+    case 0xfffffffd:
+      break;
+    case 0xfffffffe:
+      break;
+    case 0xffffffff:
+    }
+  } while( true );
+LAB_08904ca0:
+  bVar1 = false;
+  bVar2 = has_piece(this,(float)x,(float)y,(float)z);
+  iVar4 = CONCAT31(extraout_var_01,bVar2);
+  while( true ) {
+    if ((iVar4 == 0) || (bVar1)) {
+      if (iVar5 == iVar3) {
+        return 2;
+      }
+      return iVar5 < iVar3 ^ 1;
+    }
+    iVar4 = find_piece_index(this,(float)x,(float)y,(float)z);
+    if (this->pieces[iVar4]->state == false) break;
+    bVar1 = true;
+    bVar2 = has_piece(this,(float)x,(float)y,(float)z);
+    iVar4 = CONCAT31(extraout_var_02,bVar2);
+  }
+  iVar3 = iVar3 + 1;
+  switch(in_t1) {
+  default:
+switchD_08904d6c_caseD_0:
+    break;
+  case 1:
+    break;
+  case 2:
+    break;
+  case 3:
+    break;
+  case 0xfffffffd:
+    break;
+  case 0xfffffffe:
+    break;
+  case 0xffffffff:
+  }
+  goto LAB_08904ca0;
+}
+
+// ========================================================
+// 0x08904ef8: plane::available_ways(int, int, int, int)
+// ========================================================
+// Function: available_ways @ 08904ef8
+
+/* DWARF original prototype: int available_ways(plane * this, int x, int y, int z, int advance) */
+
+int __thiscall plane::available_ways(plane *this,int x,int y,int z,int advance)
+
+{
+  bool bVar1;
+  bool bVar2;
+  int iVar3;
+  int iVar4;
+  float fVar5;
+  float fVar6;
+  float fVar7;
+  int in_t0;
+  int iVar8;
+  int iVar9;
+  int in_stack_00000014;
+  
+                    /* Unresolved local var: bool canGoRight@[???]
+                       Unresolved local var: bool canGoLeft@[???]
+                       Unresolved local var: int index_left@[???]
+                       Unresolved local var: int index_right@[???]
+                       Unresolved local var: int right_advance@[???]
+                       Unresolved local var: int left_advance@[???] */
+  iVar4 = this->dead_axis;
+  if (iVar4 == 2) {
+    if (in_t0 == -1) {
+      if (this->face_number == 5) {
+        fVar5 = (float)x;
+        fVar6 = (float)y;
+        fVar7 = (float)z;
+        iVar4 = find_piece_index(this,(float)x,(float)y,(float)z);
+        iVar3 = find_piece_index(this,fVar5,fVar6,fVar7);
+        iVar8 = -3;
+        iVar9 = 3;
+        if (iVar4 < 0) {
+          bVar1 = false;
+          goto LAB_08904f70;
+        }
+      }
+      else {
+        fVar5 = (float)x;
+        fVar6 = (float)y;
+        fVar7 = (float)z;
+        iVar4 = find_piece_index(this,(float)x,(float)y,(float)z);
+        iVar3 = find_piece_index(this,fVar5,fVar6,fVar7);
+        iVar8 = 3;
+        iVar9 = -3;
+        if (iVar4 < 0) {
+          bVar1 = false;
+          goto LAB_08904f70;
+        }
+      }
+    }
+    else if (in_t0 < 0) {
+      if (in_t0 == -3) {
+        if (this->face_number == 5) {
+          fVar5 = (float)x;
+          fVar6 = (float)y;
+          fVar7 = (float)z;
+          iVar4 = find_piece_index(this,(float)x,(float)y,(float)z);
+          iVar3 = find_piece_index(this,fVar5,fVar6,fVar7);
+          iVar8 = 1;
+          iVar9 = -1;
+          if (iVar4 < 0) {
+            bVar1 = false;
+            goto LAB_08904f70;
+          }
+        }
+        else {
+          fVar5 = (float)x;
+          fVar6 = (float)y;
+          fVar7 = (float)z;
+          iVar4 = find_piece_index(this,(float)x,(float)y,(float)z);
+          iVar3 = find_piece_index(this,fVar5,fVar6,fVar7);
+          iVar8 = -1;
+          iVar9 = 1;
+          if (iVar4 < 0) {
+            bVar1 = false;
+            goto LAB_08904f70;
+          }
+        }
+      }
+      else {
+LAB_08904f48:
+        iVar3 = 0;
+        iVar4 = 0;
+        iVar8 = 0;
+        iVar9 = 0;
+      }
+    }
+    else if (in_t0 == 1) {
+      if (this->face_number == 5) {
+        fVar5 = (float)x;
+        fVar6 = (float)y;
+        fVar7 = (float)z;
+        iVar4 = find_piece_index(this,(float)x,(float)y,(float)z);
+        iVar3 = find_piece_index(this,fVar5,fVar6,fVar7);
+        iVar8 = 3;
+        iVar9 = -3;
+        if (iVar4 < 0) {
+          bVar1 = false;
+          goto LAB_08904f70;
+        }
+      }
+      else {
+        fVar5 = (float)x;
+        fVar6 = (float)y;
+        fVar7 = (float)z;
+        iVar4 = find_piece_index(this,(float)x,(float)y,(float)z);
+        iVar3 = find_piece_index(this,fVar5,fVar6,fVar7);
+        iVar8 = -3;
+        iVar9 = 3;
+        if (iVar4 < 0) {
+          bVar1 = false;
+          goto LAB_08904f70;
+        }
+      }
+    }
+    else {
+      if (in_t0 != 3) goto LAB_08904f48;
+      if (this->face_number == 5) {
+        fVar5 = (float)x;
+        fVar6 = (float)y;
+        fVar7 = (float)z;
+        iVar4 = find_piece_index(this,(float)x,(float)y,(float)z);
+        iVar3 = find_piece_index(this,fVar5,fVar6,fVar7);
+        iVar8 = -1;
+        iVar9 = 1;
+        if (iVar4 < 0) {
+          bVar1 = false;
+          goto LAB_08904f70;
+        }
+      }
+      else {
+        fVar5 = (float)x;
+        fVar6 = (float)y;
+        fVar7 = (float)z;
+        iVar4 = find_piece_index(this,(float)x,(float)y,(float)z);
+        iVar3 = find_piece_index(this,fVar5,fVar6,fVar7);
+        iVar8 = 1;
+        iVar9 = -1;
+        if (iVar4 < 0) {
+          bVar1 = false;
+          goto LAB_08904f70;
+        }
+      }
+    }
+  }
+  else {
+    fVar5 = 4.2039e-45;
+    if (iVar4 == 3) {
+      if (in_t0 == -1) {
+        if (this->face_number == 4) {
+          fVar6 = (float)y;
+          fVar7 = (float)z;
+          iVar4 = find_piece_index(this,4.2039e-45,(float)y,(float)z);
+          iVar3 = find_piece_index(this,fVar5,fVar6,fVar7);
+          iVar8 = -2;
+          iVar9 = 2;
+          if (iVar4 < 0) {
+            bVar1 = false;
+            goto LAB_08904f70;
+          }
+        }
+        else {
+          fVar6 = (float)y;
+          fVar7 = (float)z;
+          iVar4 = find_piece_index(this,4.2039e-45,(float)y,(float)z);
+          iVar3 = find_piece_index(this,fVar5,fVar6,fVar7);
+          iVar8 = 2;
+          iVar9 = -2;
+          if (iVar4 < 0) {
+            bVar1 = false;
+            goto LAB_08904f70;
+          }
+        }
+      }
+      else if (in_t0 < 0) {
+        if (in_t0 != -2) goto LAB_08904f48;
+        if (this->face_number == 4) {
+          fVar6 = (float)y;
+          fVar7 = (float)z;
+          iVar4 = find_piece_index(this,4.2039e-45,(float)y,(float)z);
+          iVar3 = find_piece_index(this,fVar5,fVar6,fVar7);
+          iVar8 = 1;
+          iVar9 = -1;
+          if (iVar4 < 0) {
+            bVar1 = false;
+            goto LAB_08904f70;
+          }
+        }
+        else {
+          fVar6 = (float)y;
+          fVar7 = (float)z;
+          iVar4 = find_piece_index(this,4.2039e-45,(float)y,(float)z);
+          iVar3 = find_piece_index(this,fVar5,fVar6,fVar7);
+          iVar8 = -1;
+          iVar9 = 1;
+          if (iVar4 < 0) {
+            bVar1 = false;
+            goto LAB_08904f70;
+          }
+        }
+      }
+      else if (in_t0 == 1) {
+        if (this->face_number == 4) {
+          fVar6 = (float)y;
+          fVar7 = (float)z;
+          iVar4 = find_piece_index(this,4.2039e-45,(float)y,(float)z);
+          iVar3 = find_piece_index(this,fVar5,fVar6,fVar7);
+          iVar8 = 2;
+          iVar9 = -2;
+          if (iVar4 < 0) {
+            bVar1 = false;
+            goto LAB_08904f70;
+          }
+        }
+        else {
+          fVar6 = (float)y;
+          fVar7 = (float)z;
+          iVar4 = find_piece_index(this,4.2039e-45,(float)y,(float)z);
+          iVar3 = find_piece_index(this,fVar5,fVar6,fVar7);
+          iVar8 = -2;
+          iVar9 = 2;
+          if (iVar4 < 0) {
+            bVar1 = false;
+            goto LAB_08904f70;
+          }
+        }
+      }
+      else {
+        if (in_t0 != 2) goto LAB_08904f48;
+        if (this->face_number == 4) {
+          fVar6 = (float)y;
+          fVar7 = (float)z;
+          iVar4 = find_piece_index(this,4.2039e-45,(float)y,(float)z);
+          iVar3 = find_piece_index(this,fVar5,fVar6,fVar7);
+          iVar8 = -1;
+          iVar9 = 1;
+          if (iVar4 < 0) {
+            bVar1 = false;
+            goto LAB_08904f70;
+          }
+        }
+        else {
+          fVar6 = (float)y;
+          fVar7 = (float)z;
+          iVar4 = find_piece_index(this,4.2039e-45,(float)y,(float)z);
+          iVar3 = find_piece_index(this,fVar5,fVar6,fVar7);
+          iVar8 = 1;
+          iVar9 = -1;
+          if (iVar4 < 0) {
+            bVar1 = false;
+            goto LAB_08904f70;
+          }
+        }
+      }
+    }
+    else {
+      if (iVar4 != 1) goto LAB_08904f48;
+      if (in_t0 == -2) {
+        if (this->face_number == 6) {
+          fVar6 = (float)y;
+          fVar7 = (float)z;
+          iVar4 = find_piece_index(this,4.2039e-45,(float)y,(float)z);
+          iVar3 = find_piece_index(this,fVar5,fVar6,fVar7);
+          iVar8 = -3;
+          iVar9 = 3;
+          if (iVar4 < 0) {
+            bVar1 = false;
+            goto LAB_08904f70;
+          }
+        }
+        else {
+          fVar6 = (float)y;
+          fVar7 = (float)z;
+          iVar4 = find_piece_index(this,4.2039e-45,(float)y,(float)z);
+          iVar3 = find_piece_index(this,fVar5,fVar6,fVar7);
+          iVar8 = 3;
+          iVar9 = -3;
+          if (iVar4 < 0) {
+            bVar1 = false;
+            goto LAB_08904f70;
+          }
+        }
+      }
+      else if (in_t0 < -1) {
+        if (in_t0 != -3) goto LAB_08904f48;
+        if (this->face_number == 6) {
+          fVar6 = (float)y;
+          fVar7 = (float)z;
+          iVar4 = find_piece_index(this,4.2039e-45,(float)y,(float)z);
+          iVar3 = find_piece_index(this,fVar5,fVar6,fVar7);
+          iVar8 = 2;
+          iVar9 = -2;
+          if (iVar4 < 0) {
+            bVar1 = false;
+            goto LAB_08904f70;
+          }
+        }
+        else {
+          fVar6 = (float)y;
+          fVar7 = (float)z;
+          iVar4 = find_piece_index(this,4.2039e-45,(float)y,(float)z);
+          iVar3 = find_piece_index(this,fVar5,fVar6,fVar7);
+          iVar8 = -2;
+          iVar9 = 2;
+          if (iVar4 < 0) {
+            bVar1 = false;
+            goto LAB_08904f70;
+          }
+        }
+      }
+      else if (in_t0 == 2) {
+        if (this->face_number == 6) {
+          fVar6 = (float)y;
+          fVar7 = (float)z;
+          iVar4 = find_piece_index(this,4.2039e-45,(float)y,(float)z);
+          iVar3 = find_piece_index(this,fVar5,fVar6,fVar7);
+          iVar8 = 3;
+          iVar9 = -3;
+          if (iVar4 < 0) {
+            bVar1 = false;
+            goto LAB_08904f70;
+          }
+        }
+        else {
+          fVar6 = (float)y;
+          fVar7 = (float)z;
+          iVar4 = find_piece_index(this,4.2039e-45,(float)y,(float)z);
+          iVar3 = find_piece_index(this,fVar5,fVar6,fVar7);
+          iVar8 = -3;
+          iVar9 = 3;
+          if (iVar4 < 0) {
+            bVar1 = false;
+            goto LAB_08904f70;
+          }
+        }
+      }
+      else {
+        if (in_t0 != 3) goto LAB_08904f48;
+        if (this->face_number == 6) {
+          fVar6 = (float)y;
+          fVar7 = (float)z;
+          iVar4 = find_piece_index(this,4.2039e-45,(float)y,(float)z);
+          iVar3 = find_piece_index(this,fVar5,fVar6,fVar7);
+          iVar8 = -2;
+          iVar9 = 2;
+          if (iVar4 < 0) {
+            bVar1 = false;
+            goto LAB_08904f70;
+          }
+        }
+        else {
+          fVar6 = (float)y;
+          fVar7 = (float)z;
+          iVar4 = find_piece_index(this,4.2039e-45,(float)y,(float)z);
+          iVar3 = find_piece_index(this,fVar5,fVar6,fVar7);
+          iVar8 = 2;
+          iVar9 = -2;
+          if (iVar4 < 0) {
+            bVar1 = false;
+            goto LAB_08904f70;
+          }
+        }
+      }
+    }
+  }
+  if (this->side_size * this->side_size < iVar4) {
+    bVar1 = false;
+  }
+  else {
+    bVar1 = this->pieces[iVar4]->state == false;
+  }
+LAB_08904f70:
+  bVar2 = false;
+  if (-1 < iVar3) {
+    if (this->side_size * this->side_size < iVar3) {
+      bVar2 = false;
+    }
+    else {
+      bVar2 = this->pieces[iVar3]->state == false;
+    }
+  }
+  iVar4 = -1;
+  if (bVar1) {
+    iVar4 = 1;
+    if (bVar2) {
+      if ((iVar8 != 0) && (iVar9 != 0)) {
+        iVar4 = longest_way(this,x,y,z,advance,in_stack_00000014);
+        return iVar4;
+      }
+      return 2;
+    }
+  }
+  else if (bVar2) {
+    iVar4 = 0;
+  }
+  return iVar4;
+}
+
+// ========================================================
+// 0x08905b7c: plane::print(bool)
+// ========================================================
+// Function: print @ 08905b7c
+
+/* DWARF original prototype: int print(plane * this, bool low_quality) */
+
+int __thiscall plane::print(plane *this,bool low_quality)
+
+{
+  piece *this_00;
+  int iVar1;
+  plane *ppVar2;
+  plane *ppVar3;
+  int iVar4;
+  int iVar5;
+  
+                    /* Unresolved local var: int prints@[???] */
+                    /* Unresolved local var: int i@[???] */
+  iVar1 = this->side_size;
+  if (iVar1 * iVar1 < 1) {
+    return 0;
+  }
+  iVar5 = 0;
+  iVar4 = 0;
+  ppVar2 = this;
+  do {
+    this_00 = ppVar2->pieces[0];
+    ppVar3 = ppVar2;
+    while( true ) {
+      iVar4 = iVar4 + 1;
+      ppVar2 = (plane *)&ppVar3->i;
+      if (this_00 == (piece *)0x0) break;
+      if (this_00->state == false) {
+        if (this_00->status != 2) break;
+        iVar1 = this->dead_axis;
+      }
+      else {
+        iVar1 = this->dead_axis;
+      }
+      iVar5 = iVar5 + 1;
+      piece::print(this_00,iVar1,low_quality);
+      iVar1 = this->side_size;
+      if (iVar1 * iVar1 <= iVar4) {
+        return iVar5;
+      }
+      this_00 = ppVar3->pieces[1];
+      ppVar3 = ppVar2;
+    }
+    if (iVar1 * iVar1 <= iVar4) {
+      return iVar5;
+    }
+  } while( true );
+}
+
+// ========================================================
+// 0x08905c80: plane::generate_positions(int, int, int, int)
+// ========================================================
+// Function: generate_positions @ 08905c80
+
+/* WARNING: Removing unreachable block (ram,0x08905cd4) */
+/* DWARF original prototype: void generate_positions(plane * this, int offset_x, int offset_y, int
+   offset_z, int cam_distance) */
+
+void __thiscall
+plane::generate_positions(plane *this,int offset_x,int offset_y,int offset_z,int cam_distance)
+
+{
+  GLfloat GVar1;
+  piece *ppVar2;
+  glinterface *pgVar3;
+  int iVar4;
+  int in_t0;
+  int (*paiVar5) [3];
+  int iVar6;
+  int iVar7;
+  piece **pppVar8;
+  int iVar9;
+  int (*paiVar10) [20];
+  float fVar11;
+  float fVar12;
+  float fVar13;
+  int (*local_48) [3];
+  int local_44;
+  int local_40;
+  
+                    /* Unresolved local var: int count@[???]
+                       Unresolved local var: int inc_i@[???]
+                       Unresolved local var: int inc_j@[???] */
+                    /* Unresolved local var: int i@[???] */
+  if (this->side_size < 1) {
+    return;
+  }
+                    /* Unresolved local var: int j@[???] */
+  iVar9 = 0;
+  local_40 = 0;
+  iVar6 = 0;
+LAB_08905cf0:
+  pppVar8 = this->pieces + iVar9;
+  local_44 = 0;
+  iVar7 = 0;
+  paiVar5 = this->cam_positions + iVar9;
+  paiVar10 = this->index + iVar6;
+  local_48 = paiVar5;
+  do {
+    ppVar2 = operator_new(0x50);
+    GVar1 = DAT_089dc360;
+    ppVar2->ident = -1;
+    ppVar2->size = GVar1;
+    ppVar2->material[2] = 0xff;
+    ppVar2->temporal = true;
+    ppVar2->material[0] = 0xff;
+    ppVar2->material[1] = 0xff;
+    ppVar2->material[3] = 200;
+    ppVar2->state = false;
+    ppVar2->type = 0;
+    *(undefined4 *)&ppVar2->prints_counter = 0;
+    *(undefined4 *)((int)&ppVar2->prints_counter + 4) = 0;
+    pgVar3 = operator_new(1);
+    ppVar2->owner = -2;
+    ppVar2->status = 0;
+    ppVar2->ident = iVar9;
+    fVar11 = DAT_089dc364;
+    iVar4 = this->dead_axis;
+    ppVar2->printer = pgVar3;
+    ppVar2->effect_size = ppVar2->size;
+    ppVar2->effect_alpha = fVar11;
+    *pppVar8 = ppVar2;
+    if (iVar4 == 1) {
+      fVar13 = (float)(iVar6 + offset_y + this->i);
+      fVar11 = (float)(iVar7 + offset_z + this->j);
+      fVar12 = (float)(offset_x + this->dead_offset);
+      (*local_48)[0] = (int)fVar12 + in_t0 * this->axis_polarity;
+      ppVar2->z = fVar11;
+      (*paiVar5)[1] = (local_40 + (int)fVar13) - in_t0;
+      (*paiVar5)[2] = (local_44 + (int)fVar11) - in_t0;
+      ppVar2->x = fVar12;
+      ppVar2->y = fVar13;
+    }
+    else if (iVar4 == 2) {
+      iVar4 = this->axis_polarity;
+      fVar13 = (float)(iVar6 + offset_x + this->i);
+      fVar11 = (float)(iVar7 + offset_z + this->j);
+      fVar12 = (float)(offset_y + this->dead_offset);
+      (*local_48)[0] = (local_40 + (int)fVar13) - in_t0;
+      ppVar2->z = fVar11;
+      (*paiVar5)[1] = (int)fVar12 + in_t0 * iVar4;
+      (*paiVar5)[2] = (local_44 + (int)fVar11) - in_t0;
+      ppVar2->x = fVar13;
+      ppVar2->y = fVar12;
+    }
+    else {
+      iVar4 = this->axis_polarity;
+      fVar12 = (float)(iVar6 + offset_x + this->i);
+      fVar13 = (float)(offset_y + this->j + iVar7);
+      fVar11 = (float)(offset_z + this->dead_offset);
+      (*local_48)[0] = (local_40 + (int)fVar12) - in_t0;
+      ppVar2->z = fVar11;
+      (*paiVar5)[1] = ((int)fVar13 + local_44) - in_t0;
+      (*paiVar5)[2] = (int)fVar11 + in_t0 * iVar4;
+      ppVar2->x = fVar12;
+      ppVar2->y = fVar13;
+    }
+    ppVar2 = *pppVar8;
+    iVar4 = this->max_vertex[0];
+    (*paiVar10)[0] = iVar9;
+    if (iVar4 < (int)ppVar2->x) {
+      this->max_vertex[0] = (int)ppVar2->x;
+    }
+    if (this->max_vertex[1] < (int)ppVar2->y) {
+      this->max_vertex[1] = (int)ppVar2->y;
+    }
+    if (this->max_vertex[2] < (int)ppVar2->z) {
+      this->max_vertex[2] = (int)ppVar2->z;
+    }
+    if (iVar6 == 0) {
+      if (iVar7 == 0) {
+        fVar11 = ppVar2->y;
+        fVar12 = ppVar2->z;
+        this->a_vertex[0] = (int)ppVar2->x;
+        this->a_vertex[1] = (int)fVar11;
+        this->a_vertex[2] = (int)fVar12;
+        iVar4 = this->side_size;
+      }
+      else {
+        iVar4 = this->side_size;
+      }
+      if (iVar4 + -1 == iVar7) {
+        fVar11 = ppVar2->y;
+        fVar12 = ppVar2->z;
+        this->b_vertex[0] = (int)ppVar2->x;
+        this->b_vertex[1] = (int)fVar11;
+        this->b_vertex[2] = (int)fVar12;
+      }
+      if (iVar4 == 1) goto LAB_08905fdc;
+    }
+    else {
+      iVar4 = this->side_size;
+      if (iVar6 == iVar4 + -1) {
+LAB_08905fdc:
+        if (iVar7 == 0) {
+          fVar11 = ppVar2->y;
+          fVar12 = ppVar2->z;
+          this->c_vertex[0] = (int)ppVar2->x;
+          this->c_vertex[1] = (int)fVar11;
+          this->c_vertex[2] = (int)fVar12;
+        }
+        if (iVar6 == iVar7) {
+          fVar11 = ppVar2->z;
+          fVar12 = ppVar2->y;
+          this->d_vertex[0] = (int)ppVar2->x;
+          this->d_vertex[1] = (int)fVar12;
+          this->d_vertex[2] = (int)fVar11;
+        }
+      }
+    }
+    iVar7 = iVar7 + 1;
+    local_48 = local_48 + 1;
+    iVar9 = iVar9 + 1;
+    pppVar8 = pppVar8 + 1;
+    paiVar10 = (int (*) [20])(*paiVar10 + 1);
+    paiVar5 = paiVar5 + 1;
+    if (iVar4 <= iVar7) break;
+    local_44 = local_44 + in_t0 / 10;
+  } while( true );
+  do {
+    iVar6 = iVar6 + 1;
+    if (iVar4 <= iVar6) {
+      return;
+    }
+    local_40 = local_40 + in_t0 / 10;
+  } while (iVar4 < 1);
+  goto LAB_08905cf0;
+}
+

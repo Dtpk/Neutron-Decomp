@@ -1,0 +1,273 @@
+// ========================================================
+// 0x0890635c: enemy::restart()
+// ========================================================
+// Function: restart @ 0890635c
+
+/* DWARF original prototype: void restart(enemy * this) */
+
+void __thiscall enemy::restart(enemy *this)
+
+{
+  int iVar1;
+  int iVar2;
+  int iVar3;
+  int iVar4;
+  GLfloat GVar5;
+  
+  iVar2 = this->start_x;
+  iVar3 = this->start_y;
+  iVar4 = this->start_z;
+  GVar5 = (this->super_ship).size;
+  iVar1 = (this->super_ship).material[3];
+  this->active = true;
+  (this->super_ship).x_predict = (float)iVar2;
+  (this->super_ship).y_predict = (float)iVar3;
+  (this->super_ship).z_predict = (float)iVar4;
+  (this->super_ship).effect_size = GVar5;
+  (this->super_ship).effect_alpha = iVar1;
+  (this->super_ship).x = (float)iVar2;
+  (this->super_ship).y = (float)iVar3;
+  (this->super_ship).z = (float)iVar4;
+  (this->super_ship).cue_counter = 0;
+  (this->super_ship).status = 0;
+  (this->super_ship).step_counter = 0;
+  (this->super_ship).step_speed = 1;
+  return;
+}
+
+// ========================================================
+// 0x089063b8: enemy::predict(plane**)
+// ========================================================
+// Function: predict @ 089063b8
+
+/* DWARF original prototype: void predict(enemy * this, plane * * map) */
+
+void __thiscall enemy::predict(enemy *this,plane **map)
+
+{
+  float fVar1;
+  float fVar2;
+  float fVar3;
+  
+  fVar3 = (this->super_ship).x;
+  fVar2 = (this->super_ship).y;
+  fVar1 = (this->super_ship).z;
+  (this->super_ship).x_predict = fVar3;
+  (this->super_ship).y_predict = fVar2;
+  (this->super_ship).z_predict = fVar1;
+  switch((this->super_ship).advance) {
+  case 1:
+    if (fVar3 < (((float)map[(this->super_ship).actual_plane]->side_size +
+                 map[(this->super_ship).actual_plane]->pieces[0]->x) - DAT_089dbce4) - DAT_089dbce4)
+    {
+      (this->super_ship).x_predict = fVar3 + DAT_089dbce4;
+      return;
+    }
+    break;
+  case 2:
+    if (fVar2 < (((float)map[(this->super_ship).actual_plane]->side_size +
+                 map[(this->super_ship).actual_plane]->pieces[0]->y) - DAT_089dbce4) - DAT_089dbce4)
+    {
+      (this->super_ship).y_predict = fVar2 + DAT_089dbce4;
+      return;
+    }
+    break;
+  case 3:
+    if (fVar1 < (((float)map[(this->super_ship).actual_plane]->side_size +
+                 map[(this->super_ship).actual_plane]->pieces[0]->z) - DAT_089dbce4) - DAT_089dbce4)
+    {
+      (this->super_ship).z_predict = fVar1 + DAT_089dbce4;
+    }
+    break;
+  case -3:
+    if (map[(this->super_ship).actual_plane]->pieces[0]->z < fVar1) {
+      (this->super_ship).z_predict = fVar1 - DAT_089dbce4;
+      return;
+    }
+    break;
+  case -2:
+    if (map[(this->super_ship).actual_plane]->pieces[0]->y < fVar2) {
+      (this->super_ship).y_predict = fVar2 - DAT_089dbce4;
+      return;
+    }
+    break;
+  case -1:
+    if (map[(this->super_ship).actual_plane]->pieces[0]->x < fVar3) {
+      (this->super_ship).x_predict = fVar3 - DAT_089dbce4;
+      return;
+    }
+  }
+  return;
+}
+
+// ========================================================
+// 0x08908394: enemy::move(plane**, int)
+// ========================================================
+// Function: move @ 08908394
+
+/* WARNING: Removing unreachable block (ram,0x089086f4) */
+/* WARNING: Removing unreachable block (ram,0x0890864c) */
+/* WARNING: Removing unreachable block (ram,0x08908510) */
+/* WARNING: Removing unreachable block (ram,0x089086dc) */
+/* WARNING: Removing unreachable block (ram,0x0890870c) */
+/* WARNING: Removing unreachable block (ram,0x08908684) */
+/* DWARF original prototype: int move(enemy * this, plane * * map, int proton_face) */
+
+int __thiscall enemy::move(enemy *this,plane **map,int proton_face)
+
+{
+  int iVar1;
+  int iVar2;
+  uint turn;
+  undefined4 extraout_v0;
+  undefined4 extraout_v1;
+  plane **x;
+  plane *ppVar3;
+  float in_a3;
+  piece *ppVar4;
+  int cam_z;
+  GLfloat unaff_s4;
+  GLfloat unaff_s5;
+  GLfloat unaff_retaddr;
+  
+                    /* Unresolved local var: int index_predict@[???]
+                       Unresolved local var: int way@[???]
+                       Unresolved local var: int axis@[???]
+                       Unresolved local var: int index@[???] */
+  iVar1 = plane::find_piece_index
+                    (map[(this->super_ship).actual_plane],(float)map,(float)proton_face,in_a3);
+  if (map[(this->super_ship).actual_plane]->pieces[iVar1]->state != false) {
+    return map[(this->super_ship).actual_plane]->pieces[iVar1]->type;
+  }
+  x = map;
+                    /* Unresolved local var: int cam_x@[???]
+                       Unresolved local var: int cam_y@[???]
+                       Unresolved local var: int cam_z@[???] */
+  predict(this,map);
+  iVar2 = plane::find_piece_index
+                    (map[(this->super_ship).actual_plane],(float)x,(float)proton_face,in_a3);
+  turn = plane::available_ways
+                   (map[(this->super_ship).actual_plane],(int)(this->super_ship).x,
+                    (int)(this->super_ship).y,(int)(this->super_ship).z,(int)unaff_s4);
+  if (map[(this->super_ship).actual_plane]->pieces[iVar2]->state == false) {
+    iVar2 = rand();
+    if (iVar2 % 0xf == 5) {
+      if (turn < 2) goto LAB_089086bc;
+      if (turn == 2) {
+        iVar2 = rand();
+        ship::change_direction(&this->super_ship,iVar2 % 2);
+        iVar2 = this->type;
+      }
+      else {
+        iVar2 = this->type;
+      }
+    }
+    else {
+      iVar2 = this->type;
+    }
+  }
+  else if (turn < 2) {
+LAB_089086bc:
+    ship::change_direction(&this->super_ship,turn);
+    iVar2 = this->type;
+  }
+  else {
+    iVar2 = rand();
+    ship::change_direction(&this->super_ship,iVar2 % 2);
+    iVar2 = this->type;
+  }
+  if (iVar2 == 2) {
+    this->active = (bool)(this->active ^ 1);
+  }
+  if (iVar2 == 3) {
+    if (this->active != false) {
+      iVar2 = rand();
+      this->active = (bool)((byte)iVar2 & 1);
+      goto LAB_0890853c;
+    }
+    this->active = true;
+  }
+  else {
+LAB_0890853c:
+    if (this->active == false) goto LAB_089085bc;
+  }
+  piece::change_state(map[(this->super_ship).actual_plane]->pieces[iVar1],
+                      (this->super_ship).material,2);
+  ppVar4 = map[(this->super_ship).actual_plane]->pieces[iVar1];
+  __floatsidf(-(this->super_ship).cue_counter);
+  iVar2 = (this->super_ship).ident;
+  *(undefined4 *)&ppVar4->prints_counter = extraout_v0;
+  *(undefined4 *)((int)&ppVar4->prints_counter + 4) = extraout_v1;
+  ppVar4->owner = iVar2;
+  iVar2 = this->type;
+  (this->super_ship).cue_counter = (this->super_ship).cue_counter + 1;
+  if (iVar2 == 3) {
+    iVar2 = rand();
+    (this->super_ship).material[0] = iVar2 % 200;
+    iVar2 = rand();
+    (this->super_ship).material[1] = iVar2 % 200;
+    iVar2 = rand();
+    (this->super_ship).material[2] = iVar2 % 200;
+  }
+LAB_089085bc:
+  ppVar3 = map[(this->super_ship).actual_plane];
+  cam_z = ppVar3->cam_positions[iVar1][2];
+  iVar2 = ppVar3->cam_positions[iVar1][0];
+  iVar1 = ppVar3->cam_positions[iVar1][1];
+  ship::do_step(&this->super_ship,map);
+  camera::update_pos((this->super_ship).cam_ship,iVar2,iVar1,cam_z,unaff_s4,unaff_s5,unaff_retaddr);
+  return 0;
+}
+
+// ========================================================
+// 0x08908924: enemy::print(int, bool)
+// ========================================================
+// Function: print @ 08908924
+
+/* DWARF original prototype: void print(enemy * this, int axis, bool low_quality) */
+
+void __thiscall enemy::print(enemy *this,int axis,bool low_quality)
+
+{
+  int iVar1;
+  float fVar2;
+  int in_stack_00000000;
+  int in_stack_00000004;
+  int in_stack_00000008;
+  int in_stack_0000000c;
+  GLfloat in_stack_00000010;
+  int in_stack_00000014;
+  int in_stack_00000018;
+  int in_stack_0000001c;
+  GLfloat in_stack_00000020;
+  
+  if ((this->super_ship).status != 6) {
+    glinterface::solid_cube
+              ((this->super_ship).printer,3.57331e-43,3.57331e-43,3.57331e-43,(int)in_stack_00000010
+               ,in_stack_00000014,in_stack_00000018,in_stack_0000001c,in_stack_00000020);
+    return;
+  }
+  fVar2 = (this->super_ship).effect_size;
+  if (fVar2 < DAT_089dc368) {
+    (this->super_ship).effect_size = fVar2 + DAT_089dc36c;
+  }
+  iVar1 = (this->super_ship).effect_alpha;
+  if (iVar1 < 1) {
+    (this->super_ship).status = 2;
+  }
+  else {
+    iVar1 = iVar1 + -7;
+    (this->super_ship).effect_alpha = iVar1;
+  }
+  if (iVar1 < 0) {
+    (this->super_ship).effect_alpha = 0;
+  }
+  glinterface::solid_cube
+            ((this->super_ship).printer,3.57331e-43,3.57331e-43,3.57331e-43,in_stack_00000000,
+             in_stack_00000004,in_stack_00000008,in_stack_0000000c,in_stack_00000010);
+  glinterface::solid_cube
+            ((this->super_ship).printer,3.57331e-43,3.57331e-43,3.57331e-43,(int)in_stack_00000010,
+             in_stack_00000014,in_stack_00000018,in_stack_0000001c,in_stack_00000020);
+  return;
+}
+

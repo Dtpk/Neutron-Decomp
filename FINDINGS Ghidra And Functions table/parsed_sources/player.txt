@@ -1,0 +1,256 @@
+// ========================================================
+// 0x08906298: player::change_color(int)
+// ========================================================
+// Function: change_color @ 08906298
+
+/* DWARF original prototype: void change_color(player * this, int user_color) */
+
+void __thiscall player::change_color(player *this,int user_color)
+
+{
+  if (user_color == 0) {
+    (this->super_ship).material[3] = 200;
+    (this->super_ship).material[1] = 100;
+    (this->super_ship).material[2] = 0xf;
+    (this->super_ship).material[0] = 0;
+    return;
+  }
+  if (user_color != 1) {
+    (this->super_ship).material[3] = 200;
+    (this->super_ship).material[1] = 0x46;
+    (this->super_ship).material[2] = 0x96;
+    (this->super_ship).material[0] = 0;
+    return;
+  }
+  (this->super_ship).material[3] = 200;
+  (this->super_ship).material[1] = 10;
+  (this->super_ship).material[2] = 100;
+  (this->super_ship).material[0] = 100;
+  return;
+}
+
+// ========================================================
+// 0x08906304: player::restart()
+// ========================================================
+// Function: restart @ 08906304
+
+/* DWARF original prototype: void restart(player * this) */
+
+void __thiscall player::restart(player *this)
+
+{
+  int iVar1;
+  int iVar2;
+  int iVar3;
+  int iVar4;
+  
+  iVar2 = this->start_x;
+  iVar3 = this->start_y;
+  iVar4 = this->start_z;
+  iVar1 = (this->super_ship).material[3];
+  (this->super_ship).step_speed = 1;
+  (this->super_ship).x_predict = (float)iVar2;
+  (this->super_ship).y_predict = (float)iVar3;
+  (this->super_ship).z_predict = (float)iVar4;
+  (this->super_ship).effect_size = (this->super_ship).size;
+  (this->super_ship).effect_alpha = iVar1;
+  (this->super_ship).x = (float)iVar2;
+  (this->super_ship).y = (float)iVar3;
+  (this->super_ship).z = (float)iVar4;
+  (this->super_ship).cue_counter = 0;
+  (this->super_ship).status = 1;
+  (this->super_ship).step_counter = 0;
+  return;
+}
+
+// ========================================================
+// 0x08908730: player::move(plane**, int)
+// ========================================================
+// Function: move @ 08908730
+
+/* DWARF original prototype: int move(player * this, plane * * map, int mode) */
+
+int __thiscall player::move(player *this,plane **map,int mode)
+
+{
+  int iVar1;
+  undefined4 extraout_v0;
+  piece *ppVar2;
+  undefined4 extraout_v1;
+  int *material;
+  plane *ppVar3;
+  float in_a3;
+  int iVar4;
+  GLfloat unaff_s4;
+  int iVar5;
+  GLfloat unaff_s5;
+  GLfloat unaff_retaddr;
+  
+                    /* Unresolved local var: int index@[???] */
+  iVar1 = plane::find_piece_index(map[(this->super_ship).actual_plane],(float)map,(float)mode,in_a3)
+  ;
+                    /* Unresolved local var: int cam_x@[???]
+                       Unresolved local var: int cam_y@[???]
+                       Unresolved local var: int cam_z@[???] */
+  material = (this->super_ship).material;
+  ppVar2 = map[(this->super_ship).actual_plane]->pieces[iVar1];
+  if (ppVar2->state == false) {
+    piece::change_state(ppVar2,material,1);
+    map[(this->super_ship).actual_plane]->pieces[iVar1]->owner = (this->super_ship).ident;
+    if (mode == 1) {
+      iVar5 = (this->super_ship).actual_plane;
+      iVar4 = (this->super_ship).cue_counter;
+      ppVar2 = map[iVar5]->pieces[iVar1];
+      __floatsidf(-iVar4);
+      (this->super_ship).cue_counter = iVar4 + 1;
+      *(undefined4 *)&ppVar2->prints_counter = extraout_v0;
+      *(undefined4 *)((int)&ppVar2->prints_counter + 4) = extraout_v1;
+      goto LAB_0890881c;
+    }
+  }
+  else {
+    if (mode == 1) {
+      return ppVar2->type;
+    }
+    piece::change_state(ppVar2,material,1);
+    map[(this->super_ship).actual_plane]->pieces[iVar1]->owner = (this->super_ship).ident;
+  }
+  iVar5 = (this->super_ship).actual_plane;
+  map[iVar5]->pieces[iVar1]->temporal = true;
+LAB_0890881c:
+  ppVar3 = map[iVar5];
+  iVar5 = ppVar3->cam_positions[iVar1][2];
+  iVar4 = ppVar3->cam_positions[iVar1][0];
+  iVar1 = ppVar3->cam_positions[iVar1][1];
+  ship::do_step(&this->super_ship,map);
+  camera::update_pos((this->super_ship).cam_ship,iVar4,iVar1,iVar5,unaff_s4,unaff_s5,unaff_retaddr);
+  return 0;
+}
+
+// ========================================================
+// 0x08908a2c: player::print(int, bool)
+// ========================================================
+// Function: print @ 08908a2c
+
+/* DWARF original prototype: void print(player * this, int axis, bool low_quality) */
+
+void __thiscall player::print(player *this,int axis,bool low_quality)
+
+{
+  int iVar1;
+  float fVar2;
+  int in_stack_00000000;
+  int in_stack_00000004;
+  int in_stack_00000008;
+  int in_stack_0000000c;
+  GLfloat in_stack_00000010;
+  int in_stack_00000014;
+  int in_stack_00000018;
+  int in_stack_0000001c;
+  GLfloat in_stack_00000020;
+  
+  iVar1 = (this->super_ship).status;
+  if (iVar1 != 6) {
+    if (iVar1 == 3) {
+      glinterface::solid_cube
+                ((this->super_ship).printer,3.57331e-43,3.57331e-43,3.57331e-43,in_stack_00000000,
+                 in_stack_00000004,in_stack_00000008,in_stack_0000000c,in_stack_00000010);
+      iVar1 = (this->super_ship).effect_alpha;
+      if (iVar1 < 0xff) {
+        (this->super_ship).effect_alpha = iVar1 + 7;
+        fVar2 = (this->super_ship).effect_size;
+      }
+      else {
+        fVar2 = (this->super_ship).effect_size;
+      }
+      if ((this->super_ship).size < fVar2) {
+        (this->super_ship).effect_size = fVar2 - DAT_089dc360;
+      }
+      else if ((this->super_ship).material[3] <= (this->super_ship).effect_alpha) {
+        (this->super_ship).status = 1;
+      }
+    }
+    glinterface::solid_cube
+              ((this->super_ship).printer,3.57331e-43,3.57331e-43,3.57331e-43,(int)in_stack_00000010
+               ,in_stack_00000014,in_stack_00000018,in_stack_0000001c,in_stack_00000020);
+    return;
+  }
+  fVar2 = (this->super_ship).effect_size;
+  if (fVar2 < DAT_089dc368) {
+    (this->super_ship).effect_size = fVar2 + DAT_089dc36c;
+  }
+  iVar1 = (this->super_ship).effect_alpha;
+  if (iVar1 < 1) {
+    (this->super_ship).status = 1;
+  }
+  else {
+    iVar1 = iVar1 + -7;
+    (this->super_ship).effect_alpha = iVar1;
+  }
+  if (iVar1 < 0) {
+    (this->super_ship).effect_alpha = 0;
+  }
+  glinterface::solid_cube
+            ((this->super_ship).printer,3.57331e-43,3.57331e-43,3.57331e-43,in_stack_00000000,
+             in_stack_00000004,in_stack_00000008,in_stack_0000000c,in_stack_00000010);
+  glinterface::solid_cube
+            ((this->super_ship).printer,3.57331e-43,3.57331e-43,3.57331e-43,(int)in_stack_00000010,
+             in_stack_00000014,in_stack_00000018,in_stack_0000001c,in_stack_00000020);
+  return;
+}
+
+// ========================================================
+// 0x08908bc8: player::print_guides(int, int)
+// ========================================================
+// Function: print_guides @ 08908bc8
+
+/* DWARF original prototype: void print_guides(player * this, int face, int axis) */
+
+void __thiscall player::print_guides(player *this,int face,int axis)
+
+{
+  int iVar1;
+  int unaff_f20;
+  int unaff_f21;
+  int unaff_f22;
+  int unaff_f23;
+  GLfloat unaff_f24;
+  int in_stack_00000010;
+  int in_stack_00000014;
+  int in_stack_00000018;
+  int in_stack_0000001c;
+  GLfloat in_stack_00000020;
+  int in_stack_00000024;
+  int in_stack_fffffffc;
+  
+                    /* Unresolved local var: int right_x@[???]
+                       Unresolved local var: int right_y@[???]
+                       Unresolved local var: int right_z@[???]
+                       Unresolved local var: int left_x@[???]
+                       Unresolved local var: int left_y@[???]
+                       Unresolved local var: int left_z@[???] */
+  switch(face) {
+  case 1:
+    iVar1 = (this->super_ship).advance;
+    if ((((iVar1 == -1) || (iVar1 < 0)) || (iVar1 == 1)) || (iVar1 == 2)) break;
+  default:
+    break;
+  case 2:
+    break;
+  case 3:
+    break;
+  case 4:
+    break;
+  case 5:
+    break;
+  case 6:
+  }
+  glinterface::square_3D
+            ((this->super_ship).printer,3.57331e-43,0.0,0.0,unaff_f20,unaff_f21,unaff_f22,unaff_f23,
+             unaff_f24,in_stack_fffffffc);
+  glinterface::square_3D
+            ((this->super_ship).printer,0.0,0.0,3.57331e-43,in_stack_00000010,in_stack_00000014,
+             in_stack_00000018,in_stack_0000001c,in_stack_00000020,in_stack_00000024);
+  return;
+}
+

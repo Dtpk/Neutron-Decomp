@@ -1,0 +1,548 @@
+// ========================================================
+// 0x08909ecc: button::change_color(int, int, int, int)
+// ========================================================
+// Function: change_color @ 08909ecc
+
+/* DWARF original prototype: void change_color(button * this, int r, int g, int b, int a) */
+
+void __thiscall button::change_color(button *this,int r,int g,int b,int a)
+
+{
+  int in_t0;
+  
+  this->color[3] = in_t0;
+  this->color[0] = r;
+  this->color[1] = g;
+  this->color[2] = b;
+  return;
+}
+
+// ========================================================
+// 0x08909ee0: button::show_skeleton()
+// ========================================================
+// Function: show_skeleton @ 08909ee0
+
+/* DWARF original prototype: void show_skeleton(button * this) */
+
+void __thiscall button::show_skeleton(button *this)
+
+{
+  GLfloat in_a2;
+  GLfloat in_a3;
+  int *x_origin;
+  GLfloat unaff_f20;
+  GLfloat unaff_f21;
+  GLfloat in_stack_00000000;
+  int *in_stack_00000004;
+  GLfloat in_stack_00000010;
+  GLfloat in_stack_00000014;
+  GLfloat in_stack_00000018;
+  int *in_stack_0000001c;
+  
+  x_origin = this->color;
+  glinterface::line(this->printer,(GLfloat)x_origin,in_a2,in_a3,unaff_f20,unaff_f21,
+                    in_stack_00000000,in_stack_00000004);
+  glinterface::line(this->printer,(GLfloat)x_origin,in_a2,in_a3,unaff_f20,unaff_f21,
+                    in_stack_00000000,in_stack_00000004);
+  glinterface::line(this->printer,(GLfloat)x_origin,in_a2,in_a3,unaff_f20,unaff_f21,
+                    in_stack_00000000,in_stack_00000004);
+  glinterface::line(this->printer,(GLfloat)x_origin,in_a2,in_a3,in_stack_00000010,in_stack_00000014,
+                    in_stack_00000018,in_stack_0000001c);
+  return;
+}
+
+// ========================================================
+// 0x0890a008: button::print_3D(float, float, float, int, int)
+// ========================================================
+// Function: print_3D @ 0890a008
+
+/* DWARF original prototype: void print_3D(button * this, float x, float y, float z, int axis, int
+   polarity) */
+
+void __thiscall button::print_3D(button *this,float x,float y,float z,int axis,int polarity)
+
+{
+  float fVar1;
+  int iVar2;
+  int iVar3;
+  int unaff_s2;
+  int iVar4;
+  int unaff_s3;
+  button *pbVar5;
+  int unaff_s4;
+  int unaff_s5;
+  GLfloat unaff_s6;
+  int unaff_s7;
+  float in_f12;
+  float in_f13;
+  float in_f14;
+  float fVar6;
+  
+                    /* Unresolved local var: float offsetx@[???]
+                       Unresolved local var: float offsety@[???] */
+  fVar1 = DAT_089dc48c;
+  fVar6 = 0.0;
+  this->x = in_f12;
+  this->y = in_f13;
+  this->z = in_f14;
+  pbVar5 = this;
+LAB_0890a0b0:
+                    /* Unresolved local var: int i@[???] */
+  iVar2 = pbVar5->characters[0];
+LAB_0890a0b4:
+  if (iVar2 < 0) goto LAB_0890a1e0;
+  if ((int)y < 1) {
+    iVar4 = 5;
+    do {
+      iVar3 = 5;
+LAB_0890a2c4:
+      if (::::FONT[iVar2][iVar4][iVar3] == 0) {
+LAB_0890a2b4:
+        if (iVar3 + -1 == -1) goto LAB_0890a360;
+        iVar2 = pbVar5->characters[0];
+        iVar3 = iVar3 + -1;
+        goto LAB_0890a2c4;
+      }
+      if (x != 1.4013e-45) {
+                    /* Unresolved local var: int y@[???]
+                       Unresolved local var: int x@[???] */
+        glinterface::square_3D
+                  (this->printer,(GLfloat)this->color[0],(GLfloat)this->color[1],
+                   (GLfloat)this->color[2],unaff_s2,unaff_s3,unaff_s4,unaff_s5,unaff_s6,unaff_s7);
+        goto LAB_0890a2b4;
+      }
+      glinterface::square_3D
+                (this->printer,(GLfloat)this->color[0],(GLfloat)this->color[1],
+                 (GLfloat)this->color[2],unaff_s2,unaff_s3,unaff_s4,unaff_s5,unaff_s6,unaff_s7);
+      if (iVar3 + -1 != -1) {
+        iVar2 = pbVar5->characters[0];
+        iVar3 = iVar3 + -1;
+        goto LAB_0890a2c4;
+      }
+LAB_0890a360:
+      iVar4 = iVar4 + -1;
+      if (iVar4 == iVar3 + -1) goto LAB_0890a360;
+      iVar2 = pbVar5->characters[0];
+    } while( true );
+  }
+  iVar4 = 0;
+  do {
+    iVar3 = 0;
+LAB_0890a138:
+    if (::::FONT[iVar2][iVar4][iVar3] == 0) {
+LAB_0890a12c:
+      if (iVar3 + 1 == 6) goto LAB_0890a1d0;
+      iVar2 = pbVar5->characters[0];
+      iVar3 = iVar3 + 1;
+      goto LAB_0890a138;
+    }
+    if (x != 1.4013e-45) {
+                    /* Unresolved local var: int y@[???]
+                       Unresolved local var: int x@[???] */
+      glinterface::square_3D
+                (this->printer,(GLfloat)this->color[0],(GLfloat)this->color[1],
+                 (GLfloat)this->color[2],unaff_s2,unaff_s3,unaff_s4,unaff_s5,unaff_s6,unaff_s7);
+      goto LAB_0890a12c;
+    }
+    glinterface::square_3D
+              (this->printer,(GLfloat)this->color[0],(GLfloat)this->color[1],(GLfloat)this->color[2]
+               ,unaff_s2,unaff_s3,unaff_s4,unaff_s5,unaff_s6,unaff_s7);
+    if (iVar3 + 1 != 6) {
+      iVar2 = pbVar5->characters[0];
+      iVar3 = iVar3 + 1;
+      goto LAB_0890a138;
+    }
+LAB_0890a1d0:
+    iVar4 = iVar4 + 1;
+    if (iVar4 == iVar3 + 1) goto LAB_0890a23c;
+    iVar2 = pbVar5->characters[0];
+  } while( true );
+LAB_0890a360:
+  fVar6 = fVar6 - fVar1;
+LAB_0890a1e0:
+  if (&pbVar5->x == (float *)(this->characters + 0x31)) {
+    this->width = fVar6;
+    return;
+  }
+  iVar2 = pbVar5->characters[1];
+  pbVar5 = (button *)&pbVar5->x;
+  goto LAB_0890a0b4;
+LAB_0890a23c:
+  pbVar5 = (button *)&pbVar5->x;
+  fVar6 = fVar6 + fVar1;
+  if (pbVar5 == (button *)(this->characters + 0x31)) {
+    this->width = fVar6;
+    return;
+  }
+  goto LAB_0890a0b0;
+}
+
+// ========================================================
+// 0x0890a370: button::print_2D(float, float, float)
+// ========================================================
+// Function: print_2D @ 0890a370
+
+/* DWARF original prototype: void print_2D(button * this, float x, float y, float z) */
+
+void __thiscall button::print_2D(button *this,float x,float y,float z)
+
+{
+  float fVar1;
+  int iVar2;
+  int iVar3;
+  int iVar4;
+  button *pbVar5;
+  int unaff_s4;
+  int unaff_s5;
+  int unaff_s6;
+  int unaff_s7;
+  GLfloat unaff_retaddr;
+  float in_f12;
+  float in_f13;
+  float in_f14;
+  float fVar6;
+  
+                    /* Unresolved local var: float offsetx@[???]
+                       Unresolved local var: float offsety@[???] */
+  this->x = in_f12;
+  this->y = in_f13;
+  this->z = in_f14;
+  if (this->isFadeing != false) {
+    iVar2 = this->color[3] + 10;
+    if (iVar2 < this->effect_alpha) {
+      this->color[3] = iVar2;
+    }
+    else {
+      this->color[3] = this->effect_alpha;
+      this->isFadeing = false;
+    }
+  }
+  fVar1 = DAT_089dc498;
+  fVar6 = 0.0;
+                    /* Unresolved local var: int i@[???] */
+  iVar2 = this->characters[0];
+  pbVar5 = this;
+LAB_0890a41c:
+  iVar4 = 0;
+  if (-1 < iVar2) {
+    do {
+      iVar3 = 0;
+      while( true ) {
+        while (::::FONT[iVar2][iVar4][iVar3] == 0) {
+                    /* Unresolved local var: int y@[???]
+                       Unresolved local var: int x@[???] */
+          if (iVar3 + 1 == 6) goto LAB_0890a4cc;
+          iVar2 = pbVar5->characters[0];
+          iVar3 = iVar3 + 1;
+        }
+        glinterface::square(this->printer,(GLfloat)this->color[0],(GLfloat)this->color[1],
+                            (GLfloat)this->color[2],unaff_s4,unaff_s5,unaff_s6,unaff_s7,
+                            unaff_retaddr);
+        if (iVar3 + 1 == 6) break;
+        iVar2 = pbVar5->characters[0];
+        iVar3 = iVar3 + 1;
+      }
+LAB_0890a4cc:
+      iVar4 = iVar4 + 1;
+      if (iVar4 == iVar3 + 1) goto LAB_0890a4cc;
+      iVar2 = pbVar5->characters[0];
+    } while( true );
+  }
+  goto LAB_0890a4dc;
+LAB_0890a4cc:
+  fVar6 = fVar6 + fVar1;
+LAB_0890a4dc:
+  if ((float *)(this->characters + 0x31) == &pbVar5->x) {
+    this->width = fVar6;
+    return;
+  }
+  iVar2 = pbVar5->characters[1];
+  pbVar5 = (button *)&pbVar5->x;
+  goto LAB_0890a41c;
+}
+
+// ========================================================
+// 0x0890a534: button::print(float, float, float, int)
+// ========================================================
+// Function: print @ 0890a534
+
+/* DWARF original prototype: void print(button * this, float x, float y, float z, int method) */
+
+void __thiscall button::print(button *this,float x,float y,float z,int method)
+
+{
+  int in_stack_00000014;
+  
+  if (x == 0.0) {
+    print_2D(this,0.0,y,z);
+    return;
+  }
+  if (x == 2.8026e-45) {
+    print_3D(this,1.4013e-45,-NAN,z,method,in_stack_00000014);
+    return;
+  }
+  if ((int)x < 3) {
+    if (x == 1.4013e-45) {
+LAB_0890a58c:
+      print_3D(this,x,1.4013e-45,z,method,in_stack_00000014);
+      return;
+    }
+  }
+  else {
+    if (x == 4.2039e-45) goto LAB_0890a58c;
+    if (x == 5.60519e-45) {
+      print_3D(this,4.2039e-45,-NAN,z,method,in_stack_00000014);
+      return;
+    }
+  }
+  return;
+}
+
+// ========================================================
+// 0x0890a594: button::load_text(char*, int)
+// ========================================================
+// Function: load_text @ 0890a594
+
+/* DWARF original prototype: void load_text(button * this, char * word, int fade_alpha) */
+
+void __thiscall button::load_text(button *this,char *word,int fade_alpha)
+
+{
+  size_t sVar1;
+  int iVar2;
+  int iVar3;
+  button *pbVar4;
+  size_t sVar5;
+  
+                    /* Unresolved local var: int length@[???] */
+  sVar1 = strlen(word);
+  this->height = DAT_089dc49c;
+  this->width = (float)(int)(sVar1 * 5);
+  iVar2 = 0;
+  do {
+                    /* Unresolved local var: int i@[???] */
+    iVar3 = iVar2 + 4;
+    *(undefined4 *)((int)this->characters + iVar2) = 0xffffffff;
+    iVar2 = iVar3;
+  } while (iVar3 != 0x104);
+                    /* Unresolved local var: int i@[DW_OP_reg6(a2)] */
+  if ((int)sVar1 < 1) {
+LAB_0890a668:
+    if (0 < fade_alpha) {
+      this->isFadeing = true;
+      this->effect_alpha = fade_alpha;
+      this->color[3] = 0;
+    }
+    return;
+  }
+  sVar5 = 0;
+  pbVar4 = this;
+LAB_0890a614:
+  do {
+    pbVar4->characters[0] = -1;
+    switch(word[sVar5] + -0x20) {
+    case '\0':
+      pbVar4->characters[0] = 0x24;
+      break;
+    case '\x01':
+    case '\x02':
+    case '\x04':
+    case '\x05':
+    case '\x06':
+    case '\a':
+    case '\b':
+    case '\t':
+    case '\n':
+    case '\v':
+    case '\r':
+    case '\x0f':
+    case '\x1b':
+    case '\x1d':
+    case '\x1f':
+    case ' ':
+    case '!':
+    case '\"':
+    case '#':
+    case '$':
+    case '%':
+    case '&':
+    case '\'':
+    case '(':
+    case ')':
+    case '*':
+    case '+':
+    case ',':
+    case '-':
+    case '.':
+    case '0':
+    case '1':
+    case '2':
+    case '3':
+    case '4':
+    case '5':
+    case '7':
+    case '9':
+    case ':':
+    case '<':
+    case '>':
+    case '?':
+    case '@':
+    case '[':
+      break;
+    case '\x03':
+      pbVar4->characters[0] = 0x2c;
+      break;
+    case '\f':
+      pbVar4->characters[0] = 0x29;
+      break;
+    case '\x0e':
+      pbVar4->characters[0] = 0x28;
+      break;
+    case '\x10':
+      pbVar4->characters[0] = 0x1a;
+      break;
+    case '\x11':
+      pbVar4->characters[0] = 0x1b;
+      break;
+    case '\x12':
+      pbVar4->characters[0] = 0x1c;
+      break;
+    case '\x13':
+      pbVar4->characters[0] = 0x1d;
+      break;
+    case '\x14':
+      pbVar4->characters[0] = 0x1e;
+      break;
+    case '\x15':
+      pbVar4->characters[0] = 0x1f;
+      break;
+    case '\x16':
+      pbVar4->characters[0] = 0x20;
+      break;
+    case '\x17':
+      pbVar4->characters[0] = 0x21;
+      break;
+    case '\x18':
+      pbVar4->characters[0] = 0x22;
+      break;
+    case '\x19':
+      pbVar4->characters[0] = 0x23;
+      break;
+    case '\x1a':
+      pbVar4->characters[0] = 0x25;
+      break;
+    case '\x1c':
+      pbVar4->characters[0] = 0x26;
+      break;
+    case '\x1e':
+      pbVar4->characters[0] = 0x27;
+      break;
+    case '/':
+      pbVar4->characters[0] = 0x2d;
+      break;
+    case '6':
+      pbVar4->characters[0] = 0x2e;
+      break;
+    case '8':
+      pbVar4->characters[0] = 0x2f;
+      break;
+    case ';':
+    case '\\':
+      goto switchD_0890a64c_caseD_3b;
+    case '=':
+      pbVar4->characters[0] = 0x2b;
+      break;
+    case 'A':
+      pbVar4->characters[0] = 0;
+      break;
+    case 'B':
+      pbVar4->characters[0] = 1;
+      break;
+    case 'C':
+      pbVar4->characters[0] = 2;
+      break;
+    case 'D':
+      pbVar4->characters[0] = 3;
+      break;
+    case 'E':
+      pbVar4->characters[0] = 4;
+      break;
+    case 'F':
+      pbVar4->characters[0] = 5;
+      break;
+    case 'G':
+      pbVar4->characters[0] = 6;
+      break;
+    case 'H':
+      pbVar4->characters[0] = 7;
+      break;
+    case 'I':
+      pbVar4->characters[0] = 8;
+      break;
+    case 'J':
+      pbVar4->characters[0] = 9;
+      break;
+    case 'K':
+      pbVar4->characters[0] = 10;
+      break;
+    case 'L':
+      pbVar4->characters[0] = 0xb;
+      break;
+    case 'M':
+      pbVar4->characters[0] = 0xc;
+      break;
+    case 'N':
+      pbVar4->characters[0] = 0xd;
+      break;
+    case 'O':
+      pbVar4->characters[0] = 0xe;
+      break;
+    case 'P':
+      pbVar4->characters[0] = 0xf;
+      break;
+    case 'Q':
+      pbVar4->characters[0] = 0x10;
+      break;
+    case 'R':
+      pbVar4->characters[0] = 0x11;
+      break;
+    case 'S':
+      pbVar4->characters[0] = 0x12;
+      break;
+    case 'T':
+      pbVar4->characters[0] = 0x13;
+      break;
+    case 'U':
+      pbVar4->characters[0] = 0x14;
+      break;
+    case 'V':
+      pbVar4->characters[0] = 0x15;
+      break;
+    case 'W':
+      pbVar4->characters[0] = 0x16;
+      break;
+    case 'X':
+      pbVar4->characters[0] = 0x17;
+      break;
+    case 'Y':
+      pbVar4->characters[0] = 0x18;
+      break;
+    case 'Z':
+      pbVar4->characters[0] = 0x19;
+      break;
+    default:
+      goto switchD_0890a64c_default;
+    }
+switchD_0890a64c_default:
+    sVar5 = sVar5 + 1;
+    pbVar4 = (button *)&pbVar4->x;
+  } while (sVar1 != sVar5);
+  goto LAB_0890a668;
+switchD_0890a64c_caseD_3b:
+  sVar5 = sVar5 + 1;
+  pbVar4->characters[0] = 0x2a;
+  pbVar4 = (button *)&pbVar4->x;
+  if (sVar1 == sVar5) goto LAB_0890a668;
+  goto LAB_0890a614;
+}
+

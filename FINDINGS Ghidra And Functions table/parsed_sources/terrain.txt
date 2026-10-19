@@ -1,0 +1,1340 @@
+// ========================================================
+// 0x08902ec0: terrain::create_unions()
+// ========================================================
+// Function: create_unions @ 08902ec0
+
+/* WARNING: Removing unreachable block (ram,0x08902f48) */
+/* WARNING: Removing unreachable block (ram,0x08902f9c) */
+/* WARNING: Removing unreachable block (ram,0x08902ef0) */
+/* WARNING: Removing unreachable block (ram,0x08903144) */
+/* WARNING: Removing unreachable block (ram,0x089030c8) */
+/* WARNING: Removing unreachable block (ram,0x08903114) */
+/* WARNING: Removing unreachable block (ram,0x08903164) */
+/* WARNING: Removing unreachable block (ram,0x08903024) */
+/* WARNING: Removing unreachable block (ram,0x08903048) */
+/* WARNING: Removing unreachable block (ram,0x08902f78) */
+/* WARNING: Removing unreachable block (ram,0x08903064) */
+/* WARNING: Removing unreachable block (ram,0x08903098) */
+/* DWARF original prototype: void create_unions(terrain * this) */
+
+void __thiscall terrain::create_unions(terrain *this)
+
+{
+  piece *ppVar1;
+  int iVar2;
+  plane *ppVar3;
+  plane **pppVar4;
+  int iVar5;
+  int iVar6;
+  int iVar7;
+  float fVar8;
+  int iVar9;
+  float fVar10;
+  int iVar11;
+  
+                    /* Unresolved local var: int i@[DW_OP_reg12(t4)] */
+  iVar6 = this->N_PLANES;
+  if (0 < iVar6) {
+    pppVar4 = this->map;
+    iVar5 = 0;
+    do {
+      while( true ) {
+        ppVar3 = *pppVar4;
+        if (ppVar3->dead_axis != 1) break;
+        ppVar1 = ppVar3->pieces[0];
+        iVar5 = iVar5 + 1;
+        pppVar4 = pppVar4 + 1;
+        fVar8 = ppVar1->y;
+        fVar10 = ppVar1->z;
+        iVar7 = (int)ppVar1->x;
+        this->unions[0][0][0] = iVar7;
+        iVar9 = (int)fVar8;
+        iVar11 = (int)fVar10;
+        this->unions[0][0][1] = iVar9 + ppVar3->side_size + -1;
+        iVar2 = ppVar3->side_size;
+        this->unions[0][1][0] = iVar7;
+        this->unions[0][0][2] = iVar11 + iVar2 / 2;
+        iVar2 = ppVar3->side_size;
+        this->unions[0][1][2] = iVar11;
+        this->unions[0][2][0] = iVar7;
+        this->unions[0][1][1] = iVar9 + iVar2 / 2;
+        this->unions[0][2][1] = iVar9 + ppVar3->side_size / 2;
+        iVar2 = ppVar3->side_size;
+        this->unions[0][3][0] = iVar7;
+        this->unions[0][3][1] = iVar9;
+        this->unions[0][2][2] = iVar11 + iVar2 + -1;
+        this->unions[0][3][2] = iVar11 + ppVar3->side_size / 2;
+        this = (terrain *)(this->map + 0xb);
+        if (iVar6 <= iVar5) {
+          return;
+        }
+      }
+      iVar2 = ppVar3->side_size;
+      if (ppVar3->dead_axis == 2) {
+        ppVar1 = ppVar3->pieces[0];
+        iVar7 = (int)ppVar1->x;
+        iVar11 = (int)ppVar1->y;
+        iVar9 = (int)ppVar1->z;
+        this->unions[0][0][1] = iVar11;
+        this->unions[0][0][2] = iVar9;
+        this->unions[0][1][0] = iVar7;
+        this->unions[0][1][1] = iVar11;
+        this->unions[0][0][0] = iVar7 + iVar2 / 2;
+        this->unions[0][1][2] = iVar9 + ppVar3->side_size / 2;
+        iVar2 = ppVar3->side_size;
+        this->unions[0][2][1] = iVar11;
+        this->unions[0][2][0] = iVar7 + iVar2 + -1;
+        this->unions[0][2][2] = iVar9 + ppVar3->side_size / 2;
+        iVar2 = ppVar3->side_size;
+        this->unions[0][3][1] = iVar11;
+        this->unions[0][3][0] = iVar7 + iVar2 / 2;
+        this->unions[0][3][2] = iVar9 + ppVar3->side_size + -1;
+      }
+      else {
+        ppVar1 = ppVar3->pieces[0];
+        iVar7 = (int)ppVar1->x;
+        iVar9 = (int)ppVar1->y;
+        iVar11 = (int)ppVar1->z;
+        this->unions[0][0][0] = iVar7 + iVar2 / 2;
+        iVar2 = ppVar3->side_size;
+        this->unions[0][0][2] = iVar11;
+        this->unions[0][1][0] = iVar7;
+        this->unions[0][0][1] = iVar9 + iVar2 + -1;
+        iVar2 = ppVar3->side_size;
+        this->unions[0][1][2] = iVar11;
+        this->unions[0][1][1] = iVar9 + iVar2 / 2;
+        this->unions[0][2][0] = iVar7 + ppVar3->side_size + -1;
+        iVar2 = ppVar3->side_size;
+        this->unions[0][2][2] = iVar11;
+        this->unions[0][2][1] = iVar9 + iVar2 / 2;
+        iVar2 = ppVar3->side_size;
+        this->unions[0][3][1] = iVar9;
+        this->unions[0][3][2] = iVar11;
+        this->unions[0][3][0] = iVar7 + iVar2 / 2;
+      }
+      iVar5 = iVar5 + 1;
+      pppVar4 = pppVar4 + 1;
+      this = (terrain *)(this->map + 0xb);
+    } while (iVar5 < iVar6);
+  }
+  return;
+}
+
+// ========================================================
+// 0x08903188: terrain::wich_union(int, int, int, int, int)
+// ========================================================
+// Function: wich_union @ 08903188
+
+/* DWARF original prototype: int wich_union(terrain * this, int a, int b, int c, int n_plane, int
+   union_type) */
+
+int __thiscall terrain::wich_union(terrain *this,int a,int b,int c,int n_plane,int union_type)
+
+{
+  int in_t0;
+  int iVar1;
+  int in_t1;
+  
+                    /* Unresolved local var: int look_for@[???] */
+  switch(this->map[in_t0]->face_number) {
+  default:
+    goto switchD_089031b8_caseD_0;
+  case 1:
+  case 4:
+    if (in_t1 == 1) goto LAB_08903278;
+    if (in_t1 < 2) {
+LAB_08903298:
+      if (in_t1 == 0) {
+        iVar1 = 2;
+      }
+      else {
+        iVar1 = 0;
+      }
+      goto LAB_089031ec;
+    }
+    iVar1 = 6;
+    if (in_t1 == 2) goto LAB_089031ec;
+    break;
+  case 2:
+  case 5:
+    if (in_t1 != 1) {
+      if (1 < in_t1) {
+        if (in_t1 == 2) {
+          iVar1 = 6;
+        }
+        else if (in_t1 == 3) {
+          iVar1 = 4;
+        }
+        else {
+          iVar1 = 0;
+        }
+        goto LAB_089031ec;
+      }
+      if (in_t1 != 0) {
+        iVar1 = 0;
+        goto LAB_089031ec;
+      }
+LAB_08903288:
+      iVar1 = 1;
+      goto LAB_089031ec;
+    }
+LAB_08903278:
+    iVar1 = 3;
+    goto LAB_089031ec;
+  case 3:
+  case 6:
+    if (in_t1 == 1) goto LAB_08903288;
+    if (in_t1 < 2) goto LAB_08903298;
+    if (in_t1 == 2) {
+      iVar1 = 4;
+      goto LAB_089031ec;
+    }
+  }
+  iVar1 = 5;
+  if (in_t1 != 3) {
+switchD_089031b8_caseD_0:
+    iVar1 = 0;
+  }
+LAB_089031ec:
+  if ((iVar1 != this->map[a]->face_number) && (a = b, iVar1 != this->map[b]->face_number)) {
+    a = c;
+  }
+  return a;
+}
+
+// ========================================================
+// 0x089032a8: terrain::set_unions_of_plane(int)
+// ========================================================
+// Function: set_unions_of_plane @ 089032a8
+
+/* DWARF original prototype: void set_unions_of_plane(terrain * this, int n_plane) */
+
+void __thiscall terrain::set_unions_of_plane(terrain *this,int n_plane)
+
+{
+  int a;
+  int b;
+  int c;
+  int b_00;
+  int c_00;
+  int iVar1;
+  int iVar2;
+  int iVar3;
+  int iVar4;
+  int (*paaiVar5) [4] [3];
+  int iVar6;
+  int iVar7;
+  int iVar8;
+  int iVar9;
+  int iVar10;
+  int iVar11;
+  int iVar12;
+  int *piVar13;
+  plane *ppVar14;
+  int *piVar15;
+  int *piVar16;
+  int *piVar17;
+  int *piVar18;
+  int *piVar19;
+  int *piVar20;
+  int local_70 [4];
+  int iVar21;
+  int local_40;
+  int local_3c;
+  int local_38;
+  int local_34;
+  undefined1 *local_2c;
+  
+  c_00 = DAT_089dc308;
+  b_00 = DAT_089dc304;
+  iVar1 = set_unions_of_plane(int)::C_11;
+  c = DAT_089dc2fc;
+  b = DAT_089dc2f8;
+  a = set_unions_of_plane(int)::C_12;
+                    /* Unresolved local var: int top_unions_count@[???]
+                       Unresolved local var: int left_unions_count@[???]
+                       Unresolved local var: int right_unions_count@[???]
+                       Unresolved local var: int bottom_unions_count@[???]
+                       Unresolved local var: int[3] top_unions@[???]
+                       Unresolved local var: int[3] left_unions@[???]
+                       Unresolved local var: int[3] right_unions@[???]
+                       Unresolved local var: int[3] bottom_unions@[???] */
+  local_2c = (undefined1 *)local_70;
+  piVar17 = local_70;
+  piVar20 = local_70;
+                    /* Unresolved local var: int i@[???] */
+  iVar8 = this->N_PLANES;
+  local_70[0] = set_unions_of_plane(int)::C_9;
+  local_70[1] = DAT_089dc31c;
+  local_70[2] = DAT_089dc320;
+  local_70[3] = set_unions_of_plane(int)::C_10;
+  iVar2 = DAT_089dc310;
+  iVar21 = DAT_089dc314;
+  if (iVar8 < 1) {
+    local_3c = 0;
+    local_38 = 0;
+    local_40 = 0;
+  }
+  else {
+    local_34 = 0;
+    local_38 = 0;
+    local_3c = 0;
+    local_40 = 0;
+    iVar12 = 0;
+    piVar13 = this->ground_material + 3;
+    do {
+      if (n_plane != iVar12) {
+                    /* Unresolved local var: int j@[???] */
+        iVar11 = this->unions[n_plane][0][0];
+        iVar10 = this->unions[n_plane][1][0];
+        piVar16 = local_70 + local_34;
+        iVar9 = this->unions[n_plane][2][0];
+        iVar7 = this->unions[n_plane][3][0];
+        paaiVar5 = (int (*) [4] [3])(piVar13 + 1);
+        iVar6 = 0;
+        piVar15 = (int *)((int)piVar17 + 0x24);
+        piVar19 = (int *)((int)piVar20 + 0x18);
+        piVar18 = (int *)(local_2c + 0xc);
+        do {
+          iVar4 = (*paaiVar5)[0][0];
+          if (((iVar11 == iVar4) && (this->unions[n_plane][0][1] == (*paaiVar5)[0][1])) &&
+             (this->unions[n_plane][0][2] == (*paaiVar5)[0][2])) {
+            *piVar16 = iVar12;
+            piVar16 = piVar16 + 1;
+            local_34 = local_34 + 1;
+            if (iVar4 != iVar10) goto LAB_089033fc;
+            iVar3 = this->unions[n_plane][1][1];
+LAB_08903504:
+            if ((iVar3 != (*paaiVar5)[0][1]) || (this->unions[n_plane][1][2] != (*paaiVar5)[0][2]))
+            goto LAB_089033fc;
+            *piVar18 = iVar12;
+            local_38 = local_38 + 1;
+            local_2c = local_2c + 4;
+            piVar18 = piVar18 + 1;
+            if (iVar4 == iVar9) {
+              iVar3 = this->unions[n_plane][2][1];
+              goto LAB_08903544;
+            }
+LAB_08903404:
+            if (iVar4 == iVar7) {
+              iVar4 = this->unions[n_plane][3][1];
+LAB_0890357c:
+              if ((iVar4 == (*paaiVar5)[0][1]) && (this->unions[n_plane][3][2] == (*paaiVar5)[0][2])
+                 ) {
+                *piVar15 = iVar12;
+                piVar17 = (int *)((int)piVar17 + 4);
+                local_40 = local_40 + 1;
+                piVar15 = piVar15 + 1;
+              }
+            }
+          }
+          else {
+            if (iVar4 == iVar10) {
+              iVar3 = this->unions[n_plane][1][1];
+              goto LAB_08903504;
+            }
+LAB_089033fc:
+            if (iVar4 != iVar9) goto LAB_08903404;
+            iVar3 = this->unions[n_plane][2][1];
+LAB_08903544:
+            if ((iVar3 != (*paaiVar5)[0][1]) || (this->unions[n_plane][2][2] != (*paaiVar5)[0][2]))
+            goto LAB_08903404;
+            *piVar19 = iVar12;
+            piVar20 = (int *)((int)piVar20 + 4);
+            local_3c = local_3c + 1;
+            piVar19 = piVar19 + 1;
+            if (iVar4 == iVar7) {
+              iVar4 = this->unions[n_plane][3][1];
+              goto LAB_0890357c;
+            }
+          }
+          iVar6 = iVar6 + 1;
+          paaiVar5 = (int (*) [4] [3])(*paaiVar5 + 1);
+        } while (iVar6 != 4);
+      }
+      iVar12 = iVar12 + 1;
+      piVar13 = piVar13 + 0xc;
+    } while (iVar12 != iVar8);
+    if (local_34 == 1) {
+      this->map[n_plane]->id_union_top = local_70[0];
+      goto joined_r0x089035f4;
+    }
+  }
+  ppVar14 = this->map[n_plane];
+  iVar8 = wich_union(this,local_70[0],local_70[1],local_70[2],iVar2,iVar21);
+  ppVar14->id_union_top = iVar8;
+joined_r0x089035f4:
+  if (local_38 == 1) {
+    this->map[n_plane]->id_union_left = local_70[3];
+  }
+  else {
+    ppVar14 = this->map[n_plane];
+    iVar8 = wich_union(this,local_70[3],iVar2,iVar21,iVar2,iVar21);
+    ppVar14->id_union_left = iVar8;
+  }
+  if (local_3c == 1) {
+    this->map[n_plane]->id_union_right = iVar1;
+  }
+  else {
+    ppVar14 = this->map[n_plane];
+    iVar1 = wich_union(this,iVar1,b_00,c_00,iVar2,iVar21);
+    ppVar14->id_union_right = iVar1;
+  }
+  if (local_40 == 1) {
+    this->map[n_plane]->id_union_bottom = a;
+    return;
+  }
+  ppVar14 = this->map[n_plane];
+  iVar2 = wich_union(this,a,b,c,iVar2,iVar21);
+  ppVar14->id_union_bottom = iVar2;
+  return;
+}
+
+// ========================================================
+// 0x089036c4: terrain::am_i_clear()
+// ========================================================
+// Function: am_i_clear @ 089036c4
+
+/* DWARF original prototype: bool am_i_clear(terrain * this) */
+
+bool __thiscall terrain::am_i_clear(terrain *this)
+
+{
+  int iVar1;
+  plane *ppVar2;
+  int iVar3;
+  piece *ppVar4;
+  plane **pppVar5;
+  int iVar6;
+  int iVar7;
+  
+                    /* Unresolved local var: int i@[DW_OP_reg9(t1)] */
+  iVar7 = this->N_PLANES;
+  this->is_clear = true;
+  if (0 < iVar7) {
+    pppVar5 = this->map;
+    iVar6 = 0;
+LAB_089036dc:
+    do {
+                    /* Unresolved local var: int j@[???] */
+      ppVar2 = *pppVar5;
+      iVar1 = ppVar2->side_size * ppVar2->side_size;
+      if (0 < iVar1) {
+        iVar3 = 0;
+        ppVar4 = ppVar2->pieces[0];
+        while( true ) {
+          iVar3 = iVar3 + 1;
+          if ((ppVar4->state != false) && (0 < ppVar4->owner)) {
+            iVar6 = iVar6 + 1;
+            this->is_clear = false;
+            pppVar5 = pppVar5 + 1;
+            if (iVar7 <= iVar6) goto LAB_08903734;
+            goto LAB_089036dc;
+          }
+          if (iVar3 == iVar1) break;
+          ppVar4 = ppVar2->pieces[1];
+          ppVar2 = (plane *)&ppVar2->i;
+        }
+      }
+      iVar6 = iVar6 + 1;
+      pppVar5 = pppVar5 + 1;
+    } while (iVar6 < iVar7);
+  }
+LAB_08903734:
+  return this->is_clear;
+}
+
+// ========================================================
+// 0x08903754: terrain::fire_up_cue(int)
+// ========================================================
+// Function: fire_up_cue @ 08903754
+
+/* DWARF original prototype: void fire_up_cue(terrain * this, int ship_ident) */
+
+void __thiscall terrain::fire_up_cue(terrain *this,int ship_ident)
+
+{
+  int iVar1;
+  plane *ppVar2;
+  piece *ppVar3;
+  int iVar4;
+  plane *ppVar5;
+  int iVar6;
+  int iVar7;
+  
+                    /* Unresolved local var: int i@[DW_OP_reg10(t2)] */
+  iVar7 = this->N_PLANES;
+  if (0 < iVar7) {
+    iVar6 = 0;
+    do {
+      this = (terrain *)this->map;
+                    /* Unresolved local var: int j@[DW_OP_reg7(a3)] */
+      ppVar2 = *(plane **)this;
+      iVar1 = ppVar2->side_size * ppVar2->side_size;
+      if (0 < iVar1) {
+        iVar4 = 0;
+        do {
+          ppVar3 = ppVar2->pieces[0];
+          ppVar5 = ppVar2;
+          while( true ) {
+            iVar4 = iVar4 + 1;
+            ppVar2 = (plane *)&ppVar5->i;
+            if (ppVar3->owner == ship_ident) break;
+            if (iVar4 == iVar1) goto LAB_089037a4;
+            ppVar3 = ppVar5->pieces[1];
+            ppVar5 = ppVar2;
+          }
+          ppVar3->owner = -2;
+          ppVar3->status = 2;
+          ppVar3->state = false;
+        } while (iVar4 != iVar1);
+      }
+LAB_089037a4:
+      iVar6 = iVar6 + 1;
+    } while (iVar6 != iVar7);
+  }
+  return;
+}
+
+// ========================================================
+// 0x089037d4: terrain::clear_cue(int)
+// ========================================================
+// Function: clear_cue @ 089037d4
+
+/* DWARF original prototype: void clear_cue(terrain * this, int ship_ident) */
+
+void __thiscall terrain::clear_cue(terrain *this,int ship_ident)
+
+{
+  int iVar1;
+  plane *ppVar2;
+  int iVar3;
+  plane *ppVar4;
+  piece *ppVar5;
+  int iVar6;
+  int iVar7;
+  
+                    /* Unresolved local var: int i@[DW_OP_reg9(t1)] */
+  iVar7 = this->N_PLANES;
+  if (0 < iVar7) {
+    iVar6 = 0;
+    do {
+      this = (terrain *)this->map;
+                    /* Unresolved local var: int j@[???] */
+      ppVar2 = *(plane **)this;
+      iVar1 = ppVar2->side_size * ppVar2->side_size;
+      if (0 < iVar1) {
+        iVar3 = 0;
+        do {
+          ppVar5 = ppVar2->pieces[0];
+          ppVar4 = ppVar2;
+          while( true ) {
+            iVar3 = iVar3 + 1;
+            ppVar2 = (plane *)&ppVar4->i;
+            if (ppVar5->owner == ship_ident) break;
+            if (iVar3 == iVar1) goto LAB_08903824;
+            ppVar5 = ppVar4->pieces[1];
+            ppVar4 = ppVar2;
+          }
+          ppVar5->temporal = true;
+        } while (iVar3 != iVar1);
+      }
+LAB_08903824:
+      iVar6 = iVar6 + 1;
+    } while (iVar6 != iVar7);
+  }
+  return;
+}
+
+// ========================================================
+// 0x08903848: terrain::restart()
+// ========================================================
+// Function: restart @ 08903848
+
+/* DWARF original prototype: void restart(terrain * this) */
+
+void __thiscall terrain::restart(terrain *this)
+
+{
+  int iVar1;
+  plane *ppVar2;
+  piece *ppVar3;
+  int iVar4;
+  terrain *ptVar5;
+  int iVar6;
+  int iVar7;
+  
+                    /* Unresolved local var: int i@[DW_OP_reg9(t1)] */
+  iVar7 = this->N_PLANES;
+  if (0 < iVar7) {
+    iVar6 = 0;
+    ptVar5 = this;
+    do {
+      ptVar5 = (terrain *)ptVar5->map;
+                    /* Unresolved local var: int j@[DW_OP_reg5(a1)] */
+      ppVar2 = *(plane **)ptVar5;
+      iVar1 = ppVar2->side_size * ppVar2->side_size;
+      if (0 < iVar1) {
+        iVar4 = 0;
+        do {
+          ppVar3 = ppVar2->pieces[0];
+          iVar4 = iVar4 + 1;
+          ppVar3->temporal = true;
+          ppVar3->type = 0;
+          ppVar3->state = false;
+          ppVar3->status = 0;
+          ppVar2 = (plane *)&ppVar2->i;
+        } while (iVar1 != iVar4);
+      }
+      iVar6 = iVar6 + 1;
+    } while (iVar6 != iVar7);
+  }
+  this->time = 0;
+  return;
+}
+
+// ========================================================
+// 0x089038b0: terrain::combat_mode()
+// ========================================================
+// Function: combat_mode @ 089038b0
+
+/* DWARF original prototype: void combat_mode(terrain * this) */
+
+void __thiscall terrain::combat_mode(terrain *this)
+
+{
+  int iVar1;
+  plane *ppVar2;
+  piece *ppVar3;
+  int iVar4;
+  int iVar5;
+  int iVar6;
+  
+                    /* Unresolved local var: int i@[DW_OP_reg8(t0)] */
+  iVar6 = this->N_PLANES;
+  if (0 < iVar6) {
+    iVar5 = 0;
+    do {
+      this = (terrain *)this->map;
+                    /* Unresolved local var: int j@[DW_OP_reg5(a1)] */
+      ppVar2 = *(plane **)this;
+      iVar1 = ppVar2->side_size * ppVar2->side_size;
+      if (0 < iVar1) {
+        iVar4 = 0;
+        do {
+          ppVar3 = ppVar2->pieces[0];
+          iVar4 = iVar4 + 1;
+          ppVar3->owner = -2;
+          ppVar3->state = false;
+          ppVar3->temporal = false;
+          *(undefined4 *)&ppVar3->prints_counter = 0;
+          *(undefined4 *)((int)&ppVar3->prints_counter + 4) = 0;
+          ppVar2 = (plane *)&ppVar2->i;
+        } while (iVar1 != iVar4);
+      }
+      iVar5 = iVar5 + 1;
+    } while (iVar5 != iVar6);
+  }
+  return;
+}
+
+// ========================================================
+// 0x0890391c: terrain::navigation_mode()
+// ========================================================
+// Function: navigation_mode @ 0890391c
+
+/* DWARF original prototype: void navigation_mode(terrain * this) */
+
+void __thiscall terrain::navigation_mode(terrain *this)
+
+{
+  int iVar1;
+  plane *ppVar2;
+  piece *ppVar3;
+  int iVar4;
+  int iVar5;
+  int iVar6;
+  
+                    /* Unresolved local var: int i@[DW_OP_reg9(t1)] */
+  iVar6 = this->N_PLANES;
+  if (0 < iVar6) {
+    iVar5 = 0;
+    do {
+      this = (terrain *)this->map;
+                    /* Unresolved local var: int j@[DW_OP_reg6(a2)] */
+      ppVar2 = *(plane **)this;
+      iVar1 = ppVar2->side_size * ppVar2->side_size;
+      if (0 < iVar1) {
+        iVar4 = 0;
+        do {
+          ppVar3 = ppVar2->pieces[0];
+          iVar4 = iVar4 + 1;
+          ppVar3->owner = -2;
+          ppVar2 = (plane *)&ppVar2->i;
+          ppVar3->state = false;
+          if (ppVar3->status != 2) {
+            ppVar3->temporal = true;
+          }
+          *(undefined4 *)&ppVar3->prints_counter = 0;
+          *(undefined4 *)((int)&ppVar3->prints_counter + 4) = 0;
+        } while (iVar4 != iVar1);
+      }
+      iVar5 = iVar5 + 1;
+    } while (iVar5 != iVar6);
+  }
+  return;
+}
+
+// ========================================================
+// 0x08903998: terrain::change_color(int, int, int, int)
+// ========================================================
+// Function: change_color @ 08903998
+
+/* DWARF original prototype: void change_color(terrain * this, int r, int g, int b, int a) */
+
+void __thiscall terrain::change_color(terrain *this,int r,int g,int b,int a)
+
+{
+  int in_t0;
+  
+  this->material[3] = in_t0;
+  this->material[0] = r;
+  this->material[1] = g;
+  this->material[2] = b;
+  return;
+}
+
+// ========================================================
+// 0x089039ac: terrain::create_from_miniature(miniature*)
+// ========================================================
+// Function: create_from_miniature @ 089039ac
+
+/* DWARF original prototype: void create_from_miniature(terrain * this, miniature * mini_map) */
+
+void __thiscall terrain::create_from_miniature(terrain *this,miniature *mini_map)
+
+{
+  plane *ppVar1;
+  int iVar2;
+  int iVar3;
+  int *piVar4;
+  int iVar5;
+  int *piVar6;
+  int iVar7;
+  int iVar8;
+  int iVar9;
+  int local_188 [4];
+  int in_stack_fffffe88;
+  
+                    /* Unresolved local var: plane *[90] temp_map@[???]
+                       Unresolved local var: int id_count@[???]
+                       Unresolved local var: bool has_double@[???] */
+  piVar6 = local_188;
+                    /* Unresolved local var: int i@[???] */
+  if (mini_map->cubes < 1) {
+    this->N_PLANES = 0;
+    this->N_PLANES = 0;
+    return;
+  }
+  iVar9 = 0;
+  do {
+    iVar8 = iVar9 * 6;
+    iVar7 = 1;
+    piVar4 = local_188 + iVar9 * 6;
+    do {
+                    /* Unresolved local var: int j@[???] */
+      ppVar1 = miniature::convert_to_plane(mini_map,iVar9,iVar7,iVar8,in_stack_fffffe88);
+      *piVar4 = (int)ppVar1;
+      iVar7 = iVar7 + 1;
+      iVar8 = iVar8 + 1;
+      piVar4 = piVar4 + 1;
+    } while (iVar7 != 7);
+    iVar9 = iVar9 + 1;
+  } while (iVar9 < mini_map->cubes);
+  iVar9 = iVar9 * 6;
+                    /* Unresolved local var: int i@[???] */
+  this->N_PLANES = iVar9;
+  if (iVar9 < 1) {
+    iVar8 = 0;
+  }
+  else {
+    iVar8 = 0;
+    iVar7 = 0;
+    do {
+                    /* Unresolved local var: int j@[???] */
+      iVar5 = 0;
+      if (iVar9 < 1) {
+        iVar5 = ((plane *)*piVar6)->face_number;
+        this->map[iVar8] = (plane *)*piVar6;
+        if (iVar5 == 4) {
+          iVar5 = this->start_on_plane;
+          goto LAB_08903b38;
+        }
+      }
+      else {
+        ppVar1 = (plane *)*piVar6;
+        iVar3 = local_188[0];
+        piVar4 = local_188;
+        while( true ) {
+          while( true ) {
+            iVar5 = iVar5 + 1;
+            piVar4 = piVar4 + 1;
+            if ((((ppVar1->i != *(int *)(iVar3 + 4)) || (ppVar1->j != *(int *)(iVar3 + 8))) ||
+                (ppVar1->dead_axis != *(int *)(iVar3 + 0x10))) ||
+               (ppVar1->dead_offset != *(int *)(iVar3 + 0x14))) break;
+            iVar2 = ppVar1->face_number;
+            if (iVar2 != *(int *)(iVar3 + 0x18)) goto LAB_08903aac;
+            if (iVar5 == iVar9) goto LAB_08903a94;
+            iVar3 = *piVar4;
+          }
+          if (iVar5 == iVar9) break;
+          iVar3 = *piVar4;
+        }
+        iVar2 = ppVar1->face_number;
+LAB_08903a94:
+        this->map[iVar8] = ppVar1;
+        if (iVar2 == 4) {
+          iVar5 = this->start_on_plane;
+LAB_08903b38:
+          if (iVar5 == -1) {
+            this->start_on_plane = iVar8;
+          }
+        }
+      }
+      iVar8 = iVar8 + 1;
+LAB_08903aac:
+      iVar7 = iVar7 + 1;
+      piVar6 = piVar6 + 1;
+    } while (iVar7 < iVar9);
+  }
+  this->N_PLANES = iVar8;
+  return;
+}
+
+// ========================================================
+// 0x08903ba8: terrain::create_from_array(int, int const (*) [7])
+// ========================================================
+// Function: create_from_array @ 08903ba8
+
+/* DWARF original prototype: void create_from_array(terrain * this, int N_PLANES, int[7] * PLANES)
+    */
+
+void __thiscall terrain::create_from_array(terrain *this,int N_PLANES,int (*PLANES) [7])
+
+{
+  plane *ppVar1;
+  int iVar2;
+  int (*paiVar3) [20];
+  plane *ppVar4;
+  int iVar5;
+  terrain *ptVar6;
+  int iVar7;
+  
+                    /* Unresolved local var: int i@[???] */
+  this->N_PLANES = N_PLANES;
+  if (0 < N_PLANES) {
+    iVar7 = 0;
+    ptVar6 = this;
+    do {
+      ptVar6 = (terrain *)ptVar6->map;
+      *(plane **)ptVar6 = (plane *)0x0;
+      ppVar1 = operator_new(0x1fb0);
+      ppVar1->ident = iVar7;
+      ppVar1->i = (*PLANES)[0];
+      ppVar1->j = (*PLANES)[1];
+      ppVar1->side_size = (*PLANES)[2];
+      ppVar1->dead_axis = (*PLANES)[3];
+      ppVar1->dead_offset = (*PLANES)[4];
+      ppVar1->face_number = (*PLANES)[5];
+      iVar2 = (*PLANES)[6];
+      ppVar1->id_union_right = -1;
+      ppVar1->id_union_top = -1;
+      ppVar1->axis_polarity = iVar2;
+      ppVar1->id_union_left = -1;
+      ppVar1->id_union_bottom = -1;
+      ppVar4 = ppVar1;
+      iVar2 = 0;
+      do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+        iVar5 = iVar2 + 4;
+        ppVar4->cam_positions[0][0] = 0;
+        ppVar4->cam_positions[0][1] = 0;
+        ppVar4->cam_positions[0][2] = 0;
+        *(undefined4 *)((int)ppVar1->pieces + iVar2) = 0;
+        ppVar4 = (plane *)&ppVar4->side_size;
+        iVar2 = iVar5;
+      } while (iVar5 != 0x640);
+      iVar2 = 0;
+      do {
+        iVar5 = 0;
+        paiVar3 = ppVar1->index + iVar2;
+        do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+          iVar5 = iVar5 + 1;
+          (*paiVar3)[0] = 0;
+          paiVar3 = (int (*) [20])(*paiVar3 + 1);
+        } while (iVar5 != 0x14);
+        iVar2 = iVar2 + 1;
+      } while (iVar2 != 0x14);
+      ppVar1->a_vertex[0] = 0;
+      ppVar1->a_vertex[1] = 0;
+      ppVar1->a_vertex[2] = 0;
+      ppVar1->b_vertex[0] = 0;
+      ppVar1->b_vertex[1] = 0;
+      ppVar1->b_vertex[2] = 0;
+      ppVar1->c_vertex[0] = 0;
+      ppVar1->c_vertex[1] = 0;
+      ppVar1->c_vertex[2] = 0;
+      ppVar1->d_vertex[0] = 0;
+      ppVar1->d_vertex[1] = 0;
+      ppVar1->d_vertex[2] = 0;
+      ppVar1->max_vertex[0] = 0;
+      ppVar1->max_vertex[1] = 0;
+      ppVar1->max_vertex[2] = 0;
+      iVar2 = this->N_PLANES;
+      iVar7 = iVar7 + 1;
+      *(plane **)ptVar6 = ppVar1;
+      ppVar1->visited = false;
+      PLANES = PLANES + 1;
+    } while (iVar7 < iVar2);
+  }
+  if (this->start_on_plane == -1) {
+    this->start_on_plane = 0;
+  }
+  return;
+}
+
+// ========================================================
+// 0x08903d28: terrain::print_skeleton()
+// ========================================================
+// Function: print_skeleton @ 08903d28
+
+/* DWARF original prototype: void print_skeleton(terrain * this) */
+
+void __thiscall terrain::print_skeleton(terrain *this)
+
+{
+  int iVar1;
+  int iVar2;
+  plane *y_origin;
+  GLfloat in_a3;
+  terrain *ptVar3;
+  int iVar4;
+  GLfloat unaff_retaddr;
+  GLfloat in_stack_00000000;
+  int *in_stack_00000004;
+  GLfloat in_stack_00000008;
+  int in_stack_0000000c;
+  GLfloat in_stack_fffffffc;
+  
+                    /* Unresolved local var: int i@[???] */
+  if (0 < this->N_PLANES) {
+    iVar4 = 0;
+    ptVar3 = this;
+    do {
+      ptVar3 = (terrain *)ptVar3->map;
+      y_origin = *(plane **)ptVar3;
+      iVar2 = y_origin->dead_axis;
+      if (iVar2 == 1) {
+        if (this->map[y_origin->id_union_bottom]->dead_axis == 1) {
+          iVar1 = y_origin->id_union_right;
+          iVar2 = 1;
+        }
+        else {
+          glinterface::line(this->printer,(GLfloat)this->material,(GLfloat)y_origin,in_a3,
+                            unaff_retaddr,in_stack_fffffffc,in_stack_00000000,in_stack_00000004);
+          y_origin = *(plane **)ptVar3;
+          iVar1 = y_origin->id_union_right;
+          iVar2 = y_origin->dead_axis;
+        }
+        if (this->map[iVar1]->dead_axis == iVar2) {
+          iVar2 = y_origin->id_union_top;
+        }
+        else {
+          glinterface::line(this->printer,(GLfloat)this->material,(GLfloat)y_origin,in_a3,
+                            unaff_retaddr,in_stack_fffffffc,in_stack_00000000,in_stack_00000004);
+          y_origin = *(plane **)ptVar3;
+          iVar2 = y_origin->id_union_top;
+        }
+        if (this->map[iVar2]->dead_axis == y_origin->dead_axis) {
+          iVar2 = y_origin->id_union_left;
+        }
+        else {
+          glinterface::line(this->printer,(GLfloat)this->material,(GLfloat)y_origin,in_a3,
+                            unaff_retaddr,in_stack_fffffffc,in_stack_00000000,in_stack_00000004);
+          y_origin = *(plane **)ptVar3;
+          iVar2 = y_origin->id_union_left;
+        }
+LAB_08903eec:
+        if (this->map[iVar2]->dead_axis != y_origin->dead_axis) {
+          glinterface::line(this->printer,(GLfloat)this->material,(GLfloat)y_origin,in_a3,
+                            unaff_retaddr,in_stack_fffffffc,in_stack_00000000,in_stack_00000004);
+        }
+      }
+      else {
+        if (iVar2 == 2) {
+          if (this->map[y_origin->id_union_left]->dead_axis == 2) {
+            iVar2 = y_origin->id_union_bottom;
+          }
+          else {
+            glinterface::line(this->printer,(GLfloat)this->material,(GLfloat)y_origin,in_a3,
+                              unaff_retaddr,in_stack_fffffffc,in_stack_00000000,in_stack_00000004);
+            y_origin = *(plane **)ptVar3;
+            iVar2 = y_origin->id_union_bottom;
+          }
+          iVar1 = y_origin->dead_axis;
+          if (this->map[iVar2]->dead_axis == iVar1) {
+            iVar2 = y_origin->id_union_right;
+          }
+          else {
+            glinterface::line(this->printer,(GLfloat)this->material,(GLfloat)y_origin,in_a3,
+                              unaff_retaddr,in_stack_fffffffc,in_stack_00000000,in_stack_00000004);
+            y_origin = *(plane **)ptVar3;
+            iVar2 = y_origin->id_union_right;
+            iVar1 = y_origin->dead_axis;
+          }
+          if (this->map[iVar2]->dead_axis == iVar1) {
+            iVar2 = y_origin->id_union_top;
+          }
+          else {
+            glinterface::line(this->printer,(GLfloat)this->material,(GLfloat)y_origin,in_a3,
+                              unaff_retaddr,in_stack_fffffffc,in_stack_00000000,in_stack_00000004);
+            y_origin = *(plane **)ptVar3;
+            iVar2 = y_origin->id_union_top;
+          }
+          goto LAB_08903eec;
+        }
+        if (iVar2 == 3) {
+          if (this->map[y_origin->id_union_left]->dead_axis == 3) {
+            iVar2 = y_origin->id_union_top;
+          }
+          else {
+            glinterface::line(this->printer,(GLfloat)this->material,(GLfloat)y_origin,in_a3,
+                              unaff_retaddr,in_stack_fffffffc,in_stack_00000000,in_stack_00000004);
+            y_origin = *(plane **)ptVar3;
+            iVar2 = y_origin->id_union_top;
+          }
+          iVar1 = y_origin->dead_axis;
+          if (this->map[iVar2]->dead_axis == iVar1) {
+            iVar2 = y_origin->id_union_right;
+          }
+          else {
+            glinterface::line(this->printer,(GLfloat)this->material,(GLfloat)y_origin,in_a3,
+                              unaff_retaddr,in_stack_fffffffc,in_stack_00000000,in_stack_00000004);
+            y_origin = *(plane **)ptVar3;
+            iVar2 = y_origin->id_union_right;
+            iVar1 = y_origin->dead_axis;
+          }
+          if (this->map[iVar2]->dead_axis == iVar1) {
+            iVar2 = y_origin->id_union_bottom;
+          }
+          else {
+            glinterface::line(this->printer,(GLfloat)this->material,(GLfloat)y_origin,in_a3,
+                              unaff_retaddr,in_stack_fffffffc,in_stack_00000000,in_stack_00000004);
+            y_origin = *(plane **)ptVar3;
+            iVar2 = y_origin->id_union_bottom;
+          }
+          goto LAB_08903eec;
+        }
+      }
+      in_a3 = (GLfloat)this->ground_material[2];
+      glinterface::square_3D
+                (this->printer,(GLfloat)this->ground_material[0],(GLfloat)this->ground_material[1],
+                 in_a3,(int)unaff_retaddr,(int)in_stack_fffffffc,(int)in_stack_00000000,
+                 (int)in_stack_00000004,in_stack_00000008,in_stack_0000000c);
+      iVar4 = iVar4 + 1;
+    } while (iVar4 < this->N_PLANES);
+  }
+  return;
+}
+
+// ========================================================
+// 0x089041ac: terrain::build_skeleton(bool)
+// ========================================================
+// Function: build_skeleton @ 089041ac
+
+/* DWARF original prototype: void build_skeleton(terrain * this, bool build) */
+
+void __thiscall terrain::build_skeleton(terrain *this,bool build)
+
+{
+  char cVar1;
+  int iVar2;
+  int iVar3;
+  int iVar4;
+  plane *y_origin;
+  GLfloat in_a3;
+  terrain *ptVar5;
+  GLfloat unaff_retaddr;
+  GLfloat in_stack_00000000;
+  int *in_stack_00000004;
+  GLfloat in_stack_00000008;
+  int in_stack_0000000c;
+  GLfloat in_stack_fffffffc;
+  
+  iVar4 = this->N_PLANES;
+  iVar3 = this->painted_planes;
+  if (iVar3 < iVar4) {
+    iVar2 = this->painted_bones;
+    if (iVar2 < 5) {
+      this->painted[iVar3][iVar2] = build;
+      this->painted_bones = iVar2 + 1;
+    }
+    else {
+      this->painted_planes = iVar3 + 1;
+      this->painted_bones = 0;
+    }
+  }
+  else {
+    this->status = 1;
+    this->painted_bones = 0;
+    this->painted_planes = 0;
+  }
+  if (0 < iVar4) {
+    iVar3 = 0;
+    ptVar5 = this;
+    do {
+      y_origin = ptVar5->map[0];
+      iVar4 = y_origin->dead_axis;
+      if (iVar4 == 1) {
+        if (ptVar5->painted[0][0] == false) {
+          cVar1 = ptVar5->painted[0][1];
+        }
+        else if (this->map[y_origin->id_union_bottom]->dead_axis == 1) {
+          cVar1 = ptVar5->painted[0][1];
+        }
+        else {
+          glinterface::line(this->printer,(GLfloat)this->material,(GLfloat)y_origin,in_a3,
+                            unaff_retaddr,in_stack_fffffffc,in_stack_00000000,in_stack_00000004);
+          y_origin = ptVar5->map[0];
+          cVar1 = ptVar5->painted[0][1];
+        }
+        if (cVar1 == '\0') {
+          cVar1 = ptVar5->painted[0][2];
+        }
+        else if (this->map[y_origin->id_union_right]->dead_axis == y_origin->dead_axis) {
+          cVar1 = ptVar5->painted[0][2];
+        }
+        else {
+          glinterface::line(this->printer,(GLfloat)this->material,(GLfloat)y_origin,in_a3,
+                            unaff_retaddr,in_stack_fffffffc,in_stack_00000000,in_stack_00000004);
+          y_origin = ptVar5->map[0];
+          cVar1 = ptVar5->painted[0][2];
+        }
+        if (cVar1 == '\0') {
+          cVar1 = ptVar5->painted[0][3];
+        }
+        else if (this->map[y_origin->id_union_top]->dead_axis == y_origin->dead_axis) {
+          cVar1 = ptVar5->painted[0][3];
+        }
+        else {
+          glinterface::line(this->printer,(GLfloat)this->material,(GLfloat)y_origin,in_a3,
+                            unaff_retaddr,in_stack_fffffffc,in_stack_00000000,in_stack_00000004);
+          y_origin = ptVar5->map[0];
+          cVar1 = ptVar5->painted[0][3];
+        }
+        if (cVar1 != '\0') {
+          iVar4 = y_origin->id_union_left;
+LAB_089043dc:
+          if (this->map[iVar4]->dead_axis != y_origin->dead_axis) {
+            glinterface::line(this->printer,(GLfloat)this->material,(GLfloat)y_origin,in_a3,
+                              unaff_retaddr,in_stack_fffffffc,in_stack_00000000,in_stack_00000004);
+          }
+        }
+      }
+      else if (iVar4 == 2) {
+        if (ptVar5->painted[0][0] == false) {
+          cVar1 = ptVar5->painted[0][1];
+        }
+        else if (this->map[y_origin->id_union_left]->dead_axis == 2) {
+          cVar1 = ptVar5->painted[0][1];
+        }
+        else {
+          glinterface::line(this->printer,(GLfloat)this->material,(GLfloat)y_origin,in_a3,
+                            unaff_retaddr,in_stack_fffffffc,in_stack_00000000,in_stack_00000004);
+          y_origin = ptVar5->map[0];
+          cVar1 = ptVar5->painted[0][1];
+        }
+        if (cVar1 == '\0') {
+          cVar1 = ptVar5->painted[0][2];
+        }
+        else if (this->map[y_origin->id_union_bottom]->dead_axis == y_origin->dead_axis) {
+          cVar1 = ptVar5->painted[0][2];
+        }
+        else {
+          glinterface::line(this->printer,(GLfloat)this->material,(GLfloat)y_origin,in_a3,
+                            unaff_retaddr,in_stack_fffffffc,in_stack_00000000,in_stack_00000004);
+          y_origin = ptVar5->map[0];
+          cVar1 = ptVar5->painted[0][2];
+        }
+        if (cVar1 == '\0') {
+          cVar1 = ptVar5->painted[0][3];
+        }
+        else if (this->map[y_origin->id_union_right]->dead_axis == y_origin->dead_axis) {
+          cVar1 = ptVar5->painted[0][3];
+        }
+        else {
+          glinterface::line(this->printer,(GLfloat)this->material,(GLfloat)y_origin,in_a3,
+                            unaff_retaddr,in_stack_fffffffc,in_stack_00000000,in_stack_00000004);
+          y_origin = ptVar5->map[0];
+          cVar1 = ptVar5->painted[0][3];
+        }
+        if (cVar1 != '\0') {
+          iVar4 = y_origin->id_union_top;
+          goto LAB_089043dc;
+        }
+      }
+      else if (iVar4 == 3) {
+        if (ptVar5->painted[0][0] == false) {
+          cVar1 = ptVar5->painted[0][1];
+        }
+        else if (this->map[y_origin->id_union_left]->dead_axis == 3) {
+          cVar1 = ptVar5->painted[0][1];
+        }
+        else {
+          glinterface::line(this->printer,(GLfloat)this->material,(GLfloat)y_origin,in_a3,
+                            unaff_retaddr,in_stack_fffffffc,in_stack_00000000,in_stack_00000004);
+          y_origin = ptVar5->map[0];
+          cVar1 = ptVar5->painted[0][1];
+        }
+        if (cVar1 == '\0') {
+          cVar1 = ptVar5->painted[0][2];
+        }
+        else if (this->map[y_origin->id_union_top]->dead_axis == y_origin->dead_axis) {
+          cVar1 = ptVar5->painted[0][2];
+        }
+        else {
+          glinterface::line(this->printer,(GLfloat)this->material,(GLfloat)y_origin,in_a3,
+                            unaff_retaddr,in_stack_fffffffc,in_stack_00000000,in_stack_00000004);
+          y_origin = ptVar5->map[0];
+          cVar1 = ptVar5->painted[0][2];
+        }
+        if (cVar1 == '\0') {
+          cVar1 = ptVar5->painted[0][3];
+        }
+        else if (this->map[y_origin->id_union_right]->dead_axis == y_origin->dead_axis) {
+          cVar1 = ptVar5->painted[0][3];
+        }
+        else {
+          glinterface::line(this->printer,(GLfloat)this->material,(GLfloat)y_origin,in_a3,
+                            unaff_retaddr,in_stack_fffffffc,in_stack_00000000,in_stack_00000004);
+          y_origin = ptVar5->map[0];
+          cVar1 = ptVar5->painted[0][3];
+        }
+        if (cVar1 != '\0') {
+          iVar4 = y_origin->id_union_bottom;
+          goto LAB_089043dc;
+        }
+      }
+      in_a3 = (GLfloat)this->ground_material[2];
+      glinterface::square_3D
+                (this->printer,(GLfloat)this->ground_material[0],(GLfloat)this->ground_material[1],
+                 in_a3,(int)unaff_retaddr,(int)in_stack_fffffffc,(int)in_stack_00000000,
+                 (int)in_stack_00000004,in_stack_00000008,in_stack_0000000c);
+      iVar3 = iVar3 + 1;
+      ptVar5 = (terrain *)ptVar5->map;
+    } while (iVar3 < this->N_PLANES);
+  }
+  return;
+}
+
+// ========================================================
+// 0x0890471c: terrain::print(bool, int, bool)
+// ========================================================
+// Function: print @ 0890471c
+
+/* DWARF original prototype: int print(terrain * this, bool skeleton, int actual_plane, bool
+   low_quality) */
+
+int __thiscall terrain::print(terrain *this,bool skeleton,int actual_plane,bool low_quality)
+
+{
+  int iVar1;
+  int iVar2;
+  terrain *ptVar3;
+  int iVar4;
+  
+                    /* Unresolved local var: int prints@[???] */
+  if (skeleton) {
+    if (this->status == 4) {
+      build_skeleton(this,true);
+      iVar1 = this->N_PLANES;
+      goto joined_r0x089047e8;
+    }
+    if (this->status == 5) {
+      build_skeleton(this,false);
+      iVar1 = this->N_PLANES;
+      goto joined_r0x089047e8;
+    }
+    print_skeleton(this);
+  }
+                    /* Unresolved local var: int i@[???] */
+  iVar1 = this->N_PLANES;
+joined_r0x089047e8:
+  if (iVar1 < 1) {
+    return 0;
+  }
+  iVar4 = 0;
+  iVar1 = 0;
+  ptVar3 = this;
+  do {
+    ptVar3 = (terrain *)ptVar3->map;
+    iVar1 = iVar1 + 1;
+    iVar2 = plane::print(*(plane **)ptVar3,low_quality);
+    iVar4 = iVar4 + iVar2;
+  } while (iVar1 < this->N_PLANES);
+  return iVar4;
+}
+
+// ========================================================
+// 0x08904818: terrain::init(int, int, int, int)
+// ========================================================
+// Function: init @ 08904818
+
+/* DWARF original prototype: void init(terrain * this, int offset_x, int offset_y, int offset_z, int
+   cam_distance) */
+
+void __thiscall terrain::init(terrain *this,int offset_x,int offset_y,int offset_z,int cam_distance)
+
+{
+  plane *ppVar1;
+  plane **pppVar2;
+  int iVar3;
+  int unaff_s4;
+  
+                    /* Unresolved local var: int i@[???] */
+  if (0 < this->N_PLANES) {
+    pppVar2 = this->map;
+    iVar3 = 0;
+    ppVar1 = *pppVar2;
+    while( true ) {
+      ppVar1->ident = iVar3;
+      plane::generate_positions(ppVar1,offset_x,offset_y,offset_z,unaff_s4);
+      ppVar1 = *pppVar2;
+      iVar3 = iVar3 + 1;
+      pppVar2 = pppVar2 + 1;
+      if (this->max_vertex[0] < ppVar1->max_vertex[0]) {
+        this->max_vertex[0] = ppVar1->max_vertex[0];
+      }
+      if (this->max_vertex[1] < ppVar1->max_vertex[1]) {
+        this->max_vertex[1] = ppVar1->max_vertex[1];
+      }
+      if (this->max_vertex[2] < ppVar1->max_vertex[2]) {
+        this->max_vertex[2] = ppVar1->max_vertex[2];
+      }
+      if (this->N_PLANES <= iVar3) break;
+      ppVar1 = *pppVar2;
+    }
+  }
+  create_unions(this);
+                    /* Unresolved local var: int i@[???] */
+  iVar3 = 0;
+  if (0 < this->N_PLANES) {
+    do {
+      set_unions_of_plane(this,iVar3);
+      iVar3 = iVar3 + 1;
+    } while (iVar3 < this->N_PLANES);
+  }
+  return;
+}
+

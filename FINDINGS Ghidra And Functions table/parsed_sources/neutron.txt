@@ -1,0 +1,3849 @@
+// ========================================================
+// 0x08902aa0: neutron
+// ========================================================
+// Function: neutron @ 08902aa0
+
+/* WARNING: Removing unreachable block (ram,0x08902c30) */
+/* WARNING: Removing unreachable block (ram,0x08902bf8) */
+/* WARNING: Removing unreachable block (ram,0x08902bb4) */
+/* WARNING: Removing unreachable block (ram,0x08902b80) */
+/* WARNING: Removing unreachable block (ram,0x08902b4c) */
+/* WARNING: Removing unreachable block (ram,0x08902b14) */
+/* WARNING: Removing unreachable block (ram,0x08902b30) */
+/* WARNING: Removing unreachable block (ram,0x08902b68) */
+/* WARNING: Removing unreachable block (ram,0x08902b98) */
+/* WARNING: Removing unreachable block (ram,0x08902bd4) */
+/* WARNING: Removing unreachable block (ram,0x08902c14) */
+/* WARNING: Removing unreachable block (ram,0x08902c4c) */
+/* DWARF original prototype: void neutron(neutron * this, int color, int difficuty, int stage, bool
+   sound) */
+
+void __thiscall neutron::neutron(neutron *this,int color,int difficuty,int stage,bool sound)
+
+{
+  float fVar1;
+  GLfloat GVar2;
+  GLfloat GVar3;
+  GLfloat GVar4;
+  int iVar5;
+  stage_interface *this_00;
+  camera *pcVar6;
+  glinterface *pgVar7;
+  sound_mixer *psVar8;
+  bool in_t0;
+  neutron *pnVar9;
+  undefined4 unaff_s2;
+  int iVar10;
+  undefined1 sound_00;
+  
+  this->game_over = false;
+  this->ground = (terrain *)0x0;
+  this->proton = (player *)0x0;
+  iVar10 = 0;
+  pnVar9 = this;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar10 = iVar10 + 1;
+    iVar5 = rand();
+    pnVar9->background_colors[0][0] = iVar5 % 500 + 200;
+    iVar5 = rand();
+    pnVar9->background_colors[0][1] = iVar5 % 500 + -0xfa;
+    iVar5 = rand();
+    pnVar9->background_colors[0][2] = iVar5 % 500 + -0xfa;
+    iVar5 = rand();
+    pnVar9->background_colors[0][3] = iVar5 % 0xff;
+    iVar5 = rand();
+    pnVar9->background_colors[0][4] = iVar5 % 0xff;
+    iVar5 = rand();
+    pnVar9->background_colors[0][5] = iVar5 % 0xff;
+    iVar5 = rand();
+    pnVar9->background_colors[0][6] = iVar5 % 3 + 1;
+    iVar5 = rand();
+    pnVar9->background_colors[0][8] = 1;
+    pnVar9->background_colors[0][7] = iVar5 % 2;
+    iVar5 = rand();
+    pnVar9->background_colors[0][9] = iVar5 % 0x167 + 1;
+    iVar5 = rand();
+    pnVar9->background_colors[0][10] = iVar5 % 0x32 + -0x19;
+    iVar5 = rand();
+    pnVar9->background_colors[0][0xb] = iVar5 % 0x32 + -0x19;
+    iVar5 = rand();
+    sound_00 = (undefined1)unaff_s2;
+    pnVar9->background_colors[0][0xc] = iVar5 % 0x32 + -0x19;
+    pnVar9 = (neutron *)(pnVar9->miniatures + 7);
+  } while (iVar10 != 0x32);
+  this->bg_current_size = 0;
+  this->bg_current_count = 0;
+  iVar10 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar5 = iVar10 + 4;
+    *(undefined4 *)((int)this->miniatures + iVar10) = 0;
+    iVar10 = iVar5;
+  } while (iVar5 != 100);
+  iVar10 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar5 = iVar10 + 4;
+    *(undefined4 *)((int)this->electron + iVar10) = 0;
+    iVar10 = iVar5;
+  } while (iVar5 != 0x78);
+  this->time = 10;
+  fVar1 = DAT_089dbce0;
+  this->go_status = 1000;
+  this->game_status = 1000;
+  this->speed = fVar1;
+  this->game_cam = (camera *)0x0;
+  this->interface = (stage_interface *)0x0;
+  this->user_color = color;
+  this->user_difficulty = difficuty;
+  this->user_stage = stage;
+  this->user_sound = in_t0;
+  this->low_quality = false;
+  this->intro_step = 0;
+  this->last_charged_electron = 0;
+  this->uncharged_electrons = 0;
+  this->charged_electrons = 0;
+  this->timer = 0;
+  this->vision = 0;
+  this->colision = 0;
+  this->actual_stage = 0;
+  this->actual_artifact = 0;
+  this->timer_artifact = 0;
+  this->game_mode = 0;
+  this->move_ship[0] = 0;
+  this->move_ship[1] = 0;
+  this->move_ship[2] = 0;
+  this->camera_passes = 0;
+  this_00 = operator_new(0x714);
+  stage_interface::stage_interface(this_00,color,difficuty,stage,(bool)sound_00);
+  this->interface = this_00;
+  this->save_game = false;
+  this->actual_miniature = 0;
+  pcVar6 = operator_new(0x38);
+  pcVar6->x = 0.0;
+  pcVar6->y = 0.0;
+  GVar2 = DAT_089dbce4;
+  pcVar6->z = 0.0;
+  pcVar6->y_ori = GVar2;
+  pcVar6->x_dir = 0.0;
+  pcVar6->y_dir = 0.0;
+  pcVar6->z_dir = 0.0;
+  pcVar6->x_ori = 0.0;
+  pcVar6->z_ori = 0.0;
+  pcVar6->degrees = 0;
+  pgVar7 = operator_new(1);
+  GVar4 = DAT_089dbcf4;
+  GVar2 = DAT_089dbce8;
+  pcVar6->locator = pgVar7;
+  GVar3 = DAT_089dbcec;
+  pcVar6->z_dir = GVar4;
+  GVar4 = DAT_089dbcf0;
+  iVar10 = this->user_stage;
+  pcVar6->x_dir = GVar2;
+  pcVar6->z = GVar4;
+  pcVar6->y_dir = GVar3;
+  pcVar6->last_x = 0.0;
+  pcVar6->last_y = 0.0;
+  pcVar6->last_z = 0.0;
+  this->game_cam = pcVar6;
+  pcVar6->x = GVar2;
+  pcVar6->y = GVar3;
+  this->isSolo = false;
+  this->sound_status = 0;
+  if (iVar10 == 1) {
+    this->isTutorial = true;
+    this->tutorial_step = 0;
+  }
+  else {
+    this->tutorial_step = -1;
+    this->isTutorial = false;
+  }
+  this->score_buffer[5] = '0';
+  this->tutorial_counter = 0;
+  this->enemies_buffer[0] = '0';
+  this->enemies_buffer[1] = '0';
+  this->score = 0;
+  this->prints = 0;
+  builtin_strncpy(this->score_buffer,"00000",5);
+  this->n_score = (char *)0x0;
+  this->n_enemies = (char *)0x0;
+  this->mixer = (sound_mixer *)0x0;
+  psVar8 = operator_new(0x1c);
+  psVar8->TOTAL_SOUNDS = 0xc;
+  psVar8->refresh_effects = false;
+  iVar10 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar5 = iVar10 + 1;
+    psVar8->effects[iVar10] = false;
+    iVar10 = iVar5;
+  } while (iVar5 != 0xc);
+  this->mixer = psVar8;
+  psVar8->TOTAL_MUSIC = 4;
+  psVar8->refresh_music = false;
+                    /* Unresolved local var: void anon_var_0@[???] */
+  psVar8->music[0] = false;
+  psVar8->music[1] = false;
+  psVar8->music[2] = false;
+  psVar8->music[3] = false;
+  return;
+}
+
+// ========================================================
+// 0x0890bde0: neutron::move_lookat(camera*, float, float, float, int)
+// ========================================================
+// Function: move_lookat @ 0890bde0
+
+/* DWARF original prototype: bool move_lookat(neutron * this, camera * cam, float x, float y, float
+   z, int speed) */
+
+bool __thiscall neutron::move_lookat(neutron *this,camera *cam,float x,float y,float z,int speed)
+
+{
+  float fVar1;
+  float in_f12;
+  float in_f13;
+  float in_f14;
+  
+  fVar1 = cam->x_dir;
+  if (fVar1 != in_f12) {
+    if (in_f12 < fVar1) {
+      cam->x_dir = fVar1 - (float)(int)x;
+      return false;
+    }
+    cam->x_dir = fVar1 + (float)(int)x;
+    return false;
+  }
+  fVar1 = cam->z_dir;
+  if (fVar1 != in_f14) {
+    if (in_f14 < fVar1) {
+      cam->z_dir = fVar1 - (float)(int)x;
+      return false;
+    }
+    cam->z_dir = fVar1 + (float)(int)x;
+    return false;
+  }
+  fVar1 = cam->y_dir;
+  if (fVar1 == in_f13) {
+    return true;
+  }
+  if (fVar1 <= in_f13) {
+    cam->y_dir = fVar1 + (float)(int)x;
+    return false;
+  }
+  cam->y_dir = fVar1 - (float)(int)x;
+  return false;
+}
+
+// ========================================================
+// 0x0890bee0: neutron::move_camera(camera*, float, float, float, int)
+// ========================================================
+// Function: move_camera @ 0890bee0
+
+/* DWARF original prototype: bool move_camera(neutron * this, camera * cam, float x, float y, float
+   z, int speed) */
+
+bool __thiscall neutron::move_camera(neutron *this,camera *cam,float x,float y,float z,int speed)
+
+{
+  float fVar1;
+  float in_f12;
+  float in_f13;
+  float in_f14;
+  
+  fVar1 = cam->x;
+  if (fVar1 != in_f12) {
+    if (in_f12 < fVar1) {
+      cam->x = fVar1 - (float)(int)x;
+      return false;
+    }
+    cam->x = fVar1 + (float)(int)x;
+    return false;
+  }
+  fVar1 = cam->z;
+  if (fVar1 != in_f14) {
+    if (in_f14 < fVar1) {
+      cam->z = fVar1 - (float)(int)x;
+      return false;
+    }
+    cam->z = fVar1 + (float)(int)x;
+    return false;
+  }
+  fVar1 = cam->y;
+  if (fVar1 == in_f13) {
+    return true;
+  }
+  if (fVar1 <= in_f13) {
+    cam->y = fVar1 + (float)(int)x;
+    return false;
+  }
+  cam->y = fVar1 - (float)(int)x;
+  return false;
+}
+
+// ========================================================
+// 0x0890bfe0: neutron::level_complete()
+// ========================================================
+// Function: level_complete @ 0890bfe0
+
+/* DWARF original prototype: int level_complete(neutron * this) */
+
+int __thiscall neutron::level_complete(neutron *this)
+
+{
+  float in_a3;
+  float in_stack_00000008;
+  int in_stack_0000000c;
+  
+  move_camera(this,(this->proton->super_ship).cam_ship,1.4013e-45,in_a3,in_stack_00000008,
+              in_stack_0000000c);
+  return this->game_status;
+}
+
+// ========================================================
+// 0x0890c024: neutron::wait_option()
+// ========================================================
+// Function: wait_option @ 0890c024
+
+/* DWARF original prototype: int wait_option(neutron * this) */
+
+int __thiscall neutron::wait_option(neutron *this)
+
+{
+  return this->game_status;
+}
+
+// ========================================================
+// 0x0890c02c: neutron::show_miniatures()
+// ========================================================
+// Function: show_miniatures @ 0890c02c
+
+/* DWARF original prototype: int show_miniatures(neutron * this) */
+
+int __thiscall neutron::show_miniatures(neutron *this)
+
+{
+  float in_a3;
+  float in_stack_00000008;
+  int in_stack_0000000c;
+  
+  move_camera(this,this->game_cam,1.4013e-45,in_a3,in_stack_00000008,in_stack_0000000c);
+  move_lookat(this,this->game_cam,1.4013e-45,in_a3,in_stack_00000008,in_stack_0000000c);
+  return this->game_status;
+}
+
+// ========================================================
+// 0x0890c0bc: neutron::are_you_sure()
+// ========================================================
+// Function: are_you_sure @ 0890c0bc
+
+/* DWARF original prototype: int are_you_sure(neutron * this) */
+
+int __thiscall neutron::are_you_sure(neutron *this)
+
+{
+  return this->game_status;
+}
+
+// ========================================================
+// 0x0890c0c4: neutron::show_staff()
+// ========================================================
+// Function: show_staff @ 0890c0c4
+
+/* DWARF original prototype: int show_staff(neutron * this) */
+
+int __thiscall neutron::show_staff(neutron *this)
+
+{
+  button *this_00;
+  char *word;
+  stage_interface *psVar1;
+  
+  psVar1 = this->interface;
+  if (psVar1->actual_staff < 5) {
+    if (99 < this->time) {
+      this->time = 0;
+      this_00 = psVar1->buttons[0x26];
+      word = psVar1->whats[psVar1->actual_staff + 1];
+      psVar1->actual_staff = psVar1->actual_staff + 1;
+      button::load_text(this_00,word,200);
+      psVar1 = this->interface;
+      button::load_text(psVar1->buttons[0x27],psVar1->whos[psVar1->actual_staff],200);
+      return this->game_status;
+    }
+    this->time = this->time + 1;
+  }
+  return this->game_status;
+}
+
+// ========================================================
+// 0x0890c168: neutron::on_miniature_change()
+// ========================================================
+// Function: on_miniature_change @ 0890c168
+
+/* WARNING: Removing unreachable block (ram,0x0890c22c) */
+/* WARNING: Removing unreachable block (ram,0x0890c1fc) */
+/* WARNING: Removing unreachable block (ram,0x0890c1d0) */
+/* WARNING: Removing unreachable block (ram,0x0890c1a4) */
+/* WARNING: Removing unreachable block (ram,0x0890c1c0) */
+/* WARNING: Removing unreachable block (ram,0x0890c1e0) */
+/* WARNING: Removing unreachable block (ram,0x0890c214) */
+/* WARNING: Removing unreachable block (ram,0x0890c244) */
+/* DWARF original prototype: void on_miniature_change(neutron * this) */
+
+void __thiscall neutron::on_miniature_change(neutron *this)
+
+{
+  int iVar1;
+  char local_10;
+  char local_f;
+  char local_e;
+  char local_d;
+  char local_c;
+  char local_b;
+  
+                    /* Unresolved local var: char * score_string@[???]
+                       Unresolved local var: char[6] score_buffer@[???]
+                       Unresolved local var: int a@[???]
+                       Unresolved local var: int b@[???]
+                       Unresolved local var: int c@[???]
+                       Unresolved local var: int d@[???]
+                       Unresolved local var: int e@[???]
+                       Unresolved local var: int f@[???] */
+  iVar1 = this->miniatures[this->actual_miniature]->high_score;
+  local_10 = (char)(iVar1 / 100000) + '0';
+  local_d = (char)((iVar1 % 1000) / 100) + '0';
+  local_f = (char)((iVar1 % 100000) / 10000) + '0';
+  local_e = (char)((iVar1 % 10000) / 1000) + '0';
+  local_b = (char)((iVar1 % 100) % 10) + '0';
+  local_c = (char)((iVar1 % 100) / 10) + '0';
+  button::load_text(this->interface->buttons[1],&local_10,-1);
+  return;
+}
+
+// ========================================================
+// 0x0890c274: neutron::game_intro()
+// ========================================================
+// Function: game_intro @ 0890c274
+
+/* DWARF original prototype: int game_intro(neutron * this) */
+
+int __thiscall neutron::game_intro(neutron *this)
+
+{
+  int iVar1;
+  
+  if (this->intro_step < 0x5e) {
+    iVar1 = this->game_status;
+    this->intro_step = this->intro_step + 1;
+  }
+  else {
+    sound_mixer::play_effect(this->mixer,0);
+    this->go_status = 0xb;
+    this->time = 0x50;
+    iVar1 = 4;
+  }
+  return iVar1;
+}
+
+// ========================================================
+// 0x0890c2d0: neutron::load_miniatures()
+// ========================================================
+// Function: load_miniatures @ 0890c2d0
+
+/* DWARF original prototype: void load_miniatures(neutron * this) */
+
+void __thiscall neutron::load_miniatures(neutron *this)
+
+{
+  miniature **ppmVar1;
+  miniature *pmVar2;
+  camera *pcVar3;
+  neutron *pnVar4;
+  int iVar5;
+  int unaff_s4;
+  int iVar6;
+  int iVar7;
+  int iVar8;
+  int iVar9;
+  int iVar10;
+  
+  pmVar2 = this->miniatures[0];
+  this->actual_miniature = 0;
+  pcVar3 = this->game_cam;
+  iVar6 = pmVar2->cam[0];
+  iVar7 = pmVar2->cam[1];
+  iVar8 = pmVar2->cam[2];
+  iVar9 = pmVar2->cam_center[0];
+  iVar10 = pmVar2->cam_center[1];
+  iVar5 = 0;
+  pcVar3->z_dir = (float)pmVar2->cam_center[2];
+  pcVar3->x = (float)iVar6;
+  pcVar3->y = (float)iVar7;
+  pcVar3->z = (float)iVar8;
+  pcVar3->x_dir = (float)iVar9;
+  pcVar3->y_dir = (float)iVar10;
+  pnVar4 = this;
+LAB_0890c3a0:
+  iVar6 = this->user_stage;
+  do {
+    iVar5 = iVar5 + 1;
+    iVar7 = 100;
+    iVar8 = 100;
+    iVar9 = 100;
+    if (iVar5 <= iVar6) {
+                    /* Unresolved local var: int i@[???] */
+      iVar7 = 0;
+      iVar8 = 0x82;
+      iVar9 = 5;
+      if (this->user_color != 0) {
+        iVar7 = 0x82;
+        iVar8 = 8;
+        iVar9 = 0x82;
+        if (this->user_color != 1) break;
+      }
+    }
+    ppmVar1 = pnVar4->miniatures;
+    pnVar4 = (neutron *)&pnVar4->user_stage;
+    miniature::change_color(*ppmVar1,iVar7,iVar8,iVar9,unaff_s4);
+    if (iVar5 == 0x19) goto LAB_0890c3d4;
+    iVar6 = this->user_stage;
+  } while( true );
+  miniature::change_color(pnVar4->miniatures[0],8,0xaf,0xe1,unaff_s4);
+  pnVar4 = (neutron *)&pnVar4->user_stage;
+  if (iVar5 == 0x19) {
+LAB_0890c3d4:
+    this->miniatures[this->actual_miniature]->color[3] = 0xff;
+    return;
+  }
+  goto LAB_0890c3a0;
+}
+
+// ========================================================
+// 0x0890c40c: neutron::create_miniatures()
+// ========================================================
+// Function: create_miniatures @ 0890c40c
+
+/* DWARF original prototype: void create_miniatures(neutron * this) */
+
+void __thiscall neutron::create_miniatures(neutron *this)
+
+{
+  miniature *pmVar1;
+  int unaff_s2;
+  int unaff_s3;
+  int iVar2;
+  char *unaff_s4;
+  int iVar3;
+  int iVar4;
+  
+                    /* Unresolved local var: int h_count@[???]
+                       Unresolved local var: int v_count@[???]
+                       Unresolved local var: int v_pos@[???]
+                       Unresolved local var: int h_pos@[???] */
+  iVar4 = 0;
+  iVar3 = 0;
+  do {
+                    /* Unresolved local var: int i@[???] */
+    iVar2 = iVar3 + 1;
+    switch(iVar2) {
+    case 1:
+      pmVar1 = operator_new(0x1c8);
+      miniature::miniature(pmVar1,::::CUBE_MINI_DATA,1,0,unaff_s2,unaff_s3,unaff_s4);
+      this->miniatures[0] = pmVar1;
+      break;
+    case 2:
+      pmVar1 = operator_new(0x1c8);
+      miniature::miniature(pmVar1,::::RECTANGLE_MINI_DATA,2,0,unaff_s2,unaff_s3,unaff_s4);
+      this->miniatures[0] = pmVar1;
+      break;
+    case 3:
+      pmVar1 = operator_new(0x1c8);
+      miniature::miniature(pmVar1,::::ELLE_MINI_DATA,3,0,unaff_s2,unaff_s3,unaff_s4);
+      this->miniatures[0] = pmVar1;
+      break;
+    case 4:
+      pmVar1 = operator_new(0x1c8);
+      miniature::miniature(pmVar1,::::TE_MINI_DATA,4,0,unaff_s2,unaff_s3,unaff_s4);
+      this->miniatures[0] = pmVar1;
+      break;
+    case 5:
+      pmVar1 = operator_new(0x1c8);
+      miniature::miniature(pmVar1,::::DOUBLECUBE_MINI_DATA,2,0,unaff_s2,unaff_s3,unaff_s4);
+      this->miniatures[0] = pmVar1;
+      break;
+    case 6:
+      pmVar1 = operator_new(0x1c8);
+      miniature::miniature(pmVar1,::::ESE_MINI_DATA,4,0,unaff_s2,unaff_s3,unaff_s4);
+      this->miniatures[0] = pmVar1;
+      break;
+    case 7:
+      pmVar1 = operator_new(0x1c8);
+      miniature::miniature(pmVar1,::::V_MINI_DATA,3,0,unaff_s2,unaff_s3,unaff_s4);
+      this->miniatures[0] = pmVar1;
+      break;
+    case 8:
+      pmVar1 = operator_new(0x1c8);
+      miniature::miniature(pmVar1,::::CRAZY_CROSS_MINI_DATA,4,0,unaff_s2,unaff_s3,unaff_s4);
+      this->miniatures[0] = pmVar1;
+      break;
+    case 9:
+      pmVar1 = operator_new(0x1c8);
+      miniature::miniature(pmVar1,::::DEATH_STAIRS_MINI_DATA,3,0,unaff_s2,unaff_s3,unaff_s4);
+      this->miniatures[0] = pmVar1;
+      break;
+    case 10:
+      pmVar1 = operator_new(0x1c8);
+      miniature::miniature(pmVar1,::::CROSS_MINI_DATA,5,0,unaff_s2,unaff_s3,unaff_s4);
+      this->miniatures[0] = pmVar1;
+      break;
+    case 0xb:
+      pmVar1 = operator_new(0x1c8);
+      miniature::miniature(pmVar1,::::ESE_CURVE_MINI_DATA,5,0,unaff_s2,unaff_s3,unaff_s4);
+      this->miniatures[0] = pmVar1;
+      break;
+    case 0xc:
+      pmVar1 = operator_new(0x1c8);
+      miniature::miniature(pmVar1,::::TRIPOD_MINI_DATA,4,0,unaff_s2,unaff_s3,unaff_s4);
+      this->miniatures[0] = pmVar1;
+      break;
+    case 0xd:
+      pmVar1 = operator_new(0x1c8);
+      miniature::miniature(pmVar1,::::KEOPS_MINI_DATA,9,0,unaff_s2,unaff_s3,unaff_s4);
+      this->miniatures[0] = pmVar1;
+      break;
+    case 0xe:
+      pmVar1 = operator_new(0x1c8);
+      miniature::miniature(pmVar1,::::DOUBLE_CROSS_MINI_DATA,7,0,unaff_s2,unaff_s3,unaff_s4);
+      this->miniatures[0] = pmVar1;
+      break;
+    case 0xf:
+      pmVar1 = operator_new(0x1c8);
+      miniature::miniature(pmVar1,::::CORNER_MINI_DATA,8,0,unaff_s2,unaff_s3,unaff_s4);
+      this->miniatures[0] = pmVar1;
+      break;
+    case 0x10:
+      pmVar1 = operator_new(0x1c8);
+      miniature::miniature(pmVar1,::::MAGNET_MINI_DATA,7,0,unaff_s2,unaff_s3,unaff_s4);
+      this->miniatures[0] = pmVar1;
+      break;
+    case 0x11:
+      pmVar1 = operator_new(0x1c8);
+      miniature::miniature(pmVar1,::::DONUT_MINI_DATA,8,0,unaff_s2,unaff_s3,unaff_s4);
+      this->miniatures[0] = pmVar1;
+      break;
+    case 0x12:
+      pmVar1 = operator_new(0x1c8);
+      miniature::miniature(pmVar1,::::CURVE_MINI_DATA,7,0,unaff_s2,unaff_s3,unaff_s4);
+      this->miniatures[0] = pmVar1;
+      break;
+    case 0x13:
+      pmVar1 = operator_new(0x1c8);
+      miniature::miniature(pmVar1,::::CASTLE_MINI_DATA,8,0,unaff_s2,unaff_s3,unaff_s4);
+      this->miniatures[0] = pmVar1;
+      break;
+    case 0x14:
+      pmVar1 = operator_new(0x1c8);
+      miniature::miniature(pmVar1,::::PIRAMID_MINI_DATA,8,0,unaff_s2,unaff_s3,unaff_s4);
+      this->miniatures[0] = pmVar1;
+      break;
+    case 0x15:
+      pmVar1 = operator_new(0x1c8);
+      miniature::miniature(pmVar1,::::KNOT_MINI_DATA,5,0,unaff_s2,unaff_s3,unaff_s4);
+      this->miniatures[0] = pmVar1;
+      break;
+    case 0x16:
+      pmVar1 = operator_new(0x1c8);
+      miniature::miniature(pmVar1,::::BLENDER_MINI_DATA,8,0,unaff_s2,unaff_s3,unaff_s4);
+      this->miniatures[0] = pmVar1;
+      break;
+    case 0x17:
+      pmVar1 = operator_new(0x1c8);
+      miniature::miniature(pmVar1,::::SHOES_MINI_DATA,9,0,unaff_s2,unaff_s3,unaff_s4);
+      this->miniatures[0] = pmVar1;
+      break;
+    case 0x18:
+      pmVar1 = operator_new(0x1c8);
+      miniature::miniature(pmVar1,::::DEATH_STAR_MINI_DATA,0xc,0,unaff_s2,unaff_s3,unaff_s4);
+      this->miniatures[0] = pmVar1;
+      break;
+    case 0x19:
+      pmVar1 = operator_new(0x1c8);
+      miniature::miniature(pmVar1,::::HELIX_MINI_DATA,0xb,0,unaff_s2,unaff_s3,unaff_s4);
+      this->miniatures[0] = pmVar1;
+    }
+    pmVar1 = this->miniatures[0];
+    pmVar1->cam[0] = pmVar1->max_vertex[0] + -0xe;
+    if (iVar3 < 5) {
+      pmVar1->cam[1] = 4;
+LAB_0890c4d4:
+      pmVar1->cam[2] = pmVar1->cam_center[2];
+      if (iVar4 < 4) goto LAB_0890c4e4;
+LAB_0890c520:
+      iVar4 = 0;
+    }
+    else {
+      if (9 < iVar3) {
+        if (iVar3 < 0xf) {
+          pmVar1->cam[1] = -0x1c;
+        }
+        else if (iVar3 < 0x14) {
+          pmVar1->cam[1] = -0x2a;
+        }
+        else {
+          pmVar1->cam[1] = -0x38;
+        }
+        goto LAB_0890c4d4;
+      }
+      pmVar1->cam[1] = -0xc;
+      pmVar1->cam[2] = pmVar1->cam_center[2];
+      if (3 < iVar4) goto LAB_0890c520;
+LAB_0890c4e4:
+      iVar4 = iVar4 + 1;
+    }
+    if (iVar2 == 0x19) {
+      return;
+    }
+    this = (neutron *)&this->user_stage;
+    iVar3 = iVar2;
+  } while( true );
+}
+
+// ========================================================
+// 0x0890cb2c: neutron::delay_artifact()
+// ========================================================
+// Function: delay_artifact @ 0890cb2c
+
+/* WARNING: Removing unreachable block (ram,0x0890cb54) */
+/* DWARF original prototype: void delay_artifact(neutron * this) */
+
+void __thiscall neutron::delay_artifact(neutron *this)
+
+{
+  int iVar1;
+  int iVar2;
+  
+  iVar2 = this->timer_artifact;
+  iVar1 = rand();
+  if (iVar1 % 200 + 100 <= iVar2) {
+    this->actual_artifact = 1;
+    this->timer_artifact = 0;
+    return;
+  }
+  this->timer_artifact = this->timer_artifact + 1;
+  return;
+}
+
+// ========================================================
+// 0x0890cba8: neutron::delay(int, int)
+// ========================================================
+// Function: delay @ 0890cba8
+
+/* DWARF original prototype: int delay(neutron * this, int status, int time) */
+
+int __thiscall neutron::delay(neutron *this,int status,int time)
+
+{
+  int local_20;
+  undefined4 local_1c;
+  undefined4 local_18;
+  
+  if (this->timer < time) {
+    status = this->game_status;
+    this->timer = this->timer + 1;
+  }
+  else {
+                    /* Unresolved local var: int[3] buttons@[???] */
+    this->timer = 0;
+    local_18 = DAT_089df1f8;
+    local_1c = DAT_089df1f4;
+    local_20 = delay(int,int)::C_30;
+    if (status == 0xb) {
+      this->vision = 1;
+      stage_interface::activate_buttons(this->interface,&local_20,3);
+      if (this->user_sound != false) {
+        sound_mixer::play_music(this->mixer,0);
+        return 0xb;
+      }
+    }
+  }
+  return status;
+}
+
+// ========================================================
+// 0x0890cc60: neutron::menu_move(int)
+// ========================================================
+// Function: menu_move @ 0890cc60
+
+/* DWARF original prototype: void menu_move(neutron * this, int side) */
+
+void __thiscall neutron::menu_move(neutron *this,int side)
+
+{
+  int iVar1;
+  uint uVar2;
+  plane *ppVar3;
+  terrain *ptVar4;
+  stage_interface *this_00;
+  int local_18;
+  undefined4 local_14;
+  undefined4 local_10;
+  
+                    /* Unresolved local var: int[3] buttons@[???] */
+  if (side == 0) {
+    this_00 = this->interface;
+    iVar1 = this_00->actual_option;
+    if (iVar1 < 4) {
+      if (0 < iVar1) goto LAB_0890ce30;
+      this_00->actual_option = 3;
+    }
+    else if (iVar1 - 4U < 4) {
+      if (iVar1 != 4) goto LAB_0890ce30;
+      this_00->actual_option = 7;
+    }
+    else if (iVar1 < 9) {
+      this_00->actual_option = 0xb;
+    }
+    else {
+LAB_0890ce30:
+      this_00->actual_option = iVar1 + -1;
+    }
+LAB_0890ce34:
+    iVar1 = this_00->actual_option;
+LAB_0890ce38:
+    ptVar4 = this->ground;
+    ppVar3 = ptVar4->map[this_00->menu_option[iVar1]];
+    iVar1 = ppVar3->dead_axis;
+  }
+  else {
+    if (side == 1) {
+      this_00 = this->interface;
+      iVar1 = this_00->actual_option;
+      if (iVar1 < 4) {
+        if (iVar1 == 3) {
+          this_00->actual_option = 0;
+          goto LAB_0890cce0;
+        }
+LAB_0890cfa4:
+        this_00->actual_option = iVar1 + 1;
+      }
+      else if (iVar1 - 4U < 4) {
+        if (iVar1 < 7) goto LAB_0890cfa4;
+        this_00->actual_option = 4;
+      }
+      else {
+        if (iVar1 < 0xb) goto LAB_0890cfa4;
+        this_00->actual_option = 8;
+      }
+      goto LAB_0890ce34;
+    }
+    this_00 = this->interface;
+    if (side == 3) {
+      if (this_00->actual_option == 0) {
+        if (this->user_stage < 2) {
+          this_00->actual_option = 4;
+        }
+        else {
+          this_00->actual_option = 5;
+        }
+        iVar1 = this_00->actual_option;
+      }
+      else {
+        iVar1 = this_00->actual_option;
+      }
+      if (iVar1 == 0xb) {
+        this_00->actual_option = 0;
+        goto LAB_0890cce0;
+      }
+      iVar1 = this_00->actual_option;
+      goto LAB_0890ce38;
+    }
+    if (this_00->actual_option == 1) {
+      this_00->actual_option = 9;
+    }
+    if (this_00->actual_option != 7) {
+      iVar1 = this_00->actual_option;
+      goto LAB_0890ce38;
+    }
+    this_00->actual_option = 0;
+LAB_0890cce0:
+    ptVar4 = this->ground;
+    ppVar3 = ptVar4->map[this_00->menu_option[this_00->actual_option]];
+    iVar1 = ppVar3->dead_axis;
+  }
+  if (iVar1 == 2) {
+    this->move_ship[0] = ppVar3->a_vertex[0] + 10;
+    this->move_ship[1] = ptVar4->map[this_00->menu_option[this_00->actual_option]]->dead_offset + 2;
+    this->move_ship[2] = ptVar4->map[this_00->menu_option[this_00->actual_option]]->a_vertex[2] + 10
+    ;
+    uVar2 = this_00->actual_option;
+    if (0xb < uVar2) {
+      uVar2 = this_00->actual_option;
+      goto LAB_0890cda4;
+    }
+  }
+  else {
+    if (iVar1 == 3) {
+      this->move_ship[0] = ppVar3->a_vertex[0] + 10;
+      this->move_ship[1] =
+           ptVar4->map[this_00->menu_option[this_00->actual_option]]->a_vertex[1] + 0xc;
+      this->move_ship[2] = ptVar4->map[this_00->menu_option[this_00->actual_option]]->dead_offset;
+    }
+    else if (iVar1 == 1) {
+      this->move_ship[0] = ppVar3->dead_offset;
+      this->move_ship[1] =
+           ptVar4->map[this_00->menu_option[this_00->actual_option]]->a_vertex[1] + 0xc;
+      this->move_ship[2] =
+           ptVar4->map[this_00->menu_option[this_00->actual_option]]->a_vertex[2] + 10;
+    }
+    uVar2 = this_00->actual_option;
+    if (0xb < uVar2) {
+LAB_0890cda4:
+      local_10 = DAT_089df214;
+      local_14 = DAT_089df210;
+      local_18 = menu_move(int)::C_20;
+      if (uVar2 == 8) {
+        this_00->buttons[0x19]->color[3] = 0xff;
+      }
+      else {
+        this_00->buttons[0x19]->color[3] = 0x28;
+      }
+      if (this_00->actual_option == 5) {
+        this_00->buttons[0x1f]->color[3] = 0xff;
+      }
+      else {
+        this_00->buttons[0x1f]->color[3] = 0x28;
+      }
+      if (this_00->actual_option == 4) {
+        this_00->buttons[0x20]->color[3] = 0xff;
+      }
+      else {
+        this_00->buttons[0x20]->color[3] = 0x28;
+      }
+      if (this_00->actual_option != 6) {
+        this_00->buttons[0x21]->color[3] = 0x28;
+        stage_interface::activate_buttons(this_00,&local_18,3);
+        this->game_status = 0xb;
+        return;
+      }
+      this_00->buttons[0x21]->color[3] = 0xff;
+      stage_interface::activate_buttons(this_00,&local_18,3);
+      this->game_status = 0xb;
+      return;
+    }
+  }
+  local_18 = menu_move(int)::C_20;
+  local_14 = DAT_089df210;
+  local_10 = DAT_089df214;
+                    /* WARNING: Could not recover jumptable at 0x0890ceb8. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (*(code *)(&PTR_LAB_089de840)[uVar2])();
+  return;
+}
+
+// ========================================================
+// 0x0890d254: neutron::print_stars()
+// ========================================================
+// Function: print_stars @ 0890d254
+
+/* DWARF original prototype: void print_stars(neutron * this) */
+
+void __thiscall neutron::print_stars(neutron *this)
+
+{
+  int (*paiVar1) [13];
+  int (*paiVar2) [13];
+  int (*paiVar3) [13];
+  neutron *pnVar4;
+  int unaff_retaddr;
+  int in_stack_00000000;
+  int in_stack_00000004;
+  GLfloat in_stack_00000008;
+  int in_stack_0000000c;
+  int in_stack_fffffffc;
+  
+                    /* Unresolved local var: int x@[???]
+                       Unresolved local var: int y@[???]
+                       Unresolved local var: int z@[???]
+                       Unresolved local var: int i@[???] */
+  pnVar4 = this;
+  do {
+    glPushMatrix();
+    glRotatef((float)pnVar4->background_colors[0][9],(float)pnVar4->background_colors[0][10],
+              (float)pnVar4->background_colors[0][0xb],(float)pnVar4->background_colors[0][0xc]);
+    paiVar1 = pnVar4->background_colors;
+    paiVar2 = pnVar4->background_colors;
+    paiVar3 = pnVar4->background_colors;
+    pnVar4 = (neutron *)(pnVar4->miniatures + 7);
+    glinterface::square_3D
+              (this->ground->printer,(GLfloat)(*paiVar1)[3],(GLfloat)(*paiVar2)[4],
+               (GLfloat)(*paiVar3)[5],unaff_retaddr,in_stack_fffffffc,in_stack_00000000,
+               in_stack_00000004,in_stack_00000008,in_stack_0000000c);
+    glPopMatrix();
+  } while (pnVar4 != (neutron *)(this->background_colors[0x2a] + 8));
+  return;
+}
+
+// ========================================================
+// 0x0890d308: neutron::print_background()
+// ========================================================
+// Function: print_background @ 0890d308
+
+/* WARNING: Removing unreachable block (ram,0x0890d3b8) */
+/* WARNING: Removing unreachable block (ram,0x0890d478) */
+/* DWARF original prototype: void print_background(neutron * this) */
+
+void __thiscall neutron::print_background(neutron *this)
+
+{
+  int iVar1;
+  player *ppVar2;
+  terrain *ptVar3;
+  int iVar4;
+  neutron *pnVar5;
+  neutron *pnVar6;
+  int unaff_s4;
+  int unaff_s5;
+  int unaff_s6;
+  int unaff_retaddr;
+  GLfloat in_stack_00000000;
+  
+                    /* Unresolved local var: int x@[???]
+                       Unresolved local var: int i@[???] */
+  pnVar6 = (neutron *)(this->background_colors[0x2a] + 8);
+  pnVar5 = this;
+LAB_0890d3dc:
+  ppVar2 = this->proton;
+  do {
+    ptVar3 = this->ground;
+    if (ptVar3->map[(ppVar2->super_ship).actual_plane]->dead_axis == 0) {
+      glinterface::square(ptVar3->printer,(GLfloat)pnVar5->background_colors[0][3],
+                          (GLfloat)pnVar5->background_colors[0][4],
+                          (GLfloat)pnVar5->background_colors[0][5],unaff_s4,unaff_s5,unaff_s6,
+                          unaff_retaddr,in_stack_00000000);
+      iVar4 = pnVar5->background_colors[0][6];
+      if (pnVar5->background_colors[0][8] == 0) goto LAB_0890d37c;
+LAB_0890d43c:
+      iVar4 = iVar4 + 1;
+      pnVar5->background_colors[0][6] = iVar4;
+    }
+    else {
+      glinterface::square(ptVar3->printer,(GLfloat)pnVar5->background_colors[0][3],
+                          (GLfloat)pnVar5->background_colors[0][4],
+                          (GLfloat)pnVar5->background_colors[0][5],unaff_s4,unaff_s5,unaff_s6,
+                          unaff_retaddr,in_stack_00000000);
+      iVar4 = pnVar5->background_colors[0][6];
+      if (pnVar5->background_colors[0][8] != 0) goto LAB_0890d43c;
+LAB_0890d37c:
+      iVar4 = iVar4 + -1;
+      pnVar5->background_colors[0][6] = iVar4;
+    }
+    if (0.0 < (float)iVar4) break;
+    iVar4 = rand();
+    pnVar5->background_colors[0][8] = 1;
+    pnVar5->background_colors[0][0] = iVar4 % 500 + -0xfa;
+    pnVar5 = (neutron *)(pnVar5->miniatures + 7);
+    if (pnVar6 == pnVar5) {
+      return;
+    }
+    ppVar2 = this->proton;
+  } while( true );
+  iVar1 = rand();
+  if (iVar1 % 200 + 10 <= iVar4) {
+    pnVar5->background_colors[0][8] = 0;
+  }
+  pnVar5 = (neutron *)(pnVar5->miniatures + 7);
+  if (pnVar6 == pnVar5) {
+    return;
+  }
+  goto LAB_0890d3dc;
+}
+
+// ========================================================
+// 0x0890d4c4: neutron::print_stage()
+// ========================================================
+// Function: print_stage @ 0890d4c4
+
+/* DWARF original prototype: void print_stage(neutron * this) */
+
+void __thiscall neutron::print_stage(neutron *this)
+
+{
+  char cVar1;
+  player *ppVar2;
+  enemy *peVar3;
+  int iVar4;
+  miniature *pmVar5;
+  plane *ppVar6;
+  miniature *this_00;
+  neutron *pnVar7;
+  int iVar8;
+  int unaff_retaddr;
+  int in_stack_00000000;
+  int in_stack_00000004;
+  GLfloat in_stack_00000008;
+  int in_stack_0000000c;
+  int in_stack_fffffffc;
+  
+  iVar4 = this->vision;
+  if (iVar4 == 1) {
+    camera::locate((this->proton->super_ship).cam_ship);
+    iVar4 = this->game_status;
+LAB_0890d504:
+    if (iVar4 == 9) {
+      iVar4 = this->user_stage;
+LAB_0890d6f8:
+      if (0x19 < iVar4) {
+        return;
+      }
+      if (iVar4 < 6) {
+        iVar8 = 5;
+      }
+      else {
+        iVar8 = 10;
+        if (10 < iVar4) {
+          if (iVar4 < 0x10) {
+            iVar8 = 0xf;
+          }
+          else if (iVar4 < 0x15) {
+            iVar8 = 0x14;
+          }
+          else {
+            iVar8 = 0x19;
+          }
+        }
+      }
+                    /* Unresolved local var: int i@[???] */
+      iVar4 = 0;
+      pnVar7 = this;
+      do {
+        while (this->actual_miniature != iVar4) {
+          this_00 = pnVar7->miniatures[0];
+          this_00->rotation = 0;
+LAB_0890d728:
+          iVar4 = iVar4 + 1;
+          miniature::print(this_00);
+          pnVar7 = (neutron *)&pnVar7->user_stage;
+          if (iVar8 <= iVar4) {
+            return;
+          }
+        }
+        pmVar5 = this->miniatures[iVar4];
+        this_00 = pnVar7->miniatures[0];
+        if (0x167 < pmVar5->rotation) {
+          pmVar5->rotation = 0;
+          goto LAB_0890d728;
+        }
+        pmVar5->rotation = pmVar5->rotation + 5;
+        iVar4 = iVar4 + 1;
+        miniature::print(this_00);
+        pnVar7 = (neutron *)&pnVar7->user_stage;
+        if (iVar8 <= iVar4) {
+          return;
+        }
+      } while( true );
+    }
+  }
+  else {
+    if (iVar4 == 2) {
+                    /* Unresolved local var: int i@[???] */
+      if (this->N_SHIPS + -1 < 1) goto LAB_0890d500;
+      iVar4 = 0;
+      peVar3 = this->electron[0];
+      pnVar7 = this;
+      while( true ) {
+        iVar4 = iVar4 + 1;
+        camera::locate((peVar3->super_ship).cam_ship);
+        if (this->N_SHIPS + -1 <= iVar4) break;
+        peVar3 = pnVar7->electron[1];
+        pnVar7 = (neutron *)&pnVar7->user_stage;
+      }
+      iVar4 = this->game_status;
+      goto LAB_0890d504;
+    }
+    if (iVar4 != 0) {
+LAB_0890d500:
+      iVar4 = this->game_status;
+      goto LAB_0890d504;
+    }
+    camera::locate(this->game_cam);
+    iVar4 = this->game_status;
+    if (iVar4 == 9) {
+                    /* Unresolved local var: int show_to@[???] */
+      iVar4 = this->user_stage;
+      goto LAB_0890d6f8;
+    }
+  }
+  if (((iVar4 == 6) || (iVar4 == 0xd)) || (iVar4 == 0xb)) {
+    ppVar2 = this->proton;
+LAB_0890d650:
+    iVar4 = terrain::print(this->ground,false,(ppVar2->super_ship).actual_plane,this->low_quality);
+    this->prints = iVar4;
+    player::print(this->proton,this->ground->map[(this->proton->super_ship).actual_plane]->dead_axis
+                  ,this->low_quality);
+    iVar4 = this->actual_stage;
+    if (this->user_difficulty != 0) goto LAB_0890d57c;
+LAB_0890d698:
+    if (iVar4 != 1000) {
+      iVar4 = this->game_status;
+      goto LAB_0890d6a8;
+    }
+    cVar1 = this->isTutorial;
+  }
+  else {
+    ppVar2 = this->proton;
+    if (iVar4 == 3) goto LAB_0890d650;
+    iVar4 = terrain::print(this->ground,true,(ppVar2->super_ship).actual_plane,this->low_quality);
+    this->prints = iVar4;
+    player::print(this->proton,this->ground->map[(this->proton->super_ship).actual_plane]->dead_axis
+                  ,this->low_quality);
+    iVar4 = this->actual_stage;
+    if (this->user_difficulty == 0) goto LAB_0890d698;
+LAB_0890d57c:
+    if (iVar4 == 2000) {
+      iVar4 = this->game_status;
+LAB_0890d6a8:
+      if (iVar4 == 0) {
+        ppVar6 = this->ground->map[(this->proton->super_ship).actual_plane];
+        player::print_guides(this->proton,ppVar6->face_number,ppVar6->dead_axis);
+        cVar1 = this->isTutorial;
+      }
+      else {
+        cVar1 = this->isTutorial;
+      }
+    }
+    else {
+      cVar1 = this->isTutorial;
+    }
+  }
+  if (cVar1 == '\0') {
+    iVar4 = this->game_mode;
+  }
+  else if (this->tutorial_step < 3) {
+    iVar4 = this->game_mode;
+  }
+  else {
+    ppVar6 = this->ground->map[(this->proton->super_ship).actual_plane];
+    player::print_guides(this->proton,ppVar6->face_number,ppVar6->dead_axis);
+    iVar4 = this->game_mode;
+  }
+  if ((iVar4 == 0) && (this->game_status == 0)) {
+                    /* Unresolved local var: int i@[???] */
+    iVar4 = this->N_SHIPS;
+  }
+  else {
+    if (this->game_status != 10) {
+      iVar4 = this->N_SHIPS;
+      goto LAB_0890d7ac;
+    }
+    iVar4 = this->N_SHIPS;
+    if (this->tutorial_step != 10) goto LAB_0890d7ac;
+  }
+  if (iVar4 + -1 < 1) {
+    return;
+  }
+  iVar8 = 0;
+  pnVar7 = this;
+  do {
+    peVar3 = pnVar7->electron[0];
+    iVar8 = iVar8 + 1;
+    pnVar7 = (neutron *)&pnVar7->user_stage;
+    if ((peVar3->super_ship).status == 0) {
+      glinterface::square_3D
+                ((peVar3->super_ship).printer,(GLfloat)(peVar3->super_ship).material[0],
+                 (GLfloat)(peVar3->super_ship).material[1],(GLfloat)(peVar3->super_ship).material[2]
+                 ,unaff_retaddr,in_stack_fffffffc,in_stack_00000000,in_stack_00000004,
+                 in_stack_00000008,in_stack_0000000c);
+      iVar4 = this->N_SHIPS;
+    }
+  } while (iVar8 < iVar4 + -1);
+LAB_0890d7ac:
+  if (0 < iVar4 + -1) {
+    iVar8 = 0;
+    pnVar7 = this;
+    do {
+      peVar3 = pnVar7->electron[0];
+      iVar8 = iVar8 + 1;
+      pnVar7 = (neutron *)&pnVar7->user_stage;
+      if ((peVar3->super_ship).status != 0) {
+        enemy::print(peVar3,this->ground->map[(peVar3->super_ship).actual_plane]->dead_axis,
+                     this->low_quality);
+        iVar4 = this->N_SHIPS;
+      }
+    } while (iVar8 < iVar4 + -1);
+    return;
+  }
+  return;
+}
+
+// ========================================================
+// 0x0890d8cc: neutron::print()
+// ========================================================
+// Function: print @ 0890d8cc
+
+/* DWARF original prototype: void print(neutron * this) */
+
+void __thiscall neutron::print(neutron *this)
+
+{
+  char cVar1;
+  int iVar2;
+  stage_interface *this_00;
+  float in_a2;
+  float in_a3;
+  int in_stack_00000000;
+  
+  iVar2 = this->actual_stage;
+  if (iVar2 == 1000) {
+    iVar2 = this->game_status;
+    if ((iVar2 != 1000) && (iVar2 != 4)) {
+      if (iVar2 == 6) {
+        button::print(this->interface->buttons[0x1e],0.0,in_a2,in_a3,in_stack_00000000);
+        iVar2 = this->game_status;
+      }
+      if (iVar2 == 0xd) {
+        button::print(this->interface->buttons[0x26],0.0,in_a2,in_a3,in_stack_00000000);
+        button::print(this->interface->buttons[0x27],0.0,in_a2,in_a3,in_stack_00000000);
+      }
+      print_stage(this);
+      stage_interface::print_menu_interface(this->interface,this->proton->start_z);
+      return;
+    }
+    camera::locate(this->game_cam);
+    stage_interface::print_intro(this->interface,this->intro_step);
+    return;
+  }
+  if (iVar2 < 0x3e9) {
+    if (iVar2 != 1) {
+      cVar1 = this->game_over;
+      goto LAB_0890d90c;
+    }
+    if (-1 < this->tutorial_step) {
+      stage_interface::print_tutorial_interface(this->interface,10,this->isTutorial);
+      goto LAB_0890d92c;
+    }
+    this_00 = this->interface;
+  }
+  else {
+    if (iVar2 == 2000) {
+      stage_interface::print_train_interface(this->interface,10);
+      print_stage(this);
+      return;
+    }
+    if (iVar2 == 3000) {
+      stage_interface::print_solo_interface(this->interface,10);
+      goto LAB_0890d92c;
+    }
+    cVar1 = this->game_over;
+LAB_0890d90c:
+    if (cVar1 == '\0') {
+      this_00 = this->interface;
+    }
+    else {
+      print_background(this);
+      this_00 = this->interface;
+    }
+  }
+  stage_interface::print_game_interface(this_00,10,this->game_status,this->colision);
+LAB_0890d92c:
+  print_stage(this);
+  return;
+}
+
+// ========================================================
+// 0x0890dac4: neutron::change_option()
+// ========================================================
+// Function: change_option @ 0890dac4
+
+/* DWARF original prototype: int change_option(neutron * this) */
+
+int __thiscall neutron::change_option(neutron *this)
+
+{
+  bool bVar1;
+  undefined3 extraout_var;
+  undefined3 extraout_var_00;
+  int iVar2;
+  player *this_00;
+  terrain *ptVar3;
+  plane **x;
+  float in_a3;
+  plane **in_stack_00000008;
+  int in_stack_0000000c;
+  
+                    /* Unresolved local var: int index@[???]
+                       Unresolved local var: int cam_x@[???]
+                       Unresolved local var: int cam_y@[???]
+                       Unresolved local var: int cam_z@[???] */
+  this_00 = this->proton;
+  ptVar3 = this->ground;
+  (this_00->super_ship).material[3] = 0x4b;
+  x = ptVar3->map;
+  bVar1 = ship::go_to(&this_00->super_ship,(float)x,(float)ptVar3->N_PLANES,in_a3,in_stack_00000008,
+                      in_stack_0000000c);
+  if (CONCAT31(extraout_var,bVar1) == 0) {
+    player::move(this->proton,this->ground->map,0);
+    iVar2 = this->game_status;
+  }
+  else {
+    plane::find_piece_index
+              (this->ground->map[(this->proton->super_ship).actual_plane],(float)x,0.0,in_a3);
+    bVar1 = move_camera(this,(this->proton->super_ship).cam_ship,1.4013e-45,
+                        (float)this->ground->map[(this->proton->super_ship).actual_plane],
+                        (float)in_stack_00000008,in_stack_0000000c);
+    iVar2 = 6;
+    if (CONCAT31(extraout_var_00,bVar1) == 0) {
+      iVar2 = this->game_status;
+    }
+  }
+  return iVar2;
+}
+
+// ========================================================
+// 0x0890dbd8: neutron::show_stage()
+// ========================================================
+// Function: show_stage @ 0890dbd8
+
+/* DWARF original prototype: int show_stage(neutron * this) */
+
+int __thiscall neutron::show_stage(neutron *this)
+
+{
+  bool bVar1;
+  undefined3 extraout_var;
+  undefined3 extraout_var_00;
+  int iVar2;
+  undefined3 extraout_var_01;
+  button *this_00;
+  float in_a1;
+  float in_a2;
+  player *ppVar3;
+  float in_a3;
+  float y;
+  float unaff_retaddr;
+  int local_18 [2];
+  int in_stack_fffffffc;
+  
+                    /* Unresolved local var: int index@[???]
+                       Unresolved local var: int cam_x@[???]
+                       Unresolved local var: int cam_y@[???]
+                       Unresolved local var: int cam_z@[???] */
+  plane::find_piece_index
+            (this->ground->map[(this->proton->super_ship).actual_plane],in_a1,in_a2,in_a3);
+  ppVar3 = this->proton;
+  y = (float)this->camera_passes;
+  if (y == 0.0) {
+    bVar1 = move_camera(this,(ppVar3->super_ship).cam_ship,1.4013e-45,0.0,unaff_retaddr,
+                        in_stack_fffffffc);
+    if (CONCAT31(extraout_var_01,bVar1) == 0) {
+      iVar2 = this->game_status;
+    }
+    else {
+      this->camera_passes = 1;
+      iVar2 = this->game_status;
+    }
+  }
+  else if (y == 1.4013e-45) {
+    bVar1 = move_camera(this,(ppVar3->super_ship).cam_ship,1.4013e-45,1.4013e-45,unaff_retaddr,
+                        in_stack_fffffffc);
+    if (CONCAT31(extraout_var_00,bVar1) == 0) {
+      iVar2 = this->game_status;
+    }
+    else {
+      this->camera_passes = 2;
+      iVar2 = this->game_status;
+    }
+  }
+  else {
+    bVar1 = move_camera(this,(ppVar3->super_ship).cam_ship,1.4013e-45,y,unaff_retaddr,
+                        in_stack_fffffffc);
+    if (CONCAT31(extraout_var,bVar1) != 0) {
+      this->timer = 0;
+      if ((this->actual_stage == 1) && (this->isTutorial != false)) {
+                    /* Unresolved local var: int[2] buttons@[???] */
+        local_18[0] = 0x1e;
+        local_18[1] = 0xd;
+        stage_interface::activate_buttons(this->interface,local_18,2);
+        terrain::change_color(this->ground,100,100,100,(int)unaff_retaddr);
+        iVar2 = 10;
+      }
+      else {
+        ppVar3 = this->proton;
+        this_00 = this->interface->buttons[6];
+        (ppVar3->super_ship).effect_size = DAT_089dc368;
+        (ppVar3->super_ship).status = 3;
+        button::load_text(this_00,"navigation mode",0xff);
+        terrain::change_color(this->ground,100,100,100,(int)unaff_retaddr);
+        this->time = 0x19;
+        this->go_status = 0;
+        sound_mixer::play_effect(this->mixer,0xb);
+        iVar2 = 4;
+      }
+      return iVar2;
+    }
+    iVar2 = this->game_status;
+  }
+  return iVar2;
+}
+
+// ========================================================
+// 0x0890de00: neutron::execute_artifact()
+// ========================================================
+// Function: execute_artifact @ 0890de00
+
+/* DWARF original prototype: void execute_artifact(neutron * this) */
+
+void __thiscall neutron::execute_artifact(neutron *this)
+
+{
+  int iVar1;
+  plane *ppVar2;
+  piece *ppVar3;
+  terrain *ptVar4;
+  int iVar5;
+  terrain *ptVar6;
+  int iVar7;
+  int iVar8;
+  
+  ptVar4 = this->ground;
+  iVar8 = ptVar4->N_PLANES;
+  if (0 < iVar8) {
+    iVar7 = 0;
+    ptVar6 = ptVar4;
+    do {
+      ptVar6 = (terrain *)ptVar6->map;
+      ppVar2 = *(plane **)ptVar6;
+      iVar1 = ppVar2->side_size * ppVar2->side_size;
+      if (0 < iVar1) {
+        iVar5 = 0;
+        do {
+          ppVar3 = ppVar2->pieces[0];
+          iVar5 = iVar5 + 1;
+          ppVar3->temporal = true;
+          ppVar3->type = 0;
+          ppVar3->state = false;
+          ppVar3->status = 0;
+          ppVar2 = (plane *)&ppVar2->i;
+        } while (iVar1 != iVar5);
+      }
+      iVar7 = iVar7 + 1;
+    } while (iVar7 != iVar8);
+  }
+  ptVar4->time = 0;
+  return;
+}
+
+// ========================================================
+// 0x0890de08: neutron::restart()
+// ========================================================
+// Function: restart @ 0890de08
+
+/* DWARF original prototype: void restart(neutron * this) */
+
+void __thiscall neutron::restart(neutron *this)
+
+{
+  enemy *this_00;
+  neutron *pnVar1;
+  int iVar2;
+  
+  if (this->actual_stage != 3000) {
+    terrain::restart(this->ground);
+  }
+                    /* Unresolved local var: int i@[???] */
+  this->last_charged_electron = 0;
+  this->charged_electrons = 0;
+  this->uncharged_electrons = 0;
+  this->colision = 0;
+  this->low_quality = false;
+  this->game_over = false;
+  if (0 < this->N_SHIPS + -1) {
+    iVar2 = 0;
+    this_00 = this->electron[0];
+    pnVar1 = this;
+    while( true ) {
+      iVar2 = iVar2 + 1;
+      enemy::restart(this_00);
+      if (this->N_SHIPS + -1 <= iVar2) break;
+      this_00 = pnVar1->electron[1];
+      pnVar1 = (neutron *)&pnVar1->user_stage;
+    }
+  }
+  return;
+}
+
+// ========================================================
+// 0x0890de9c: neutron::combat()
+// ========================================================
+// Function: combat @ 0890de9c
+
+/* WARNING: Removing unreachable block (ram,0x0890e350) */
+/* WARNING: Removing unreachable block (ram,0x0890e320) */
+/* WARNING: Removing unreachable block (ram,0x0890e2ec) */
+/* WARNING: Removing unreachable block (ram,0x0890e2cc) */
+/* WARNING: Removing unreachable block (ram,0x0890e298) */
+/* WARNING: Removing unreachable block (ram,0x0890e2dc) */
+/* WARNING: Removing unreachable block (ram,0x0890e308) */
+/* WARNING: Removing unreachable block (ram,0x0890e338) */
+/* WARNING: Removing unreachable block (ram,0x0890e06c) */
+/* WARNING: Removing unreachable block (ram,0x0890e094) */
+/* DWARF original prototype: int combat(neutron * this) */
+
+int __thiscall neutron::combat(neutron *this)
+
+{
+  bool bVar1;
+  stage_interface *psVar2;
+  int iVar3;
+  undefined3 extraout_var;
+  int iVar4;
+  int iVar5;
+  enemy *peVar6;
+  player *ppVar7;
+  sound_mixer *this_00;
+  camera *pcVar8;
+  terrain *ptVar9;
+  button *this_01;
+  int iVar10;
+  int unaff_s4;
+  GLfloat GVar11;
+  
+                    /* Unresolved local var: int piece_type@[???] */
+  ppVar7 = this->proton;
+  iVar4 = (ppVar7->super_ship).step_counter;
+  if (iVar4 < (ppVar7->super_ship).step_speed) {
+    (ppVar7->super_ship).step_counter = iVar4 + 1;
+    iVar4 = this->colision;
+LAB_0890dedc:
+    if (iVar4 == 1) {
+      psVar2 = this->interface;
+      goto LAB_0890e164;
+    }
+                    /* Unresolved local var: int i@[???] */
+    iVar4 = this->N_SHIPS;
+LAB_0890deec:
+    iVar5 = iVar4 + -1;
+    if (iVar5 < 1) {
+      iVar4 = this->uncharged_electrons;
+    }
+    else {
+      iVar10 = 0;
+      iVar3 = 0;
+      do {
+        peVar6 = *(enemy **)((int)this->electron + iVar3);
+        iVar5 = (peVar6->super_ship).status;
+        if (iVar5 == 1) {
+          iVar4 = (peVar6->super_ship).step_counter;
+          if (iVar4 < (peVar6->super_ship).step_speed) {
+            (peVar6->super_ship).step_counter = iVar4 + 1;
+            iVar4 = this->N_SHIPS;
+          }
+          else {
+            ppVar7 = this->proton;
+            ptVar9 = this->ground;
+            (peVar6->super_ship).step_counter = 0;
+            iVar4 = enemy::move(peVar6,ptVar9->map,(ppVar7->super_ship).actual_face);
+            if (iVar4 == 0) {
+              iVar4 = this->N_SHIPS;
+            }
+            else {
+                    /* Unresolved local var: int a@[???]
+                       Unresolved local var: int b@[???] */
+              ptVar9 = this->ground;
+              *(undefined4 *)(*(int *)((int)this->electron + iVar3) + 0x60) = 6;
+              terrain::fire_up_cue(ptVar9,iVar10 + 1);
+              iVar4 = this->uncharged_electrons + 1;
+              iVar5 = ((this->N_SHIPS - iVar4) + -1) % 100;
+              psVar2 = this->interface;
+              this->uncharged_electrons = iVar4;
+              this->n_enemies = this->enemies_buffer;
+              this->enemies_buffer[1] = (char)(iVar5 % 10) + '0';
+              this->enemies_buffer[0] = (char)(iVar5 / 10) + '0';
+              button::load_text(psVar2->buttons[3],this->enemies_buffer,-1);
+              sound_mixer::play_effect(this->mixer,4);
+              iVar4 = this->N_SHIPS;
+            }
+          }
+        }
+        else if (((this->proton->super_ship).actual_plane == (peVar6->super_ship).actual_plane) &&
+                (iVar5 == 0)) {
+          (peVar6->super_ship).status = 1;
+          this->last_charged_electron = iVar10;
+          this->charged_electrons = this->charged_electrons + 1;
+          terrain::change_color
+                    (this->ground,(peVar6->super_ship).material[0],(peVar6->super_ship).material[1],
+                     (peVar6->super_ship).material[2],unaff_s4);
+          sound_mixer::play_effect(this->mixer,5);
+          iVar4 = this->N_SHIPS;
+        }
+        iVar10 = iVar10 + 1;
+        iVar5 = iVar4 + -1;
+        iVar3 = iVar10 * 4;
+      } while (iVar10 < iVar5);
+      iVar4 = this->uncharged_electrons;
+    }
+    if (iVar4 == iVar5) {
+      if (iVar4 == this->charged_electrons) {
+        peVar6 = this->electron[this->last_charged_electron];
+        pcVar8 = (this->proton->super_ship).cam_ship;
+        GVar11 = (peVar6->super_ship).x;
+        this->colision = 2;
+        pcVar8->x_dir = GVar11;
+        pcVar8->y_dir = (peVar6->super_ship).y;
+        pcVar8->z_dir = (peVar6->super_ship).z;
+        goto LAB_0890df58;
+      }
+      iVar4 = this->colision;
+    }
+    else if (iVar4 == this->charged_electrons) {
+      bVar1 = terrain::am_i_clear(this->ground);
+      if (CONCAT31(extraout_var,bVar1) == 0) {
+        iVar4 = this->colision;
+      }
+      else {
+        terrain::navigation_mode(this->ground);
+        ptVar9 = this->ground;
+        terrain::change_color
+                  (ptVar9,ptVar9->material[0],ptVar9->material[1],ptVar9->material[2],unaff_s4);
+        this_01 = this->interface->buttons[6];
+        this->game_mode = 0;
+        button::load_text(this_01,"navigation mode",0xff);
+        ptVar9 = this->ground;
+        terrain::change_color
+                  (ptVar9,ptVar9->material[0],ptVar9->material[1],ptVar9->material[2],unaff_s4);
+        iVar4 = this->colision;
+      }
+    }
+    else {
+LAB_0890df58:
+      iVar4 = this->colision;
+    }
+    if (iVar4 < 1) {
+      return this->game_status;
+    }
+    if (iVar4 != 1) {
+      button::load_text(this->interface->buttons[6],"you win",-1);
+      return 1;
+    }
+  }
+  else {
+    (ppVar7->super_ship).step_counter = 0;
+    iVar4 = player::move(ppVar7,this->ground->map,this->game_mode);
+    ppVar7 = this->proton;
+    if (((ppVar7->super_ship).actual_plane != (ppVar7->super_ship).last_plane) &&
+       ((ppVar7->super_ship).last_advance != (ppVar7->super_ship).advance)) {
+      sound_mixer::play_effect(this->mixer,7);
+    }
+    if (iVar4 == 0) {
+                    /* Unresolved local var: int a@[???]
+                       Unresolved local var: int b@[???]
+                       Unresolved local var: int c@[???]
+                       Unresolved local var: int d@[???]
+                       Unresolved local var: int e@[???]
+                       Unresolved local var: int f@[???] */
+      iVar4 = this->score + -1;
+      this->score = iVar4;
+      psVar2 = this->interface;
+      this->n_score = this->score_buffer;
+      this->score_buffer[0] = (char)(iVar4 / 100000) + '0';
+      this->score_buffer[3] = (char)((iVar4 % 1000) / 100) + '0';
+      this->score_buffer[1] = (char)((iVar4 % 100000) / 10000) + '0';
+      this->score_buffer[2] = (char)((iVar4 % 10000) / 1000) + '0';
+      this->score_buffer[5] = (char)((iVar4 % 100) % 10) + '0';
+      this->score_buffer[4] = (char)((iVar4 % 100) / 10) + '0';
+      button::load_text(psVar2->buttons[1],this->score_buffer,-1);
+      iVar4 = this->colision;
+      goto LAB_0890dedc;
+    }
+    if (iVar4 == 3) {
+      execute_artifact(this);
+      iVar4 = this->colision;
+      goto LAB_0890dedc;
+    }
+    terrain::fire_up_cue(this->ground,0);
+    this_00 = this->mixer;
+    this->colision = 1;
+    (this->proton->super_ship).status = 6;
+    sound_mixer::play_effect(this_00,4);
+    if (this->colision != 1) {
+      iVar4 = this->N_SHIPS;
+      goto LAB_0890deec;
+    }
+  }
+  psVar2 = this->interface;
+LAB_0890e164:
+  button::load_text(psVar2->buttons[6],"you lose",-1);
+  return 1;
+}
+
+// ========================================================
+// 0x0890e37c: neutron::navigate()
+// ========================================================
+// Function: navigate @ 0890e37c
+
+/* DWARF original prototype: int navigate(neutron * this) */
+
+int __thiscall neutron::navigate(neutron *this)
+
+{
+  enemy **ppeVar1;
+  int iVar2;
+  neutron *pnVar3;
+  enemy *peVar4;
+  player *ppVar5;
+  button *this_00;
+  sound_mixer *this_01;
+  int iVar6;
+  int in_stack_00000000;
+  
+                    /* Unresolved local var: int piece_type@[???] */
+  ppVar5 = this->proton;
+  iVar2 = (ppVar5->super_ship).step_counter;
+  if (iVar2 < (ppVar5->super_ship).step_speed) {
+    (ppVar5->super_ship).step_counter = iVar2 + 1;
+                    /* Unresolved local var: int i@[???] */
+    iVar2 = this->N_SHIPS;
+  }
+  else {
+    (ppVar5->super_ship).step_counter = 0;
+    player::move(ppVar5,this->ground->map,this->game_mode);
+    ppVar5 = this->proton;
+    if ((ppVar5->super_ship).actual_plane == (ppVar5->super_ship).last_plane) {
+      iVar2 = this->N_SHIPS;
+    }
+    else if ((ppVar5->super_ship).last_advance == (ppVar5->super_ship).advance) {
+      iVar2 = this->N_SHIPS;
+    }
+    else {
+      sound_mixer::play_effect(this->mixer,7);
+      iVar2 = this->N_SHIPS;
+    }
+  }
+  if (iVar2 + -1 < 1) {
+LAB_0890e474:
+    iVar2 = this->game_status;
+  }
+  else {
+    iVar6 = 0;
+    pnVar3 = this;
+    do {
+      ppeVar1 = pnVar3->electron;
+      pnVar3 = (neutron *)&pnVar3->user_stage;
+      if (((this->proton->super_ship).actual_plane == ((*ppeVar1)->super_ship).actual_plane) &&
+         (((*ppeVar1)->super_ship).status == 0)) {
+        this_00 = this->interface->buttons[6];
+        this->game_mode = 1;
+        button::load_text(this_00,"combat mode",0xff);
+        terrain::combat_mode(this->ground);
+        peVar4 = this->electron[this->last_charged_electron];
+        terrain::change_color
+                  (this->ground,(peVar4->super_ship).material[0],(peVar4->super_ship).material[1],
+                   (peVar4->super_ship).material[2],in_stack_00000000);
+        this_01 = this->mixer;
+        (this->electron[iVar6]->super_ship).status = 1;
+        this->last_charged_electron = iVar6;
+        this->charged_electrons = this->charged_electrons + 1;
+        sound_mixer::play_effect(this_01,5);
+        goto LAB_0890e474;
+      }
+      iVar6 = iVar6 + 1;
+    } while (iVar6 != iVar2 + -1);
+    iVar2 = this->game_status;
+  }
+  return iVar2;
+}
+
+// ========================================================
+// 0x0890e4dc: neutron::run()
+// ========================================================
+// Function: run @ 0890e4dc
+
+/* DWARF original prototype: int run(neutron * this) */
+
+int __thiscall neutron::run(neutron *this)
+
+{
+  int iVar1;
+  
+  if (this->prints < 0xea7) {
+    this->low_quality = false;
+  }
+  else {
+    this->low_quality = true;
+  }
+  if ((this->game_mode != 0) && (this->game_mode != 2)) {
+    iVar1 = combat(this);
+    return iVar1;
+  }
+  iVar1 = navigate(this);
+  return iVar1;
+}
+
+// ========================================================
+// 0x0890e524: neutron::load_artifact(int)
+// ========================================================
+// Function: load_artifact @ 0890e524
+
+/* WARNING: Removing unreachable block (ram,0x0890e59c) */
+/* DWARF original prototype: void load_artifact(neutron * this, int artifact) */
+
+void __thiscall neutron::load_artifact(neutron *this,int artifact)
+
+{
+  int iVar1;
+  int iVar2;
+  int iVar3;
+  piece *this_00;
+  int local_20;
+  undefined4 local_1c;
+  undefined4 local_18;
+  undefined4 local_14;
+  
+                    /* Unresolved local var: int found@[???]
+                       Unresolved local var: int plane@[???]
+                       Unresolved local var: int piece@[???]
+                       Unresolved local var: int[4] material@[???] */
+  local_20 = load_artifact(int)::C_21;
+  local_1c = DAT_089df200;
+  local_18 = DAT_089df204;
+  local_14 = DAT_089df208;
+  this->actual_artifact = 0;
+  do {
+    iVar1 = rand();
+    iVar3 = this->ground->N_PLANES;
+    if (iVar3 == 0) {
+      trap(7);
+    }
+    iVar2 = rand();
+    this_00 = this->ground->map[iVar1 % iVar3]->pieces[iVar2 % 400];
+  } while (this_00->state != false);
+  piece::change_state(this_00,&local_20,3);
+  return;
+}
+
+// ========================================================
+// 0x0890e5e8: neutron::autoload_eletrons(int)
+// ========================================================
+// Function: autoload_eletrons @ 0890e5e8
+
+/* WARNING: Removing unreachable block (ram,0x0890eb74) */
+/* WARNING: Removing unreachable block (ram,0x0890ec78) */
+/* WARNING: Removing unreachable block (ram,0x0890ea18) */
+/* WARNING: Removing unreachable block (ram,0x0890eb34) */
+/* WARNING: Removing unreachable block (ram,0x0890ebec) */
+/* WARNING: Removing unreachable block (ram,0x0890ec04) */
+/* WARNING: Removing unreachable block (ram,0x0890e7d0) */
+/* WARNING: Removing unreachable block (ram,0x0890ead0) */
+/* WARNING: Removing unreachable block (ram,0x0890eb4c) */
+/* WARNING: Removing unreachable block (ram,0x0890eb8c) */
+/* WARNING: Removing unreachable block (ram,0x0890ec30) */
+/* WARNING: Removing unreachable block (ram,0x0890eba4) */
+/* WARNING: Removing unreachable block (ram,0x0890ec48) */
+/* WARNING: Removing unreachable block (ram,0x0890ea94) */
+/* WARNING: Removing unreachable block (ram,0x0890eaac) */
+/* WARNING: Removing unreachable block (ram,0x0890eae8) */
+/* DWARF original prototype: void autoload_eletrons(neutron * this, int n_enemies) */
+
+void __thiscall neutron::autoload_eletrons(neutron *this,int n_enemies)
+
+{
+  int iVar1;
+  bool bVar2;
+  enemy *this_00;
+  int *piVar3;
+  camera *pcVar4;
+  glinterface *pgVar5;
+  undefined1 *puVar6;
+  int iVar7;
+  plane *ppVar8;
+  int iVar9;
+  player *ppVar10;
+  int iVar11;
+  int iVar12;
+  terrain *ptVar13;
+  int iVar14;
+  int *piVar15;
+  int *piVar16;
+  neutron *pnVar17;
+  float fVar18;
+  GLfloat GVar19;
+  float fVar20;
+  float fVar21;
+  int local_40;
+  undefined1 *local_3c;
+  int aiStack_38 [4];
+  
+                    /* Unresolved local var: bool allready_used@[???]
+                       Unresolved local var: int[0][7] ELECTRON@[???]
+                       Unresolved local var: int[0][3] CAM@[???]
+                       Unresolved local var: int choosen_plane@[???] */
+  ppVar10 = this->proton;
+  local_3c = (undefined1 *)&local_40;
+  local_40 = n_enemies + this->ground->N_PLANES + -1;
+  iVar1 = -((n_enemies + -1) * 0x1c + 0x2aU & 0xfffffff8);
+  piVar15 = (int *)((int)&local_40 + iVar1);
+  iVar12 = (ppVar10->super_ship).actual_plane;
+                    /* Unresolved local var: int i@[???] */
+  piVar16 = (int *)((int)&local_40 + (iVar1 - ((n_enemies + -1) * 0xc + 0x1aU & 0xfffffff8)));
+  if (local_40 < 1) {
+    return;
+  }
+  iVar14 = 0;
+  pnVar17 = this;
+LAB_0890e690:
+                    /* Unresolved local var: int j@[???] */
+  bVar2 = false;
+  do {
+    if ((iVar12 != (ppVar10->super_ship).actual_plane) && (!bVar2)) {
+      ptVar13 = this->ground;
+      ppVar8 = ptVar13->map[iVar12];
+      iVar7 = ppVar8->dead_axis;
+      if (iVar7 == 1) {
+        iVar7 = ppVar8->dead_offset;
+        *piVar15 = iVar7;
+        iVar7 = iVar7 << 1;
+        piVar15[1] = ppVar8->i + 0xb;
+        iVar9 = ppVar8->j + 0xb;
+        piVar15[2] = iVar9;
+LAB_0890ea80:
+        *piVar16 = iVar7;
+        piVar16[1] = piVar15[1] * 3 +
+                     ((ptVar13->max_vertex[1] / 0x14 + ptVar13->max_vertex[1] + 1) / 2) * -2;
+        piVar16[2] = iVar9 * 3 +
+                     ((ptVar13->max_vertex[2] / 0x14 + ptVar13->max_vertex[2] + 1) / 2) * -2;
+      }
+      else {
+        if (iVar7 == 2) {
+          iVar7 = ppVar8->i + 0xb;
+          *piVar15 = iVar7;
+          piVar15[1] = ppVar8->dead_offset;
+          iVar9 = ppVar8->j + 0xb;
+          piVar15[2] = iVar9;
+          iVar7 = iVar7 * 3 +
+                  ((ptVar13->max_vertex[0] / 0x14 + ptVar13->max_vertex[0] + 1) / 2) * -2;
+          goto LAB_0890ea80;
+        }
+        if (iVar7 == 3) {
+          iVar7 = ppVar8->i + 0xb;
+          *piVar15 = iVar7;
+          piVar15[1] = ppVar8->j + 0xb;
+          iVar11 = ppVar8->dead_offset;
+          piVar15[2] = iVar11;
+          *piVar16 = iVar7 * 3 +
+                     ((ptVar13->max_vertex[0] / 0x14 + ptVar13->max_vertex[0] + 1) / 2) * -2;
+          iVar7 = ptVar13->max_vertex[1];
+          iVar9 = piVar15[1];
+          piVar16[2] = iVar11 << 1;
+          piVar16[1] = iVar9 * 3 + ((iVar7 / 0x14 + iVar7 + 1) / 2) * -2;
+        }
+      }
+      ppVar8 = ptVar13->map[iVar12];
+      piVar15[3] = ppVar8->face_number;
+      iVar7 = ppVar8->face_number;
+      if (iVar7 < 6) {
+        piVar15[4] = iVar7 + 1;
+        if (piVar15[4] < 1) goto LAB_0890e9dc;
+        piVar15[5] = iVar12;
+LAB_0890e780:
+        iVar12 = this->actual_stage;
+        if (iVar12 != 2000) {
+          iVar7 = this->user_difficulty;
+          goto LAB_0890e794;
+        }
+        piVar15[6] = 0;
+      }
+      else {
+        piVar15[4] = iVar7 + -1;
+        if (0 < piVar15[4]) {
+          piVar15[5] = iVar12;
+          goto LAB_0890e780;
+        }
+LAB_0890e9dc:
+        piVar15[4] = 2;
+        piVar15[5] = iVar12;
+        iVar12 = this->actual_stage;
+        if (iVar12 == 2000) {
+          piVar15[6] = 0;
+        }
+        else {
+          iVar7 = this->user_difficulty;
+LAB_0890e794:
+          if (iVar7 == 0) {
+            if (iVar12 < 3) {
+              piVar15[6] = 0;
+            }
+            else {
+              if (9 < iVar12) {
+                if (iVar12 < 0xf) goto LAB_0890ea04;
+                goto LAB_0890e7bc;
+              }
+              iVar12 = rand();
+              piVar15[6] = iVar12 % 2;
+            }
+          }
+          else if (iVar12 < 10) {
+LAB_0890ea04:
+            iVar12 = rand();
+            piVar15[6] = iVar12 % 3;
+          }
+          else {
+LAB_0890e7bc:
+            iVar12 = rand();
+            piVar15[6] = iVar12 % 4;
+          }
+        }
+      }
+      this_00 = operator_new(0x94);
+      GVar19 = DAT_089dbcec;
+      (this_00->super_ship).size = DAT_089dc360;
+      (this_00->super_ship).parts = GVar19;
+      (this_00->super_ship).path_found = false;
+      piVar3 = (int *)((int)&local_40 + iVar14 * 0x1c + iVar1);
+      iVar12 = *piVar3;
+      this_00->start_x = iVar12;
+      iVar9 = piVar3[1];
+      this_00->start_y = iVar9;
+      iVar7 = piVar3[2];
+      fVar21 = (float)iVar12;
+      this_00->start_z = iVar7;
+      iVar11 = piVar3[3];
+      fVar20 = (float)iVar9;
+      this_00->start_actual_face = iVar11;
+      iVar9 = piVar3[4];
+      fVar18 = (float)iVar7;
+      (this_00->super_ship).x_predict = fVar21;
+      this_00->start_previous_face = iVar9;
+      iVar7 = piVar3[5];
+      (this_00->super_ship).y_predict = fVar20;
+      (this_00->super_ship).x = fVar21;
+      this_00->start_plane = iVar7;
+      iVar12 = piVar3[6];
+      (this_00->super_ship).y = fVar20;
+      (this_00->super_ship).actual_face = iVar11;
+      this_00->type = iVar12;
+      (this_00->super_ship).previous_face = iVar9;
+      (this_00->super_ship).actual_plane = iVar7;
+      (this_00->super_ship).plane_path = -1;
+      (this_00->super_ship).ident = -1;
+      (this_00->super_ship).z_predict = fVar18;
+      (this_00->super_ship).z = fVar18;
+      (this_00->super_ship).cue_counter = 0;
+      pcVar4 = operator_new(0x38);
+      GVar19 = DAT_089dbce4;
+      pcVar4->x = 0.0;
+      pcVar4->y_ori = GVar19;
+      pcVar4->y = 0.0;
+      pcVar4->z = 0.0;
+      pcVar4->x_dir = 0.0;
+      pcVar4->y_dir = 0.0;
+      pcVar4->z_dir = 0.0;
+      pcVar4->x_ori = 0.0;
+      pcVar4->z_ori = 0.0;
+      pcVar4->degrees = 0;
+      pgVar5 = operator_new(1);
+      pcVar4->locator = pgVar5;
+      (this_00->super_ship).cam_ship = pcVar4;
+      pcVar4->last_x = 0.0;
+      pcVar4->last_y = 0.0;
+      pcVar4->last_z = 0.0;
+      (this_00->super_ship).status = 0;
+      pgVar5 = operator_new(1);
+      iVar12 = this_00->type;
+      (this_00->super_ship).printer = pgVar5;
+      (this_00->super_ship).step_counter = 0;
+      (this_00->super_ship).step_speed = 0;
+      if (iVar12 == 2) {
+        iVar12 = 0x78;
+LAB_0890e920:
+        (this_00->super_ship).material[0] = iVar12;
+        (this_00->super_ship).material[3] = 0xff;
+        (this_00->super_ship).material[1] = 0;
+        (this_00->super_ship).material[2] = 0;
+      }
+      else {
+        if (iVar12 == 0) {
+          iVar12 = 100;
+          goto LAB_0890e920;
+        }
+        if (iVar12 == 1) {
+          (this_00->super_ship).material[0] = 0xdc;
+          (this_00->super_ship).material[1] = 0x5a;
+          (this_00->super_ship).material[2] = 5;
+          (this_00->super_ship).material[3] = 0xff;
+        }
+        else {
+          iVar12 = rand();
+          (this_00->super_ship).material[0] = iVar12 % 200;
+          iVar12 = rand();
+          (this_00->super_ship).material[1] = iVar12 % 200;
+          iVar12 = rand();
+          (this_00->super_ship).material[3] = 0xff;
+          (this_00->super_ship).material[2] = iVar12 % 200;
+        }
+      }
+      GVar19 = (this_00->super_ship).size;
+      iVar12 = (this_00->super_ship).material[3];
+      ptVar13 = this->ground;
+      this_00->active = true;
+      (this_00->super_ship).effect_size = GVar19;
+      (this_00->super_ship).effect_alpha = iVar12;
+      pnVar17->electron[0] = this_00;
+      ship::init(&this_00->super_ship,ptVar13->map);
+      iVar14 = iVar14 + 1;
+      ppVar10 = this->proton;
+      (pnVar17->electron[0]->super_ship).ident = iVar14;
+      iVar12 = (ppVar10->super_ship).actual_plane;
+      if (iVar14 == local_40) {
+        return;
+      }
+      pnVar17 = (neutron *)&pnVar17->user_stage;
+      piVar15 = piVar15 + 7;
+      piVar16 = piVar16 + 3;
+      if (iVar14 == 0x1e) {
+        return;
+      }
+      goto LAB_0890e690;
+    }
+    iVar12 = rand();
+    iVar7 = this->ground->N_PLANES;
+    iVar12 = iVar12 % iVar7;
+    if (iVar7 == 0) {
+      trap(7);
+    }
+    if (iVar14 == 0) {
+LAB_0890e700:
+      ppVar10 = this->proton;
+      goto LAB_0890e690;
+    }
+    if (iVar14 < 1) break;
+    iVar7 = 0;
+    iVar9 = *(int *)((int)aiStack_38 + iVar1 + 0xc);
+    puVar6 = (undefined1 *)((int)&local_40 + iVar1);
+    while (iVar12 != iVar9) {
+      iVar7 = iVar7 + 1;
+      if (iVar7 == iVar14) goto LAB_0890e700;
+      piVar3 = (int *)(puVar6 + 0x30);
+      puVar6 = puVar6 + 0x1c;
+      iVar9 = *piVar3;
+    }
+    ppVar10 = this->proton;
+    bVar2 = true;
+    iVar12 = (ppVar10->super_ship).actual_plane;
+  } while( true );
+  ppVar10 = this->proton;
+  goto LAB_0890e690;
+}
+
+// ========================================================
+// 0x0890ec88: neutron::load_new_enemy()
+// ========================================================
+// Function: load_new_enemy @ 0890ec88
+
+/* DWARF original prototype: void load_new_enemy(neutron * this) */
+
+void __thiscall neutron::load_new_enemy(neutron *this)
+
+{
+  int iVar1;
+  player *ppVar2;
+  camera *ptr;
+  enemy *ptr_00;
+  neutron *pnVar3;
+  int iVar4;
+  
+  if ((this->game_mode == 2) || (this->game_mode == 0)) {
+                    /* Unresolved local var: int i@[???] */
+    iVar1 = this->N_SHIPS;
+    if (0 < iVar1 + -1) {
+      iVar4 = 0;
+      pnVar3 = this;
+      do {
+        ptr_00 = pnVar3->electron[0];
+        iVar4 = iVar4 + 1;
+        if (ptr_00 != (enemy *)0x0) {
+          ptr = (ptr_00->super_ship).cam_ship;
+          if (ptr != (camera *)0x0) {
+            if (ptr->locator != (glinterface *)0x0) {
+              operator_delete(ptr->locator);
+              ptr->locator = (glinterface *)0x0;
+            }
+            operator_delete(ptr);
+          }
+          operator_delete((ptr_00->super_ship).printer);
+          operator_delete(ptr_00);
+          iVar1 = this->N_SHIPS;
+          pnVar3->electron[0] = (enemy *)0x0;
+        }
+        pnVar3 = (neutron *)&pnVar3->user_stage;
+      } while (iVar4 < iVar1 + -1);
+    }
+    this->N_SHIPS = 2;
+    autoload_eletrons(this,1);
+    this->game_mode = 0;
+    button::load_text(this->interface->buttons[6],"navigation mode",0xff);
+    ppVar2 = this->proton;
+    this->last_charged_electron = 0;
+    this->charged_electrons = 0;
+    this->uncharged_electrons = 0;
+    this->colision = 0;
+    (ppVar2->super_ship).effect_size = 0.0;
+    (ppVar2->super_ship).status = 1;
+    (ppVar2->super_ship).effect_alpha = 100;
+  }
+  return;
+}
+
+// ========================================================
+// 0x0890eda8: neutron::load_proton(bool)
+// ========================================================
+// Function: load_proton @ 0890eda8
+
+/* DWARF original prototype: void load_proton(neutron * this, bool setup_cams) */
+
+void __thiscall neutron::load_proton(neutron *this,bool setup_cams)
+
+{
+  float fVar1;
+  player *ppVar2;
+  camera *pcVar3;
+  glinterface *pgVar4;
+  int iVar5;
+  plane *ppVar6;
+  int iVar7;
+  int iVar8;
+  terrain *ptVar9;
+  GLfloat GVar10;
+  int iVar11;
+  int iVar12;
+  int local_38;
+  int local_34;
+  int local_30;
+  int local_28;
+  
+                    /* Unresolved local var: int[6] PROTON@[???]
+                       Unresolved local var: int[3] CAM@[???] */
+  iVar8 = this->ground->start_on_plane;
+  ppVar6 = this->ground->map[iVar8];
+  if (ppVar6->dead_axis == 1) {
+    local_38 = ppVar6->dead_offset;
+    local_34 = ppVar6->i + 0xc;
+    local_30 = ppVar6->j + 10;
+    iVar7 = ppVar6->face_number;
+    iVar5 = this->actual_stage;
+  }
+  else {
+    if (ppVar6->dead_axis == 2) {
+      local_34 = ppVar6->dead_offset;
+      local_30 = ppVar6->j + 10;
+    }
+    else {
+      local_34 = ppVar6->j + 0xc;
+      local_30 = ppVar6->dead_offset;
+    }
+    local_38 = ppVar6->i + 10;
+    iVar7 = ppVar6->face_number;
+    iVar5 = this->actual_stage;
+  }
+  if (iVar5 == 1000) {
+    local_28 = iVar7 + 1;
+  }
+  else {
+    local_28 = iVar7 + -2;
+  }
+  iVar5 = this->user_color;
+  ppVar2 = operator_new(0x94);
+  ppVar2->start_x = local_38;
+  ppVar2->start_y = local_34;
+  ppVar2->start_z = local_30;
+  ppVar2->start_actual_face = iVar7;
+  ppVar2->start_previous_face = local_28;
+  ppVar2->start_plane = iVar8;
+  ppVar2->user_color = iVar5;
+  if (iVar5 == 0) {
+    (ppVar2->super_ship).material[1] = 100;
+    (ppVar2->super_ship).material[2] = 0xf;
+    (ppVar2->super_ship).material[3] = 0xff;
+    (ppVar2->super_ship).material[0] = 0;
+  }
+  else if (iVar5 == 1) {
+    (ppVar2->super_ship).material[1] = 10;
+    (ppVar2->super_ship).material[2] = 100;
+    (ppVar2->super_ship).material[3] = 0xff;
+    (ppVar2->super_ship).material[0] = 100;
+  }
+  else {
+    (ppVar2->super_ship).material[1] = 0x46;
+    (ppVar2->super_ship).material[2] = 0x96;
+    (ppVar2->super_ship).material[3] = 0xff;
+    (ppVar2->super_ship).material[0] = 0;
+  }
+  iVar5 = ppVar2->start_x;
+  iVar11 = ppVar2->start_y;
+  (ppVar2->super_ship).actual_face = ppVar2->start_actual_face;
+  iVar12 = ppVar2->start_z;
+  iVar7 = ppVar2->start_plane;
+  iVar8 = ppVar2->start_previous_face;
+  (ppVar2->super_ship).size = DAT_089dc360;
+  GVar10 = DAT_089dbcec;
+  (ppVar2->super_ship).last_plane = iVar7;
+  (ppVar2->super_ship).actual_plane = iVar7;
+  (ppVar2->super_ship).x_predict = (float)iVar5;
+  (ppVar2->super_ship).y_predict = (float)iVar11;
+  (ppVar2->super_ship).z_predict = (float)iVar12;
+  (ppVar2->super_ship).x = (float)iVar5;
+  (ppVar2->super_ship).y = (float)iVar11;
+  (ppVar2->super_ship).z = (float)iVar12;
+  (ppVar2->super_ship).previous_face = iVar8;
+  (ppVar2->super_ship).parts = GVar10;
+  (ppVar2->super_ship).plane_path = -1;
+  (ppVar2->super_ship).ident = -1;
+  (ppVar2->super_ship).cue_counter = 0;
+  (ppVar2->super_ship).path_found = false;
+  pcVar3 = operator_new(0x38);
+  GVar10 = DAT_089dbce4;
+  pcVar3->x = 0.0;
+  pcVar3->y = 0.0;
+  pcVar3->z = 0.0;
+  pcVar3->x_dir = 0.0;
+  pcVar3->y_dir = 0.0;
+  pcVar3->z_dir = 0.0;
+  pcVar3->x_ori = 0.0;
+  pcVar3->y_ori = GVar10;
+  pcVar3->z_ori = 0.0;
+  pcVar3->degrees = 0;
+  pgVar4 = operator_new(1);
+  pcVar3->locator = pgVar4;
+  (ppVar2->super_ship).cam_ship = pcVar3;
+  pcVar3->last_x = 0.0;
+  pcVar3->last_y = 0.0;
+  pcVar3->last_z = 0.0;
+  pgVar4 = operator_new(1);
+  (ppVar2->super_ship).printer = pgVar4;
+  fVar1 = DAT_089dc368;
+  (ppVar2->super_ship).last_advance = 1;
+  (ppVar2->super_ship).effect_size = fVar1;
+  (ppVar2->super_ship).status = 1;
+  (ppVar2->super_ship).advance = 1;
+  (ppVar2->super_ship).effect_alpha = 0;
+  (ppVar2->super_ship).step_counter = 0;
+  (ppVar2->super_ship).step_speed = 0;
+  pcVar3 = operator_new(0x38);
+  pcVar3->y_ori = GVar10;
+  pcVar3->x = 0.0;
+  pcVar3->y = 0.0;
+  pcVar3->z = 0.0;
+  pcVar3->x_dir = 0.0;
+  pcVar3->y_dir = 0.0;
+  pcVar3->z_dir = 0.0;
+  pcVar3->x_ori = 0.0;
+  pcVar3->z_ori = 0.0;
+  pcVar3->degrees = 0;
+  pgVar4 = operator_new(1);
+  pcVar3->last_x = 0.0;
+  pcVar3->last_y = 0.0;
+  pcVar3->last_z = 0.0;
+  GVar10 = (ppVar2->super_ship).x;
+  ptVar9 = this->ground;
+  pcVar3->locator = pgVar4;
+  pcVar3->x = GVar10;
+  GVar10 = (ppVar2->super_ship).y;
+  ppVar2->cam_first_person = pcVar3;
+  this->proton = ppVar2;
+  pcVar3->y = GVar10;
+  pcVar3->z = (ppVar2->super_ship).z;
+  ship::init(&ppVar2->super_ship,ptVar9->map);
+  if (setup_cams) {
+    ptVar9 = this->ground;
+    if (this->actual_stage == 1000) {
+      ppVar2 = this->proton;
+      ((ppVar2->super_ship).cam_ship)->y = (float)ptVar9->max_vertex[1];
+    }
+    else {
+      ppVar2 = this->proton;
+      iVar8 = ptVar9->max_vertex[0];
+      iVar7 = ptVar9->max_vertex[1];
+      pcVar3 = (ppVar2->super_ship).cam_ship;
+      pcVar3->z = (float)(ptVar9->max_vertex[2] + 0x14);
+      pcVar3->x = (float)(iVar8 + 0x14);
+      pcVar3->y = (float)(iVar7 + 0x14);
+    }
+  }
+  else {
+    ppVar2 = this->proton;
+  }
+  this->camera_passes = 0;
+  (ppVar2->super_ship).ident = 0;
+  this->move_ship[1] = local_34;
+  this->move_ship[2] = local_30;
+  this->move_ship[0] = local_38;
+  return;
+}
+
+// ========================================================
+// 0x0890f180: neutron::unload_stage()
+// ========================================================
+// Function: unload_stage @ 0890f180
+
+/* DWARF original prototype: void unload_stage(neutron * this) */
+
+void __thiscall neutron::unload_stage(neutron *this)
+
+{
+  camera *pcVar1;
+  piece *ptr;
+  player *ptr_00;
+  enemy *ptr_01;
+  plane *ppVar2;
+  neutron *pnVar3;
+  int iVar4;
+  plane *ptr_02;
+  terrain *ptVar5;
+  int iVar6;
+  terrain *ptr_03;
+  
+  ptr_00 = this->proton;
+  if (ptr_00 != (player *)0x0) {
+    pcVar1 = (ptr_00->super_ship).cam_ship;
+    if (pcVar1 == (camera *)0x0) {
+      pcVar1 = ptr_00->cam_first_person;
+    }
+    else {
+      if (pcVar1->locator != (glinterface *)0x0) {
+        operator_delete(pcVar1->locator);
+        pcVar1->locator = (glinterface *)0x0;
+      }
+      operator_delete(pcVar1);
+      pcVar1 = ptr_00->cam_first_person;
+    }
+    if (pcVar1 != (camera *)0x0) {
+      if (pcVar1->locator != (glinterface *)0x0) {
+        operator_delete(pcVar1->locator);
+        pcVar1->locator = (glinterface *)0x0;
+      }
+      operator_delete(pcVar1);
+    }
+    operator_delete((ptr_00->super_ship).printer);
+    operator_delete(ptr_00);
+    this->proton = (player *)0x0;
+  }
+  iVar4 = 0;
+  pnVar3 = this;
+  do {
+                    /* Unresolved local var: int i@[???] */
+    ptr_01 = pnVar3->electron[0];
+    iVar4 = iVar4 + 1;
+    if (ptr_01 != (enemy *)0x0) {
+      pcVar1 = (ptr_01->super_ship).cam_ship;
+      if (pcVar1 != (camera *)0x0) {
+        if (pcVar1->locator != (glinterface *)0x0) {
+          operator_delete(pcVar1->locator);
+          pcVar1->locator = (glinterface *)0x0;
+        }
+        operator_delete(pcVar1);
+      }
+      operator_delete((ptr_01->super_ship).printer);
+      operator_delete(ptr_01);
+      pnVar3->electron[0] = (enemy *)0x0;
+    }
+    pnVar3 = (neutron *)&pnVar3->user_stage;
+  } while (iVar4 != 0x1e);
+  ptr_03 = this->ground;
+  if (ptr_03 != (terrain *)0x0) {
+    pcVar1 = ptr_03->cam_terrain;
+    if (pcVar1 == (camera *)0x0) {
+      iVar4 = ptr_03->N_PLANES;
+    }
+    else {
+      if (pcVar1->locator != (glinterface *)0x0) {
+        operator_delete(pcVar1->locator);
+        pcVar1->locator = (glinterface *)0x0;
+      }
+      operator_delete(pcVar1);
+                    /* Unresolved local var: void anon_var_0@[???] */
+      iVar4 = ptr_03->N_PLANES;
+    }
+    if (0 < iVar4) {
+      iVar6 = 0;
+      ptVar5 = ptr_03;
+      do {
+        ptVar5 = (terrain *)ptVar5->map;
+        ptr_02 = *(plane **)ptVar5;
+        if (ptr_02 != (plane *)0x0) {
+          iVar4 = 0;
+          ppVar2 = ptr_02;
+          do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+            ptr = ppVar2->pieces[0];
+            iVar4 = iVar4 + 1;
+            if (ptr != (piece *)0x0) {
+              if (ptr->printer != (glinterface *)0x0) {
+                operator_delete(ptr->printer);
+                ptr->printer = (glinterface *)0x0;
+              }
+              operator_delete(ptr);
+              ppVar2->pieces[0] = (piece *)0x0;
+            }
+            ppVar2 = (plane *)&ppVar2->i;
+          } while (iVar4 != 400);
+          operator_delete(ptr_02);
+          iVar4 = ptr_03->N_PLANES;
+          *(plane **)ptVar5 = (plane *)0x0;
+        }
+        iVar6 = iVar6 + 1;
+      } while (iVar6 < iVar4);
+    }
+    operator_delete(ptr_03->printer);
+    operator_delete(ptr_03);
+    this->ground = (terrain *)0x0;
+  }
+  return;
+}
+
+// ========================================================
+// 0x0890f380: neutron::stage_over()
+// ========================================================
+// Function: stage_over @ 0890f380
+
+/* DWARF original prototype: int stage_over(neutron * this) */
+
+int __thiscall neutron::stage_over(neutron *this)
+
+{
+  bool bVar1;
+  undefined3 extraout_var;
+  stage_interface *psVar2;
+  int iVar3;
+  terrain *this_00;
+  camera *ptr;
+  enemy *ptr_00;
+  float unaff_s2;
+  neutron *pnVar4;
+  int unaff_s3;
+  int iVar5;
+  int local_20;
+  undefined4 local_1c;
+  
+  if (this->actual_stage != 2000) {
+    bVar1 = move_camera(this,(this->proton->super_ship).cam_ship,1.4013e-45,(float)this->proton,
+                        unaff_s2,unaff_s3);
+    if (CONCAT31(extraout_var,bVar1) == 0) {
+      iVar3 = this->game_status;
+    }
+    else {
+                    /* Unresolved local var: int[2] buttons@[???] */
+      local_20 = stage_over()::C_32;
+      local_1c = DAT_089df1ec;
+      stage_interface::activate_buttons(this->interface,&local_20,2);
+      if (this->colision == 1) {
+        button::load_text(this->interface->buttons[0x1a],"try again",-1);
+        sound_mixer::play_effect(this->mixer,6);
+        return 8;
+      }
+      if (this->isSolo == false) {
+        if (this->miniatures[this->actual_stage + -1]->high_score < this->score) {
+          psVar2 = this->interface;
+          this->miniatures[this->actual_stage + -1]->high_score = this->score;
+          button::load_text(psVar2->buttons[6],"new high score",0xff);
+          this->save_game = true;
+          sound_mixer::play_effect(this->mixer,9);
+          psVar2 = this->interface;
+        }
+        else {
+          sound_mixer::play_effect(this->mixer,8);
+          psVar2 = this->interface;
+        }
+        button::load_text(psVar2->buttons[0x1a],"load next",-1);
+        if (this->actual_stage == 0x19) {
+          if (this->isSolo == false) {
+            button::load_text(this->interface->buttons[0x1a],"game over",-1);
+            if (this->user_difficulty == 0) {
+              button::load_text(this->interface->buttons[6],"ok, try hard mode",0xff);
+            }
+            else {
+              button::load_text(this->interface->buttons[6],"wow. congratulations",0xff);
+              sound_mixer::play_effect(this->mixer,10);
+              this->game_over = true;
+            }
+          }
+        }
+        else {
+          button::load_text(this->interface->buttons[6],"stage clear",0xff);
+        }
+        iVar3 = 8;
+        this->game_mode = 2;
+      }
+      else {
+        if (this->miniatures[this->actual_stage + -1]->high_score < this->score) {
+          psVar2 = this->interface;
+          this->miniatures[this->actual_stage + -1]->high_score = this->score;
+          button::load_text(psVar2->buttons[6],"new high score",0xff);
+          this->save_game = true;
+          sound_mixer::play_effect(this->mixer,9);
+          psVar2 = this->interface;
+        }
+        else {
+          sound_mixer::play_effect(this->mixer,8);
+          psVar2 = this->interface;
+        }
+        button::load_text(psVar2->buttons[0x1a]," restart ",-1);
+        iVar3 = 8;
+      }
+    }
+    return iVar3;
+  }
+  if (this->colision == 1) {
+    if ((this->proton->super_ship).status == 6) {
+      return this->game_status;
+    }
+    iVar3 = this->N_SHIPS;
+  }
+  else if (this->colision == 2) {
+    if ((this->electron[0]->super_ship).status == 6) {
+      return this->game_status;
+    }
+    iVar3 = this->N_SHIPS;
+  }
+  else {
+                    /* Unresolved local var: int i@[???] */
+    iVar3 = this->N_SHIPS;
+  }
+  if (0 < iVar3 + -1) {
+    iVar5 = 0;
+    pnVar4 = this;
+    do {
+      ptr_00 = pnVar4->electron[0];
+      iVar5 = iVar5 + 1;
+      if (ptr_00 != (enemy *)0x0) {
+        ptr = (ptr_00->super_ship).cam_ship;
+        if (ptr != (camera *)0x0) {
+          if (ptr->locator != (glinterface *)0x0) {
+            operator_delete(ptr->locator);
+            ptr->locator = (glinterface *)0x0;
+          }
+          operator_delete(ptr);
+        }
+        operator_delete((ptr_00->super_ship).printer);
+        operator_delete(ptr_00);
+        iVar3 = this->N_SHIPS;
+        pnVar4->electron[0] = (enemy *)0x0;
+      }
+      pnVar4 = (neutron *)&pnVar4->user_stage;
+    } while (iVar5 < iVar3 + -1);
+  }
+  this->N_SHIPS = 1;
+  terrain::navigation_mode(this->ground);
+  this_00 = this->ground;
+  terrain::change_color
+            (this_00,this_00->material[0],this_00->material[1],this_00->material[2],(int)unaff_s2);
+  this->game_mode = 2;
+  return 0;
+}
+
+// ========================================================
+// 0x0890f74c: neutron::load_stage(int, bool)
+// ========================================================
+// Function: load_stage @ 0890f74c
+
+/* DWARF original prototype: void load_stage(neutron * this, int stage, bool setup_cams) */
+
+void __thiscall neutron::load_stage(neutron *this,int stage,bool setup_cams)
+
+{
+  GLfloat GVar1;
+  terrain *ptVar2;
+  glinterface *pgVar3;
+  camera *pcVar4;
+  terrain *ptVar5;
+  int iVar6;
+  miniature *pmVar7;
+  int unaff_s4;
+  
+  this->game_mode = 0;
+  this->actual_stage = stage;
+  if (stage == 1000) {
+    ptVar2 = operator_new(0x1400);
+    ptVar2->N_PLANES = 0x5a;
+    iVar6 = 0;
+    ptVar5 = ptVar2;
+    do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+      iVar6 = iVar6 + 1;
+      ptVar5->map[0] = (plane *)0x0;
+      ptVar5->painted[0][0] = false;
+      ptVar5->painted[0][1] = false;
+      ptVar5->painted[0][2] = false;
+      ptVar5->painted[0][3] = false;
+      ptVar5 = (terrain *)ptVar5->map;
+    } while (iVar6 < 0x5a);
+    ptVar2->is_clear = true;
+    ptVar2->ground_material[2] = 0xff;
+    ptVar2->ground_material[0] = 0xff;
+    ptVar2->ground_material[1] = 0xff;
+    ptVar2->material[3] = 100;
+    ptVar2->material[0] = 100;
+    ptVar2->material[1] = 100;
+    ptVar2->material[2] = 100;
+    ptVar2->ground_material[3] = 0x1e;
+    ptVar2->max_vertex[0] = 0;
+    ptVar2->max_vertex[1] = 0;
+    ptVar2->max_vertex[2] = 0;
+    pgVar3 = operator_new(1);
+    ptVar2->printer = pgVar3;
+    ptVar2->status = 4;
+    ptVar2->painted_bones = 0;
+    ptVar2->painted_planes = 0;
+    ptVar2->time = 0;
+    pcVar4 = operator_new(0x38);
+    pcVar4->x = 0.0;
+    pcVar4->y = 0.0;
+    GVar1 = DAT_089dbce4;
+    pcVar4->z = 0.0;
+    pcVar4->x_dir = 0.0;
+    pcVar4->y_ori = GVar1;
+    pcVar4->y_dir = 0.0;
+    pcVar4->z_dir = 0.0;
+    pcVar4->x_ori = 0.0;
+    pcVar4->z_ori = 0.0;
+    pcVar4->degrees = 0;
+    pgVar3 = operator_new(1);
+    pcVar4->locator = pgVar3;
+    ptVar2->start_on_plane = -1;
+    ptVar2->cam_terrain = pcVar4;
+    this->ground = ptVar2;
+    pcVar4->last_x = 0.0;
+    pcVar4->last_y = 0.0;
+    pcVar4->last_z = 0.0;
+    terrain::create_from_array(ptVar2,0xe,::::MENU_DATA);
+    terrain::init(this->ground,0,0,0,unaff_s4);
+    this->ground->status = 1;
+    this->N_SHIPS = 1;
+    load_proton(this,setup_cams);
+    return;
+  }
+  if (stage == 2000) {
+    ptVar2 = operator_new(0x1400);
+    ptVar2->N_PLANES = 0x5a;
+    iVar6 = 0;
+    ptVar5 = ptVar2;
+    do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+      iVar6 = iVar6 + 1;
+      ptVar5->map[0] = (plane *)0x0;
+      ptVar5->painted[0][0] = false;
+      ptVar5->painted[0][1] = false;
+      ptVar5->painted[0][2] = false;
+      ptVar5->painted[0][3] = false;
+      ptVar5 = (terrain *)ptVar5->map;
+    } while (iVar6 < 0x5a);
+    ptVar2->is_clear = true;
+    ptVar2->ground_material[2] = 0xff;
+    ptVar2->ground_material[0] = 0xff;
+    ptVar2->ground_material[1] = 0xff;
+    ptVar2->material[3] = 100;
+    ptVar2->material[0] = 100;
+    ptVar2->material[1] = 100;
+    ptVar2->material[2] = 100;
+    ptVar2->ground_material[3] = 0x1e;
+    ptVar2->max_vertex[0] = 0;
+    ptVar2->max_vertex[1] = 0;
+    ptVar2->max_vertex[2] = 0;
+    pgVar3 = operator_new(1);
+    ptVar2->printer = pgVar3;
+    ptVar2->status = 4;
+    ptVar2->painted_bones = 0;
+    ptVar2->painted_planes = 0;
+    ptVar2->time = 0;
+    pcVar4 = operator_new(0x38);
+    pcVar4->x = 0.0;
+    pcVar4->y = 0.0;
+    GVar1 = DAT_089dbce4;
+    pcVar4->z = 0.0;
+    pcVar4->x_dir = 0.0;
+    pcVar4->y_ori = GVar1;
+    pcVar4->y_dir = 0.0;
+    pcVar4->z_dir = 0.0;
+    pcVar4->x_ori = 0.0;
+    pcVar4->z_ori = 0.0;
+    pcVar4->degrees = 0;
+    pgVar3 = operator_new(1);
+    pmVar7 = this->miniatures[0];
+    pcVar4->locator = pgVar3;
+    ptVar2->start_on_plane = -1;
+    ptVar2->cam_terrain = pcVar4;
+    this->ground = ptVar2;
+    pcVar4->last_x = 0.0;
+    pcVar4->last_y = 0.0;
+    pcVar4->last_z = 0.0;
+    terrain::create_from_miniature(ptVar2,pmVar7);
+    terrain::init(this->ground,0,0,0,unaff_s4);
+    this->N_SHIPS = 1;
+    this->game_mode = 2;
+    load_proton(this,setup_cams);
+    return;
+  }
+  if (stage == 3000) {
+    load_miniatures(this);
+    this->N_SHIPS = 0;
+    return;
+  }
+  if (this->user_difficulty == 0) {
+    this->N_SHIPS = this->miniatures[stage + -1]->cubes + 1;
+  }
+  else {
+    this->N_SHIPS = this->miniatures[stage + -1]->cubes * 2 + 1;
+  }
+  ptVar2 = operator_new(0x1400);
+  ptVar2->N_PLANES = 0x5a;
+  iVar6 = 0;
+  ptVar5 = ptVar2;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar6 = iVar6 + 1;
+    ptVar5->map[0] = (plane *)0x0;
+    ptVar5->painted[0][0] = false;
+    ptVar5->painted[0][1] = false;
+    ptVar5->painted[0][2] = false;
+    ptVar5->painted[0][3] = false;
+    ptVar5 = (terrain *)ptVar5->map;
+  } while (iVar6 < 0x5a);
+  ptVar2->is_clear = true;
+  ptVar2->ground_material[2] = 0xff;
+  ptVar2->ground_material[0] = 0xff;
+  ptVar2->ground_material[1] = 0xff;
+  ptVar2->material[3] = 100;
+  ptVar2->material[0] = 100;
+  ptVar2->material[1] = 100;
+  ptVar2->material[2] = 100;
+  ptVar2->ground_material[3] = 0x1e;
+  ptVar2->max_vertex[0] = 0;
+  ptVar2->max_vertex[1] = 0;
+  ptVar2->max_vertex[2] = 0;
+  pgVar3 = operator_new(1);
+  ptVar2->printer = pgVar3;
+  ptVar2->status = 4;
+  ptVar2->painted_bones = 0;
+  ptVar2->painted_planes = 0;
+  ptVar2->time = 0;
+  pcVar4 = operator_new(0x38);
+  pcVar4->x = 0.0;
+  pcVar4->y = 0.0;
+  pcVar4->y_ori = DAT_089dbce4;
+  pcVar4->z = 0.0;
+  pcVar4->x_dir = 0.0;
+  pcVar4->y_dir = 0.0;
+  pcVar4->z_dir = 0.0;
+  pcVar4->x_ori = 0.0;
+  pcVar4->z_ori = 0.0;
+  pcVar4->degrees = 0;
+  pgVar3 = operator_new(1);
+  pmVar7 = this->miniatures[stage + -1];
+  pcVar4->locator = pgVar3;
+  ptVar2->start_on_plane = -1;
+  ptVar2->cam_terrain = pcVar4;
+  pcVar4->last_x = 0.0;
+  pcVar4->last_y = 0.0;
+  pcVar4->last_z = 0.0;
+  this->ground = ptVar2;
+  terrain::create_from_miniature(ptVar2,pmVar7);
+  if (this->miniatures[stage + -1]->cubes < 8) {
+    terrain::init(this->ground,0,0,0,unaff_s4);
+    load_proton(this,setup_cams);
+    autoload_eletrons(this,this->N_SHIPS + -1);
+    return;
+  }
+  terrain::init(this->ground,0,0,0,unaff_s4);
+  load_proton(this,setup_cams);
+  autoload_eletrons(this,this->N_SHIPS + -1);
+  return;
+}
+
+// ========================================================
+// 0x0890fc90: neutron::change_stage(int, bool)
+// ========================================================
+// Function: change_stage @ 0890fc90
+
+/* WARNING: Removing unreachable block (ram,0x0890fe98) */
+/* WARNING: Removing unreachable block (ram,0x0890fe68) */
+/* WARNING: Removing unreachable block (ram,0x0890fe3c) */
+/* WARNING: Removing unreachable block (ram,0x0890fe1c) */
+/* WARNING: Removing unreachable block (ram,0x0890fd88) */
+/* WARNING: Removing unreachable block (ram,0x0890fffc) */
+/* WARNING: Removing unreachable block (ram,0x0890fdac) */
+/* WARNING: Removing unreachable block (ram,0x0890fe2c) */
+/* WARNING: Removing unreachable block (ram,0x0890fe4c) */
+/* WARNING: Removing unreachable block (ram,0x0890fe80) */
+/* WARNING: Removing unreachable block (ram,0x0890feb0) */
+/* DWARF original prototype: int change_stage(neutron * this, int stage, bool show_it) */
+
+int __thiscall neutron::change_stage(neutron *this,int stage,bool show_it)
+
+{
+  float fVar1;
+  player *ppVar2;
+  int iVar3;
+  int *piVar4;
+  terrain *ptVar5;
+  sound_mixer *psVar6;
+  button *pbVar7;
+  stage_interface *psVar8;
+  int iVar9;
+  int unaff_retaddr;
+  
+                    /* Unresolved local var: int * buttons@[???] */
+  restart(this);
+  unload_stage(this);
+  load_stage(this,stage,show_it);
+  if (stage == 1000) {
+    if (this->user_sound == false) {
+      psVar8 = this->interface;
+    }
+    else {
+      sound_mixer::play_music(this->mixer,0);
+      psVar8 = this->interface;
+    }
+    pbVar7 = psVar8->buttons[0x1e];
+    this->vision = 1;
+    button::load_text(pbVar7,"tap to select or drag to move",-1);
+    return 0xb;
+  }
+  if (stage == 3000) {
+    this->vision = 0;
+    piVar4 = operator_new___(0x18);
+    psVar8 = this->interface;
+    *piVar4 = 0x1b;
+    piVar4[1] = 0x1c;
+    piVar4[2] = 0xd;
+    piVar4[3] = 0x1d;
+    piVar4[5] = 0x23;
+    piVar4[4] = 0x22;
+    stage_interface::activate_buttons(psVar8,piVar4,6);
+    operator_delete___(piVar4);
+    button::load_text(this->interface->buttons[6],"cube",0xff);
+    on_miniature_change(this);
+    return 9;
+  }
+                    /* Unresolved local var: int a_e@[???]
+                       Unresolved local var: int b_e@[???]
+                       Unresolved local var: int a@[???]
+                       Unresolved local var: int b@[???]
+                       Unresolved local var: int c@[???]
+                       Unresolved local var: int d@[???]
+                       Unresolved local var: int e@[???]
+                       Unresolved local var: int f@[???] */
+  if (this->user_sound != false) {
+    psVar6 = this->mixer;
+    iVar3 = rand();
+    sound_mixer::play_music(psVar6,iVar3 % 3 + 1);
+  }
+  if (stage == 2000) {
+    piVar4 = operator_new___(0x18);
+    psVar8 = this->interface;
+    *piVar4 = 4;
+    piVar4[1] = 5;
+    piVar4[2] = 0xd;
+    piVar4[3] = 0xe;
+    piVar4[4] = 0x13;
+    piVar4[5] = 0x14;
+    stage_interface::activate_buttons(psVar8,piVar4,6);
+    button::load_text(this->interface->buttons[6],"welcome to trainer stage",0xff);
+    operator_delete___(piVar4);
+    iVar3 = this->N_SHIPS;
+  }
+  else {
+    piVar4 = operator_new___(0x14);
+    psVar8 = this->interface;
+    *piVar4 = 4;
+    piVar4[1] = 5;
+    piVar4[2] = 0x13;
+    piVar4[3] = 0x14;
+    piVar4[4] = 0xd;
+    stage_interface::activate_buttons(psVar8,piVar4,5);
+    button::load_text(this->interface->buttons[6],"get ready",0xff);
+    this->tutorial_step = -1;
+    operator_delete___(piVar4);
+    if (stage == 1) {
+      if (this->isTutorial == false) {
+        iVar3 = this->N_SHIPS;
+      }
+      else {
+        pbVar7 = this->interface->buttons[6];
+        this->tutorial_step = 0;
+        button::load_text(pbVar7,"welcome to neutron|s tutorial",0xff);
+        button::load_text(this->interface->buttons[0x1e],"next",-1);
+        iVar3 = this->N_SHIPS;
+      }
+    }
+    else {
+      iVar3 = this->N_SHIPS;
+    }
+  }
+  iVar3 = (iVar3 + -1) % 100;
+  psVar8 = this->interface;
+  this->n_enemies = this->enemies_buffer;
+  this->enemies_buffer[1] = (char)(iVar3 % 10) + '0';
+  this->enemies_buffer[0] = (char)(iVar3 / 10) + '0';
+  button::load_text(psVar8->buttons[3],this->enemies_buffer,-1);
+  iVar9 = this->ground->N_PLANES;
+  iVar3 = this->ground->map[0]->side_size;
+  psVar8 = this->interface;
+  this->n_score = this->score_buffer;
+  iVar3 = iVar3 * iVar3 * iVar9;
+  this->score = iVar3;
+  this->score_buffer[0] = (char)(iVar3 / 100000) + '0';
+  this->score_buffer[3] = (char)((iVar3 % 1000) / 100) + '0';
+  this->score_buffer[1] = (char)((iVar3 % 100000) / 10000) + '0';
+  this->score_buffer[2] = (char)((iVar3 % 10000) / 1000) + '0';
+  this->score_buffer[5] = (char)((iVar3 % 100) % 10) + '0';
+  this->score_buffer[4] = (char)((iVar3 % 100) / 10) + '0';
+  button::load_text(psVar8->buttons[1],this->score_buffer,-1);
+  this->vision = 1;
+  fVar1 = DAT_089dc368;
+  if (!show_it) {
+    ppVar2 = this->proton;
+    ptVar5 = this->ground;
+    psVar6 = this->mixer;
+    (ppVar2->super_ship).status = 3;
+    ptVar5->status = 1;
+    ptVar5->painted_planes = 0;
+    ptVar5->painted_bones = 0;
+    (ppVar2->super_ship).effect_size = fVar1;
+    this->time = 0x19;
+    this->go_status = 0;
+    sound_mixer::play_effect(psVar6,0xb);
+    return 4;
+  }
+  ptVar5 = this->ground;
+  psVar6 = this->mixer;
+  ptVar5->status = 4;
+  ptVar5->painted_planes = 1;
+  ptVar5->painted_bones = 1;
+  sound_mixer::play_effect(psVar6,3);
+  ppVar2 = this->proton;
+  terrain::change_color
+            (this->ground,(ppVar2->super_ship).material[0],(ppVar2->super_ship).material[1],
+             (ppVar2->super_ship).material[2],unaff_retaddr);
+  return 5;
+}
+
+// ========================================================
+// 0x08910178: neutron::next_level()
+// ========================================================
+// Function: next_level @ 08910178
+
+/* DWARF original prototype: int next_level(neutron * this) */
+
+int __thiscall neutron::next_level(neutron *this)
+
+{
+  int iVar1;
+  
+  if ((this->isSolo == false) && (this->colision != 1)) {
+    iVar1 = this->actual_stage + 1;
+    if (this->actual_stage < 0x19) {
+      this->actual_stage = iVar1;
+      if (this->user_stage < iVar1) {
+        this->save_game = true;
+        this->user_stage = iVar1;
+        iVar1 = change_stage(this,this->actual_stage,true);
+        return iVar1;
+      }
+    }
+    else {
+      this->actual_stage = 1;
+    }
+    iVar1 = change_stage(this,this->actual_stage,true);
+    return iVar1;
+  }
+  iVar1 = change_stage(this,this->actual_stage,false);
+  return iVar1;
+}
+
+// ========================================================
+// 0x089101ec: neutron::step_tutorial()
+// ========================================================
+// Function: step_tutorial @ 089101ec
+
+/* DWARF original prototype: void step_tutorial(neutron * this) */
+
+void __thiscall neutron::step_tutorial(neutron *this)
+
+{
+  int iVar1;
+  int *id_enableds;
+  stage_interface *psVar2;
+  char *word;
+  
+                    /* Unresolved local var: int * buttons@[???] */
+  iVar1 = this->tutorial_step + 1;
+  this->tutorial_step = iVar1;
+  switch(iVar1) {
+  default:
+    return;
+  case 1:
+    psVar2 = this->interface;
+    word = "you are this blinking cube";
+    break;
+  case 2:
+    psVar2 = this->interface;
+    word = "look, you have a tail";
+    break;
+  case 3:
+    psVar2 = this->interface;
+    word = "and this colored squares are your guides";
+    break;
+  case 4:
+    psVar2 = this->interface;
+    word = "red means pod|s left. blue means pod|s right";
+    break;
+  case 5:
+    id_enableds = operator_new___(0xc);
+    psVar2 = this->interface;
+    *id_enableds = 0x1e;
+    id_enableds[2] = 4;
+    id_enableds[1] = 0xd;
+    stage_interface::activate_buttons(psVar2,id_enableds,3);
+    button::load_text(this->interface->buttons[6],"tap left part of the screen to turn left",0xff);
+    goto LAB_089102ec;
+  case 6:
+    id_enableds = operator_new___(0xc);
+    psVar2 = this->interface;
+    *id_enableds = 0x1e;
+    id_enableds[2] = 5;
+    id_enableds[1] = 0xd;
+    stage_interface::activate_buttons(psVar2,id_enableds,3);
+    button::load_text(this->interface->buttons[6],"now try with right part to turn right",0xff);
+    goto LAB_089102ec;
+  case 7:
+    id_enableds = operator_new___(0x10);
+    psVar2 = this->interface;
+    *id_enableds = 0x1e;
+    id_enableds[1] = 0xd;
+    id_enableds[2] = 4;
+    id_enableds[3] = 5;
+    stage_interface::activate_buttons(psVar2,id_enableds,4);
+    button::load_text(this->interface->buttons[6],"ok, good. practice a beat ...",0xff);
+    goto LAB_089102ec;
+  case 8:
+    psVar2 = this->interface;
+    word = "navigation mode done, let|s see combat mode";
+    break;
+  case 9:
+    psVar2 = this->interface;
+    word = "now, i will load an enemy, tap next to do it";
+    break;
+  case 10:
+    id_enableds = operator_new___(0xc);
+    psVar2 = this->interface;
+    *id_enableds = 0xd;
+    id_enableds[2] = 5;
+    id_enableds[1] = 4;
+    stage_interface::activate_buttons(psVar2,id_enableds,3);
+    load_new_enemy(this);
+    button::load_text(this->interface->buttons[6],"enemy|s location is colored ...",0xff);
+    goto LAB_089102ec;
+  case 0xb:
+    id_enableds = operator_new___(0x10);
+    psVar2 = this->interface;
+    *id_enableds = 0x1e;
+    id_enableds[1] = 0xd;
+    id_enableds[2] = 4;
+    id_enableds[3] = 5;
+    stage_interface::activate_buttons(psVar2,id_enableds,4);
+    button::load_text(this->interface->buttons[6],"there it is, he also has a tail ...",0xff);
+    goto LAB_089102ec;
+  case 0xc:
+    psVar2 = this->interface;
+    word = "his tail is growing, also your|s ...";
+    break;
+  case 0xe:
+    psVar2 = this->interface;
+    word = "your mission: don|t crash to any tail";
+    break;
+  case 0xf:
+    psVar2 = this->interface;
+    word = "tap next when ready to fight";
+    break;
+  case 0x10:
+    id_enableds = operator_new___(0xc);
+    psVar2 = this->interface;
+    *id_enableds = 0xd;
+    id_enableds[2] = 5;
+    id_enableds[1] = 4;
+    stage_interface::activate_buttons(psVar2,id_enableds,3);
+    button::load_text(this->interface->buttons[6],"combat mode",0xff);
+    goto LAB_089102ec;
+  case 0x11:
+    id_enableds = operator_new___(8);
+    psVar2 = this->interface;
+    *id_enableds = 0x1e;
+    id_enableds[1] = 0xd;
+    stage_interface::activate_buttons(psVar2,id_enableds,2);
+    if (this->colision == 1) {
+      button::load_text(this->interface->buttons[6],"you lose, best luck next time",0xff);
+    }
+    else {
+      button::load_text(this->interface->buttons[6],"you win, congratulations",0xff);
+    }
+    goto LAB_089102ec;
+  case 0x12:
+    button::load_text(this->interface->buttons[6],"remeber, left and right are relatives ...",0xff);
+    button::load_text(this->interface->buttons[0x1e],"load stage one",0xff);
+    restart(this);
+    return;
+  case 0x13:
+    id_enableds = operator_new___(0x14);
+    psVar2 = this->interface;
+    *id_enableds = 4;
+    id_enableds[1] = 5;
+    id_enableds[2] = 0x13;
+    id_enableds[3] = 0x14;
+    id_enableds[4] = 0xd;
+    stage_interface::activate_buttons(psVar2,id_enableds,5);
+    this->tutorial_step = -1;
+    this->isTutorial = false;
+    iVar1 = change_stage(this,1,true);
+    this->game_status = iVar1;
+LAB_089102ec:
+    operator_delete___(id_enableds);
+    return;
+  }
+  button::load_text(psVar2->buttons[6],word,0xff);
+  return;
+}
+
+// ========================================================
+// 0x08910634: neutron::tutorial()
+// ========================================================
+// Function: tutorial @ 08910634
+
+/* DWARF original prototype: int tutorial(neutron * this) */
+
+int __thiscall neutron::tutorial(neutron *this)
+
+{
+  float fVar1;
+  int iVar2;
+  player *ppVar3;
+  enemy *peVar4;
+  int in_stack_00000000;
+  
+                    /* Unresolved local var: int piece_type@[???] */
+  fVar1 = DAT_089dc368;
+  switch(this->tutorial_step) {
+  case 0:
+  case 0xb:
+  case 0xd:
+  case 0xe:
+  case 0xf:
+  case 0x11:
+  case 0x12:
+    goto switchD_08910668_caseD_0;
+  case 1:
+    ppVar3 = this->proton;
+    if ((ppVar3->super_ship).status != 3) {
+      (ppVar3->super_ship).status = 3;
+      (ppVar3->super_ship).effect_alpha = 0;
+      (ppVar3->super_ship).effect_size = fVar1;
+    }
+    goto switchD_08910668_caseD_0;
+  default:
+    player::move(this->proton,this->ground->map,this->game_mode);
+    ppVar3 = this->proton;
+    if ((ppVar3->super_ship).actual_plane == (ppVar3->super_ship).last_plane) {
+      return this->game_status;
+    }
+    if ((ppVar3->super_ship).last_advance == (ppVar3->super_ship).advance) {
+      return this->game_status;
+    }
+    sound_mixer::play_effect(this->mixer,7);
+    return this->game_status;
+  case 10:
+    player::move(this->proton,this->ground->map,this->game_mode);
+    ppVar3 = this->proton;
+    iVar2 = (ppVar3->super_ship).actual_plane;
+    if (iVar2 == (ppVar3->super_ship).last_plane) {
+      peVar4 = this->electron[0];
+    }
+    else {
+      if ((ppVar3->super_ship).last_advance == (ppVar3->super_ship).advance) {
+        peVar4 = this->electron[0];
+      }
+      else {
+        sound_mixer::play_effect(this->mixer,7);
+        ppVar3 = this->proton;
+        peVar4 = this->electron[0];
+      }
+      iVar2 = (ppVar3->super_ship).actual_plane;
+    }
+    if (iVar2 == (peVar4->super_ship).actual_plane) {
+      if ((peVar4->super_ship).status == 0) {
+        this->game_mode = 1;
+        terrain::combat_mode(this->ground);
+        peVar4 = this->electron[0];
+        terrain::change_color
+                  (this->ground,(peVar4->super_ship).material[0],(peVar4->super_ship).material[1],
+                   (peVar4->super_ship).material[2],in_stack_00000000);
+        peVar4 = this->electron[0];
+        (peVar4->super_ship).status = 1;
+        goto LAB_089106cc;
+      }
+      iVar2 = (peVar4->super_ship).status;
+    }
+    else {
+LAB_089106cc:
+      iVar2 = (peVar4->super_ship).status;
+    }
+    if (iVar2 == 1) {
+      ppVar3 = this->proton;
+LAB_089108a4:
+      enemy::move(peVar4,this->ground->map,(ppVar3->super_ship).actual_face);
+      iVar2 = this->tutorial_counter + 1;
+      this->tutorial_counter = iVar2;
+    }
+    else {
+      iVar2 = this->tutorial_counter;
+    }
+    break;
+  case 0xc:
+    player::move(this->proton,this->ground->map,this->game_mode);
+    ppVar3 = this->proton;
+    if ((ppVar3->super_ship).actual_plane == (ppVar3->super_ship).last_plane) {
+      peVar4 = this->electron[0];
+    }
+    else if ((ppVar3->super_ship).last_advance == (ppVar3->super_ship).advance) {
+      peVar4 = this->electron[0];
+    }
+    else {
+      sound_mixer::play_effect(this->mixer,7);
+      peVar4 = this->electron[0];
+    }
+    iVar2 = this->tutorial_counter;
+    if ((peVar4->super_ship).status == 1) {
+      if (iVar2 == 0) {
+        ship::change_direction(&peVar4->super_ship,1);
+        peVar4 = this->electron[0];
+      }
+      ppVar3 = this->proton;
+      goto LAB_089108a4;
+    }
+    break;
+  case 0x10:
+    iVar2 = player::move(this->proton,this->ground->map,this->game_mode);
+    ppVar3 = this->proton;
+    if (((ppVar3->super_ship).actual_plane != (ppVar3->super_ship).last_plane) &&
+       ((ppVar3->super_ship).last_advance != (ppVar3->super_ship).advance)) {
+      sound_mixer::play_effect(this->mixer,7);
+    }
+    if (iVar2 == 0) {
+      ppVar3 = this->proton;
+    }
+    else {
+      terrain::fire_up_cue(this->ground,0);
+      this->colision = 1;
+      (this->proton->super_ship).status = 6;
+      step_tutorial(this);
+      sound_mixer::play_effect(this->mixer,4);
+      ppVar3 = this->proton;
+    }
+    iVar2 = enemy::move(this->electron[0],this->ground->map,(ppVar3->super_ship).actual_face);
+    if (iVar2 == 0) {
+      return this->game_status;
+    }
+    terrain::fire_up_cue(this->ground,1);
+    this->colision = 2;
+    (this->electron[0]->super_ship).status = 6;
+    step_tutorial(this);
+    sound_mixer::play_effect(this->mixer,4);
+    return this->game_status;
+  }
+  if (iVar2 < 2) {
+    return this->game_status;
+  }
+  step_tutorial(this);
+  this->tutorial_counter = 0;
+switchD_08910668_caseD_0:
+  return this->game_status;
+}
+
+// ========================================================
+// 0x0891094c: neutron::main_loop()
+// ========================================================
+// Function: main_loop @ 0891094c
+
+/* DWARF original prototype: void main_loop(neutron * this) */
+
+void __thiscall neutron::main_loop(neutron *this)
+
+{
+  int iVar1;
+  
+  iVar1 = this->game_status;
+  this->speed = DAT_089de254;
+  if (iVar1 == 8) {
+    iVar1 = level_complete(this);
+    this->game_status = iVar1;
+  }
+  else if (iVar1 < 9) {
+    if (iVar1 == 3) {
+      iVar1 = next_level(this);
+      this->game_status = iVar1;
+      return;
+    }
+    if (iVar1 < 4) {
+      if (iVar1 == 0) {
+        if (this->user_difficulty == 1) {
+          this->speed = DAT_089de25c;
+        }
+        else {
+          this->speed = DAT_089de258;
+        }
+        iVar1 = run(this);
+        this->game_status = iVar1;
+      }
+      else if (iVar1 == 1) {
+        iVar1 = stage_over(this);
+        this->game_status = iVar1;
+      }
+    }
+    else if (iVar1 == 5) {
+      iVar1 = show_stage(this);
+      this->game_status = iVar1;
+    }
+    else if (iVar1 < 5) {
+      iVar1 = delay(this,this->go_status,this->time);
+      this->game_status = iVar1;
+    }
+    else if (iVar1 == 6) {
+      iVar1 = wait_option(this);
+      this->game_status = iVar1;
+    }
+  }
+  else {
+    if (iVar1 == 0xb) {
+      iVar1 = change_option(this);
+      this->game_status = iVar1;
+      return;
+    }
+    if (iVar1 < 0xc) {
+      if (iVar1 == 9) {
+        iVar1 = show_miniatures(this);
+        this->game_status = iVar1;
+      }
+      else if (iVar1 == 10) {
+        this->speed = DAT_089de258;
+        iVar1 = tutorial(this);
+        this->game_status = iVar1;
+      }
+    }
+    else if (iVar1 == 0xd) {
+      iVar1 = show_staff(this);
+      this->game_status = iVar1;
+    }
+    else if (iVar1 < 0xd) {
+      iVar1 = are_you_sure(this);
+      this->game_status = iVar1;
+    }
+    else if (iVar1 == 1000) {
+      iVar1 = game_intro(this);
+      this->game_status = iVar1;
+    }
+  }
+  return;
+}
+
+// ========================================================
+// 0x08910b20: neutron::execute_action(int)
+// ========================================================
+// Function: execute_action @ 08910b20
+
+/* DWARF original prototype: void execute_action(neutron * this, int action) */
+
+void __thiscall neutron::execute_action(neutron *this,int action)
+
+{
+  bool bVar1;
+  int iVar2;
+  int *id_enableds;
+  stage_interface *psVar3;
+  int iVar4;
+  sound_mixer *psVar5;
+  button *pbVar6;
+  player *this_00;
+  
+                    /* Unresolved local var: int * buttons@[???] */
+  switch(action) {
+  case 0:
+    this_00 = this->proton;
+    iVar2 = 0;
+    goto LAB_08910ff4;
+  case 1:
+    this_00 = this->proton;
+    iVar2 = 1;
+LAB_08910ff4:
+    ship::change_direction(&this_00->super_ship,iVar2);
+    return;
+  case 2:
+    menu_move(this,3);
+    psVar5 = this->mixer;
+    iVar2 = 1;
+    break;
+  case 3:
+  case 0xd:
+    menu_move(this,2);
+    psVar5 = this->mixer;
+    iVar2 = 1;
+    break;
+  default:
+    return;
+  case 5:
+    iVar2 = 2000;
+    goto LAB_08911034;
+  case 6:
+    menu_move(this,0);
+    psVar5 = this->mixer;
+    iVar2 = 2;
+    break;
+  case 7:
+    menu_move(this,1);
+    psVar5 = this->mixer;
+    iVar2 = 2;
+    break;
+  case 8:
+    if ((this->game_status == 0) && (this->actual_stage != 2000)) {
+      id_enableds = operator_new___(8);
+      psVar3 = this->interface;
+      *id_enableds = 0x25;
+      id_enableds[1] = 0x24;
+      stage_interface::activate_buttons(psVar3,id_enableds,2);
+      this->game_status = 0xc;
+LAB_089110c8:
+      psVar5 = this->mixer;
+    }
+    else {
+      id_enableds = operator_new___(0xc);
+      psVar3 = this->interface;
+      *id_enableds = 7;
+      id_enableds[1] = 0xb;
+      id_enableds[2] = 0xc;
+      stage_interface::activate_buttons(psVar3,id_enableds,3);
+      bVar1 = this->isSolo;
+      this->interface->actual_option = 0;
+      if (bVar1 != false) {
+        this->isSolo = false;
+      }
+      if (-1 < this->tutorial_step) {
+        this->tutorial_step = -1;
+      }
+      iVar2 = change_stage(this,1000,true);
+      this->game_status = iVar2;
+      if (this->user_sound == false) goto LAB_089110c8;
+      sound_mixer::play_music(this->mixer,0);
+      psVar5 = this->mixer;
+    }
+    sound_mixer::play_effect(psVar5,1);
+    goto LAB_08910f34;
+  case 9:
+    load_new_enemy(this);
+    psVar5 = this->mixer;
+    iVar2 = 1;
+    break;
+  case 10:
+    iVar2 = 1;
+    this->isTutorial = true;
+    goto LAB_08911034;
+  case 0xb:
+    iVar2 = this->user_stage;
+    goto LAB_08911034;
+  case 0xc:
+    load_miniatures(this);
+    iVar2 = 3000;
+LAB_08911034:
+    iVar4 = change_stage(this,iVar2,true);
+    psVar5 = this->mixer;
+    iVar2 = 1;
+    this->game_status = iVar4;
+    break;
+  case 0xe:
+    menu_move(this,3);
+    psVar5 = this->mixer;
+    iVar2 = 1;
+    this->save_game = true;
+    break;
+  case 0xf:
+    psVar3 = this->interface;
+    if (psVar3->choosen_color < 2) {
+      psVar3->choosen_color = psVar3->choosen_color + 1;
+    }
+    else {
+      psVar3->choosen_color = 0;
+    }
+    iVar2 = psVar3->choosen_color;
+    this->user_color = iVar2;
+    player::change_color(this->proton,iVar2);
+    psVar5 = this->mixer;
+    iVar2 = 1;
+    break;
+  case 0x10:
+    if (this->user_difficulty == 0) {
+      pbVar6 = this->interface->buttons[0x17];
+      this->user_difficulty = 1;
+      button::load_text(pbVar6,"hard",-1);
+      psVar5 = this->mixer;
+      iVar2 = 1;
+    }
+    else {
+      pbVar6 = this->interface->buttons[0x17];
+      this->user_difficulty = 0;
+      button::load_text(pbVar6,"easy",-1);
+      psVar5 = this->mixer;
+      iVar2 = 1;
+    }
+    break;
+  case 0x11:
+    if (this->user_sound == false) {
+      pbVar6 = this->interface->buttons[0x19];
+      this->user_sound = true;
+      button::load_text(pbVar6,"on",-1);
+      sound_mixer::stop_all(this->mixer,0);
+      sound_mixer::stop_all(this->mixer,1);
+      sound_mixer::play_music(this->mixer,0);
+      psVar5 = this->mixer;
+      iVar2 = 1;
+    }
+    else {
+      pbVar6 = this->interface->buttons[0x19];
+      this->user_sound = false;
+      button::load_text(pbVar6,"off",-1);
+      sound_mixer::stop_all(this->mixer,1);
+      psVar5 = this->mixer;
+      iVar2 = 1;
+    }
+    break;
+  case 0x12:
+    psVar5 = this->mixer;
+    iVar2 = 1;
+    this->game_status = 3;
+    break;
+  case 0x13:
+    this->miniatures[this->actual_miniature]->color[3] = 0x4b;
+    iVar2 = this->actual_miniature;
+    if (iVar2 < 1) {
+      iVar2 = this->user_stage;
+    }
+    this->actual_miniature = iVar2 + -1;
+    pbVar6 = this->interface->buttons[6];
+    this->miniatures[this->actual_miniature]->color[3] = 0xff;
+    button::load_text(pbVar6,this->miniatures[this->actual_miniature]->name,0xff);
+    psVar5 = this->mixer;
+    goto LAB_08910d54;
+  case 0x14:
+    this->miniatures[this->actual_miniature]->color[3] = 0x4b;
+    if (this->actual_miniature < 0x18) {
+      iVar2 = this->actual_miniature + 1;
+      if (iVar2 < this->user_stage) {
+        this->actual_miniature = iVar2;
+      }
+      else {
+        this->actual_miniature = 0;
+      }
+    }
+    else {
+      this->actual_miniature = 0;
+    }
+    button::load_text(this->interface->buttons[6],this->miniatures[this->actual_miniature]->name,
+                      0xff);
+    psVar5 = this->mixer;
+    this->miniatures[this->actual_miniature]->color[3] = 0xff;
+LAB_08910d54:
+    sound_mixer::play_effect(psVar5,2);
+    on_miniature_change(this);
+    return;
+  case 0x15:
+    iVar2 = change_stage(this,this->actual_miniature + 1,true);
+    psVar5 = this->mixer;
+    this->game_status = iVar2;
+    iVar2 = 1;
+    this->isSolo = true;
+    break;
+  case 0x16:
+    step_tutorial(this);
+    psVar5 = this->mixer;
+    iVar2 = 1;
+    break;
+  case 0x17:
+    this->miniatures[this->actual_miniature]->color[3] = 0x4b;
+    iVar2 = this->actual_miniature;
+    if (4 < iVar2) {
+      this->actual_miniature = iVar2 + -5;
+      sound_mixer::play_effect(this->mixer,2);
+      on_miniature_change(this);
+      iVar2 = this->actual_miniature;
+    }
+    psVar3 = this->interface;
+    this->miniatures[iVar2]->color[3] = 0xff;
+    button::load_text(psVar3->buttons[6],this->miniatures[this->actual_miniature]->name,0xff);
+    return;
+  case 0x18:
+    this->miniatures[this->actual_miniature]->color[3] = 0x4b;
+    iVar2 = this->actual_miniature;
+    if ((iVar2 < 0x14) && (iVar2 + 5 < this->user_stage)) {
+      this->actual_miniature = iVar2 + 5;
+      sound_mixer::play_effect(this->mixer,2);
+      on_miniature_change(this);
+      iVar2 = this->actual_miniature;
+    }
+    button::load_text(this->interface->buttons[6],this->miniatures[iVar2]->name,0xff);
+    this->miniatures[this->actual_miniature]->color[3] = 0xff;
+    return;
+  case 0x19:
+    id_enableds = operator_new___(0xc);
+    psVar3 = this->interface;
+    *id_enableds = 7;
+    id_enableds[1] = 0xb;
+    id_enableds[2] = 0xc;
+    stage_interface::activate_buttons(psVar3,id_enableds,3);
+    bVar1 = this->isSolo;
+    this->interface->actual_option = 0;
+    if (bVar1 != false) {
+      this->isSolo = false;
+    }
+    if (-1 < this->tutorial_step) {
+      this->tutorial_step = -1;
+    }
+    iVar2 = change_stage(this,1000,true);
+    this->game_status = iVar2;
+    sound_mixer::play_effect(this->mixer,1);
+    if (this->user_sound != false) {
+      sound_mixer::play_music(this->mixer,0);
+    }
+    goto LAB_08910f34;
+  case 0x1a:
+    id_enableds = operator_new___(0x14);
+    psVar3 = this->interface;
+    *id_enableds = 4;
+    id_enableds[1] = 5;
+    id_enableds[2] = 0x13;
+    id_enableds[3] = 0x14;
+    id_enableds[4] = 0xd;
+    stage_interface::activate_buttons(psVar3,id_enableds,5);
+    this->game_status = 0;
+    sound_mixer::play_effect(this->mixer,1);
+LAB_08910f34:
+    operator_delete___(id_enableds);
+    return;
+  case 0x1b:
+    psVar3 = this->interface;
+    this->time = 0;
+    pbVar6 = psVar3->buttons[0x26];
+    psVar3->actual_staff = 0;
+    button::load_text(pbVar6,psVar3->whats[0],200);
+    psVar3 = this->interface;
+    button::load_text(psVar3->buttons[0x27],psVar3->whos[psVar3->actual_staff],200);
+    this->game_status = 0xd;
+    return;
+  }
+  sound_mixer::play_effect(psVar5,iVar2);
+  return;
+}
+

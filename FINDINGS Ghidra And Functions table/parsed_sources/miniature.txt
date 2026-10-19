@@ -1,0 +1,335 @@
+// ========================================================
+// 0x0890b830: miniature::change_color(int, int, int, int)
+// ========================================================
+// Function: change_color @ 0890b830
+
+/* DWARF original prototype: void change_color(miniature * this, int r, int g, int b, int a) */
+
+void __thiscall miniature::change_color(miniature *this,int r,int g,int b,int a)
+
+{
+  int in_t0;
+  
+  this->color[3] = in_t0;
+  this->color[0] = r;
+  this->color[1] = g;
+  this->color[2] = b;
+  return;
+}
+
+// ========================================================
+// 0x0890b844: miniature::convert_to_plane(int, int, int, int)
+// ========================================================
+// Function: convert_to_plane @ 0890b844
+
+/* WARNING: Removing unreachable block (ram,0x0890ba90) */
+/* WARNING: Removing unreachable block (ram,0x0890ba20) */
+/* WARNING: Removing unreachable block (ram,0x0890ba00) */
+/* WARNING: Removing unreachable block (ram,0x0890ba10) */
+/* WARNING: Removing unreachable block (ram,0x0890ba80) */
+/* WARNING: Removing unreachable block (ram,0x0890baa0) */
+/* DWARF original prototype: plane * convert_to_plane(miniature * this, int cube, int face_number,
+   int id_plane, int side_size) */
+
+plane * __thiscall
+miniature::convert_to_plane(miniature *this,int cube,int face_number,int id_plane,int side_size)
+
+{
+  plane *ppVar1;
+  plane *ppVar2;
+  int (*paiVar3) [20];
+  int iVar4;
+  int in_t0;
+  int iVar5;
+  int iVar6;
+  int iVar7;
+  int iVar8;
+  int iVar9;
+  
+                    /* Unresolved local var: int i@[???]
+                       Unresolved local var: int j@[???]
+                       Unresolved local var: int dead_offset@[???]
+                       Unresolved local var: int dead_axis@[???]
+                       Unresolved local var: int axis_polarity@[???]
+                       Unresolved local var: int[7] data@[???]
+                       Unresolved local var: plane * temp_plane@[???] */
+  switch(face_number) {
+  default:
+    iVar7 = 0;
+    iVar5 = 0;
+    iVar6 = 0;
+    iVar9 = 0;
+    iVar8 = 0;
+    goto LAB_0890b8b4;
+  case 1:
+    iVar9 = 3;
+    iVar6 = this->vertex[cube][2];
+    iVar7 = this->vertex[cube][0];
+    iVar4 = this->vertex[cube][1];
+    break;
+  case 2:
+    iVar9 = 2;
+    iVar6 = this->vertex[cube][1];
+    iVar7 = this->vertex[cube][0];
+    iVar4 = this->vertex[cube][2];
+    goto LAB_0890ba78;
+  case 3:
+    iVar9 = 1;
+    iVar6 = this->vertex[cube][0];
+    iVar7 = this->vertex[cube][1];
+    iVar4 = this->vertex[cube][2];
+    break;
+  case 4:
+    iVar9 = 3;
+    iVar6 = this->vertex[cube][2];
+    iVar7 = this->vertex[cube][0];
+    iVar4 = this->vertex[cube][1];
+    goto LAB_0890ba78;
+  case 5:
+    iVar9 = 2;
+    iVar6 = this->vertex[cube][1];
+    iVar7 = this->vertex[cube][0];
+    iVar4 = this->vertex[cube][2];
+    break;
+  case 6:
+    iVar9 = 1;
+    iVar6 = this->vertex[cube][0];
+    iVar7 = this->vertex[cube][1];
+    iVar4 = this->vertex[cube][2];
+LAB_0890ba78:
+    iVar8 = -1;
+    iVar5 = in_t0 + -1;
+    iVar6 = iVar5 * (iVar6 / 2);
+    iVar7 = (iVar7 / 2) * iVar5;
+    iVar5 = iVar5 * (iVar4 / 2);
+    goto LAB_0890b8b4;
+  }
+  iVar8 = 1;
+  iVar5 = in_t0 + -1;
+  iVar6 = in_t0 + iVar5 * (iVar6 / 2) + -1;
+  iVar7 = (iVar7 / 2) * iVar5;
+  iVar5 = iVar5 * (iVar4 / 2);
+LAB_0890b8b4:
+  ppVar1 = operator_new(0x1fb0);
+  ppVar1->ident = id_plane;
+  ppVar1->i = iVar7;
+  ppVar1->j = iVar5;
+  ppVar1->side_size = in_t0;
+  ppVar1->dead_axis = iVar9;
+  ppVar1->dead_offset = iVar6;
+  ppVar1->face_number = face_number;
+  ppVar1->axis_polarity = iVar8;
+  ppVar1->id_union_right = -1;
+  ppVar1->id_union_top = -1;
+  ppVar1->id_union_left = -1;
+  ppVar1->id_union_bottom = -1;
+  ppVar2 = ppVar1;
+  iVar6 = 0;
+  do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+    iVar7 = iVar6 + 4;
+    ppVar2->cam_positions[0][0] = 0;
+    ppVar2->cam_positions[0][1] = 0;
+    ppVar2->cam_positions[0][2] = 0;
+    *(undefined4 *)((int)ppVar1->pieces + iVar6) = 0;
+    ppVar2 = (plane *)&ppVar2->side_size;
+    iVar6 = iVar7;
+  } while (iVar7 != 0x640);
+  iVar6 = 0;
+  do {
+    iVar7 = 0;
+    paiVar3 = ppVar1->index + iVar6;
+    do {
+                    /* Unresolved local var: void anon_var_0@[???] */
+      iVar7 = iVar7 + 1;
+      (*paiVar3)[0] = 0;
+      paiVar3 = (int (*) [20])(*paiVar3 + 1);
+    } while (iVar7 != 0x14);
+    iVar6 = iVar6 + 1;
+  } while (iVar6 != 0x14);
+  ppVar1->a_vertex[0] = 0;
+  ppVar1->a_vertex[1] = 0;
+  ppVar1->a_vertex[2] = 0;
+  ppVar1->b_vertex[0] = 0;
+  ppVar1->b_vertex[1] = 0;
+  ppVar1->b_vertex[2] = 0;
+  ppVar1->c_vertex[0] = 0;
+  ppVar1->c_vertex[1] = 0;
+  ppVar1->c_vertex[2] = 0;
+  ppVar1->d_vertex[0] = 0;
+  ppVar1->d_vertex[1] = 0;
+  ppVar1->d_vertex[2] = 0;
+  ppVar1->max_vertex[0] = 0;
+  ppVar1->max_vertex[1] = 0;
+  ppVar1->max_vertex[2] = 0;
+  ppVar1->visited = false;
+  return ppVar1;
+}
+
+// ========================================================
+// 0x0890bb84: miniature::print()
+// ========================================================
+// Function: print @ 0890bb84
+
+/* WARNING: Removing unreachable block (ram,0x0890bbc8) */
+/* WARNING: Removing unreachable block (ram,0x0890bbf4) */
+/* DWARF original prototype: void print(miniature * this) */
+
+void __thiscall miniature::print(miniature *this)
+
+{
+  int iVar1;
+  int iVar2;
+  int unaff_f20;
+  int unaff_f21;
+  int unaff_f22;
+  GLfloat in_stack_00000000;
+  int in_stack_fffffffc;
+  
+                    /* Unresolved local var: float x_pos@[???]
+                       Unresolved local var: float z_pos@[???] */
+  iVar1 = this->min_vertex[2] + this->offset[2] +
+          ((this->max_vertex[2] - this->min_vertex[2]) / 4) * 2;
+  iVar2 = this->min_vertex[0] + this->offset[0] +
+          ((this->max_vertex[0] - this->min_vertex[0]) / 4) * 2;
+  glPushMatrix();
+  glTranslatef((float)iVar2,(float)this->paint_pos[0][1],(float)iVar1);
+  glRotatef((float)this->rotation,0.0,DAT_089dbce4,0.0);
+  glTranslatef(-(float)iVar2,(float)-this->paint_pos[0][1],-(float)iVar1);
+                    /* Unresolved local var: int i@[???] */
+  if (0 < this->cubes) {
+    iVar1 = 0;
+    do {
+      glinterface::solid_cube
+                (this->printer,(GLfloat)this->color[0],(GLfloat)this->color[1],
+                 (GLfloat)this->color[2],unaff_f20,unaff_f21,unaff_f22,in_stack_fffffffc,
+                 in_stack_00000000);
+      glinterface::cube_skeleton
+                (this->printer,3.57331e-43,3.57331e-43,3.57331e-43,unaff_f20,unaff_f21,unaff_f22,
+                 in_stack_fffffffc,in_stack_00000000);
+      iVar1 = iVar1 + 1;
+    } while (iVar1 < this->cubes);
+  }
+  glPopMatrix();
+  return;
+}
+
+// ========================================================
+// 0x08911270: miniature
+// ========================================================
+// Function: miniature @ 08911270
+
+/* WARNING: Removing unreachable block (ram,0x089113c8) */
+/* DWARF original prototype: void miniature(miniature * this, int[3] * data, int cubes, int
+   offset_x, int offset_y, int offset_z, char * new_name) */
+
+void __thiscall
+miniature::miniature
+          (miniature *this,int (*data) [3],int cubes,int offset_x,int offset_y,int offset_z,
+          char *new_name)
+
+{
+  int *piVar1;
+  int iVar2;
+  glinterface *pgVar3;
+  int iVar4;
+  int iVar5;
+  int iVar6;
+  int in_t0;
+  int in_t1;
+  char *in_t2;
+  miniature *pmVar7;
+  int iVar8;
+  int iVar9;
+  int iVar10;
+  
+  this->high_score = 0x1b207;
+  this->name = in_t2;
+  this->min_vertex[1] = 1000;
+  this->rotation = 0;
+  this->cubes = cubes;
+  this->max_vertex[0] = 0;
+  this->max_vertex[1] = 0;
+  this->max_vertex[2] = 0;
+  this->min_vertex[0] = 1000;
+  this->min_vertex[2] = 1000;
+  this->cam[0] = 0;
+  this->cam[1] = 0;
+  this->cam[2] = 0;
+  this->cam_center[0] = 0;
+  this->cam_center[1] = 0;
+  this->cam_center[2] = 0;
+  this->offset[0] = offset_x;
+  this->offset[1] = in_t0;
+  this->offset[2] = in_t1;
+                    /* Unresolved local var: void anon_var_0@[???] */
+  if (cubes < 1) {
+    iVar2 = this->max_vertex[2];
+    iVar4 = this->min_vertex[2];
+  }
+  else {
+    iVar9 = 0;
+    pmVar7 = this;
+    iVar6 = 0;
+    iVar10 = 1000;
+    do {
+      iVar4 = (*data)[0];
+      iVar2 = this->max_vertex[0];
+      pmVar7->vertex[0][0] = iVar4;
+      iVar4 = iVar4 + 2;
+      pmVar7->vertex[0][1] = (*data)[1];
+      pmVar7->vertex[0][2] = (*data)[2];
+      if (iVar2 < iVar4) {
+        this->max_vertex[0] = iVar4;
+      }
+      iVar8 = pmVar7->vertex[0][1];
+      if (this->max_vertex[1] < iVar8 + 2) {
+        this->max_vertex[1] = iVar8 + 2;
+      }
+      iVar4 = pmVar7->vertex[0][2];
+      iVar2 = iVar4 + 2;
+      if (iVar6 < iVar2) {
+        this->max_vertex[2] = iVar2;
+        iVar5 = pmVar7->vertex[0][0];
+      }
+      else {
+        iVar5 = pmVar7->vertex[0][0];
+        iVar2 = iVar6;
+      }
+      if (iVar5 < this->min_vertex[0]) {
+        this->min_vertex[0] = iVar5;
+      }
+      if (iVar8 < this->min_vertex[1]) {
+        this->min_vertex[1] = iVar8;
+      }
+      if (iVar4 < iVar10) {
+        this->min_vertex[2] = iVar4;
+        iVar6 = (*data)[0];
+      }
+      else {
+        iVar6 = (*data)[0];
+        iVar4 = iVar10;
+      }
+      iVar9 = iVar9 + 1;
+      pmVar7->paint_pos[0][0] = offset_x + iVar6;
+      pmVar7->paint_pos[0][1] = in_t0 + (*data)[1];
+      piVar1 = *data;
+      data = data + 1;
+      pmVar7->paint_pos[0][2] = in_t1 + piVar1[2];
+      pmVar7 = (miniature *)(pmVar7->color + 3);
+      iVar6 = iVar2;
+      iVar10 = iVar4;
+    } while (iVar9 < cubes);
+  }
+  this->color[2] = 0xff;
+  this->color[0] = 0xff;
+  this->color[1] = 0xff;
+  this->cam_center[1] = in_t0;
+  this->color[3] = 0x4b;
+  this->cam_center[0] = 0;
+  this->cam_center[2] = in_t1 + iVar2 / 2 + iVar4;
+  pgVar3 = operator_new(1);
+  this->printer = pgVar3;
+  return;
+}
+

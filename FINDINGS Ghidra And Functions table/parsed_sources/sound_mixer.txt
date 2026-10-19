@@ -1,0 +1,95 @@
+// ========================================================
+// 0x0890bd18: sound_mixer::play_effect(int)
+// ========================================================
+// Function: play_effect @ 0890bd18
+
+/* DWARF original prototype: void play_effect(sound_mixer * this, int ident) */
+
+void __thiscall sound_mixer::play_effect(sound_mixer *this,int ident)
+
+{
+  if (this->refresh_effects == false) {
+    this->refresh_effects = true;
+  }
+  this->effects[ident] = true;
+  return;
+}
+
+// ========================================================
+// 0x0890bd38: sound_mixer::play_music(int)
+// ========================================================
+// Function: play_music @ 0890bd38
+
+/* DWARF original prototype: void play_music(sound_mixer * this, int ident) */
+
+void __thiscall sound_mixer::play_music(sound_mixer *this,int ident)
+
+{
+  int iVar1;
+  int iVar2;
+  int iVar3;
+  
+  if (this->refresh_music == false) {
+    this->refresh_music = true;
+                    /* Unresolved local var: int i@[DW_OP_reg6(a2)] */
+    iVar3 = this->TOTAL_MUSIC;
+  }
+  else {
+    iVar3 = this->TOTAL_MUSIC;
+  }
+  if (0 < iVar3) {
+    iVar1 = 0;
+    do {
+      iVar2 = iVar1 + 1;
+      this->music[iVar1] = false;
+      iVar1 = iVar2;
+    } while (iVar2 < iVar3);
+  }
+  this->music[ident] = true;
+  return;
+}
+
+// ========================================================
+// 0x0890bd80: sound_mixer::stop_all(int)
+// ========================================================
+// Function: stop_all @ 0890bd80
+
+/* DWARF original prototype: void stop_all(sound_mixer * this, int type) */
+
+void __thiscall sound_mixer::stop_all(sound_mixer *this,int type)
+
+{
+  int iVar1;
+  int iVar2;
+  int iVar3;
+  
+  if (type == 0) {
+                    /* Unresolved local var: int i@[???] */
+    iVar3 = this->TOTAL_SOUNDS;
+    this->refresh_effects = true;
+    iVar2 = 0;
+    if (0 < iVar3) {
+      do {
+        iVar1 = iVar2 + 1;
+        this->effects[iVar2] = false;
+        iVar2 = iVar1;
+      } while (iVar1 < iVar3);
+    }
+  }
+  else {
+    iVar2 = this->TOTAL_MUSIC;
+                    /* Unresolved local var: int i@[DW_OP_reg5(a1)] */
+    this->refresh_music = true;
+    if (0 < iVar2) {
+      iVar3 = 0;
+      do {
+        iVar1 = iVar3 + 1;
+        this->music[iVar3] = false;
+        iVar3 = iVar1;
+      } while (iVar1 < iVar2);
+      return;
+    }
+  }
+  return;
+}
+
