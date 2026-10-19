@@ -126,18 +126,56 @@ void player::print_guides(int face, int axis) {
     if (!printer) return;
     float lx = x, ly = y, lz = z;
     float rx = x, ry = y, rz = z;
+    float dist = 0.8f;
 
-    switch (advance) {
-        case 1:  ly += 0.8f; ry -= 0.8f; break;
-        case -1: ly -= 0.8f; ry += 0.8f; break;
-        case 2:  lx -= 0.8f; rx += 0.8f; break;
-        case -2: lx += 0.8f; rx -= 0.8f; break;
-        case 3:  lx -= 0.8f; rx += 0.8f; break;
-        case -3: lx += 0.8f; rx -= 0.8f; break;
-        default: break;
+    switch (face) {
+        case 1:
+        case 4:
+            // Dead axis 3 (Z fixed, movement in X / Y)
+            if (advance == 1) { // Moving +X
+                ly += dist; ry -= dist;
+            } else if (advance == -1) { // Moving -X
+                ly -= dist; ry += dist;
+            } else if (advance == 2) { // Moving +Y
+                lx -= dist; rx += dist;
+            } else if (advance == -2) { // Moving -Y
+                lx += dist; rx -= dist;
+            }
+            break;
+
+        case 2:
+        case 5:
+            // Dead axis 2 (Y fixed, movement in X / Z)
+            if (advance == 1) { // Moving +X
+                lz += dist; rz -= dist;
+            } else if (advance == -1) { // Moving -X
+                lz -= dist; rz += dist;
+            } else if (advance == 3) { // Moving +Z
+                lx -= dist; rx += dist;
+            } else if (advance == -3) { // Moving -Z
+                lx += dist; rx -= dist;
+            }
+            break;
+
+        case 3:
+        case 6:
+            // Dead axis 1 (X fixed, movement in Y / Z)
+            if (advance == 2) { // Moving +Y
+                lz += dist; rz -= dist;
+            } else if (advance == -2) { // Moving -Y
+                lz -= dist; rz += dist;
+            } else if (advance == 3) { // Moving +Z
+                ly -= dist; ry += dist;
+            } else if (advance == -3) { // Moving -Z
+                ly += dist; ry -= dist;
+            }
+            break;
+
+        default:
+            break;
     }
 
-    // Left guide is RED, Right guide is BLUE!
-    printer->square_3D(lx, ly, lz, 255, 30, 30, 220, 0.25f, axis);
-    printer->square_3D(rx, ry, rz, 30, 100, 255, 220, 0.25f, axis);
+    // Left guide is RED (turn left), Right guide is BLUE (turn right)
+    printer->square_3D(lx, ly, lz, 255, 30, 30, 220, 0.35f, axis);
+    printer->square_3D(rx, ry, rz, 30, 100, 255, 220, 0.35f, axis);
 }

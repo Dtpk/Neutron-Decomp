@@ -690,8 +690,11 @@ void neutron::print_stage() {
 
     if (proton) {
         proton->print(0, low_quality);
-        if (actual_stage == 2000 && proton->status == 1) {
-            proton->print_guides(proton->actual_face, 1);
+        if ((user_difficulty == 0 || actual_stage == 2000) && proton->status == 1 && ground) {
+            plane* pp = ground->map[proton->actual_plane];
+            if (pp) {
+                proton->print_guides(pp->face_number, pp->dead_axis);
+            }
         }
     }
 

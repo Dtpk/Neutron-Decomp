@@ -93,16 +93,22 @@ int enemy::move(plane** map, int proton_face) {
 
     if (idx_pred >= 0 && !map[actual_plane]->pieces[idx_pred]->state) {
         if (std::rand() % 15 == 5) {
-            if (turn < 2) {
+            if (turn == 0 || turn == 1) {
                 ship::change_direction(turn);
             } else if (turn == 2) {
                 ship::change_direction(std::rand() % 2);
             }
         }
-    } else if (turn < 2) {
-        ship::change_direction(turn);
     } else {
-        ship::change_direction(std::rand() % 2);
+        // Path ahead is blocked or boundary reached - MUST turn
+        if (turn == 0 || turn == 1) {
+            ship::change_direction(turn);
+        } else if (turn == 2) {
+            ship::change_direction(std::rand() % 2);
+        } else {
+            // Both sides blocked on this plane; pick random turn to attempt avoidance
+            ship::change_direction(std::rand() % 2);
+        }
     }
 
     if (type == 2) {
