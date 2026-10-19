@@ -24,7 +24,7 @@ Current iteration on the right its a far call from being a direct port but the m
 The current iteration is a far cry from a clean 1:1 direct port, but progress is moving forward:
 * **Levels/Maps:** 100% in—all 25 original maps have been successfully brought over.
 * **Player Mechanics:** Mostly functional, though some engine calls are still being sorted out.
-* **The Camera:** Currently completely broken. The view toggled by `V` isn't how the game is supposed to play. I'm actively working on implementing a **Super Monkey Ball-style world-tilting camera** to better approximate the original feel. QUICK UPDATE some what working it I think has been figured out and is 1 to 1 but needs further testing.
+* **The Camera:**  UPDATE some what working now it I think has been figured out and is 1 to 1 but needs further testing. Potential other modes might be added.
 * **The Menu:** Currently redone and not a 1 to 1 and stage select has some of the real psp logic still in place looks wrong with the new menu.
 ---
 
