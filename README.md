@@ -29,7 +29,7 @@ The current iteration is a far cry from a clean 1:1 direct port, but progress is
 ---
 
 ### 📜 Project Background
-You can find the original PSP game archived on the Internet Archive. The **sole purpose** of this decompilation attempt is to prevent it from becoming **lost media**. Outside of the archive, it's unlikely the original source will resurface, so preserving the game logic is the main goal.
+You can find the original PSP game archived on the Internet Archive. The **sole purpose** of this decompilation attempt is to prevent it from becoming **lost media**. Outside of the archive, it's unlikely the original source will resurface, so preserving the game logic is the main goal. A rename is also in question to not confuse this work with any future code that becomes available "Neutron Next" Or Neutron Remastered" or "Neutron Re-Ported" etc if you have a idea let me know.
 
 **How it's being built:** 
 I've kept whatever clean code I could manually uncover from Ghidra. When I fed parts of it to an LLM to help make sense of the rest, it inevitably hallucinated a few things. While some of those hallucinations were useful as a starting point, I try to verify everything manually.
