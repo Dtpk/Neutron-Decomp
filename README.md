@@ -25,7 +25,8 @@ The current iteration is a far cry from a clean 1:1 direct port, but progress is
 * **Levels/Maps:** 100% in—all 25 original maps have been successfully brought over.
 * **Player Mechanics:** Mostly functional, though some engine calls are still being sorted out.
 * **The Camera:**  UPDATE some what working now it I think has been figured out and is 1 to 1 but needs further testing. Potential other modes might be added.
-* **The Menu:** Currently redone and not a 1 to 1 and stage select has some of the real psp logic still in place looks wrong with the new menu.
+* **The Menu:** Currently redone and not a 1 to 1 and stage select has some of the real psp logic still in place looks wrong will get old menu going and have a toggle for a new menu if wanted.
+
 ---
 
 ### 📜 Project Background
