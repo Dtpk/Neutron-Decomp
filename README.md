@@ -36,6 +36,7 @@ I've kept whatever clean code I could manually uncover from Ghidra. When I fed p
 
 > **ANY AND ALL HELP — LLM OR OTHERWISE — IS MASSIVELY APPRECIATED!**
 
+If you do help out I will host the changes here and you will be added to the staff/credit menu.
 ---
 
 ### 🎵 Game Audio & Music
