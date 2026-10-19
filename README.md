@@ -15,7 +15,7 @@ So using ghidra headless I attempted to rip the psp game neutron apart.
   </tr>
 </table>
 
-Current iteration on the right its a far call from being a direct port but the maps are in and player mechanics almost in. The camera fully broken right now. And a lot of calls are not fully figured out yet.
+Current iteration on the right its a far call from being a direct port but the maps are in and player mechanics almost in. The camera might work right now could use improvements. And a lot of calls are not fully figured out yet.
 
 
 ## 🛠️ Project Status & Development Log
