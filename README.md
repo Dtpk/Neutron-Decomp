@@ -43,7 +43,7 @@ I've kept whatever clean code I could manually uncover from Ghidra. When I fed p
 I honestly can't fully remember the original soundtrack from playing it on iOS back in the day, and the PSP version's audio assets were largely stripped or scrapped, so I may never know for sure. 
 * I plan to reach out to folks listed in the staff credits—maybe someone still has the source files. 
 * If not, I'll bake a media player function into the game so custom tracks can be used. (Honestly, I'm still not even 100% sure if the PSP version ever had active background music or if it was purely ambient sound effects.)
-
+* If I can't contact any old staff members I will search YouTube I seen one or 2 videos back in the day of this game its what helped me remember the name of the game when I forgot it after my ipod was stolen. I hope they had sounds if not above plan is what I will take.
 ---
 
 ### 🚀 Roadmap & Final Stretch Goals
