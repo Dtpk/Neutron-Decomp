@@ -5,6 +5,23 @@
 #include <cstring>
 #include <cmath>
 
+/*
+ * ============================================================================
+ * NEUTRON C++ PORT - DWARF SYMBOL MANIFEST MAPPING (Ref: neutron_functions.txt)
+ * ============================================================================
+ * 0x08902aa0: neutron::neutron(int color, int difficulty, int stage, bool sound)
+ * 0x0890bde0: neutron::move_lookat(camera*, float, float, float, int)
+ * 0x0890bfa0: neutron::move_camera(camera*, float, float, float, int)
+ * 0x08903330: neutron::load_new_enemy()
+ * 0x08903520: neutron::autoload_eletrons(int)
+ * 0x0890868c: neutron::navigate()
+ * 0x08908850: neutron::combat()
+ * 0x08908da0: neutron::run()
+ * 0x08908e00: neutron::print()
+ * 0x089037c0: neutron::load_stage(int, bool)
+ * ============================================================================
+ */
+
 neutron::neutron(int color, int difficulty, int stage, bool sound)
     : game_status(1000),
       go_status(1000),
@@ -631,49 +648,8 @@ void neutron::print_stage() {
     } else if (actual_stage == 3000) {
         if (game_cam) game_cam->locate();
     } else {
-        if (vision == 0 && proton && ground) {
-            // Dynamic Chase Camera following smoothly behind Proton
-            float fx = 0.0f, fy = 0.0f, fz = 0.0f;
-            if (proton->advance == 1)       fx =  1.0f;
-            else if (proton->advance == -1) fx = -1.0f;
-            else if (proton->advance == 2)  fy =  1.0f;
-            else if (proton->advance == -2) fy = -1.0f;
-            else if (proton->advance == 3)  fz =  1.0f;
-            else if (proton->advance == -3) fz = -1.0f;
-
-            float nx = 0.0f, ny = 0.0f, nz = 0.0f;
-            if (proton->actual_plane >= 0 && proton->actual_plane < ground->N_PLANES) {
-                plane* cp = ground->map[proton->actual_plane];
-                if (cp) {
-                    if (cp->dead_axis == 1)      nx = (float)cp->axis_polarity;
-                    else if (cp->dead_axis == 2) ny = (float)cp->axis_polarity;
-                    else                         nz = (float)cp->axis_polarity;
-                }
-            }
-            if (nx == 0.0f && ny == 0.0f && nz == 0.0f) ny = 1.0f;
-
-            float cam_back = 9.0f;
-            float cam_up   = 7.5f;
-            float eye_x = proton->x - fx * cam_back + nx * cam_up;
-            float eye_y = proton->y - fy * cam_back + ny * cam_up;
-            float eye_z = proton->z - fz * cam_back + nz * cam_up;
-
-            float target_x = proton->x + fx * 2.5f;
-            float target_y = proton->y + fy * 2.5f;
-            float target_z = proton->z + fz * 2.5f;
-
-            if (proton->cam_ship) {
-                proton->cam_ship->x = eye_x;
-                proton->cam_ship->y = eye_y;
-                proton->cam_ship->z = eye_z;
-                proton->cam_ship->x_dir = target_x;
-                proton->cam_ship->y_dir = target_y;
-                proton->cam_ship->z_dir = target_z;
-                proton->cam_ship->x_ori = nx;
-                proton->cam_ship->y_ori = ny;
-                proton->cam_ship->z_ori = nz;
-                proton->cam_ship->locate();
-            }
+        if (vision == 0 && proton && proton->cam_ship) {
+            proton->cam_ship->locate();
         } else if (vision == 1 && ground) {
             // Isometric Arena Overview
             float cx = (float)ground->max_vertex[0] * 0.5f;

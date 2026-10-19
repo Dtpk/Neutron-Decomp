@@ -13,7 +13,6 @@ camera::~camera() {
 }
 
 void camera::set_coordinates(GLfloat nx, GLfloat ny, GLfloat nz, GLfloat nx_dir, GLfloat ny_dir, GLfloat nz_dir) {
-    z_dir = nz_dir;
     last_x = x;
     last_y = y;
     last_z = z;
@@ -22,10 +21,10 @@ void camera::set_coordinates(GLfloat nx, GLfloat ny, GLfloat nz, GLfloat nx_dir,
     z = nz;
     x_dir = nx_dir;
     y_dir = ny_dir;
+    z_dir = nz_dir;
 }
 
 void camera::update_pos(int cam_x, int cam_y, int cam_z, GLfloat nx, GLfloat ny, GLfloat nz) {
-    z_dir = nz;
     last_x = x;
     last_y = y;
     last_z = z;
@@ -34,6 +33,7 @@ void camera::update_pos(int cam_x, int cam_y, int cam_z, GLfloat nx, GLfloat ny,
     z = (float)cam_z;
     x_dir = nx;
     y_dir = ny;
+    z_dir = nz;
 }
 
 void camera::restart() {
@@ -54,15 +54,13 @@ void camera::locate() {
     float dx = x_dir - x;
     float dy = y_dir - y;
     float dz = z_dir - z;
-    float len = std::sqrt(dx*dx + dy*dy + dz*dz);
-    if (len < 0.001f) {
-        x += 0.1f;
-        y += 10.0f;
-        z += 10.0f;
+    float len = std::sqrt(dx * dx + dy * dy + dz * dz);
+    if (len < 0.0001f) {
+        x_dir += 0.01f;
         dx = x_dir - x;
         dy = y_dir - y;
         dz = z_dir - z;
-        len = std::sqrt(dx*dx + dy*dy + dz*dz);
+        len = std::sqrt(dx * dx + dy * dy + dz * dz);
     }
 
     float ux = x_ori;
@@ -72,12 +70,22 @@ void camera::locate() {
         uy = 1.0f;
     }
 
-    float dot = (dx * ux + dy * uy + dz * uz) / len;
-    if (std::fabs(dot) > 0.95f) {
-        if (std::fabs(dy / len) > 0.9f) {
-            ux = 0.0f; uy = 0.0f; uz = -1.0f;
-        } else {
-            ux = 0.0f; uy = 1.0f; uz = 0.0f;
+    // Orthogonalize up vector against view direction vector for numerical stability
+    float inv_len = 1.0f / len;
+    float vx = dx * inv_len;
+    float vy = dy * inv_len;
+    float vz = dz * inv_len;
+
+    float dot = vx * ux + vy * uy + vz * uz;
+    if (std::fabs(dot) > 0.99f) {
+        // Fallback up vector if nearly parallel
+        ux = 0.0f;
+        uy = 1.0f;
+        uz = 0.0f;
+        if (std::fabs(vy) > 0.95f) {
+            ux = 0.0f;
+            uy = 0.0f;
+            uz = (vy > 0.0f) ? -1.0f : 1.0f;
         }
     }
 
