@@ -30,7 +30,21 @@ The current iteration is a far cry from a clean 1:1 direct port, but progress is
 ---
 
 ### 📜 Project Background
-You can find the original PSP game archived on the Internet Archive. The **sole purpose** of this decompilation attempt is to prevent it from becoming **lost media**. Outside of the archive, it's unlikely the original source will resurface and getting a ipod touch with the older software needed is a challenge even finding the ios game is a challenge starting to become impossible since it needs side-loading.
+You can find the original PSP game archived on the Internet Archive. The **sole purpose** of this decompilation attempt is to prevent it from becoming **lost media**. Outside of the archive, it's unlikely the original source will resurface and getting a ipod touch with the older software needed is a challenge even finding the ios game is a challenge starting to become impossible since it needs side-loading. "And it been about 3+ years since I got in contact and heard the mac os version might still exists and still hasn't been put up either but it would have been for really outdated mac's"
+
+### 📚 Reference Material And Surviving Videos And Links Game History
+
+Only surviving videos of IOS/MAC/LINUX builds is from this channel which is more then 17 years old now.
+
+"https://www.youtube.com/watch?v=_PASOl8KDZA"
+
+The only surviving web pages for this are for the psp port and what is on way back machine listed below.
+
+"https://web.archive.org/web/20110208013150/http://www.neutron-game.com/"
+
+"https://www.gamebrew.org/wiki/Neutron_PSP"
+
+Sadly none of the above were viable for getting any original source but were great none the less towards rebuilding this. "I left a comment on the youtube video more then 3 years ago and the mac version that may or may not be around never seemed to have surfaced or been put up but I did reach the original dev back then so their is hope"
 
 So preserving the game logic is the main goal. A rename is also in question to not confuse this work with any future code that becomes available "Neutron Next" Or Neutron Remastered" or "Neutron Re-Ported" etc if you have a idea let me know.
 
@@ -46,6 +60,8 @@ I honestly can't fully remember the original soundtrack from playing it on iOS b
 * I plan to reach out to folks listed in the staff credits—maybe someone still has the source files. 
 * If not, I'll bake a media player function into the game so custom tracks can be used. (Honestly, I'm still not even 100% sure if the PSP version ever had active background music or if it was purely ambient sound effects.)
 * If I can't contact any old staff members I will search YouTube I seen one or 2 videos back in the day of this game its what helped me remember the name of the game when I forgot it after my ipod was stolen. I hope they had sounds if not above plan is what I will take.
+
+* ** So the music I found a few sources of original game and gameplay all on a channel that is more then 17 years old it either had no audio or was uploaded without audio I am assuming the game had no sound from this point on. Also the website on way back machine list playing your own songs or listening to theirs and multiplayer which was never added" **
 ---
 
 ### 🚀 Roadmap & Final Stretch Goals
