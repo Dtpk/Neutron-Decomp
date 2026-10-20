@@ -32,6 +32,14 @@ The current iteration is a far cry from a clean 1:1 direct port, but progress is
 ### 📜 Project Background
 You can find the original PSP game archived on the Internet Archive. The **sole purpose** of this decompilation attempt is to prevent it from becoming **lost media**. Outside of the archive, it's unlikely the original source will resurface and getting a ipod touch with the older software needed is a challenge even finding the ios game is a challenge starting to become impossible since it needs side-loading. "And it been about 3+ years since I got in contact and heard the mac os version might still exists and still hasn't been put up either but it would have been for really outdated mac's"
 
+So preserving the game logic is the main goal. A rename is also in question to not confuse this work with any future code that becomes available "Neutron Next" Or Neutron Remastered" or "Neutron Re-Ported" etc if you have a idea let me know.
+
+**How it's being built:** 
+I've kept whatever clean code I could manually uncover from Ghidra. When I fed parts of it to an LLM to help make sense of the rest, it inevitably hallucinated a few things. While some of those hallucinations were useful as a starting point, I try to verify everything manually. And I will add comments for what does what as I go on with this.
+
+> **ANY AND ALL HELP — LLM OR OTHERWISE — IS MASSIVELY APPRECIATED!**
+---
+
 ### 📚 Reference Material And Surviving Videos And Links Game History
 
 Only surviving videos of IOS/MAC/LINUX builds is from this channel which is more then 17 years old now.
@@ -48,12 +56,6 @@ The only surviving web pages for this are for the psp port and what is on way ba
 
 Sadly none of the above were viable for getting any original source but were great none the less towards rebuilding this. "I left a comment on the youtube video more then 3 years ago and the mac version that may or may not be around never seemed to have surfaced or been put up but I did reach the original dev back then so their is hope"
 
-So preserving the game logic is the main goal. A rename is also in question to not confuse this work with any future code that becomes available "Neutron Next" Or Neutron Remastered" or "Neutron Re-Ported" etc if you have a idea let me know.
-
-**How it's being built:** 
-I've kept whatever clean code I could manually uncover from Ghidra. When I fed parts of it to an LLM to help make sense of the rest, it inevitably hallucinated a few things. While some of those hallucinations were useful as a starting point, I try to verify everything manually. And I will add comments for what does what as I go on with this.
-
-> **ANY AND ALL HELP — LLM OR OTHERWISE — IS MASSIVELY APPRECIATED!**
 
 ---
 
