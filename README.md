@@ -81,7 +81,7 @@ While a lot of the initial experimental code is messy, the core foundation is la
 ---
 
 ### 💾 Updates
-* **New builds** These will be available soon!!! I started to use a psp helped script with ghidra. "Didn't know about these at the time" I got lucky not using them and hopefully now that I did, even more progress can be made on the project. I got a lot of things now starting to be marked down so hopefully further development isn't as confusing as well as future user modding since you will know what to edit to do what you want it too do.
+* **New builds** These will be available soon!!! I started to use a psp helper script with ghidra. "Didn't know about these at the time" I got lucky not using them and hopefully now that I did, even more progress can be made on the project. I got a lot of things now starting to be marked down so hopefully further development isn't as confusing as well as future user modding since you will know what to edit to do what you want it too do.
 
 *  **GAMEPLAY** More mechanics are in and we now have fail/continue states and level complete states the vibe and ui is a bit different but I plan to have a different ui and menu that the player can pick for future modes and stuff that might not fit well in the older menu we will see. The new menu will feature random cpu battles while the camera pans around.
 
