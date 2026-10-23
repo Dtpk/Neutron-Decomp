@@ -23,9 +23,10 @@ Current iteration on the right its a far call from being a direct port but the m
 ### Current State
 The current iteration is a far cry from a clean 1:1 direct port, but progress is moving forward:
 * **Levels/Maps:** 100% in—all 25 original maps have been successfully brought over.
-* **Player Mechanics:** Mostly functional, though some engine calls are still being sorted out and moments where you can go through your line on map edges.UPDATE slightly broken now I need to figure it all out again.
+* **Player Mechanics:** Mostly functional, though some engine calls are still being sorted out and moments where you can go through your line on map edges.UPDATE this is slightly broken now I need to figure it all out again.
 * **The Camera:**  UPDATE!! This is some what working now I think this has finally been figured out and is 1 to 1 but needs further testing. Potential other modes might be added.
 * **The Menu:** Currently redone and not a 1 to 1 and stage select has some of the real psp logic still in place looks wrong will get old menu going and have a toggle for a new menu if wanted.
+* **ENEMIES:** The spawning of enemies as well as rank is correct. Orange enemies should be white but I will fix that last!!! It almost looks right though so I wanna check existing video then I will change it last since all enemy colors are fine right now including the random spawn logic and difficulty progression.
 
 ---
 
@@ -81,7 +82,7 @@ While a lot of the initial experimental code is messy, the core foundation is la
 ---
 
 ### 💾 Updates
-* **New builds** These will be available soon!!! I started to use a psp helper script with ghidra. "Didn't know about these at the time" I got lucky not using them and hopefully now that I did, even more progress can be made on the project. I got a lot of things now starting to be marked down so hopefully further development isn't as confusing as well as future user modding since you will know what to edit to do what you want it too do. "DELAY" so the builds are delayed I massively broke plane switching so I need to dig though some older builds or attempt to remake it from the ghidra so wish me luck.
+* **New builds** I started to use a psp helper script with ghidra. "Didn't know about these at the time" I got lucky not using them and hopefully now that I did, even more progress can be made on the project. I got a lot of things now starting to be marked down so hopefully further development isn't as confusing as well as future user modding since you will know what to edit to do what you want it too do. "DELAY" so the new builds / src are delayed I massively broke plane switching so I need to dig though some older builds or attempt to remake it from the ghidra so wish me luck. Besides that enemies are great now I think still need stage enter camera animation and a death animation for the player.
 
 *  **GAMEPLAY** More mechanics are in and we now have fail/continue states and level complete states the vibe and ui is a bit different but I plan to have a different ui and menu that the player can pick for future modes and stuff that might not fit well in the older menu we will see. The new menu will feature random cpu battles while the camera pans around.
 
