@@ -17,6 +17,16 @@ So using ghidra headless I attempted to rip the psp game neutron apart.
 
 Current iteration on the right its a far call from being a direct port but the maps are in and player mechanics almost in. The camera might work right now could use improvements. And a lot of calls are not fully figured out yet.
 
+Broken build video but some gameplay of the maps and "redone" menu with enemy ranks added. "mechanics are inverted which is kinda neat if perfected could make for a cool optional mode"
+
+
+
+https://github.com/user-attachments/assets/3f24be1b-5cbe-4188-93eb-9770cd55516f
+
+
+
+
+
 
 ## 🛠️ Project Status & Development Log
 
