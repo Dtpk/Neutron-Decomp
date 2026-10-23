@@ -24,6 +24,7 @@ Current iteration on the right its a far call from being a direct port but the m
 The current iteration is a far cry from a clean 1:1 direct port, but progress is moving forward:
 * **Levels/Maps:** 100% in—all 25 original maps have been successfully brought over.
 * **Player Mechanics:** Mostly functional, though some engine calls are still being sorted out and moments where you can go through your line on map edges.UPDATE this is slightly broken now I need to figure it all out again.
+So this broke in a unique way like a inverted version of the mechanics if I don't lose this terrain/ship cpp I may make it a mode it kinda a challenge a inverted movement that makes things different. Of coarse it will be optional mode if I don't lose it. But yeah I think I am on track to getting the movement right and a first release.
 * **The Camera:**  UPDATE!! This is some what working now I think this has finally been figured out and is 1 to 1 but needs further testing. Potential other modes might be added.
 * **The Menu:** Currently redone and not a 1 to 1 and stage select has some of the real psp logic still in place looks wrong will get old menu going and have a toggle for a new menu if wanted.
 * **ENEMIES:** The spawning of enemies as well as rank is correct. Orange enemies should be white but I will fix that last!!! It almost looks right though so I wanna check existing video then I will change it last since all enemy colors are fine right now including the random spawn logic and difficulty progression.
@@ -73,7 +74,7 @@ I honestly can't fully remember the original soundtrack from playing it on iOS b
 While a lot of the initial experimental code is messy, the core foundation is landing. Here is where things are heading:
 
 * **Core Playability:** Finalizing player movement, collision, and getting the camera tracking right.
-* **Customization & Features:** Adding color-selection schemes (similar to other classic *Tron* projects). Custom backgrounds effects etc...
+* **Customization & Features:** Adding color-selection schemes (similar to other classic *Tron* projects). Custom backgrounds effects etc... The base game had color changing I never used it didn't know my bad but I may try for some other special effects if needed since the color choice is optional.
 * **Ports & Web Deployment:** Turning this into a WebAssembly browser game, plus opening the door for future ports like **VR** or various console architectures by getting the engine fully mapped by then.
 * **Nostalgia & Performance:** I've been playing this on a PS4 via a PSP emulator and on my physical PSP for years just to kill time. The goal is to finally ditch the emulator overhead and get true native performance.
 * **Touch Controls And Remapping:** Wanna have controller support in full keyboard and mouse and touch screen and mouse controls.
