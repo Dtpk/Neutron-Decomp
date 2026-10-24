@@ -6,23 +6,30 @@
 </div>
 
 
-So using ghidra headless I attempted to rip the psp game neutron apart. "FUNCTIONAL BUILD IS LIVE YOU CAN PLAY IT AI STILL NEEDS WORK AND ANIMATIONS"
+So using ghidra headless I attempted to rip the psp game neutron apart. "FUNCTIONAL BUILD IS LIVE YOU CAN PLAY IT!!!"
 
 <table>
   <tr>
     <td align="center"><img width="480" height="272" alt="PIC1" src="https://github.com/user-attachments/assets/5aaef792-753c-467d-86ce-09325720f19c"></td>
-    <td align="center"><img width="480" height="272" alt="Screenshot_20261017_042435" src="https://github.com/user-attachments/assets/d5341df6-2cb2-49b3-8e94-3377210d3984"></td>
+    <td align="center"><img width="480" height="272" alt="Screenshot_20261024_005239" src="https://github.com/user-attachments/assets/ebfe3b83-aca6-4956-a81b-8a02dba6b107" /></td>
+
+
+
+    
   </tr>
 </table>
 
-Current iteration on the right its a far call from being a direct port but the maps are in and player mechanics almost in. The camera might work right now could use improvements. And a lot of calls are not fully figured out yet.
+Current iteration on the right its a far call from being a direct port but the maps are in and player mechanics mostly complete now. The camera might work right now could but use improvements. And a lot of calls are not fully figured out yet.
 
-Broken build video but some gameplay of the maps and "redone" menu with enemy ranks added. "mechanics are inverted which is kinda neat if perfected could make for a cool optional mode"
+Repaired build "gameplay video" that once had inverted mechanics now with proper line rendering so 2 squares make a rectangle the pop in is original to the original game which is why I need the pause before stage starts and camera entrance movement added in later which base game had.. So now that the harder part has been achieved all I need is ai enemy spawn fixes and framerate/camera tweaks and the menu worked on. 
 
 
 
-https://github.com/user-attachments/assets/3f24be1b-5cbe-4188-93eb-9770cd55516f
+https://github.com/user-attachments/assets/a5a8931e-cd36-4ab8-b1c3-85523ad1f853
 
+
+
+---
 
 
 
@@ -33,11 +40,10 @@ https://github.com/user-attachments/assets/3f24be1b-5cbe-4188-93eb-9770cd55516f
 ### Current State
 The current iteration is a far cry from a clean 1:1 direct port, but progress is moving forward:
 * **Levels/Maps:** 100% in—all 25 original maps have been successfully brought over.
-* **Player Mechanics:** Mostly functional, though some engine calls are still being sorted out and moments where you can go through your line on map edges.UPDATE this is slightly broken now I need to figure it all out again.
-So this broke in a unique way like a inverted version of the mechanics if I don't lose this terrain/ship cpp I may make it a mode it kinda a challenge a inverted movement that makes things different. Of coarse it will be optional mode if I don't lose it. But yeah I think I am on track to getting the movement right and a first release.
-* **The Camera:**  UPDATE!! This is some what working now I think this has finally been figured out and is 1 to 1 but needs further testing. Potential other modes might be added.
+* **Player Mechanics:** Mostly functional, though some engine calls are still being sorted out and moments where you can go through your line on map edges. Movement has been fixed latest build is playable still needs a lot of work!!
+* **The Camera:**  UPDATE!! This is some what working now I think this has finally been figured out and is 1 to 1 but needs further testing. Potential other modes might be added. Further testing I see some slight differences but I think I can get them fixed easy.
 * **The Menu:** Currently redone and not a 1 to 1 and stage select has some of the real psp logic still in place looks wrong will get old menu going and have a toggle for a new menu if wanted.
-* **ENEMIES:** The spawning of enemies as well as rank is correct. Orange enemies should be white but I will fix that last!!! It almost looks right though so I wanna check existing video then I will change it last since all enemy colors are fine right now including the random spawn logic and difficulty progression.
+* **ENEMIES:** The spawning of enemies as well as rank is correct. Orange enemies should be white but I will fix that last!!! It almost looks right though so I wanna check existing video then I will change it last since all enemy colors are fine right now including the random spawn logic and difficulty progression. "might need some tuning yet"
 
 ---
 
