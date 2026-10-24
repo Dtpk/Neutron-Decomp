@@ -6,7 +6,7 @@
 </div>
 
 
-So using ghidra headless I attempted to rip the psp game neutron apart. 
+So using ghidra headless I attempted to rip the psp game neutron apart. "FUNCTIONAL BUILD IS LIVE YOU CAN PLAY IT AI STILL NEEDS WORK AND ANIMATIONS"
 
 <table>
   <tr>
