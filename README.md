@@ -21,7 +21,7 @@ So using ghidra headless I attempted to rip the psp game neutron apart. "FUNCTIO
 
 Current iteration on the right its a far call from being a direct port but the maps are in and player mechanics mostly complete now. The camera might work right now could but use improvements. And a lot of calls are not fully figured out yet.
 
-Repaired build "gameplay video" that once had inverted mechanics now with proper line rendering so 2 squares make a rectangle the pop in is original to the original game which is why I need the pause before stage starts and camera entrance movement added in later which base game had.. So now that the harder part has been achieved all I need is ai enemy spawn fixes and framerate/camera tweaks and the menu worked on. 
+Repaired build "gameplay video" that once had inverted mechanics now with proper line rendering so 2 squares make a rectangle the pop in is original to the original game which is why I need the pause before stage starts and camera entrance movement added in later which base game had.. So now that the harder part has been achieved all I need is ai enemy spawn fixes and framerate/camera tweaks and the menu worked on the "scaling might need looked at too initial level map looks smaller compared to the psp so player and enemies may be large". 
 
 
 
