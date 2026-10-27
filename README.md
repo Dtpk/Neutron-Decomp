@@ -19,14 +19,13 @@ So using ghidra headless I attempted to rip the psp game neutron apart. "FUNCTIO
   </tr>
 </table>
 
-Current iteration on the right its a far call from being a direct port but the maps are in and player mechanics mostly complete now. The camera might work right now could but use improvements. And a lot of calls are not fully figured out yet.
 
-Repaired build "gameplay video" that once had inverted mechanics now with proper line rendering so 2 squares make a rectangle the pop in is original to the original game which is why I need the pause before stage starts and camera entrance movement added in later which base game had.. So now that the harder part has been achieved all I need is ai enemy spawn fixes and framerate/camera tweaks and the menu worked on the "scaling might need looked at too initial level map looks smaller compared to the psp so player and enemies may be large". 
-
+Almost fully done build is out "Windows And Linux" I still need a tutorial and a are you sure on the new game added in, and when hitting that wipes progress right now all progress can be managed by the save file. I included color switching and instead of 1 audio track .wav original psp version had this code removed so no idea what it was but I took some creativity here and you can play 3 .wavs. For travel exploding and music. You can remove them and game will keep playing for now they just stock sounds you can turn on off in game. I will wanna find the original .wav or get something that kinda fits. There is a level unlock cheat code and difficulty selection now too. A animated cpu battle on menu is planned. I think the multiplayer build I might try to use the original menu for if I can recover that. "Control remapping is also later" Oh the framework for map adding is in a map.txt is to be added will let you play custom maps the tool to make these is not ready yet. Excuse the compression I had to do to fit a video here on github.
 
 
-https://github.com/user-attachments/assets/a5a8931e-cd36-4ab8-b1c3-85523ad1f853
+https://github.com/user-attachments/assets/e3f8d0e0-c6ed-406a-9c6a-30b88ea33edc
 
+"The player spawning side ways is normal it's in original and scoring being broke as well I kept both in may fix scoring or hide the player "red blue" guides till last second like it appears on psp have yet to decide on this front."
 
 
 ---
