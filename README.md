@@ -28,7 +28,7 @@ Map editor and in game audio stock sounds included for now.. I think the multipl
 https://github.com/user-attachments/assets/e3f8d0e0-c6ed-406a-9c6a-30b88ea33edc
 
 
-"The player spawning side ways is normal it's in original and scoring being broke as well I kept both in may fix scoring or hide the player "red blue" guides till last second like it appears on psp have yet to decide on this front."
+"The player spawning side ways is normal it's in original although just for a frame not as dramatic as is here and scoring being broke as well is a original thing.I kept both in may fix scoring or hide the player "red blue" guides till last second like it appears on psp have yet to decide on this front."
 
 
 ---
