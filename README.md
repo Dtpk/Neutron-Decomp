@@ -30,6 +30,11 @@ https://github.com/user-attachments/assets/e3f8d0e0-c6ed-406a-9c6a-30b88ea33edc
 
 "The player spawning side ways is normal it's in original although just for a frame not as dramatic as is here and scoring being broke as well is a original thing.I kept both in may fix scoring or hide the player "red blue" guides till last second like it appears on psp have yet to decide on this front."
 
+Preview of the new map editor will replace with a video
+
+<img width="720" height="480" alt="image" src="https://github.com/user-attachments/assets/add0da31-f09d-4696-9f87-20c7005e2429" />
+
+
 
 ---
 
