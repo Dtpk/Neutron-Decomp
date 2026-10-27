@@ -20,7 +20,7 @@ So using ghidra headless I attempted to rip the psp game neutron apart. "FUNCTIO
 </table>
 
 
-Almost fully done build is out "Windows And Linux" I still need a tutorial and a are you sure on the new game added in, and when hitting that wipes progress right now all progress can be managed by the save file. I included color switching and instead of 1 audio track .wav original psp version had this code removed so no idea what it was but I took some creativity here and you can play 3 .wavs. For travel exploding and music. You can remove them and game will keep playing for now they just stock sounds you can turn on off in game. I will wanna find the original .wav or get something that kinda fits. There is a level unlock cheat code and difficulty selection now too. A animated cpu battle on menu is planned. I think the multiplayer build I might try to use the original menu for if I can recover that. "Control remapping is also later" Oh the framework for map adding is in a map.txt is to be added will let you play custom maps the tool to make these is not ready yet. Excuse the compression I had to do to fit a video here on github.
+Sound and map editor is in and will be up soon!!! I think the multiplayer build I might try to use the original menu for if I can recover that. "Control remapping is also later" For adding a map use editor make the map then place the map.txt next to the game and it will let you play the custom map as the 26th stage so beat the game or use the cheat code. Excuse the compression I had to do to fit a video here on github this is a older build video tutorial is now in with its same quirk of not actually erasing the saves its not a bug.
 
 
 https://github.com/user-attachments/assets/e3f8d0e0-c6ed-406a-9c6a-30b88ea33edc
