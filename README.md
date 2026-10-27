@@ -20,9 +20,9 @@ So using ghidra headless I attempted to rip the psp game neutron apart. "FUNCTIO
 </table>
 
 
-Map editor and in game audio stock sounds included for now.. I think the multiplayer build I might try to use the original menu for if I can recover that. "Control remapping is also later" To use map editor make the map in the editor then place the map.txt next to the game and it will let you play the custom map as the 26th stage so beat the game or use the cheat code. Excuse the compression I had to do to fit a video here on github this is a older build video tutorial is now in with its same quirk of not actually erasing the saves its not a bug. 
+Custom maps and in game audio using stock sounds is live.. I think the multiplayer build I might try to use the original menu for if I can recover that. "Control remapping is also later" 
 
-"Will update the release for windows for map editor and the game tomorrow sometime hopefully"
+"Will update the release for windows for map editor and the game tomorrow sometime hopefully also bellow video is old build and highly compressed to upload to github also the tutorial is now in with its same quirk of not actually erasing the saves its not a bug. "
 
 
 https://github.com/user-attachments/assets/e3f8d0e0-c6ed-406a-9c6a-30b88ea33edc
@@ -34,7 +34,7 @@ Preview of the new map editor will replace with a video
 
 <img width="720" height="480" alt="image" src="https://github.com/user-attachments/assets/add0da31-f09d-4696-9f87-20c7005e2429" />
 
-
+To use map editor make the map in the editor then place the map.txt next to the game and it will let you play the custom map as the 26th stage so beat the game or use the cheat code. 
 
 ---
 
