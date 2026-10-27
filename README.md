@@ -20,10 +20,13 @@ So using ghidra headless I attempted to rip the psp game neutron apart. "FUNCTIO
 </table>
 
 
-Sound and map editor is in and will be up soon!!! I think the multiplayer build I might try to use the original menu for if I can recover that. "Control remapping is also later" For adding a map use editor make the map then place the map.txt next to the game and it will let you play the custom map as the 26th stage so beat the game or use the cheat code. Excuse the compression I had to do to fit a video here on github this is a older build video tutorial is now in with its same quirk of not actually erasing the saves its not a bug.
+Map editor and in game audio stock sounds included for now.. I think the multiplayer build I might try to use the original menu for if I can recover that. "Control remapping is also later" To use map editor make the map in the editor then place the map.txt next to the game and it will let you play the custom map as the 26th stage so beat the game or use the cheat code. Excuse the compression I had to do to fit a video here on github this is a older build video tutorial is now in with its same quirk of not actually erasing the saves its not a bug. 
+
+"Will update the release for windows for map editor and the game tomorrow sometime hopefully"
 
 
 https://github.com/user-attachments/assets/e3f8d0e0-c6ed-406a-9c6a-30b88ea33edc
+
 
 "The player spawning side ways is normal it's in original and scoring being broke as well I kept both in may fix scoring or hide the player "red blue" guides till last second like it appears on psp have yet to decide on this front."
 
@@ -39,6 +42,7 @@ https://github.com/user-attachments/assets/e3f8d0e0-c6ed-406a-9c6a-30b88ea33edc
 ### Current State
 The current iteration is a far cry from a clean 1:1 direct port, but progress is moving forward:
 * **Levels/Maps:** 100% in—all 25 original maps have been successfully brought over.
+* **Custom/Maps:** A new map editor is made put the map.txt next to the game and congrats a 26th stage of your making.
 * **Player Mechanics:** Mostly functional, though some engine calls are still being sorted out and moments where you can go through your line on map edges. Movement has been fixed latest build is playable still needs a lot of work!!
 * **The Camera:**  UPDATE!! This is some what working now I think this has finally been figured out and is 1 to 1 but needs further testing. Potential other modes might be added. Further testing I see some slight differences but I think I can get them fixed easy.
 * **The Menu:** Currently redone and not a 1 to 1 and stage select has some of the real psp logic still in place looks wrong will get old menu going and have a toggle for a new menu if wanted.
@@ -92,20 +96,22 @@ I honestly can't fully remember the original soundtrack from playing it on iOS b
 While a lot of the initial experimental code is messy, the core foundation is landing. Here is where things are heading:
 
 * **Core Playability:** Finalizing player movement, collision, and getting the camera tracking right.
-* **Customization & Features:** Adding color-selection schemes (similar to other classic *Tron* projects). Custom backgrounds effects etc... The base game had color changing I never used it didn't know my bad but I may try for some other special effects if needed since the color choice is optional.
+* **Customization & Features:** Custom backgrounds effects etc...
 * **Ports & Web Deployment:** Turning this into a WebAssembly browser game, plus opening the door for future ports like **VR** or various console architectures by getting the engine fully mapped by then.
 * **Nostalgia & Performance:** I've been playing this on a PS4 via a PSP emulator and on my physical PSP for years just to kill time. The goal is to finally ditch the emulator overhead and get true native performance.
 * **Touch Controls And Remapping:** Wanna have controller support in full keyboard and mouse and touch screen and mouse controls.
-* **Some how making a custom map tool:** Making a tool to make or import custom stages would be fun but this game is really held together with glue and spit so it will be a very last stage en-devour current idea is a separate file generated on game launch it checks and the tool can fill it with maps this gets around rebuilding the game for new maps.
+-* **Some how making a custom map tool:** Making a tool to make or import custom stages would be fun but this game is really held together with glue and spit so it will be a very last stage en-devour current idea is a separate file generated on game launch it checks and the tool can fill it with maps this gets around rebuilding the game for new maps.-
 * * **Game blending:** Take the final port and instead of the ships we use other opensource things with your official dvds of coarse like halo ce grunts running with plasmas behind them instead of the dots and on collision explode and for enemy types it shows different covenant up to flood types as you progress just some ideas for what you can do later on.
 ---
 
 ### 💾 Updates
 * **New builds** I started to use a psp helper script with ghidra. "Didn't know about these at the time" I got lucky not using them and hopefully now that I did, even more progress can be made on the project. Playable builds are in the builds folder it isn't a full release a lot is still off and needs tweaks but it is playable as of right now.
 
-*  **Build Notes** I plan to have a different ui and menu that the player can pick for future modes and stuff that might not fit well in the older menu we will see. The new menu will feature random cpu battles while the camera pans around is my idea. Currently scaling is a tad off your much larger then you need to be on level one. Enemies need tweaked heavy yet and the camera it's extremely close something feels off with it framerate is being worked on but it is stable no slow downs but could be improved more. Also since it isn't final release yet all maps are unlocked.
+UP UP DOWN DOWN LEFT RIGHT ENTER Congrats if you made it this far down the read me. Here are all the maps free of charge enjoy the cheat code useful for wanting to play the custom map which is stage 26 without wanting to play through whole game.
 
-* **Separate Versions** Last minute thing but to prevent scope creep I will have a trimmed down or separate version not to ruin what I have for multiplayer "till that is tested and can be merged" this includes controller remapping and touch support which wasn't in the og psp version if you can tell... Right now single player is all in except tutorial but I even added more then one .wav as a option so now you got other sound effects you can remove or turn off in game or replace. The map.txt logic is in so need to make a tool and test that yet but custom maps can be done too now. Current build is playable till the end. I still need to put it in release soon and update the windows version.
+*  **Build Notes** I plan to have a different ui and menu that the player can pick for future modes and stuff that might not fit well in the older menu we will see. The new menu will feature random cpu battles while the camera pans around is my idea... Enemies might need tweaked and framerate is being worked on but it is stable no slow downs unlike original but could be improved more. 
+
+* **Separate Versions** Last minute thing but to prevent scope creep I will have a trimmed down or separate version not to ruin what I have for multiplayer "till that is tested and can be merged" this includes controller remapping and touch support which wasn't in the og psp version if you can tell...
 
 ### 📦 Trying the Build
 I may include a pre-compiled experimental build in a `build/` folder. If you want to try launching it locally on Linux, run:
