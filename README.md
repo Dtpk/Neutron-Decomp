@@ -46,10 +46,10 @@ To use map editor make the map in the editor then place the map.txt next to the 
 
 ### Current State
 The current iteration is a far cry from a clean 1:1 direct port, but progress is moving forward:
-* **Levels/Maps:** 100% in—all 25 original maps have been successfully brought over.
-* **Custom/Maps:** A new map editor is made put the map.txt next to the game and congrats a 26th stage of your making.
-* **Player Mechanics:** Mostly functional, though some engine calls are still being sorted out and moments where you can go through your line on map edges. Movement has been fixed latest build is playable still needs a lot of work!!
-* **The Camera:**  UPDATE!! This is some what working now I think this has finally been figured out and is 1 to 1 but needs further testing. Potential other modes might be added. Further testing I see some slight differences but I think I can get them fixed easy.
+* **Levels/Maps:** 100% in—all 25 original maps have been successfully brought over. ✅
+* **Custom/Maps:** A new map editor is made put the map.txt next to the game and congrats a 26th stage of your making. ✅
+* **Player Mechanics:** Mostly functional, though some engine calls are still being sorted out and moments where you can go through your line on map edges. Movement has been fixed latest build is playable still needs a lot of work!! ✅
+* **The Camera:**  UPDATE!! This is some what working now I think this has finally been figured out and is 1 to 1 but needs further testing. Potential other modes might be added. Further testing I see some slight differences but I think I can get them fixed easy. ✅
 * **The Menu:** Currently redone and not a 1 to 1 and stage select has some of the real psp logic still in place looks wrong will get old menu going and have a toggle for a new menu if wanted.
 * **ENEMIES:** The spawning of enemies as well as rank is correct. Orange enemies should be white but I will fix that last!!! It almost looks right though so I wanna check existing video then I will change it last since all enemy colors are fine right now including the random spawn logic and difficulty progression. "might need some tuning yet"
 
@@ -100,12 +100,12 @@ I honestly can't fully remember the original soundtrack from playing it on iOS b
 ### 🚀 Roadmap & Final Stretch Goals
 While a lot of the initial experimental code is messy, the core foundation is landing. Here is where things are heading:
 
-* **Core Playability:** Finalizing player movement, collision, and getting the camera tracking right.
+* **Core Playability:** Finalizing player movement, collision, and getting the camera tracking right. ✅
 * **Customization & Features:** Custom backgrounds effects etc...
 * **Ports & Web Deployment:** Turning this into a WebAssembly browser game, plus opening the door for future ports like **VR** or various console architectures by getting the engine fully mapped by then.
 * **Nostalgia & Performance:** I've been playing this on a PS4 via a PSP emulator and on my physical PSP for years just to kill time. The goal is to finally ditch the emulator overhead and get true native performance.
 * **Touch Controls And Remapping:** Wanna have controller support in full keyboard and mouse and touch screen and mouse controls.
--* **Some how making a custom map tool:** Making a tool to make or import custom stages would be fun but this game is really held together with glue and spit so it will be a very last stage en-devour current idea is a separate file generated on game launch it checks and the tool can fill it with maps this gets around rebuilding the game for new maps.-
+* **Some how making a custom map tool:** Making a tool to make or import custom stages would be fun but this game is really held together with glue and spit so it will be a very last stage en-devour current idea is a separate file generated on game launch it checks and the tool can fill it with maps this gets around rebuilding the game for new maps. ✅
 * * **Game blending:** Take the final port and instead of the ships we use other opensource things with your official dvds of coarse like halo ce grunts running with plasmas behind them instead of the dots and on collision explode and for enemy types it shows different covenant up to flood types as you progress just some ideas for what you can do later on.
 ---
 
