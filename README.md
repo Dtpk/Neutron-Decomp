@@ -22,7 +22,7 @@ So using ghidra headless I attempted to rip the psp game neutron apart. "FUNCTIO
 
 Custom maps and in game audio using stock sounds is live.. I think the multiplayer build I might try to use the original menu for if I can recover that. "Control remapping is also later" 
 
-"Will update the release for windows for map editor and the game tomorrow sometime hopefully also bellow video is old build and highly compressed to upload to github also the tutorial is now in with its same quirk of not actually erasing the saves its not a bug. "
+"Windows release for the map maker and game is bundled and released and can be played. Also bellow video is a old build and highly compressed to upload to github also the tutorial is now in with its same quirk of not actually erasing the saves its not a bug. Will update the video then for the new build"
 
 
 https://github.com/user-attachments/assets/e3f8d0e0-c6ed-406a-9c6a-30b88ea33edc
