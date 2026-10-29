@@ -123,5 +123,10 @@ UP UP DOWN DOWN LEFT RIGHT ENTER Congrats if you made it this far down the read 
 I may include a pre-compiled experimental build in a `build/` folder. If you want to try launching it locally on Linux, run:
 
 ```bash
+sudo chmod +x neutron
+sudo chmod +x run.sh
+then run by either using
 ./neutron or ./run.sh
+
+Map editor is launched more or less with the same steps.
 ```
