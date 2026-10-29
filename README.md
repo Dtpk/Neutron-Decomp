@@ -107,7 +107,7 @@ While a lot of the initial experimental code is messy, the core foundation is la
 * **Touch Controls And Remapping:** I wanna have controller support or full keyboard and mouse remapping and touch screen and mouse control toggles.
 * **Some how making a custom map tool:** Making a tool to make or import custom stages would be fun but this game is really held together with glue and spit so it will be a very last stage en-devour current idea is a separate file generated on game launch it checks and the tool can fill it with maps this gets around rebuilding the game for new maps. ✅
 * * **Game blending:** Take the final port and instead of the ships we use other opensource things with your official dvds of coarse like halo ce grunts running with plasmas behind them instead of the dots and on collision explode and for enemy types it shows different covenant up to flood types as you progress just some ideas for what you can do later on.
-* **Splitscreen:** This hit me out of no where but like what armagetron does in its tron game we can do here easy again not sure if I wanna do standalone builds or what for that.
+* **Splitscreen:** This hit me out of no where but like what armagetron does in its tron game we can do here easy again i'm not sure if I wanna do standalone builds or what for this yet but we make two instances they both sink up the presses this should be easier then figuring out if I wanna host a server or have to figure out some way to self host without port forwarding so I am staring work on this now. If possible controller support but might do split keyboard layout since keyboard is already implemented. Console ports after this is implemented and tested will release.
 ---
 
 ### 💾 Updates
