@@ -22,10 +22,17 @@ So using ghidra headless I attempted to rip the psp game neutron apart. "FUNCTIO
 
 Custom maps and in game audio using stock sounds is live.. I think the multiplayer build I might try to use the original menu for if I can recover that. "Control remapping is also later" 
 
-"Windows release for the map maker and game is bundled and released and can be played. Also bellow video is a old build and highly compressed to upload to github also the tutorial is now in with its same quirk of not actually erasing the saves its not a bug. Will update the video then for the new build"
+"Windows release for the map maker and game is bundled and released and can be played till completion. Also bellow video is a new unreleased build and highly compressed to upload to github I added splitscreen touch support and controller it's still in testing I will keep this version separate from the keyboard only one."
 
 
-https://github.com/user-attachments/assets/e3f8d0e0-c6ed-406a-9c6a-30b88ea33edc
+
+
+
+https://github.com/user-attachments/assets/b2295427-ed70-43fb-ab50-da6da638c0c8
+
+
+
+
 
 
 "The player spawning side ways is normal it's in original although just for a frame not as dramatic as is here and scoring being broke as well is a original thing.I kept both in may fix scoring or hide the player "red blue" guides till last second like it appears on psp have yet to decide on this front."
@@ -50,7 +57,7 @@ The current iteration is a far cry from a clean 1:1 direct port, but progress is
 * **Custom/Maps:** A new map editor is made put the map.txt next to the game and congrats a 26th stage of your making. ✅
 * **Player Mechanics:** Mostly functional, though some engine calls are still being sorted out and moments where you can go through your line on map edges. Movement has been fixed latest build is playable still needs a lot of work!! ✅
 * **The Camera:**  UPDATE!! This is some what working now I think this has finally been figured out and is 1 to 1 but needs further testing. Potential other modes might be added. Further testing I see some slight differences but I think I can get them fixed easy. ✅
-* **The Menu:** Currently redone and not a 1 to 1 and stage select has some of the real psp logic still in place looks wrong will get old menu going and have a toggle for a new menu if wanted. Working menu cpu battle is in now.
+* **The Menu:** Currently redone and not a 1 to 1 and stage select has some of the real psp logic still in place looks wrong will get old menu going and have a toggle for a new menu if wanted. Working menu cpu battle is in now. ✅
 * **ENEMIES:** The spawning of enemies as well as rank is correct. Orange enemies should be white but I will fix that last!!! It almost looks right though so I wanna check existing video then I will change it last since all enemy colors are fine right now including the random spawn logic and difficulty progression. "might need some tuning yet"
 
 ---
@@ -104,10 +111,10 @@ While a lot of the initial experimental code is messy, the core foundation is la
 * **Customization & Features:** Custom backgrounds effects etc...
 * **Ports & Web Deployment:** Turning this into a WebAssembly browser game, plus opening the door for future ports like **VR** or various console architectures by getting the engine fully mapped by then.
 * **Nostalgia & Performance:** I've been playing this on a PS4 via a PSP emulator and on my physical PSP for years just to kill time. The goal is to finally ditch the emulator overhead and get true native performance.
-* **Touch Controls And Remapping:** I wanna have controller support or full keyboard and mouse remapping and touch screen and mouse control toggles.
+* **Touch Controls And Controller:** I wanna have controller support and touch screen playing.✅
 * **Some how making a custom map tool:** Making a tool to make or import custom stages would be fun but this game is really held together with glue and spit so it will be a very last stage en-devour current idea is a separate file generated on game launch it checks and the tool can fill it with maps this gets around rebuilding the game for new maps. ✅
 * * **Game blending:** Take the final port and instead of the ships we use other opensource things with your official dvds of coarse like halo ce grunts running with plasmas behind them instead of the dots and on collision explode and for enemy types it shows different covenant up to flood types as you progress just some ideas for what you can do later on.
-* **Splitscreen:** This hit me out of no where but like what armagetron does in its tron game we can do here easy again i'm not sure if I wanna do standalone builds or what for this yet but we make two instances they both sink up the presses this should be easier then figuring out if I wanna host a server or have to figure out some way to self host without port forwarding so I am staring work on this now. If possible controller support but might do split keyboard layout since keyboard is already implemented. Console ports after this is implemented and tested will release.
+* **Splitscreen:** I am just staring work on this now.and it is in not released till I test hard only player battles right now no bots. Console ports after this is implemented and tested will release eventually Still need to polish the stage picker.✅✅✅
 ---
 
 ### 💾 Updates
