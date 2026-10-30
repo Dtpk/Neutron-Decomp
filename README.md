@@ -114,7 +114,7 @@ While a lot of the initial experimental code is messy, the core foundation is la
 * **Touch Controls And Controller:** I wanna have controller support and touch screen playing.✅
 * **Some how making a custom map tool:** Making a tool to make or import custom stages would be fun but this game is really held together with glue and spit so it will be a very last stage en-devour current idea is a separate file generated on game launch it checks and the tool can fill it with maps this gets around rebuilding the game for new maps. ✅
 * * **Game blending:** Take the final port and instead of the ships we use other opensource things with your official dvds of coarse like halo ce grunts running with plasmas behind them instead of the dots and on collision explode and for enemy types it shows different covenant up to flood types as you progress just some ideas for what you can do later on.
-* **Splitscreen:** I am just staring work on this now.and it is in not released till I test hard only player battles right now no bots. Console ports after this is implemented and tested will release eventually Still need to polish the stage picker.✅✅✅
+* **Splitscreen:** I am just staring work on this now and it is in not released till I test hard only player battles right now no bots. Console ports after this is implemented and tested will release eventually. I still need to polish the stage picker.✅✅✅
 ---
 
 ### 💾 Updates
