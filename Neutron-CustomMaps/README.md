@@ -15,6 +15,12 @@ into the same folder as the game's `neutron` binary (next to
 sudo apt install libsdl2-dev   # if not already installed
 make
 ./build/neutron_map_editor
+
+If the above is too much I bundled the "libs" folder with it so just do this to run in a portable manner. 
+chmod +x neutron_map_editor
+chmod +x run.sh
+Then run using this.
+./run.sh
 ```
 
 ### Windows
