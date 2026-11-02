@@ -110,7 +110,7 @@ I honestly can't fully remember the original soundtrack from playing it on iOS b
 
 ### 🚀 Roadmap & Final Stretch Goals
 While a lot of the initial experimental code is messy, the core foundation is landing. Here is where things are heading:
-
+* **Android Port:** This is working full controller split-screen and everything. Experimental portrait is bugged but figured it would be for now the game runs I will release it.✅
 * **Core Playability:** Finalizing player movement, collision, and getting the camera tracking right. ✅
 * **Customization & Features:** Custom backgrounds effects etc...
 * **Ports & Web Deployment:** Turning this into a WebAssembly browser game, plus opening the door for future ports like **VR** or various console architectures by getting the engine fully mapped by then.
