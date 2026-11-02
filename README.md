@@ -89,6 +89,8 @@ The only surviving web pages for this are for the psp port and what is on way ba
 
 "https://www.gamebrew.org/wiki/Neutron_PSP"
 
+"https://kotaku.com/ipad-games-the-ultimate-gamers-guide-to-apples-ipad-u-5502258"
+
 "https://web-archive-org.translate.goog/web/20250215060552/https://psp.scenebeta.com/noticia/neutron?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en-US"
 
 
