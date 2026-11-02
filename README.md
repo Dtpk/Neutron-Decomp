@@ -94,7 +94,7 @@ The only surviving web pages for this are for the psp port and what is on way ba
 
 Sadly none of the above were viable for getting any original source but were great none the less towards rebuilding this. "I left a comment on the youtube video more then 3 years ago and the mac version that may or may not be around never seemed to have surfaced or been put up but I did reach the original dev back then so their is hope"
 
-Update on this!! I found my .ipa back up I have a back up of the ios build from 3 years ago so it might not be lost I am keeping it with my current work and psp back up. So I can archive it. It won't be on the github but I might try to load it or look into it might help me see if I missed anything else but I think we pretty much got everything from the psp version either fixed or put back in. 
+Sorry premature celebration thought I had the ipa of this for older IOS but no alas it wasn't the same thing sadly quick confirmation ripping it apart so thankfully didn't need to rush for a ipod touch to try to verify it. As of right now that version is still lost.
 
 ---
 
