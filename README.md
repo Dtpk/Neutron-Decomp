@@ -23,7 +23,7 @@ So using ghidra headless I attempted to rip the psp game neutron apart. "FUNCTIO
 
 Custom maps and in game audio using stock sounds is live.. I think the multiplayer build I might try to use the original menu for if I can recover that. "Control remapping is also later" 
 
-"Windows release for the map maker and game is bundled and released and can be played till completion. Also bellow video is a new unreleased build and highly compressed to upload to github I added splitscreen touch support and controller it's still in testing I will keep this version separate from the keyboard only one."
+"Windows release for the map maker and game is bundled and released and can be played till completion. Below video was a non-released build but it is now live!!! Sorry the video is highly compressed to upload to github. This build has added split-screen touch support and controller. I will try to keep this version separate from the keyboard only one in case any regressions happen."
 
 
 
