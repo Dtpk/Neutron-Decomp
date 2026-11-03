@@ -116,7 +116,7 @@ While a lot of the initial experimental code is messy, the core foundation is la
 * **Android Port:** This is working full controller split-screen and everything. Experimental portrait is bugged but figured it would be for now the game runs I will release it. I will need to make sure it is a fat build aka universal some time so right now it might only install on newer devices so if it fails to install try another device or wait.✅
 * **Core Playability:** Finalizing player movement, collision, and getting the camera tracking right. ✅
 * **Customization & Features:** Custom backgrounds effects etc...
-* **Ports & Web Deployment:** Turning this into a WebAssembly browser game, plus opening the door for future ports like **VR** or various console architectures by getting the engine fully mapped by then.
+* **Ports & Web Deployment:** Turning this into a WebAssembly browser game, plus opening the door for future ports like **VR** or various console architectures by getting the engine fully mapped by then.✅
 * **Nostalgia & Performance:** I've been playing this on a PS4 via a PSP emulator and on my physical PSP for years just to kill time. The goal is to finally ditch the emulator overhead and get true native performance.
 * **Touch Controls And Controller:** I wanna have controller support and touch screen playing.✅
 * **Some how making a custom map tool:** Making a tool to make or import custom stages would be fun but this game is really held together with glue and spit so it will be a very last stage en-devour current idea is a separate file generated on game launch it checks and the tool can fill it with maps this gets around rebuilding the game for new maps. ✅
