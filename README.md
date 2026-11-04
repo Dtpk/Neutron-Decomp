@@ -117,7 +117,7 @@ While a lot of the initial experimental code is messy, the core foundation is la
 * **Core Playability:** Finalizing player movement, collision, and getting the camera tracking right. ✅
 * **Customization & Features:** Custom backgrounds effects etc...
 * **Ports & Web Deployment:** Turning this into a WebAssembly browser game, plus opening the door for future ports like **VR** or various console architectures by getting the engine fully mapped by then.✅
-* **Nostalgia & Performance:** I've been playing this on a PS4 via a PSP emulator and on my physical PSP for years just to kill time. The goal is to finally ditch the emulator overhead and get true native performance.
+* **Nostalgia & Performance:** I've been playing this on a PS4 via a PSP emulator and on my physical PSP for years just to kill time. The goal is to finally ditch the emulator overhead and get true native performance.✅
 * **Touch Controls And Controller:** I wanna have controller support and touch screen playing.✅
 * **Some how making a custom map tool:** Making a tool to make or import custom stages would be fun but this game is really held together with glue and spit so it will be a very last stage en-devour current idea is a separate file generated on game launch it checks and the tool can fill it with maps this gets around rebuilding the game for new maps. ✅
 * * **Game blending:** Take the final port and instead of the ships we use other opensource things with your official dvds of coarse like halo ce grunts running with plasmas behind them instead of the dots and on collision explode and for enemy types it shows different covenant up to flood types as you progress just some ideas for what you can do later on.
