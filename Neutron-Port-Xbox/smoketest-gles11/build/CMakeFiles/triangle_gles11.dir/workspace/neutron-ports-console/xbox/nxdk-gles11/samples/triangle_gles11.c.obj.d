@@ -1,0 +1,21 @@
+CMakeFiles/triangle_gles11.dir/workspace/neutron-ports-console/xbox/nxdk-gles11/samples/triangle_gles11.c.obj: \
+  /workspace/neutron-ports-console/xbox/nxdk-gles11/samples/triangle_gles11.c \
+  /workspace/neutron-ports-console/xbox/nxdk/lib/hal/video.h \
+  /workspace/neutron-ports-console/xbox/nxdk/lib/xboxkrnl/xboxkrnl.h \
+  /workspace/neutron-ports-console/xbox/nxdk/lib/xboxkrnl/xboxdef.h \
+  /workspace/neutron-ports-console/xbox/nxdk/lib/xboxkrnl/ntstatus.h \
+  /workspace/neutron-ports-console/xbox/nxdk/lib/pdclib/include/string.h \
+  /workspace/neutron-ports-console/xbox/nxdk/lib/pdclib/include/pdclib/_PDCLIB_lib_ext1.h \
+  /workspace/neutron-ports-console/xbox/nxdk/lib/pdclib/include/pdclib/_PDCLIB_int.h \
+  /workspace/neutron-ports-console/xbox/nxdk/lib/pdclib/platform/xbox/include/pdclib/_PDCLIB_config.h \
+  /workspace/neutron-ports-console/xbox/nxdk/lib/xboxrt/libc_extensions/ctype_ext_.h \
+  /workspace/neutron-ports-console/xbox/nxdk/lib/xboxrt/libc_extensions/errno_ext_.h \
+  /workspace/neutron-ports-console/xbox/nxdk/lib/xboxrt/libc_extensions/locale_ext_.h \
+  /workspace/neutron-ports-console/xbox/nxdk/lib/xboxrt/libc_extensions/stdio_ext_.h \
+  /workspace/neutron-ports-console/xbox/nxdk/lib/xboxrt/libc_extensions/stdlib_ext_.h \
+  /workspace/neutron-ports-console/xbox/nxdk/lib/xboxrt/libc_extensions/string_ext_.h \
+  /workspace/neutron-ports-console/xbox/nxdk/lib/pdclib/include/pdclib/_PDCLIB_aux.h \
+  /workspace/neutron-ports-console/xbox/nxdk-gles11/include/GLES/gl.h \
+  /workspace/neutron-ports-console/xbox/nxdk-gles11/include/GLES/glplatform.h \
+  /workspace/neutron-ports-console/xbox/nxdk-gles11/include/KHR/khrplatform.h \
+  /workspace/neutron-ports-console/xbox/nxdk/lib/pdclib/include/stdint.h

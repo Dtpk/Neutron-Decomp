@@ -1,0 +1,14 @@
+# Target labels
+ sdl2-populate
+# Source files and their labels
+/workspace/neutron-port-android-universal/build-android-arm64/_deps/sdl2-subbuild/CMakeFiles/sdl2-populate
+/workspace/neutron-port-android-universal/build-android-arm64/_deps/sdl2-subbuild/CMakeFiles/sdl2-populate.rule
+/workspace/neutron-port-android-universal/build-android-arm64/_deps/sdl2-subbuild/CMakeFiles/sdl2-populate-complete.rule
+/workspace/neutron-port-android-universal/build-android-arm64/_deps/sdl2-subbuild/sdl2-populate-prefix/src/sdl2-populate-stamp/sdl2-populate-build.rule
+/workspace/neutron-port-android-universal/build-android-arm64/_deps/sdl2-subbuild/sdl2-populate-prefix/src/sdl2-populate-stamp/sdl2-populate-configure.rule
+/workspace/neutron-port-android-universal/build-android-arm64/_deps/sdl2-subbuild/sdl2-populate-prefix/src/sdl2-populate-stamp/sdl2-populate-download.rule
+/workspace/neutron-port-android-universal/build-android-arm64/_deps/sdl2-subbuild/sdl2-populate-prefix/src/sdl2-populate-stamp/sdl2-populate-install.rule
+/workspace/neutron-port-android-universal/build-android-arm64/_deps/sdl2-subbuild/sdl2-populate-prefix/src/sdl2-populate-stamp/sdl2-populate-mkdir.rule
+/workspace/neutron-port-android-universal/build-android-arm64/_deps/sdl2-subbuild/sdl2-populate-prefix/src/sdl2-populate-stamp/sdl2-populate-patch.rule
+/workspace/neutron-port-android-universal/build-android-arm64/_deps/sdl2-subbuild/sdl2-populate-prefix/src/sdl2-populate-stamp/sdl2-populate-test.rule
+/workspace/neutron-port-android-universal/build-android-arm64/_deps/sdl2-subbuild/sdl2-populate-prefix/src/sdl2-populate-stamp/sdl2-populate-update.rule

@@ -1,0 +1,5 @@
+2 player split screen may need work player 2 screen is clipping player 1 I think and might be double rendering not sure but the frame rate seems fine.
+
+other thing frame rate over all is great mostly 59 something pretty much 60 seems at a certain point though we drop and hit a stable 29 for some reason from the 59 something cant quite tell when either I think it when 2 enemies are out or trails get longer but not sure yet will keep looking into that.
+
+our in game reset I can't figure out I am trying to do the combo done in games to exit to the dash but maybe homebrew isnt able to do this I had another homebrew game do this before if that is the case maybe removing the in game reset we did may me ok.

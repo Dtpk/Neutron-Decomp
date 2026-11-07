@@ -1,0 +1,30 @@
+The target system is: Generic - 1 - i686
+The host system is: Linux - 6.19.9-arch1-1 - x86_64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /workspace/neutron-ports-console/xbox/nxdk/bin/nxdk-cc 
+Build flags: 
+Id flags: -c 
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.o"
+
+The C compiler identification is Clang, found in "/workspace/neutron-ports-console/xbox/smoketest-gles11/build/CMakeFiles/3.25.1/CompilerIdC/CMakeCCompilerId.o"
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /workspace/neutron-ports-console/xbox/smoketest-gles11/build/CMakeFiles/CMakeScratch/TryCompile-D2jUIZ
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_f2b1f/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_f2b1f.dir/build.make CMakeFiles/cmTC_f2b1f.dir/build
+gmake[1]: Entering directory '/workspace/neutron-ports-console/xbox/smoketest-gles11/build/CMakeFiles/CMakeScratch/TryCompile-D2jUIZ'
+Building C object CMakeFiles/cmTC_f2b1f.dir/CMakeCCompilerABI.c.obj
+/workspace/neutron-ports-console/xbox/nxdk/bin/nxdk-cc  -I/workspace/neutron-ports-console/xbox/nxdk/lib -I/workspace/neutron-ports-console/xbox/nxdk/lib/xboxrt/libc_extensions -I/workspace/neutron-ports-console/xbox/nxdk/lib/pdclib/include -I/workspace/neutron-ports-console/xbox/nxdk/lib/pdclib/platform/xbox/include -I/workspace/neutron-ports-console/xbox/nxdk/lib/winapi -I/workspace/neutron-ports-console/xbox/nxdk/lib/xboxrt/vcruntime  -MD -MF CMakeFiles/cmTC_f2b1f.dir/CMakeCCompilerABI.c.obj.d -o CMakeFiles/cmTC_f2b1f.dir/CMakeCCompilerABI.c.obj -c /usr/share/cmake-3.25/Modules/CMakeCCompilerABI.c
+Linking C executable cmTC_f2b1f.exe
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f2b1f.dir/link.txt --verbose=1
+/workspace/neutron-ports-console/xbox/nxdk/bin/nxdk-link CMakeFiles/cmTC_f2b1f.dir/CMakeCCompilerABI.c.obj -out:cmTC_f2b1f.exe  /workspace/neutron-ports-console/xbox/nxdk/lib/libwinapi.lib /workspace/neutron-ports-console/xbox/nxdk/lib/xboxkrnl/libxboxkrnl.lib /workspace/neutron-ports-console/xbox/nxdk/lib/libxboxrt.lib  /workspace/neutron-ports-console/xbox/nxdk/lib/libpdclib.lib /workspace/neutron-ports-console/xbox/nxdk/lib/libnxdk_hal.lib /workspace/neutron-ports-console/xbox/nxdk/lib/libnxdk.lib /workspace/neutron-ports-console/xbox/nxdk/lib/nxdk_usb.lib 
+lld: warning: .edata=.rdata: already merged into .edataxb
+gmake[1]: Leaving directory '/workspace/neutron-ports-console/xbox/smoketest-gles11/build/CMakeFiles/CMakeScratch/TryCompile-D2jUIZ'
+
+
+

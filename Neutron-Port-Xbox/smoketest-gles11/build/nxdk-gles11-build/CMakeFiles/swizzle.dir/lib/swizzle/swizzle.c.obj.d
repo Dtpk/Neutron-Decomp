@@ -1,0 +1,20 @@
+CMakeFiles/swizzle.dir/lib/swizzle/swizzle.c.obj: \
+  /workspace/neutron-ports-console/xbox/nxdk-gles11/lib/swizzle/swizzle.c \
+  /workspace/neutron-ports-console/xbox/nxdk/lib/pdclib/platform/xbox/include/assert.h \
+  /workspace/neutron-ports-console/xbox/nxdk/lib/pdclib/include/pdclib/_PDCLIB_aux.h \
+  /workspace/neutron-ports-console/xbox/nxdk/lib/pdclib/include/stdbool.h \
+  /workspace/neutron-ports-console/xbox/nxdk/lib/pdclib/include/stddef.h \
+  /workspace/neutron-ports-console/xbox/nxdk/lib/pdclib/include/pdclib/_PDCLIB_lib_ext1.h \
+  /workspace/neutron-ports-console/xbox/nxdk/lib/pdclib/include/pdclib/_PDCLIB_int.h \
+  /workspace/neutron-ports-console/xbox/nxdk/lib/pdclib/platform/xbox/include/pdclib/_PDCLIB_config.h \
+  /workspace/neutron-ports-console/xbox/nxdk/lib/xboxrt/libc_extensions/ctype_ext_.h \
+  /workspace/neutron-ports-console/xbox/nxdk/lib/xboxrt/libc_extensions/errno_ext_.h \
+  /workspace/neutron-ports-console/xbox/nxdk/lib/xboxrt/libc_extensions/locale_ext_.h \
+  /workspace/neutron-ports-console/xbox/nxdk/lib/xboxrt/libc_extensions/stdio_ext_.h \
+  /workspace/neutron-ports-console/xbox/nxdk/lib/xboxrt/libc_extensions/stdlib_ext_.h \
+  /workspace/neutron-ports-console/xbox/nxdk/lib/xboxrt/libc_extensions/string_ext_.h \
+  /workspace/neutron-ports-console/xbox/nxdk/lib/pdclib/include/stdint.h \
+  /workspace/neutron-ports-console/xbox/nxdk/lib/pdclib/include/string.h \
+  /usr/lib/llvm-14/lib/clang/14.0.6/include/xmmintrin.h \
+  /usr/lib/llvm-14/lib/clang/14.0.6/include/mmintrin.h \
+  /workspace/neutron-ports-console/xbox/nxdk-gles11/lib/swizzle/swizzle.h

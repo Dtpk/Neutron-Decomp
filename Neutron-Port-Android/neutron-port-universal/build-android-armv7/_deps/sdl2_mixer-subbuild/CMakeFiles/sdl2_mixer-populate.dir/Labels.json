@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/workspace/neutron-port-android-universal/build-android-armv7/_deps/sdl2_mixer-subbuild/CMakeFiles/sdl2_mixer-populate"
+		},
+		{
+			"file" : "/workspace/neutron-port-android-universal/build-android-armv7/_deps/sdl2_mixer-subbuild/CMakeFiles/sdl2_mixer-populate.rule"
+		},
+		{
+			"file" : "/workspace/neutron-port-android-universal/build-android-armv7/_deps/sdl2_mixer-subbuild/CMakeFiles/sdl2_mixer-populate-complete.rule"
+		},
+		{
+			"file" : "/workspace/neutron-port-android-universal/build-android-armv7/_deps/sdl2_mixer-subbuild/sdl2_mixer-populate-prefix/src/sdl2_mixer-populate-stamp/sdl2_mixer-populate-build.rule"
+		},
+		{
+			"file" : "/workspace/neutron-port-android-universal/build-android-armv7/_deps/sdl2_mixer-subbuild/sdl2_mixer-populate-prefix/src/sdl2_mixer-populate-stamp/sdl2_mixer-populate-configure.rule"
+		},
+		{
+			"file" : "/workspace/neutron-port-android-universal/build-android-armv7/_deps/sdl2_mixer-subbuild/sdl2_mixer-populate-prefix/src/sdl2_mixer-populate-stamp/sdl2_mixer-populate-download.rule"
+		},
+		{
+			"file" : "/workspace/neutron-port-android-universal/build-android-armv7/_deps/sdl2_mixer-subbuild/sdl2_mixer-populate-prefix/src/sdl2_mixer-populate-stamp/sdl2_mixer-populate-install.rule"
+		},
+		{
+			"file" : "/workspace/neutron-port-android-universal/build-android-armv7/_deps/sdl2_mixer-subbuild/sdl2_mixer-populate-prefix/src/sdl2_mixer-populate-stamp/sdl2_mixer-populate-mkdir.rule"
+		},
+		{
+			"file" : "/workspace/neutron-port-android-universal/build-android-armv7/_deps/sdl2_mixer-subbuild/sdl2_mixer-populate-prefix/src/sdl2_mixer-populate-stamp/sdl2_mixer-populate-patch.rule"
+		},
+		{
+			"file" : "/workspace/neutron-port-android-universal/build-android-armv7/_deps/sdl2_mixer-subbuild/sdl2_mixer-populate-prefix/src/sdl2_mixer-populate-stamp/sdl2_mixer-populate-test.rule"
+		},
+		{
+			"file" : "/workspace/neutron-port-android-universal/build-android-armv7/_deps/sdl2_mixer-subbuild/sdl2_mixer-populate-prefix/src/sdl2_mixer-populate-stamp/sdl2_mixer-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"sdl2_mixer-populate"
+		],
+		"name" : "sdl2_mixer-populate"
+	}
+}

@@ -1,0 +1,44 @@
+apply plugin: 'com.android.application'
+
+android {
+    namespace "com.neutronport.game"
+    compileSdkVersion 34
+    defaultConfig {
+        // Distinct applicationId (not just namespace) so this can be
+        // installed side-by-side with the arm64-only and legacy builds on
+        // the same test device without colliding.
+        applicationId "com.neutronport.game.universal"
+        // 21 is the lowest platform the NDK r27c toolchain supports at all
+        // (see /opt/android-ndk/android-ndk-r27c/meta/platforms.json's
+        // "min": 21) -- must match the LOWER of the two ANDROID_PLATFORM
+        // values used for the two native builds below.
+        minSdkVersion 21
+        targetSdkVersion 34
+        versionCode 1
+        versionName "1.0"
+        // Both ABIs built natively (see README.txt) and dropped under
+        // jniLibs/arm64-v8a/ and jniLibs/armeabi-v7a/ -- Gradle packages
+        // each device's matching .so automatically at install time, so one
+        // APK covers both old 32-bit and modern 64-bit ARM phones.
+        ndk {
+            abiFilters 'arm64-v8a', 'armeabi-v7a'
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lint {
+        abortOnError false
+    }
+    // Prebuilt libneutron.so (compiled separately via the project's own
+    // CMake+NDK build, not Gradle's native build integration) lives under
+    // src/main/jniLibs/<abi>/ -- Gradle packages anything found there into
+    // the APK automatically, no externalNativeBuild step needed.
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+}

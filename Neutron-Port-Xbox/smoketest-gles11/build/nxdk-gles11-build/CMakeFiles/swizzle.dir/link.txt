@@ -1,0 +1,2 @@
+/usr/bin/llvm-ar qc libswizzle.lib CMakeFiles/swizzle.dir/lib/swizzle/swizzle.c.obj
+/usr/bin/llvm-ranlib libswizzle.lib

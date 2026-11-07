@@ -1,0 +1,19 @@
+# Generic build outputs and caches
+/build/
+/build-*/
+**/build-*/
+**/_deps/
+
+# Specific port and sub-project build artifacts
+Neutron-Port-Android/build-android/
+Neutron-Port-Android/neutron-port-universal/build-android-*/
+Neutron-Port-Xbox/nxdk/
+Neutron-Port-Xbox/nxdk-gles11/
+Neutron-Port-Xbox/pbgl/
+
+# IDE and OS files
+.DS_Store
+.vscode/
+.idea/
+CMakeCache.txt
+CMakeFiles/

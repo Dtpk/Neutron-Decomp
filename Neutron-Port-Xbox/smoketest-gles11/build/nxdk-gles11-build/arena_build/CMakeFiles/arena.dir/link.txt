@@ -1,0 +1,2 @@
+/usr/bin/llvm-ar qc libarena.lib CMakeFiles/arena.dir/arena.c.obj
+/usr/bin/llvm-ranlib libarena.lib

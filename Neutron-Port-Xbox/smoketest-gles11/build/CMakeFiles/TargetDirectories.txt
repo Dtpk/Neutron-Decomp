@@ -1,0 +1,10 @@
+/workspace/neutron-ports-console/xbox/smoketest-gles11/build/CMakeFiles/triangle_gles11.dir
+/workspace/neutron-ports-console/xbox/smoketest-gles11/build/CMakeFiles/edit_cache.dir
+/workspace/neutron-ports-console/xbox/smoketest-gles11/build/CMakeFiles/rebuild_cache.dir
+/workspace/neutron-ports-console/xbox/smoketest-gles11/build/nxdk-gles11-build/CMakeFiles/swizzle.dir
+/workspace/neutron-ports-console/xbox/smoketest-gles11/build/nxdk-gles11-build/CMakeFiles/GLESv1_CM.dir
+/workspace/neutron-ports-console/xbox/smoketest-gles11/build/nxdk-gles11-build/CMakeFiles/edit_cache.dir
+/workspace/neutron-ports-console/xbox/smoketest-gles11/build/nxdk-gles11-build/CMakeFiles/rebuild_cache.dir
+/workspace/neutron-ports-console/xbox/smoketest-gles11/build/nxdk-gles11-build/arena_build/CMakeFiles/arena.dir
+/workspace/neutron-ports-console/xbox/smoketest-gles11/build/nxdk-gles11-build/arena_build/CMakeFiles/edit_cache.dir
+/workspace/neutron-ports-console/xbox/smoketest-gles11/build/nxdk-gles11-build/arena_build/CMakeFiles/rebuild_cache.dir

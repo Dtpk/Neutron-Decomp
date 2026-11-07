@@ -1,0 +1,13 @@
+/workspace/neutron-port-android-universal/build-android-armv7/CMakeFiles/neutron.dir
+/workspace/neutron-port-android-universal/build-android-armv7/CMakeFiles/edit_cache.dir
+/workspace/neutron-port-android-universal/build-android-armv7/CMakeFiles/rebuild_cache.dir
+/workspace/neutron-port-android-universal/build-android-armv7/_deps/sdl2-build/CMakeFiles/sdl_headers_copy.dir
+/workspace/neutron-port-android-universal/build-android-armv7/_deps/sdl2-build/CMakeFiles/SDL2main.dir
+/workspace/neutron-port-android-universal/build-android-armv7/_deps/sdl2-build/CMakeFiles/SDL2-static.dir
+/workspace/neutron-port-android-universal/build-android-armv7/_deps/sdl2-build/CMakeFiles/SDL2_test.dir
+/workspace/neutron-port-android-universal/build-android-armv7/_deps/sdl2-build/CMakeFiles/uninstall.dir
+/workspace/neutron-port-android-universal/build-android-armv7/_deps/sdl2-build/CMakeFiles/edit_cache.dir
+/workspace/neutron-port-android-universal/build-android-armv7/_deps/sdl2-build/CMakeFiles/rebuild_cache.dir
+/workspace/neutron-port-android-universal/build-android-armv7/_deps/sdl2_mixer-build/CMakeFiles/SDL2_mixer.dir
+/workspace/neutron-port-android-universal/build-android-armv7/_deps/sdl2_mixer-build/CMakeFiles/edit_cache.dir
+/workspace/neutron-port-android-universal/build-android-armv7/_deps/sdl2_mixer-build/CMakeFiles/rebuild_cache.dir

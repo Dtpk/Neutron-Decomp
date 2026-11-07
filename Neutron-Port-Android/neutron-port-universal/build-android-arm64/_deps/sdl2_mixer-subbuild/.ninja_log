@@ -1,0 +1,21 @@
+# ninja log v5
+0	5	1793778065354927224	sdl2_mixer-populate-prefix/src/sdl2_mixer-populate-stamp/sdl2_mixer-populate-mkdir	c97d2b00b6226818
+0	5	1793778065354927224	/workspace/neutron-port-android-universal/build-android-arm64/_deps/sdl2_mixer-subbuild/sdl2_mixer-populate-prefix/src/sdl2_mixer-populate-stamp/sdl2_mixer-populate-mkdir	c97d2b00b6226818
+5	30558	1793778095909566582	sdl2_mixer-populate-prefix/src/sdl2_mixer-populate-stamp/sdl2_mixer-populate-download	941cc56766c5a943
+5	30558	1793778095909566582	/workspace/neutron-port-android-universal/build-android-arm64/_deps/sdl2_mixer-subbuild/sdl2_mixer-populate-prefix/src/sdl2_mixer-populate-stamp/sdl2_mixer-populate-download	941cc56766c5a943
+30558	30579	0	sdl2_mixer-populate-prefix/src/sdl2_mixer-populate-stamp/sdl2_mixer-populate-update	c130851833010552
+30558	30579	0	/workspace/neutron-port-android-universal/build-android-arm64/_deps/sdl2_mixer-subbuild/sdl2_mixer-populate-prefix/src/sdl2_mixer-populate-stamp/sdl2_mixer-populate-update	c130851833010552
+30579	30583	1793778095933566298	sdl2_mixer-populate-prefix/src/sdl2_mixer-populate-stamp/sdl2_mixer-populate-patch	2919fd5049a54093
+30579	30583	1793778095933566298	/workspace/neutron-port-android-universal/build-android-arm64/_deps/sdl2_mixer-subbuild/sdl2_mixer-populate-prefix/src/sdl2_mixer-populate-stamp/sdl2_mixer-populate-patch	2919fd5049a54093
+30583	30587	1793778095938566239	sdl2_mixer-populate-prefix/src/sdl2_mixer-populate-stamp/sdl2_mixer-populate-configure	13cf4bd4c0e90355
+30583	30587	1793778095938566239	/workspace/neutron-port-android-universal/build-android-arm64/_deps/sdl2_mixer-subbuild/sdl2_mixer-populate-prefix/src/sdl2_mixer-populate-stamp/sdl2_mixer-populate-configure	13cf4bd4c0e90355
+30587	30592	1793778095943566180	sdl2_mixer-populate-prefix/src/sdl2_mixer-populate-stamp/sdl2_mixer-populate-build	7c4a70f9aba7e4aa
+30587	30592	1793778095943566180	/workspace/neutron-port-android-universal/build-android-arm64/_deps/sdl2_mixer-subbuild/sdl2_mixer-populate-prefix/src/sdl2_mixer-populate-stamp/sdl2_mixer-populate-build	7c4a70f9aba7e4aa
+30592	30595	1793778095946566145	sdl2_mixer-populate-prefix/src/sdl2_mixer-populate-stamp/sdl2_mixer-populate-install	b3063b28cb8a673f
+30592	30595	1793778095946566145	/workspace/neutron-port-android-universal/build-android-arm64/_deps/sdl2_mixer-subbuild/sdl2_mixer-populate-prefix/src/sdl2_mixer-populate-stamp/sdl2_mixer-populate-install	b3063b28cb8a673f
+30595	30598	1793778095949566109	sdl2_mixer-populate-prefix/src/sdl2_mixer-populate-stamp/sdl2_mixer-populate-test	a58ce2bd99b0590
+30595	30598	1793778095949566109	/workspace/neutron-port-android-universal/build-android-arm64/_deps/sdl2_mixer-subbuild/sdl2_mixer-populate-prefix/src/sdl2_mixer-populate-stamp/sdl2_mixer-populate-test	a58ce2bd99b0590
+30598	30603	1793778095954566050	CMakeFiles/sdl2_mixer-populate-complete	3c0669747af4237c
+30598	30603	1793778095954566050	sdl2_mixer-populate-prefix/src/sdl2_mixer-populate-stamp/sdl2_mixer-populate-done	3c0669747af4237c
+30598	30603	1793778095954566050	/workspace/neutron-port-android-universal/build-android-arm64/_deps/sdl2_mixer-subbuild/CMakeFiles/sdl2_mixer-populate-complete	3c0669747af4237c
+30598	30603	1793778095954566050	/workspace/neutron-port-android-universal/build-android-arm64/_deps/sdl2_mixer-subbuild/sdl2_mixer-populate-prefix/src/sdl2_mixer-populate-stamp/sdl2_mixer-populate-done	3c0669747af4237c
