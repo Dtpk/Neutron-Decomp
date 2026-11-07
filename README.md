@@ -65,7 +65,7 @@ The current iteration is a far cry from a clean 1:1 direct port, but progress is
 * **The Camera:**  UPDATE!! This is some what working now I think this has finally been figured out and is 1 to 1 but needs further testing. Potential other modes might be added. Further testing I see some slight differences but I think I can get them fixed easy. ✅
 * **The Menu:** Currently redone and not a 1 to 1 and stage select has some of the real psp logic still in place looks wrong will get old menu going and have a toggle for a new menu if wanted. Working menu cpu battle is in now. ✅
 * **ENEMIES:** The spawning of enemies as well as rank is correct. Orange enemies should be white but I will fix that last!!! It almost looks right though so I wanna check existing video then I will change it last since all enemy colors are fine right now including the random spawn logic and difficulty progression. "might need some tuning yet"
-* **Multiplayer-Split Screen** Split screen is in and works great how ever randomized spawns need to be applied to all the builds and as of multiplayer it is on the way but this goal is pretty much met. Multiplayer works via self hosting and port forwarding lan play doesn't require that as long as a device is on the same wifi you can host and join. I may make a dedicated server by release we will see.
+
 
 ---
 
@@ -125,6 +125,7 @@ While a lot of the initial experimental code is messy, the core foundation is la
 * **Some how making a custom map tool:** Making a tool to make or import custom stages would be fun but this game is really held together with glue and spit so it will be a very last stage en-devour current idea is a separate file generated on game launch it checks and the tool can fill it with maps this gets around rebuilding the game for new maps. ✅
 * * **Game blending:** Take the final port and instead of the ships we use other opensource things with your official dvds of coarse like halo ce grunts running with plasmas behind them instead of the dots and on collision explode and for enemy types it shows different covenant up to flood types as you progress just some ideas for what you can do later on.
 * **Splitscreen:** I am just staring work on this now and it is in not released till I test hard only player battles right now no bots. Console ports after this is implemented and tested will release eventually. I still need to polish the stage picker.✅✅✅
+* **Multiplayer** Split screen is in and works great how ever randomized spawns need to be applied to all the builds and as of multiplayer it is on the way but this goal is pretty much met. Multiplayer works via self hosting and port forwarding lan play doesn't require that as long as a device is on the same wifi you can host and join. I may make a dedicated server by release we will see I also need to up the player amount from 4 during online play.
 ---
 
 ### 💾 Updates
