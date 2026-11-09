@@ -26,6 +26,12 @@ Uint32 s_last_real_tick_ms = 0; // drive_tick()'s OWN pacing clock for actually 
                                  // gate -- see pump_network()'s own comment for why main.cpp's
                                  // gate alone isn't enough once drive_tick() can be reached
                                  // every real frame instead of only once per gated main_loop()
+int s_match_difficulty = 0;    // the HOST's difficulty for THIS match (net_session::
+                                 // match_difficulty()) -- drive_tick()'s pacing clock uses
+                                 // this, NOT game->user_difficulty (each player's own
+                                 // personal setting, which also gates easy-mode guides --
+                                 // see start()'s own header comment, net_match.h)
+
 // The actual socket I/O -- submit (status 23 only) + net_session::update().
 // No tick-consumption logic at all; see drive_tick() for that. Deliberately
 // resubmits EVERY real frame, even when s_pending_local_action hasn't
@@ -79,11 +85,12 @@ bool poll_disconnection_signals(neutron* game) {
 
 bool is_active() { return s_active; }
 
-void start(neutron* game, int map_idx, unsigned seed) {
+void start(neutron* game, int map_idx, unsigned seed, int difficulty) {
     s_active = true;
     s_local_slot = net_session::local_slot();
     s_pending_local_action = 0;
     s_last_map_idx = map_idx;
+    s_match_difficulty = difficulty;
     s_seen_generation = net_session::match_generation();
     s_seen_cancel_token = net_session::cancel_token();
     s_last_real_tick_ms = SDL_GetTicks(); // fresh pacing baseline for this match/retry
@@ -128,8 +135,12 @@ void retry(neutron* game) {
     // catch that).
     s_last_map_idx = menu_multiplayer::validate_map_choice(s_last_map_idx, net_session::connected_player_count());
     unsigned seed = (unsigned)SDL_GetTicks();
-    net_session::start_match(s_last_map_idx, seed);
-    start(game, s_last_map_idx, seed);
+    // Re-read the host's OWN current difficulty here too, same reasoning
+    // as the map re-validation above -- if the host changed their local
+    // setting between matches, the retry should reflect that, not the
+    // value from whenever the FIRST match in this session started.
+    net_session::start_match(s_last_map_idx, seed, game->user_difficulty);
+    start(game, s_last_map_idx, seed, game->user_difficulty);
 }
 
 void cancel(neutron* game) {
@@ -161,7 +172,7 @@ void update_match_over(neutron* game) {
     if (net_session::role() == net_session::Role::Client &&
         net_session::match_starting() &&
         net_session::match_generation() != s_seen_generation) {
-        start(game, net_session::match_map_idx(), net_session::match_seed());
+        start(game, net_session::match_map_idx(), net_session::match_seed(), net_session::match_difficulty());
     }
 }
 
@@ -189,12 +200,15 @@ void drive_tick(neutron* game) {
     // can now be reached every real frame (via pump_network() below),
     // not just once per ~55-75ms gated main_loop() call, so a resolved
     // tick must still only actually ADVANCE at the game's intended
-    // cadence (same 55/75ms local play uses via the difficulty slider),
-    // not the instant it happens to resolve network-wise -- otherwise
-    // two machines with near-zero latency between them would run the
-    // match faster than its own difficulty pacing intends.
+    // cadence, not the instant it happens to resolve network-wise --
+    // otherwise two machines with near-zero latency between them would
+    // run the match faster than its own difficulty pacing intends.
+    // Uses s_match_difficulty (the HOST's difficulty for THIS match, see
+    // start()'s own header comment for why), NOT game->user_difficulty --
+    // every peer paces to the SAME speed regardless of each player's own
+    // personal setting, which stays tied only to the easy-mode guides.
     Uint32 now = SDL_GetTicks();
-    float target_ms = (game->user_difficulty == 1) ? 55.0f : 75.0f;
+    float target_ms = (s_match_difficulty == 1) ? 55.0f : 75.0f;
     if (now - s_last_real_tick_ms < (Uint32)target_ms) return;
     s_last_real_tick_ms = now;
 

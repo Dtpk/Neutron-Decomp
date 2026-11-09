@@ -193,7 +193,7 @@ void update(neutron* game) {
     }
 
     if (s_mode == Mode::JoinLobby && net_session::match_starting()) {
-        net_match::start(game, net_session::match_map_idx(), net_session::match_seed());
+        net_match::start(game, net_session::match_map_idx(), net_session::match_seed(), net_session::match_difficulty());
         return;
     }
     if (s_mode == Mode::JoinLobby && net_session::role() == net_session::Role::None) {
@@ -353,8 +353,13 @@ void handle_key_down(neutron* game, SDL_Keycode sym) {
                 ? resolve_random_map_idx(net_session::connected_player_count())
                 : s_host_map_idx;
             unsigned seed = (unsigned)SDL_GetTicks();
-            net_session::start_match(resolved_map_idx, seed);
-            net_match::start(game, resolved_map_idx, seed);
+            // Host's own current difficulty becomes the shared pacing
+            // speed for every peer in this match -- see net_match::
+            // start()'s own header comment for why this is kept separate
+            // from each player's own game->user_difficulty (which stays
+            // tied to their personal easy-mode guides, unaffected).
+            net_session::start_match(resolved_map_idx, seed, game->user_difficulty);
+            net_match::start(game, resolved_map_idx, seed, game->user_difficulty);
             return;
         }
         if (sym == SDLK_ESCAPE) { net_session::leave_session(); s_mode = Mode::ChooseRole; return; }

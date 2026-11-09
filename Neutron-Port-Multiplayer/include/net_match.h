@@ -44,8 +44,15 @@ bool is_active();
 // peer's own process-local call history (which diverges the moment two
 // peers run different code paths, e.g. different menu navigation before
 // the match even starts) would make them compute DIFFERENT spawn layouts
-// for what's supposed to be the exact same match.
-void start(neutron* game, int map_idx, unsigned seed);
+// for what's supposed to be the exact same match. difficulty is the
+// HOST's difficulty (0 easy, 1 hard, from net_session::match_difficulty())
+// for THIS match's shared pacing clock -- deliberately NOT written into
+// game->user_difficulty, which stays each player's own personal setting
+// (also gates easy-mode guides; see split_screen_match.cpp's
+// print_match()) so a player who prefers easy keeps their guides even in
+// a host-hard match, while drive_tick() below still paces everyone to
+// the host's chosen speed.
+void start(neutron* game, int map_idx, unsigned seed, int difficulty);
 
 // Tears the networked match down (net_session::leave_session() +
 // split_screen_match::leave_match()) and clears is_active(). Called on

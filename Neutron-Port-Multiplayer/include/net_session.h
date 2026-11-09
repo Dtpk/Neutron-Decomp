@@ -108,14 +108,34 @@ std::string player_name(int slot); // empty if that slot isn't filled
 // desync bug this avoids, below). seed is a shared spawn-layout seed the
 // caller should srand() with, identically, on every peer right before
 // calling split_screen_match::start_match_with_sources() -- see
-// net_match::start()'s own comment for why this exists at all.
-bool start_match(int map_idx, unsigned seed);
+// net_match::start()'s own comment for why this exists at all. difficulty
+// is the HOST's own local user_difficulty (0 easy, 1 hard) at the moment
+// the match starts -- the caller should pass game->user_difficulty
+// directly, read fresh on every start_match() call (including retries),
+// never a value cached from match creation. See match_difficulty()'s own
+// comment for why this needs to travel over the wire at all, separate
+// from each peer's own personal difficulty setting.
+bool start_match(int map_idx, unsigned seed, int difficulty);
 
 // True once a START has been received (client) or sent (host) -- the menu
 // should transition to the match screen when this flips true.
 bool match_starting();
 int match_map_idx();    // valid once match_starting() is true
 unsigned match_seed();  // valid once match_starting() is true -- see start_match()'s own comment
+
+// Valid once match_starting() is true -- the HOST's own difficulty
+// (0 easy, 1 hard) for THIS match, shared by every peer for pacing
+// purposes. Deliberately NOT the same thing as each peer's own local
+// game->user_difficulty: that field also gates whether easy-mode guides
+// are drawn (see split_screen_match.cpp's print_match()), and a player
+// who personally prefers easy (and relies on those guides) shouldn't
+// lose them just because the host picked a harder, faster-paced match --
+// net_match.cpp's drive_tick() uses THIS value for the shared pacing
+// clock instead of game->user_difficulty, so guides stay tied to each
+// player's own personal setting while the actual match speed follows
+// whatever the host chose, for everyone, same as map choice and seed
+// already do.
+int match_difficulty();
 
 // Increments on EVERY real START event -- the initial match start AND any
 // later retry (the host can call start_match() again from the match-over

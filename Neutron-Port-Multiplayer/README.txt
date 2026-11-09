@@ -664,3 +664,30 @@ Real-world test #2 -- results and fixes (2026-11-06)
    justified fix regardless of whether that turns out to be a factor
    too. Worth re-testing the exact "host from the PC over ethernet"
    scenario specifically once this revert is in place.
+
+21. New feature, not a bug fix: difficulty/speed is now host-authoritative
+   and synced, same pattern as map choice and spawn seed. Before this,
+   #18's shared pacing clock read game->user_difficulty directly -- each
+   peer's OWN local save setting -- with no network sync at all, so the
+   match's real speed was bottlenecked by whichever peer's personal
+   setting was slower (easy/75ms), regardless of who hosted or what the
+   host's own setting was.
+   Real fix: net_session::start_match() gained a third parameter
+   (difficulty), carried in a new 4th field on the START message
+   (START|map_idx|seed|difficulty) and exposed via a new
+   net_session::match_difficulty() accessor. net_match::start() gained a
+   matching difficulty parameter, stored in a NEW s_match_difficulty
+   variable -- deliberately NOT written into game->user_difficulty.
+   drive_tick()'s pacing clock now reads s_match_difficulty instead.
+   Both call sites that start a match (menu_multiplayer.cpp's HostLobby
+   Enter-key handler, and net_match::retry()) pass the HOST's CURRENT
+   game->user_difficulty at the moment of that call (re-read fresh every
+   retry too, same reasoning as the map re-validation).
+   Deliberately kept separate from game->user_difficulty itself (not
+   just overwriting it) because that field ALSO gates whether easy-mode
+   guides are drawn (split_screen_match.cpp's print_match()) -- a player
+   who personally prefers easy and relies on those guides keeps them
+   even in a host-hard match; only the shared match SPEED follows the
+   host, not each player's own personal visual aid preference. Confirmed
+   this distinction with the user before implementing. Not yet tested on
+   real hardware.

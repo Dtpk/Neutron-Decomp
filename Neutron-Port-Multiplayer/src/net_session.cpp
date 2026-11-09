@@ -128,6 +128,7 @@ bool g_join_pending = false; // client-only -- see net_session.h's own comment o
 bool g_match_starting = false;
 int g_match_map_idx = 0;
 unsigned g_match_seed = 0;
+int g_match_difficulty = 0; // see net_session.h's own comment on match_difficulty()
 int g_match_generation = 0; // see net_session.h's own comment on match_generation()
 int g_cancel_token = 0;     // see net_session.h's own comment on cancel_token()
 
@@ -586,9 +587,10 @@ void client_handle_message(const std::string& line) {
         }
         g_player_count = 0;
         for (int i = 0; i < MAX_PLAYERS; i++) if (!g_player_names[i].empty()) g_player_count++;
-    } else if (parts[0] == "START" && parts.size() >= 3) {
+    } else if (parts[0] == "START" && parts.size() >= 4) {
         g_match_map_idx = std::atoi(parts[1].c_str());
         g_match_seed = (unsigned)std::strtoul(parts[2].c_str(), nullptr, 10);
+        g_match_difficulty = std::atoi(parts[3].c_str());
         g_match_starting = true;
         g_match_generation++;
         // Mirror start_match()'s own reset on the host -- see its
@@ -678,10 +680,11 @@ void update() {
     else if (g_role == Role::Client) client_update();
 }
 
-bool start_match(int map_idx, unsigned seed) {
+bool start_match(int map_idx, unsigned seed, int difficulty) {
     if (g_role != Role::Host) return false;
     g_match_map_idx = map_idx;
     g_match_seed = seed;
+    g_match_difficulty = difficulty;
     g_match_starting = true;
     g_match_live = true;
     g_match_generation++;
@@ -711,7 +714,8 @@ bool start_match(int map_idx, unsigned seed) {
     g_tick_wait_started_ms = 0;
     for (auto& c : g_clients) c.tick_action = -1;
 
-    std::string line = "START|" + std::to_string(map_idx) + "|" + std::to_string(seed);
+    std::string line = "START|" + std::to_string(map_idx) + "|" + std::to_string(seed) +
+                        "|" + std::to_string(difficulty);
     for (auto& c : g_clients) {
         if (c.sock && c.welcomed) send_line(c.sock, line);
     }
@@ -721,6 +725,7 @@ bool start_match(int map_idx, unsigned seed) {
 bool match_starting() { return g_match_starting; }
 int match_map_idx() { return g_match_map_idx; }
 unsigned match_seed() { return g_match_seed; }
+int match_difficulty() { return g_match_difficulty; }
 int match_generation() { return g_match_generation; }
 
 void notify_match_ended() {
