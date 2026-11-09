@@ -752,8 +752,6 @@ void submit_local_action(int action) {
     // assembly above -- no message needed, it already knows its own input.
 }
 
-int current_tick() { return g_current_tick; }
-
 bool tick_ready() { return g_tick_ready; }
 
 int tick_action(int slot) {

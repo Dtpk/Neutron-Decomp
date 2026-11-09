@@ -26,35 +26,30 @@ Uint32 s_last_real_tick_ms = 0; // drive_tick()'s OWN pacing clock for actually 
                                  // gate -- see pump_network()'s own comment for why main.cpp's
                                  // gate alone isn't enough once drive_tick() can be reached
                                  // every real frame instead of only once per gated main_loop()
-int s_last_submitted_tick = -1;   // which (tick, action) pair raw_pump() below has already
-int s_last_submitted_action = -2; // sent -- -2 never matches a real action (0/1/2/3), so the
-                                   // very first real call always submits at least once
-
-// The actual socket I/O -- submit (status 23 only, and only when there's
-// actually something NEW to send -- see below) + net_session::update().
-// No tick-consumption logic at all; see drive_tick() for that.
-//
-// Real bug this avoids: calling net_session::submit_local_action() every
-// real frame regardless of whether anything changed meant a frame with
-// NO new keypress would resend s_pending_local_action's CURRENT value
-// again -- harmless BY ITSELF, but genuinely dangerous combined with a
-// keypress that just changed s_pending_local_action for the CURRENT,
-// still-open tick: if that fresh submission got cleared back to the
-// pre-keypress value by drive_tick() before the NEXT raw_pump() call
-// (same tick, same real-time window), that next call would resubmit the
-// OLD value, overwriting the host's copy of this tick's action with
-// stale data -- a second, independent way the same "keypress silently
-// discarded" symptom could happen. Only resubmitting when the (tick,
-// action) pair actually changed since the last submission removes that
-// risk entirely, and also cuts needless duplicate network traffic.
+// The actual socket I/O -- submit (status 23 only) + net_session::update().
+// No tick-consumption logic at all; see drive_tick() for that. Deliberately
+// resubmits EVERY real frame, even when s_pending_local_action hasn't
+// changed since the last call -- a real regression was found (and
+// reverted) here: a prior pass only resubmitted when the (tick, action)
+// pair actually changed, reasoning that resending an unchanged value was
+// pure waste. That's true in isolation, but it quietly removed the only
+// thing making a single submission self-healing. If the host's view of
+// "has this client submitted for tick N" ever gets stuck for ANY reason
+// (observed on real hardware: hosting from one specific machine over
+// ethernet would freeze the match entirely unless the OTHER player moved
+// -- moving changed the action value, which is what let the dedup logic
+// resubmit at all), the client was never going to resend the SAME value
+// again, since nothing had "changed" by its own bookkeeping -- the host
+// would then wait forever for a submission that was either never
+// received correctly or got attributed to the wrong tick, with no way to
+// recover short of the player moving or the 5s stall-timeout kicking
+// them. Continuous resubmission is what used to self-heal exactly that
+// class of problem; the small bandwidth cost of resending an unchanged
+// tiny message every ~16ms on a LAN is not worth trading away that
+// resilience for.
 void raw_pump(neutron* game) {
     if (game->game_status == 23) {
-        int tick = net_session::current_tick();
-        if (tick != s_last_submitted_tick || s_pending_local_action != s_last_submitted_action) {
-            net_session::submit_local_action(s_pending_local_action);
-            s_last_submitted_tick = tick;
-            s_last_submitted_action = s_pending_local_action;
-        }
+        net_session::submit_local_action(s_pending_local_action);
     }
     net_session::update();
 }
@@ -92,8 +87,6 @@ void start(neutron* game, int map_idx, unsigned seed) {
     s_seen_generation = net_session::match_generation();
     s_seen_cancel_token = net_session::cancel_token();
     s_last_real_tick_ms = SDL_GetTicks(); // fresh pacing baseline for this match/retry
-    s_last_submitted_tick = -1;
-    s_last_submitted_action = -2;
 
     // See this function's own header comment for why this matters: every
     // peer must srand() identically, right here, before anything that

@@ -629,3 +629,38 @@ Real-world test #2 -- results and fixes (2026-11-06)
    Both bugs are independent of #17/#18's pacing-cadence work -- they're
    about correctness of WHICH action gets sent/cleared, not WHEN/how
    often. Not independently re-tested on real hardware yet.
+
+20. #19 confirmed fixed on real hardware -- "it seems resolved," input
+   reliably registers now. BUT a new, directional bug surfaced from the
+   SAME real two-machine testing: hosting from the laptop worked great;
+   hosting from the PC (ethernet) instead froze the whole match UNLESS
+   the laptop (client) player moved -- not moving eventually got the
+   client kicked by the 5s stall timeout; moving seemed to "resume" the
+   game from wherever it had been stuck.
+   Root cause: #19b's own dedup optimization (only resubmit when the
+   (tick, action) pair actually changes) -- the exact bug description
+   above even flagged this as a real possibility: "if the host's view of
+   'has this client submitted' ever gets stuck for any reason," dedup
+   means the client never retries since nothing's *changed* by its own
+   bookkeeping, even if the host never correctly received/attributed
+   that submission. The directionality (specific to hosting from one
+   particular machine) points at a real asymmetry between the two
+   machines (performance, OS, network stack, whatever) occasionally
+   triggering whatever edge case causes the host to lose track of a
+   submission -- but WHATEVER that edge case turns out to be, dedup is
+   what turned a one-tick hiccup into a permanent freeze, by removing
+   the continuous resubmission that used to self-heal it automatically.
+   Real fix: reverted #19b entirely -- raw_pump() goes back to
+   unconditionally resubmitting s_pending_local_action every real frame,
+   regardless of whether it changed since the last call. #19a (only
+   clearing s_pending_local_action once the host's resolved action for
+   my own slot actually matches what's staged) is KEPT -- that's the
+   fix that actually mattered for "needing to spam to turn," dedup never
+   was. Removed the now-dead s_last_submitted_tick/action state and the
+   net_session::current_tick() accessor that only existed to support it.
+   User is separately double-checking both machines are actually running
+   the same (latest) build before re-testing, in case some of this was
+   just a stale-binary mismatch -- but the dedup revert here is a real,
+   justified fix regardless of whether that turns out to be a factor
+   too. Worth re-testing the exact "host from the PC over ethernet"
+   scenario specifically once this revert is in place.

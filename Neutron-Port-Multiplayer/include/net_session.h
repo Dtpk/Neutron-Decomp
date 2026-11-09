@@ -164,15 +164,6 @@ int cancel_token();
 // the only place that interprets it.
 void submit_local_action(int action);
 
-// Which tick number submit_local_action() above currently targets --
-// net_match.cpp's raw_pump() uses this to avoid resubmitting the exact
-// same (tick, action) pair over and over every real frame, which used to
-// risk a late, redundant resend of a STALE "no action" overwriting a
-// just-sent real keypress for the same still-open tick before the host
-// had a chance to lock it in (see drive_tick()'s own comment on the
-// related "keypress silently discarded" bug this is part of fixing).
-int current_tick();
-
 // True once every connected player's action for the CURRENT tick has
 // arrived. The caller should keep calling update() every frame and only
 // advance its own simulation once this is true.
