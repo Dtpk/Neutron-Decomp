@@ -22,7 +22,10 @@ namespace {
 
 constexpr Uint16 DISCOVERY_PORT = 27771; // UDP
 constexpr Uint16 GAME_PORT = 27772;      // TCP
-constexpr int MAX_PLAYERS = 4;           // matches split_screen_match's own player-slot count
+// MAX_PLAYERS itself now comes from the enclosing net_session namespace
+// (declared in net_session.h, shared with net_match.cpp/
+// menu_multiplayer.cpp) -- no longer redeclared here, which would have
+// just shadowed it.
 constexpr Uint32 TICK_STALL_TIMEOUT_MS = 5000; // see host_update()'s tick-assembly comment
 constexpr const char* DEFAULT_HOST_NAME = "Host";
 constexpr const char* DEFAULT_CLIENT_NAME = "Player";
@@ -86,9 +89,26 @@ struct ClientConn {
     TCPsocket sock = nullptr;
     LineBuffer rx;
     bool welcomed = false;
+    bool ever_welcomed = false; // true forever once welcomed is ever true -- distinguishes a
+                                  // slot that disconnected mid-match from one that was simply
+                                  // never occupied (see host_update()'s tick-assembly fallback)
     int tick_action = -1; // -1 = no input received yet for the current tick
+    bool pending_join = false; // true: connected and sent JOIN while g_match_live was true --
+                                 // parked here (NOT welcomed, NOT counted in g_player_count,
+                                 // invisible to tick-assembly) until the current match ends; see
+                                 // promote_pending_joins() below for why folding a mid-match
+                                 // joiner straight into tick-assembly is a real lockup bug.
+    std::string pending_name;
 };
 std::array<ClientConn, MAX_PLAYERS - 1> g_clients; // slots 1..MAX_PLAYERS-1 (slot 0 is the host)
+
+// True from start_match() until the host explicitly calls
+// notify_match_ended() or cancel_match() -- unlike g_match_starting (a
+// one-way latch that never resets, purely for "has a START ever gone
+// out"), this tracks whether a match is ACTUALLY live right now, so
+// host_handle_message()'s JOIN branch can tell "someone's trying to join
+// a match already in progress" apart from "joining a fresh lobby."
+bool g_match_live = false;
 
 // Client-side connection to a host
 TCPsocket g_server_sock = nullptr;
@@ -102,12 +122,14 @@ int g_player_count = 0;
 int g_max_players = MAX_PLAYERS;
 int g_local_slot = -1;
 std::string g_my_name;
+bool g_join_pending = false; // client-only -- see net_session.h's own comment on join_pending()
 
 // Match lifecycle
 bool g_match_starting = false;
 int g_match_map_idx = 0;
 unsigned g_match_seed = 0;
 int g_match_generation = 0; // see net_session.h's own comment on match_generation()
+int g_cancel_token = 0;     // see net_session.h's own comment on cancel_token()
 
 // Lockstep tick state
 int g_current_tick = 0;
@@ -212,6 +234,7 @@ bool host_game(const std::string& my_name, int max_players) {
     g_local_slot = 0;
     g_role = Role::Host;
     g_match_starting = false;
+    g_match_live = false;
     g_current_tick = 0;
     return true;
 }
@@ -239,6 +262,7 @@ bool join_game(const std::string& my_name, const std::string& host_ip) {
     g_local_slot = -1; // assigned once WELCOME arrives
     g_role = Role::Client;
     g_match_starting = false;
+    g_join_pending = false;
     g_current_tick = 0;
 
     send_line(g_server_sock, std::string("JOIN|") + g_my_name);
@@ -265,8 +289,12 @@ void leave_session() {
     g_role = Role::None;
     g_local_slot = -1;
     g_match_starting = false;
+    g_match_live = false;
+    g_join_pending = false;
     g_tick_ready = false;
 }
+
+bool join_pending() { return g_join_pending; }
 
 Role role() { return g_role; }
 bool is_connected() { return g_role == Role::Host || (g_role == Role::Client && g_local_slot >= 0); }
@@ -281,24 +309,98 @@ std::string player_name(int slot) {
 namespace {
 
 void host_broadcast_roster() {
+    // Real bug fixed here: this used to send only the first g_player_count
+    // fields of g_player_names (0..count-1), on the assumption that filled
+    // slots are always packed from slot 0 up with no gaps. That's false
+    // the moment a non-highest slot disconnects while a higher slot stays
+    // connected (any 3+ player match where the MIDDLE player leaves) --
+    // g_player_names[gap] is now "" but still counted as one of the first
+    // `count` fields, so the real higher slot's name falls off the end of
+    // the message entirely and is never sent. Every peer's own
+    // reconstructed g_player_names (client_handle_message()'s ROSTER
+    // branch below) ends up positionally shifted relative to the host's
+    // real slot numbers -- and since net_match::start()'s per-peer
+    // sources[] array is built from each peer's OWN local
+    // net_session::player_name(i) by REAL slot index, a client with a
+    // shifted roster computes a DIFFERENT (wrong) set of "which slots have
+    // a real player" than the host does, spawning the wrong ships
+    // locally. Real fix: always send exactly MAX_PLAYERS fields, one per
+    // real slot index, empty string for an empty slot -- position in the
+    // message IS the slot number, with no packing assumption at all.
     std::ostringstream oss;
-    oss << "ROSTER|" << g_player_count;
-    for (int i = 0; i < g_player_count; i++) oss << "|" << g_player_names[i];
+    oss << "ROSTER|" << MAX_PLAYERS;
+    for (int i = 0; i < MAX_PLAYERS; i++) oss << "|" << g_player_names[i];
     std::string line = oss.str();
     for (auto& c : g_clients) {
         if (c.sock && c.welcomed) send_line(c.sock, line);
     }
 }
 
+// Actually folds a pending (or brand new) JOIN into the real roster --
+// the ONLY place that sets welcomed=true, so it's safe to call either
+// immediately (host_handle_message() below, lobby case) or later, once a
+// live match ends (promote_pending_joins()).
+void welcome_client(ClientConn& c, int slot, const std::string& name) {
+    g_player_names[slot] = name;
+    g_player_count++;
+    c.welcomed = true;
+    c.ever_welcomed = true;
+    c.pending_join = false;
+    send_line(c.sock, "WELCOME|" + std::to_string(slot));
+}
+
+// Called once, right when a live match ends (notify_match_ended() or
+// cancel_match() below) -- folds in anyone who tried to JOIN while that
+// match was still running (see host_handle_message()'s own comment on
+// why they couldn't be folded in immediately). One roster broadcast
+// covers every promotion plus the already-welcomed roster, same as
+// welcome_client()'s callers used to do individually.
+void promote_pending_joins() {
+    bool any = false;
+    for (size_t i = 0; i < g_clients.size(); i++) {
+        ClientConn& c = g_clients[i];
+        if (c.sock && c.pending_join) {
+            welcome_client(c, (int)i + 1, c.pending_name);
+            c.pending_name.clear();
+            any = true;
+        }
+    }
+    if (any) host_broadcast_roster();
+}
+
 void host_handle_message(ClientConn& c, int slot, const std::string& line) {
     auto parts = split_pipe(line);
     if (parts.empty()) return;
     if (parts[0] == "JOIN" && parts.size() >= 2 && !c.welcomed) {
-        g_player_names[slot] = parts[1].empty() ? DEFAULT_CLIENT_NAME : parts[1];
-        g_player_count++;
-        c.welcomed = true;
-        send_line(c.sock, "WELCOME|" + std::to_string(slot));
-        host_broadcast_roster();
+        std::string name = parts[1].empty() ? DEFAULT_CLIENT_NAME : parts[1];
+        if (g_match_live) {
+            // Real lockup bug this avoids: folding a mid-match joiner
+            // straight into the roster (welcomed=true) makes the
+            // tick-assembly "has everyone reported in for this tick"
+            // check below wait on THEM too -- but they have no live
+            // match running client-side to ever submit a tick action
+            // from, so every peer's simulation stalls until the 5s
+            // timeout eventually kicks them again. Instead: accept the
+            // connection, remember the name, but don't touch
+            // g_player_names/g_player_count/welcomed at all until the
+            // current match actually ends (promote_pending_joins()
+            // above) -- they simply wait at their own JoinLobby screen
+            // until then, same as if they'd connected slightly later and
+            // the host just hadn't started yet. PENDING tells them WHY
+            // they're waiting (menu_multiplayer's JoinLobby screen shows
+            // a different message for this -- see net_session.h's own
+            // comment on join_pending()) -- previously nothing was sent
+            // at all, so a mid-match joiner saw the exact same generic
+            // "waiting for host to start" text as someone who'd simply
+            // beaten the host to the lobby, with no indication a match
+            // was already running.
+            c.pending_join = true;
+            c.pending_name = name;
+            send_line(c.sock, "PENDING");
+        } else {
+            welcome_client(c, slot, name);
+            host_broadcast_roster();
+        }
     } else if (parts[0] == "INPUT" && parts.size() >= 3) {
         int tick = std::atoi(parts[1].c_str());
         int action = std::atoi(parts[2].c_str());
@@ -365,7 +467,14 @@ void host_update() {
                     g_player_count--;
                     host_broadcast_roster();
                 }
+                // Reset the connection itself, but NOT ever_welcomed --
+                // that flag has to survive the disconnect, or the tick-
+                // assembly fallback below can't tell "disconnected
+                // mid-match" apart from "never connected" (see this
+                // struct's own comment).
+                bool was_ever_welcomed = c.ever_welcomed;
                 c = ClientConn();
+                c.ever_welcomed = was_ever_welcomed;
                 continue;
             }
             c.rx.feed(buf, n);
@@ -409,7 +518,11 @@ void host_update() {
                         int slot = (int)i + 1;
                         g_player_names[slot].clear();
                         g_player_count--;
+                        // ever_welcomed has to survive this reset too --
+                        // same reasoning as the recv-failure disconnect
+                        // path above.
                         c = ClientConn();
+                        c.ever_welcomed = true;
                     }
                 }
                 host_broadcast_roster();
@@ -422,7 +535,23 @@ void host_update() {
         if (all_in) {
             g_tick_actions[0] = g_local_action;
             for (size_t i = 0; i < g_clients.size(); i++) {
-                g_tick_actions[i + 1] = g_clients[i].welcomed ? g_clients[i].tick_action : 0;
+                // Real bug fixed here: a disconnected client's slot used to
+                // fall back to 0 (plain "no direction change") forever --
+                // their ship just sat on the field, never eliminated, still
+                // counting toward "alive," so a match could never correctly
+                // conclude if a player left. 3 is a new action value
+                // meaning "this slot disconnected mid-match, eliminate it"
+                // (see net_match.cpp's drive_tick(), the only place that
+                // interprets it) -- sent through the SAME tick-synchronized
+                // broadcast every other action goes through, so every peer
+                // applies the elimination at the identical tick number
+                // rather than each independently noticing the roster change
+                // at whatever moment its own copy happens to receive it
+                // (which would be a real, fresh desync risk).
+                const ClientConn& c = g_clients[i];
+                if (c.welcomed) g_tick_actions[i + 1] = c.tick_action;
+                else if (c.ever_welcomed) g_tick_actions[i + 1] = 3;
+                else g_tick_actions[i + 1] = 0;
             }
             std::ostringstream oss;
             oss << "TICK|" << g_current_tick;
@@ -441,18 +570,33 @@ void client_handle_message(const std::string& line) {
     if (parts.empty()) return;
     if (parts[0] == "WELCOME" && parts.size() >= 2) {
         g_local_slot = std::atoi(parts[1].c_str());
+        g_join_pending = false; // promoted for real now, see join_pending()'s own comment
+    } else if (parts[0] == "PENDING") {
+        g_join_pending = true;
     } else if (parts[0] == "ROSTER" && parts.size() >= 2) {
-        int count = std::atoi(parts[1].c_str());
+        // Field i (after the first two) is real slot i's name, always --
+        // see host_broadcast_roster()'s own comment on why this can't be
+        // positionally packed/counted instead. g_player_count is derived
+        // by actually counting non-empty slots, not trusted from the
+        // message's own count field (which is just MAX_PLAYERS now, kept
+        // for wire-format stability rather than relied on).
         reset_roster();
-        g_player_count = count;
-        for (int i = 0; i < count && (size_t)(2 + i) < parts.size(); i++) {
+        for (int i = 0; i < MAX_PLAYERS && (size_t)(2 + i) < parts.size(); i++) {
             g_player_names[i] = parts[2 + i];
         }
+        g_player_count = 0;
+        for (int i = 0; i < MAX_PLAYERS; i++) if (!g_player_names[i].empty()) g_player_count++;
     } else if (parts[0] == "START" && parts.size() >= 3) {
         g_match_map_idx = std::atoi(parts[1].c_str());
         g_match_seed = (unsigned)std::strtoul(parts[2].c_str(), nullptr, 10);
         g_match_starting = true;
         g_match_generation++;
+        // Mirror start_match()'s own reset on the host -- see its
+        // comment for the real stall bug this fixes. Every peer has to
+        // agree tick 0 is tick 0 for THIS match, host and client alike.
+        g_current_tick = 0;
+        g_tick_ready = false;
+        g_local_action = -1;
     } else if (parts[0] == "TICK" && parts.size() >= 2) {
         int tick = std::atoi(parts[1].c_str());
         if (tick == g_current_tick) {
@@ -461,6 +605,9 @@ void client_handle_message(const std::string& line) {
             }
             g_tick_ready = true;
         }
+    } else if (parts[0] == "CANCEL") {
+        g_match_starting = false;
+        g_cancel_token++;
     }
 }
 
@@ -536,7 +683,34 @@ bool start_match(int map_idx, unsigned seed) {
     g_match_map_idx = map_idx;
     g_match_seed = seed;
     g_match_starting = true;
+    g_match_live = true;
     g_match_generation++;
+
+    // Real bug fixed here: g_current_tick used to only ever get reset to
+    // 0 by host_game()/join_game() (i.e. once, when the SESSION is
+    // created) -- never here, on an actual match START, so a retry just
+    // kept counting up from wherever the PREVIOUS match left off (e.g.
+    // tick 300+). Harmless as long as every peer in the new match was
+    // already in the old one too (everyone's baseline stays mutually
+    // consistent, just not zero) -- but a client PROMOTED in between
+    // (see notify_match_ended()/cancel_match()) has its own
+    // g_current_tick still sitting at whatever join_game() set it to
+    // (0), since nothing drives it forward while merely pending. Their
+    // first INPUT after the retry gets tagged "tick 0", which never
+    // matches the host's real (300+) g_current_tick -- host_update()'s
+    // tick-assembly silently treats every one of their inputs as stale
+    // and never advances their tick_action off -1, so the match stalls
+    // on them until the 5s TICK_STALL_TIMEOUT_MS kicks them right back
+    // out. Real fix: reset the whole per-match tick baseline here, on
+    // EVERY start_match() call (first start AND every retry) -- so
+    // retrying always begins a fresh, shared tick 0 for every currently-
+    // welcomed peer, old or newly promoted.
+    g_current_tick = 0;
+    g_tick_ready = false;
+    g_local_action = -1;
+    g_tick_wait_started_ms = 0;
+    for (auto& c : g_clients) c.tick_action = -1;
+
     std::string line = "START|" + std::to_string(map_idx) + "|" + std::to_string(seed);
     for (auto& c : g_clients) {
         if (c.sock && c.welcomed) send_line(c.sock, line);
@@ -549,6 +723,26 @@ int match_map_idx() { return g_match_map_idx; }
 unsigned match_seed() { return g_match_seed; }
 int match_generation() { return g_match_generation; }
 
+void notify_match_ended() {
+    if (g_role != Role::Host) return;
+    g_match_live = false;
+    promote_pending_joins();
+}
+
+void cancel_match() {
+    if (g_role != Role::Host) return;
+    g_match_starting = false;
+    g_match_live = false;
+    promote_pending_joins();
+    g_cancel_token++;
+    std::string line = "CANCEL";
+    for (auto& c : g_clients) {
+        if (c.sock && c.welcomed) send_line(c.sock, line);
+    }
+}
+
+int cancel_token() { return g_cancel_token; }
+
 void submit_local_action(int action) {
     g_local_action = action;
     if (g_role == Role::Client && g_server_sock) {
@@ -557,6 +751,8 @@ void submit_local_action(int action) {
     // Host's own local action feeds directly into host_update()'s tick
     // assembly above -- no message needed, it already knows its own input.
 }
+
+int current_tick() { return g_current_tick; }
 
 bool tick_ready() { return g_tick_ready; }
 

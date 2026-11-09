@@ -35,6 +35,15 @@
 // small latency cost for this kind of game.
 namespace net_session {
 
+// Shared by net_match.cpp and menu_multiplayer.cpp (both already include
+// this header) so the player-count cap is ONE real constant across those
+// three files instead of three independent literals that happen to
+// agree. split_screen_match.cpp keeps its OWN separate MAX_PLAYERS by
+// design (deliberately net_session-agnostic) -- keep that one in sync
+// with this value by hand; see its own comment for why it isn't just
+// included from here instead.
+constexpr int MAX_PLAYERS = 12;
+
 enum class Role { None, Host, Client };
 
 struct DiscoveredGame {
@@ -77,6 +86,15 @@ bool join_game(const std::string& my_name, const std::string& host_ip);
 
 void leave_session(); // client: disconnects. host: tears down the session for everyone.
 
+// Client-only: true once the host has parked US because a match was
+// already live when we joined (see host_handle_message()'s pending_join
+// handling in net_session.cpp) -- false again once the real WELCOME
+// finally arrives (promoted into the roster for real). menu_multiplayer's
+// JoinLobby screen uses this to show "match in progress, waiting" instead
+// of the generic "waiting for host to start" text, which used to be
+// shown with no indication at all that a match was already running.
+bool join_pending();
+
 Role role();
 bool is_connected();          // true once a client's join handshake completes, or once hosting is active
 int local_slot();             // which player slot WE are (0..3), -1 if not connected
@@ -107,10 +125,53 @@ unsigned match_seed();  // valid once match_starting() is true -- see start_matc
 // generation it last acted on and only react when this value changes.
 int match_generation();
 
+// Host-only: called once, right when a live match ends NATURALLY (a
+// win/draw actually detected -- see net_match.cpp's drive_tick(), the
+// only caller, which notices the game_status 23 -> 24 transition). Folds
+// in anyone who tried to JOIN while that match was still running (see
+// the real lockup bug below -- same reasoning as cancel_match(), which
+// does the same promotion for the OTHER way a match can end). No-op if
+// called on a client.
+void notify_match_ended();
+
+// Host-only: ends the CURRENT match early (sends CANCEL to every connected
+// client) and returns everyone to their lobby screen WITHOUT touching the
+// session/roster at all -- unlike leave_session(), nobody's TCP connection
+// is closed, so the host can immediately pick a new map and start again
+// with the same roster. Real bug this exists to fix: before this, the
+// host's only way to back out of a live match was leave_session() (torn
+// down for EVERYONE), and clients had no way to notice their connection
+// had been closed mid-match at all -- see net_match.cpp's cancel_token()
+// handling for why they'd otherwise just sit there forever. Also folds
+// in any pending mid-match joiner, same as notify_match_ended() above
+// (this is simply the OTHER way a live match can end). No-op if called
+// on a client (same guard style as start_match() above).
+void cancel_match();
+
+// Increments on EVERY real CANCEL event, same "remember the last one you
+// acted on" pattern as match_generation() above -- lets a client's
+// net_match.cpp tell "a fresh cancel just arrived" apart from one it
+// already handled.
+int cancel_token();
+
 // --- Lockstep tick exchange, used once a match is live ---
-// Actions match this engine's existing discrete steering model: 0 = none,
-// 1 = turn left, 2 = turn right.
+// Actions submitted here match this engine's existing discrete steering
+// model: 0 = none, 1 = turn left, 2 = turn right. tick_action() below can
+// also return 3 for a slot, meaning "this player disconnected mid-match,
+// eliminate them" -- the host injects this itself for a slot that was
+// ever_welcomed but no longer is (see net_session.cpp's host_update()),
+// never something a caller submits; see net_match.cpp's drive_tick() for
+// the only place that interprets it.
 void submit_local_action(int action);
+
+// Which tick number submit_local_action() above currently targets --
+// net_match.cpp's raw_pump() uses this to avoid resubmitting the exact
+// same (tick, action) pair over and over every real frame, which used to
+// risk a late, redundant resend of a STALE "no action" overwriting a
+// just-sent real keypress for the same still-open tick before the host
+// had a chance to lock it in (see drive_tick()'s own comment on the
+// related "keypress silently discarded" bug this is part of fixing).
+int current_tick();
 
 // True once every connected player's action for the CURRENT tick has
 // arrived. The caller should keep calling update() every frame and only

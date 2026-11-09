@@ -232,7 +232,43 @@ Real-world test #2 -- results and fixes (2026-11-06)
    left/right half cycles the choice), same left/right-half convention as
    everything else added this round.
 
-10. Real desync bug found and fixed, NOT a same-machine-testing artifact:
+10a. Difficulty question answered (no code change -- confirmed by reading
+   the code, not something to fix): game->speed (set from
+   user_difficulty) only controls how often a peer's OWN outer loop
+   attempts a tick (main.cpp's target_frame_time) -- it's read nowhere
+   inside the actual deterministic simulation path
+   (tick_local_only()/roll_spawn_planes()/move()). Each peer's local
+   difficulty setting is NOT synced to anyone else, but since lockstep
+   never advances until every connected player's input for a tick has
+   arrived, differing settings can't cause a desync -- they can only
+   affect overall PACE, bottlenecked by whichever connected player's
+   local setting makes their own loop check least often (Easy's 75ms >
+   Hard's 55ms).
+
+10b. Mid-match disconnect: real bug found and fixed. A disconnected
+   client's tick action fell back to a plain "no direction change"
+   forever -- their ship just sat on the field, never eliminated, still
+   counting toward "alive," so a match could never correctly conclude if
+   a player left (exactly what "only able to run 2 right now" would make
+   likely to surface). Fixed as a new, tick-synchronized action value (3,
+   "this slot disconnected mid-match, eliminate it") that the HOST
+   injects into the same broadcast tick every other action goes through
+   -- every peer eliminates that slot at the identical tick number,
+   rather than each independently noticing the roster change whenever
+   its own copy of the update happens to arrive (which would have been a
+   fresh desync risk of its own). Added split_screen_match::
+   eliminate_slot() as the public hook net_match.cpp uses for this.
+   ever_welcomed (new, persists through a disconnect, unlike welcomed) is
+   what lets the host's tick-assembly logic tell "disconnected mid-match"
+   apart from "this slot was simply never occupied."
+
+10c. Player limit: WAS a hard cap of 4 (host + 3 clients), matching local
+   split-screen's own MAX_PLAYERS array size exactly. Superseded by #12
+   below -- now 12, multiplayer-only, local split-screen untouched. Only
+   tested with 2 so far -- higher player counts, and multiple
+   simultaneous disconnects in particular, haven't been verified at all.
+
+11. Real desync bug found and fixed, NOT a same-machine-testing artifact:
    there is no srand() ANYWHERE in this codebase, meaning every process
    starts std::rand() from the same default state, but then diverges
    based on however much each one actually CALLS it before a match
@@ -256,3 +292,340 @@ Real-world test #2 -- results and fixes (2026-11-06)
    Applies to both the initial match start and every retry (a fresh seed
    each time, via SDL_GetTicks(), so a retry's layout isn't identical to
    the match that just ended either). Not independently re-tested yet.
+
+12. Player cap raised 4 -> 12, multiplayer only, local split-screen
+   untouched. Local split-screen's own join-screen cap
+   (split_screen_menu.cpp's MAX_SLOTS) is a completely separate constant,
+   still 4, unchanged -- confirmed nothing feeds split_screen_match.cpp
+   more than 4 local input sources regardless of its own array size, so
+   bumping that array to 12 only matters for the networked path, which is
+   the only caller that can actually fill slots 4-11 (via net_match.cpp's
+   -3 "externally driven" sources). Four independent "4"s changed
+   together: split_screen_match.cpp's own MAX_PLAYERS (array sizes +
+   SLOT_COLORS, now 12 distinct colors), a new net_session::MAX_PLAYERS
+   shared constant (net_session.h) used by net_match.cpp and
+   menu_multiplayer.cpp instead of three separate literals, and
+   net_session.cpp's internal duplicate removed so it can't shadow the
+   new header constant. These two MAX_PLAYERS constants
+   (split_screen_match.cpp's vs net_session.h's) remain independent by
+   design -- split_screen_match.cpp still knows nothing about
+   networking -- but now MUST be kept numerically equal by hand; both
+   sides' comments say so.
+
+   Also added: dynamic map-size filtering on the host's map picker, since
+   a 12-player match on a 1-cube map ("cube") would be unplayable. Added
+   stage_cube_count() (custom_stage.h, same indexing convention as the
+   existing stage_display_name()/total_stage_count()). menu_multiplayer.cpp
+   applies a tuned heuristic (PLAYERS_PER_CUBE = 6 -- "cube" fits <=6,
+   "death star"'s 12 cubes fits <=72, so the full 12-player cap is always
+   satisfiable by at least one built-in map) to:
+     - map cycling (step_host_map()): skips any concrete map too small for
+       the CURRENT connected player count; RANDOM stays selectable always
+     - RANDOM's resolution at match-start: picks uniformly only among maps
+       that currently fit, never a map too small for the real roster
+     - auto-advance: update() bumps off an already-selected map onto the
+       next fitting one if more players join after it was picked, every
+       frame (a no-op once the selection fits again, i.e. almost always)
+   Not yet tested with more than 2 real players -- the filtering logic
+   itself compiles clean and is exercised at 2 players same as everything
+   else so far, but the actual "selection becomes invalid as players join"
+   path and anything above ~4 players is unverified on real hardware.
+
+13. Two real bugs found from 2-3-instance real testing, both fixed:
+
+13a. Host's ESC during a live match (or on the match-over screen) used to
+   call the same end() path a client's ESC does -- net_session::
+   leave_session(), which for a HOST tears the WHOLE session down,
+   closing every client's TCP socket with no warning. Clients had no code
+   path anywhere that noticed a connection had been closed mid-match
+   (menu_multiplayer's own "lost connection" check only runs on the
+   pre-match lobby screen, never during game_status 23/24) -- so
+   net_match::drive_tick() just kept returning early forever
+   (tick_ready() can never become true again once the host is gone), and
+   the match visibly froze for every remaining client. Matches exactly
+   what was reported: host exits, everyone else freezes, each needing a
+   manual Escape to get out on their own.
+   Real fix: a new net_session::cancel_match()/CANCEL message and
+   net_match::cancel() that return EVERYONE to their lobby screen
+   (menu_multiplayer::enter_lobby()) WITHOUT tearing the session down --
+   roster/connections survive, so the host can immediately pick a new map
+   and start again. Host's ESC now calls cancel() instead of end();
+   clients detect the host's CANCEL via a new net_session::cancel_token()
+   (same "remember the last one I acted on" pattern as
+   match_generation()), checked every frame by drive_tick()/
+   update_match_over(), and call cancel() themselves. A client's own ESC
+   is unchanged -- still really leaves (end()), which is the right
+   behavior for "I want to quit," just not for "I'm the host and want to
+   go back to the lobby." Also added a role()==None safety net in the
+   same two functions for a genuine disconnect/crash (not a clean
+   cancel) -- falls back to end() instead of hanging, so nothing can
+   freeze forever even outside the new cancel path.
+
+13b. On the match-over screen, only the HOST's Enter actually does
+   anything (net_match::handle_key_down()'s retry() is host-only by
+   design -- see #10's comment on why). The prompt text ("PRESS ENTER OR
+   ESC FOR MENU") never said so, so a non-host player pressing Enter saw
+   nothing happen, reported as "retry doesn't work." Real fix: added
+   net_match::local_is_host() (split_screen_match.cpp still doesn't know
+   net_session exists -- same pattern as winner_display_name()) and a
+   role-specific prompt in print_match_over(): the host sees "PRESS ENTER
+   TO REPLAY OR ESC FOR LOBBY," everyone else sees "WAITING FOR HOST TO
+   REPLAY  ESC TO LEAVE" (draw_text()'s font only has A-Z/0-9/space/colon
+   -- no parens or periods, so both strings stick to that set).
+
+   The "teleports the player around" symptom reported alongside these
+   (after a non-host player's ESC dropped them, then the host retried)
+   wasn't independently reproduced here -- most likely explained by the
+   3-same-machine-instance performance chop also reported in the same
+   test (the user's own suspicion), not a new desync, but flagged here as
+   unconfirmed either way since it wasn't specifically chased down.
+
+   NOTE (accidental, now fixed): while verifying this round's build with
+   a fresh `cmake .. && make`, a `rm -rf build` run from inside the
+   build/ directory to force CMake to regenerate ALSO deleted
+   build/build/ -- the actual run folder containing run.sh, libs/,
+   map.txt, neutron_save.txt, and the wav assets (NOT just CMake's own
+   cache, which was the intent). Recovered by copying run.sh/wavs/map.txt/
+   neutron_save.txt from the sibling /workspace/Neutron-Port/build/
+   project (the base project this one was copied from) and re-adding
+   libSDL2_net into libs/ (the base project doesn't need it). map.txt and
+   neutron_save.txt came back byte-identical to the base project's
+   copies -- if either had been separately customized inside THIS
+   project specifically since the copy, between Nov 2 and this fix, that
+   customization is gone and wasn't recoverable from anywhere on this
+   machine.
+
+14. Real lockup bug found from 3-instance testing: a disconnected player
+   REJOINING while the other players' match was still live would freeze
+   EVERYONE (needing the 5s stall timeout to recover), and could leave
+   the rejoined player's own ship effectively dead/missing on other
+   peers' screens.
+   Root cause: host_handle_message()'s JOIN handling used to fold a new
+   joiner straight into the real roster (welcomed=true, counted in
+   g_player_count) unconditionally, with no idea whether a match was
+   currently live. The lockstep tick-assembly check in host_update()
+   waits for EVERY welcomed client to report a tick_action before
+   advancing -- but a client that just joined mid-match has no live
+   match running on their own machine at all (they're sitting on their
+   JoinLobby screen, having never received a START), so they can never
+   submit one. Every peer's simulation stalled on that tick until the
+   existing 5s TICK_STALL_TIMEOUT_MS kicked them back out again -- a
+   repeating freeze-kick-rejoin-freeze cycle, matching exactly what was
+   reported.
+   Real fix (matches the user's own suggested approach -- wait until the
+   match is over to add them): a new ClientConn::pending_join/
+   pending_name pair. host_handle_message()'s JOIN branch now checks a
+   new g_match_live flag (true from start_match() until the match
+   actually ends, NOT the same thing as the one-way match_starting()
+   latch) -- if a match is live, the joiner's connection is accepted and
+   their name remembered, but welcomed/g_player_count/the roster are left
+   completely untouched, so they're invisible to tick-assembly and can't
+   stall anything. They just sit at their own JoinLobby screen (same as
+   if they'd connected slightly before the host started). The moment the
+   match ends -- naturally (new net_session::notify_match_ended(), called
+   once by net_match.cpp's drive_tick() the instant it sees game_status
+   flip to 24) or via a host cancel (net_session::cancel_match(), updated
+   to do the same promotion) -- promote_pending_joins() folds them in for
+   real (welcomed=true, counted, WELCOME sent, roster broadcast), so the
+   NEXT match (a retry or a fresh start) includes them as a normal,
+   fully-alive player like anyone else.
+
+   Found and fixed a second, related, pre-existing bug while reading
+   this code: host_broadcast_roster() built the ROSTER message by
+   sending only the first g_player_count entries of g_player_names
+   (0..count-1), assuming filled slots are always packed from slot 0
+   with no gaps. That's false the moment any NON-highest slot
+   disconnects while a higher slot stays connected (any 3+ player match
+   where a middle player leaves) -- the higher slot's name falls off the
+   end of the broadcast entirely. Every client's own reconstructed
+   g_player_names ends up positionally shifted relative to the host's
+   real slot numbers, and since net_match::start()'s per-peer sources[]
+   array is built from each peer's OWN local roster by real slot index,
+   a client with a shifted roster would compute a DIFFERENT set of
+   "which slots have a real player" than the host -- spawning the wrong
+   ships on their own screen on the next match. Real fix: ROSTER now
+   always sends exactly MAX_PLAYERS fields, one per real slot index
+   (empty string for an empty slot) -- position in the message IS the
+   slot number, no packing assumption anywhere. This was never
+   specifically reported (the symptom would show up as wrong/missing
+   ships on a retry after a 3+-player mid-match disconnect, which hasn't
+   been explicitly tested yet) but is a real, confirmed bug directly
+   adjacent to -- and likely to be hit by -- the exact scenario being
+   tested this round.
+
+15. Two gaps closed, both found by thinking through "a bunch of people
+   join a small map's match mid-game" before testing it on real hardware:
+
+15a. retry() (host presses Enter on the match-over screen) used to
+   replay s_last_map_idx completely unchecked. If mid-match joiners got
+   promoted into the roster in between (see #14), the roster could have
+   grown past what that map's own size heuristic allows (4 players on
+   "cube" is fine; 10 is not) -- only the HostLobby screen's own map
+   picker ever re-checked that, retry() bypassed it entirely and would
+   silently replay the SAME too-small map on the bigger roster. Real fix:
+   added menu_multiplayer::validate_map_choice(map_idx, player_count) --
+   same stage_fits_player_count() heuristic the HostLobby picker already
+   uses, exported so net_match.cpp's retry() can call it too, auto-
+   advancing to the next map that fits (never landing back on RANDOM --
+   retry always wants a concrete replacement) before replaying.
+
+15b. A mid-match joiner who gets parked (see #14) got NO feedback
+   message at all -- their JoinLobby screen showed the exact same
+   generic "CONNECTED -- WAITING FOR HOST TO START" text (with an empty
+   roster) as someone who'd simply beaten the host to the lobby, with
+   nothing indicating a match was already running. Real fix: a new
+   net_session::join_pending() (client-side flag, set by a new PENDING
+   message the host now sends when parking a joiner, cleared the moment
+   the real WELCOME eventually arrives) -- menu_multiplayer's JoinLobby
+   screen shows "MATCH IN PROGRESS -- WAITING TO JOIN NEXT ONE" instead
+   while this is true.
+
+   Neither of these came from a real test report -- both were found by
+   reasoning through the question "what happens if a bunch of people try
+   to join a 4-player cube match mid-game" before running it, so treat
+   them as logically-verified-but-not-yet-hardware-tested, same
+   confidence level as the roster-broadcast fix in #14.
+
+16. Real bug found from testing #14's fix on real hardware: the parked
+   joiner correctly showed the new "match in progress, waiting" message
+   (confirming #14's pending-join gate itself worked), but once promoted
+   as the match ended, the match stalled ~5 seconds and then auto-kicked
+   the just-promoted player anyway -- continuing fine afterward with the
+   original 2.
+   Root cause: g_current_tick (the lockstep tick counter) was only ever
+   reset to 0 by host_game()/join_game() -- i.e. once, when the SESSION
+   is first created -- never by start_match() or on receiving START, so
+   a RETRY just kept counting up from wherever the previous match left
+   off (tick 300+, say). Harmless as long as every peer in the new match
+   was already in the old one -- everyone's baseline stays mutually
+   consistent even if not zero. But a client promoted in between (#14's
+   whole point) has its OWN g_current_tick still sitting at whatever
+   join_game() set it to (0) when they first connected, since nothing
+   advances it while merely parked. Their first INPUT after the retry
+   gets tagged "tick 0," which never matches the host's real (300+)
+   g_current_tick -- host_update()'s tick-assembly treats it as stale
+   forever, their tick_action never leaves -1, and the match stalls on
+   them until TICK_STALL_TIMEOUT_MS (5s) kicks them right back out --
+   exactly the reported symptom.
+   Real fix: start_match() (host) now resets g_current_tick/g_tick_ready/
+   g_local_action/g_tick_wait_started_ms/every client's tick_action back
+   to a fresh baseline on EVERY call, first start or retry alike; the
+   client's own START handler mirrors the same reset. Every peer agrees
+   tick 0 is tick 0 for THIS match, old peer or newly-promoted one.
+   This narrows #14/#15 down well: the pending-join PARKING itself (the
+   actual lockup fix) is confirmed working on real hardware now -- this
+   was a separate bug in what happens the instant AFTER a correctly-
+   parked player gets promoted, not a sign the parking logic itself was
+   broken.
+
+17. Real bug found from a genuine remote (two-machine) test: multiplayer
+   is correct, but runs noticeably slower than it should -- and the user
+   confirmed this happens over a real LAN between two separate machines,
+   ruling out the earlier "3 instances on one PC" CPU-contention theory
+   from much earlier testing.
+   Root cause: net_session::submit_local_action()/update() (the actual
+   socket I/O -- sending the local player's input, polling for the
+   host's assembled tick broadcast) only ever ran from inside
+   net_match::drive_tick(), which itself only runs when main_loop() is
+   invoked -- gated by the SAME ~55-75ms delta>=target_frame_time check
+   main.cpp's outer loop uses for the real simulation step. Two peers
+   each run their OWN independent while() loop, on two different
+   machines, started at different real moments -- NOT phase-aligned
+   with each other. A given tick could easily need to wait for the
+   OTHER peer's own next ~55-75ms-gated pass before its input even got
+   sent or received, adding up to nearly one full extra tick interval of
+   latency PER TICK on average -- making a match run at roughly HALF its
+   intended speed, independent of actual network latency (a real LAN
+   round-trip is a few ms; this was never about bandwidth or ping).
+   Real fix: added net_match::pump_network() (submit + net_session::
+   update(), no sim-tick logic) and a thin split_screen_match::
+   pump_network() delegator, called from main.cpp's outer loop
+   UNCONDITIONALLY every real frame -- not gated by target_frame_time at
+   all. Pumping at normal render-frame cadence (~16ms at 60fps) instead
+   of the previous ~55-75ms shrinks the phase-misalignment window
+   roughly 3-5x. drive_tick() and update_match_over() both now call this
+   same pump_network() instead of inlining their own submit+update,
+   consolidating what used to be two separate copies of that logic.
+   Not independently re-tested on real hardware yet -- reasoned through
+   from the main-loop code directly (same confidence level as the other
+   "found by reading the code, not yet hardware-verified" entries
+   above), but this is a structural fix to a real, confirmed throughput
+   ceiling in the lockstep design, not a guess.
+
+18. Follow-up from real testing of #17: overall match speed is fixed
+   (confirmed -- "the game is running smooth now"), but input itself
+   still felt delayed a lot. Root cause, part 2 of the same underlying
+   issue: #17 made net_session::update()/submit_local_action() run every
+   real frame, so tick_ready() flips true much sooner after the data
+   actually arrives -- but drive_tick() (the only thing that actually
+   CONSUMES a ready tick and applies it) was still only reachable via
+   the SAME ~55-75ms gated main_loop() call main.cpp always used. A tick
+   resolving early just sat "ready," doing nothing, until this peer's
+   own next gated slot came around to apply it -- a separate, real
+   source of latency on top of the inherent one-tick lockstep delay this
+   design always has by nature, previously masked by the match running
+   at half speed overall (everything felt uniformly slow rather than
+   specifically input-laggy).
+   Real fix: split net_match.cpp's old drive_tick() into raw_pump()
+   (just the socket I/O) and a leaner drive_tick() that now has its OWN
+   pacing clock (s_last_real_tick_ms, mirroring the same 55/75ms
+   difficulty-based cadence local play uses) instead of relying on
+   main.cpp's gate for pacing at all. pump_network() -- called
+   UNCONDITIONALLY every real frame from main.cpp (see #17) -- now calls
+   the FULL drive_tick() for the live-match screen specifically (not
+   just raw_pump()), so a resolved tick advances the instant its own
+   pacing window opens, checked every real frame instead of once per
+   outer-gate cycle. drive_tick()'s self-pacing is what keeps this from
+   ever advancing FASTER than intended -- the still-existing gated
+   tick()->drive_tick() call path now just lands on an already-self-
+   paced function, so calling it from two places is harmless (whichever
+   call wins for a given tick-window does the real work, the other's a
+   no-op).
+   Not independently re-tested on real hardware yet -- same "reasoned
+   through from the code, not yet hardware-verified" caveat as #17 (this
+   is its direct continuation, not a separate guess).
+
+19. Follow-up from testing #18: speed is fixed, but still can't tell if
+   input is any better -- "game is smooth just really delayed or needing
+   to spam left and right to cause a movement left or right." The
+   "needing to spam" detail pointed at something more specific than pure
+   latency: keypresses being silently LOST, not just slow to register.
+   Found TWO real, independent bugs reading net_match.cpp's drive_tick()/
+   raw_pump() closely, both capable of discarding a keypress before it
+   was ever incorporated into any resolved tick at all (the ship simply
+   never turns, no matter how long you wait -- which reads exactly like
+   "needing to spam" when repeated presses eventually win the race):
+
+   19a. drive_tick() cleared s_pending_local_action to 0 unconditionally
+      on EVERY resolve, with no check that the CURRENTLY staged action
+      was the one that tick's resolution actually used. Race: if the
+      host had already finished resolving/broadcasting a tick using an
+      OLDER submission by the time a fresh keypress staged a NEW action
+      for that same still-open tick, the fresh value arrives too late to
+      affect that tick (the broadcast doesn't get redone) -- but the
+      unconditional clear right after still wiped it, discarding it
+      forever rather than letting it carry forward to the NEXT tick's
+      submission. Real fix: compare net_session::tick_action(s_local_slot)
+      (what the host actually resolved for MY slot) against
+      s_pending_local_action BEFORE clearing -- only clear if they
+      match, i.e. only once we're sure the staged action really was the
+      one incorporated.
+
+   19b. raw_pump() resubmitted s_pending_local_action's CURRENT value
+      every real frame unconditionally (needed so net_session's own
+      g_local_action doesn't go stale between resolves -- see its own
+      comment) -- but resubmitting even when NOTHING changed meant a
+      keypress that changed the staged value for the CURRENT, still-open
+      tick could get immediately followed by another raw_pump() call
+      resubmitting... the SAME value, which is fine on its own, but
+      created a window where, combined with 19a's old bug, a stale
+      resubmission could overwrite the host's copy of this tick's action
+      back to the pre-keypress value before the host locked it in. Real
+      fix: added net_session::current_tick() (new accessor) and only
+      resubmit when the (tick, action) PAIR actually changed since the
+      last submission -- removes the stale-overwrite risk entirely and
+      cuts needless duplicate network traffic as a side benefit.
+
+   Both bugs are independent of #17/#18's pacing-cadence work -- they're
+   about correctness of WHICH action gets sent/cleared, not WHEN/how
+   often. Not independently re-tested on real hardware yet.

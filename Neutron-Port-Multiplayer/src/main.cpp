@@ -955,6 +955,22 @@ int main(int argc, char* argv[]) {
             controller_input::poll_axes(g_game, SDL_GetTicks());
         }
 
+        // Real bug fixed by this call: a networked match's own socket
+        // I/O (submitting the local input, polling for the host's
+        // assembled tick) used to only run as often as main_loop() below
+        // was actually invoked -- gated by the SAME ~55-75ms delta check
+        // the simulation step itself uses. Two peers' outer loops are
+        // two independent while() loops on two different machines, not
+        // phase-aligned with each other -- a tick could easily need to
+        // wait for the OTHER peer's own next ~55-75ms-gated pass before
+        // its input even arrived, nearly doubling the effective tick
+        // interval on average regardless of real network latency
+        // (reported: still slow between two genuinely separate
+        // machines). Pumping every real frame instead (unconditional, no
+        // delta gate) shrinks that phase-misalignment window roughly
+        // 3-5x -- see split_screen_match::pump_network()'s own comment.
+        if (g_game) split_screen_match::pump_network(g_game);
+
         Uint32 current_tick = SDL_GetTicks();
         float delta = (float)(current_tick - last_tick);
 

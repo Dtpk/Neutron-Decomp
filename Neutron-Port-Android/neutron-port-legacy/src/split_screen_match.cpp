@@ -15,6 +15,8 @@
 #include <GL/glu.h>
 #include <cstdio>
 #include <cstdlib>
+#include <vector>
+#include <algorithm>
 
 // Implemented in main.cpp -- see controller_input.cpp's identical forward
 // declaration for why this lives there instead of here (this module has no
@@ -88,6 +90,9 @@ int s_colision[MAX_PLAYERS] = {0, 0, 0, 0}; // 0 alive, 1 eliminated
 int s_input_source[MAX_PLAYERS] = {-2, -2, -2, -2}; // -2 empty, -1 keyboard, 0..3 controller index
 int s_winner_slot = -1; // -1 = draw/none
 int s_last_map_idx = -1; // resolved (post-RANDOM-roll) map, reused by retry
+int s_spawn_plane[MAX_PLAYERS] = {}; // computed once per match start, see roll_spawn_planes()
+int s_spawn_off_a[MAX_PLAYERS] = {};
+int s_spawn_off_b[MAX_PLAYERS] = {};
 
 struct Color { int r, g, b; };
 const Color SLOT_COLORS[MAX_PLAYERS] = {
@@ -104,6 +109,51 @@ void cleanup_players() {
     }
 }
 
+// Builds this match's per-slot spawn plane + in-plane offset ONCE, before
+// any spawn_player() calls, so "distinct plane per player" is a real
+// guarantee (a Fisher-Yates shuffle of plane indices, consumed in order)
+// rather than something spawn_player() tries to reconstruct independently
+// per call. Replaces the old fully-deterministic (start_on_plane + slot) /
+// (slot*3, slot*5) formulas -- fixed, repeatable spawn spacing every match
+// (every player always landing on the same plane relative to each other),
+// reported as "not super great." Random per match instead, same fallback
+// behavior as before when there aren't enough planes to go around.
+void roll_spawn_planes(terrain* ground) {
+    int n = ground->N_PLANES;
+    if (n < 1) return;
+
+    std::vector<int> order(n);
+    for (int i = 0; i < n; i++) order[i] = i;
+    for (int i = n - 1; i > 0; i--) {
+        int j = std::rand() % (i + 1);
+        std::swap(order[i], order[j]);
+    }
+
+    for (int slot = 0; slot < MAX_PLAYERS; slot++) {
+        int pl = order[slot % n]; // wraps/shares once slots > planes, same as before
+        plane* pp = ground->map[pl];
+        if (!pp) {
+            for (int k = 0; k < n; k++) {
+                if (ground->map[k]) { pl = k; pp = ground->map[k]; break; }
+            }
+        }
+        s_spawn_plane[slot] = pl;
+        if (!pp) { s_spawn_off_a[slot] = 0; s_spawn_off_b[slot] = 0; continue; }
+
+        // Keep offsets within an inner margin, not the full 0..side-1
+        // range -- a corner piece has little to no room to move, and
+        // landing there was why the 4th local player used to die
+        // immediately (see the git history of this function). Random
+        // within that safe range instead of a fixed per-slot formula.
+        int side = pp->side_size > 0 ? pp->side_size : 1;
+        int margin = side / 4;
+        int safe_width = side - margin * 2;
+        if (safe_width < 1) { margin = 0; safe_width = side; }
+        s_spawn_off_a[slot] = margin + (safe_width > 0 ? std::rand() % safe_width : 0);
+        s_spawn_off_b[slot] = margin + (safe_width > 0 ? std::rand() % safe_width : 0);
+    }
+}
+
 void spawn_player(neutron* game, int slot) {
     terrain* ground = game->ground;
     if (!ground || ground->N_PLANES < 1) return;
@@ -116,30 +166,12 @@ void spawn_player(neutron* game, int slot) {
     p->material[2] = c.b;
     p->material[3] = 200;
 
-    // Distinct plane per slot whenever there are enough planes to give one
-    // (true for any real stage -- tiny/degenerate ones just wrap and share).
-    // Within the plane, offset from center by a different amount per axis
-    // per slot (not just always-dead-center) so two players sharing a plane
-    // on a small stage still don't spawn on the exact same piece.
-    int pl = (ground->start_on_plane + slot) % ground->N_PLANES;
+    int pl = s_spawn_plane[slot];
     plane* pp = ground->map[pl];
-    if (!pp) {
-        for (int k = 0; k < ground->N_PLANES; k++) {
-            if (ground->map[k]) { pl = k; pp = ground->map[k]; break; }
-        }
-    }
     if (!pp) { delete p; return; }
 
-    // Keep offsets within an inner margin, not the full 0..side-1 range --
-    // the plain mod-side version let slot 3's multiplier wrap all the way
-    // onto the last valid index (a literal corner piece, with little to no
-    // room to move), which is why the 4th player was dying immediately.
-    int side = pp->side_size > 0 ? pp->side_size : 1;
-    int margin = side / 4;
-    int safe_width = side - margin * 2;
-    if (safe_width < 1) { margin = 0; safe_width = side; }
-    int off_a = margin + (slot * 3) % safe_width;
-    int off_b = margin + (slot * 5) % safe_width;
+    int off_a = s_spawn_off_a[slot];
+    int off_b = s_spawn_off_b[slot];
 
     p->start_plane = pl;
     p->actual_plane = pl;
@@ -243,6 +275,7 @@ void start_match(neutron* game, int map_idx) {
     game->ground->init(0, 0, 0, 20);
     game->ground->status = 4;
 
+    roll_spawn_planes(game->ground);
     for (int i = 0; i < MAX_PLAYERS; i++) {
         if (s_input_source[i] != -2) spawn_player(game, i);
     }

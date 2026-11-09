@@ -90,15 +90,23 @@ void draw_text(const char* text, float x, float y, float char_size, int r, int g
     }
 }
 
-const int MAX_PLAYERS = 4;
-player* s_players[MAX_PLAYERS] = {nullptr, nullptr, nullptr, nullptr};
-int s_colision[MAX_PLAYERS] = {0, 0, 0, 0}; // 0 alive, 1 eliminated
-int s_input_source[MAX_PLAYERS] = {-2, -2, -2, -2}; // -2 empty, -1 keyboard, 0..3 controller index, -3 externally driven
+// 12, not 4 -- raised for networked play only (local split-screen stays
+// capped at 4 real local players regardless, via split_screen_menu.cpp's
+// own completely independent MAX_SLOTS=4 constant; nothing feeds this
+// array more than 4 local input sources, so the bigger array is simply
+// unused slack from local split-screen's point of view). Keep in sync
+// with net_session.cpp's own independent MAX_PLAYERS (deliberately not
+// shared across these files -- this one stays net_session-agnostic by
+// design) -- see net_session.h's own comment on its copy.
+const int MAX_PLAYERS = 12;
+player* s_players[MAX_PLAYERS] = {};
+int s_colision[MAX_PLAYERS] = {}; // 0 alive, 1 eliminated
+int s_input_source[MAX_PLAYERS] = {-2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2}; // -2 empty, -1 keyboard, 0..3 controller index, -3 externally driven
 int s_winner_slot = -1; // -1 = draw/none
 int s_last_map_idx = -1; // resolved (post-RANDOM-roll) map, reused by retry
-int s_spawn_plane[MAX_PLAYERS] = {0, 0, 0, 0}; // computed once per match start, see roll_spawn_planes()
-int s_spawn_off_a[MAX_PLAYERS] = {0, 0, 0, 0};
-int s_spawn_off_b[MAX_PLAYERS] = {0, 0, 0, 0};
+int s_spawn_plane[MAX_PLAYERS] = {}; // computed once per match start, see roll_spawn_planes()
+int s_spawn_off_a[MAX_PLAYERS] = {};
+int s_spawn_off_b[MAX_PLAYERS] = {};
 
 struct Color { int r, g, b; };
 const Color SLOT_COLORS[MAX_PLAYERS] = {
@@ -106,6 +114,14 @@ const Color SLOT_COLORS[MAX_PLAYERS] = {
     {255, 0, 255},   // magenta
     {0, 255, 0},     // green
     {255, 140, 0},   // orange
+    {255, 40, 40},   // red
+    {60, 120, 255},  // blue
+    {255, 230, 0},   // yellow
+    {170, 60, 255},  // purple
+    {255, 110, 180}, // pink
+    {150, 255, 70},  // lime
+    {0, 210, 170},   // teal
+    {210, 160, 90},  // tan
 };
 
 void cleanup_players() {
@@ -290,6 +306,11 @@ void start_match(neutron* game, int map_idx) {
     start_match_with_sources(game, map_idx, s_remembered_sources);
 }
 
+void eliminate_slot(neutron* game, int slot) {
+    if (slot < 0 || slot >= MAX_PLAYERS || !s_players[slot] || s_colision[slot] != 0) return;
+    eliminate_player(game, slot);
+}
+
 void apply_direction(int slot, int direction) {
     if (slot < 0 || slot >= MAX_PLAYERS || !s_players[slot] || s_colision[slot] != 0) return;
     s_players[slot]->change_direction(direction);
@@ -298,6 +319,11 @@ void apply_direction(int slot, int direction) {
 void leave_match(neutron* game) {
     cleanup_players();
     game->game_status = game->change_stage(1000, true); // fully rebuilds ground/proton/menu_battle
+}
+
+void leave_match_to_lobby(neutron* game) {
+    cleanup_players();
+    game->change_stage(1000, true); // same rebuild as leave_match() -- caller sets game_status itself
 }
 
 void tick_local_only(neutron* game) {
@@ -335,6 +361,10 @@ void tick(neutron* game) {
 
 void update_match_over(neutron* game) {
     if (net_match::is_active()) net_match::update_match_over(game);
+}
+
+void pump_network(neutron* game) {
+    if (net_match::is_active()) net_match::pump_network(game);
 }
 
 void print_match(neutron* game, int forced_single_slot) {
@@ -470,7 +500,20 @@ void print_match_over(neutron* game, const char* winner_name_override) {
     } else {
         draw_text("DRAW!", 190.0f, 160.0f, 2.0f, 255, 255, 255, 255);
     }
-    draw_text("PRESS ENTER OR ESC FOR MENU", 100.0f, 110.0f, 1.3f, 200, 200, 200, 220);
+    // Networked match-over: only the HOST's Enter actually retries (see
+    // net_match::handle_key_down()) -- a client pressing Enter here used
+    // to silently do nothing, reported as "retry doesn't work" from real
+    // testing. Different prompt per role fixes that, without this file
+    // needing to know net_session exists (net_match::local_is_host() asks
+    // on its behalf, same as winner_display_name() above). draw_text()'s
+    // font only has A-Z, 0-9, space, and colon -- no parens/periods, so
+    // both strings stick to that set.
+    if (net_match::is_active()) {
+        draw_text(net_match::local_is_host() ? "PRESS ENTER TO REPLAY OR ESC FOR LOBBY" : "WAITING FOR HOST TO REPLAY  ESC TO LEAVE",
+                  net_match::local_is_host() ? 70.0f : 50.0f, 110.0f, 1.3f, 200, 200, 200, 220);
+    } else {
+        draw_text("PRESS ENTER OR ESC FOR MENU", 100.0f, 110.0f, 1.3f, 200, 200, 200, 220);
+    }
     end_2d();
 }
 

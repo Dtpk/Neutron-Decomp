@@ -28,8 +28,8 @@ set_property(GLOBAL PROPERTY _CMAKE_FindGit_GIT_EXECUTABLE_VERSION
 include(ExternalProject)
 ExternalProject_Add(sdl2-populate
                      "UPDATE_DISCONNECTED" "False" "GIT_REPOSITORY" "https://github.com/libsdl-org/SDL.git" "EXTERNALPROJECT_INTERNAL_ARGUMENT_SEPARATOR" "GIT_TAG" "release-2.30.9"
-                    SOURCE_DIR          "/workspace/neutron-port-android-universal/build-android-armv7/_deps/sdl2-src"
-                    BINARY_DIR          "/workspace/neutron-port-android-universal/build-android-armv7/_deps/sdl2-build"
+                    SOURCE_DIR          "/workspace/fix-split/Neutron-Port-Android/neutron-port-universal/build-android-armv7/_deps/sdl2-src"
+                    BINARY_DIR          "/workspace/fix-split/Neutron-Port-Android/neutron-port-universal/build-android-armv7/_deps/sdl2-build"
                     CONFIGURE_COMMAND   ""
                     BUILD_COMMAND       ""
                     INSTALL_COMMAND     ""

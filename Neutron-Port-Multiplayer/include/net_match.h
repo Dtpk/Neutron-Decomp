@@ -54,17 +54,55 @@ void start(neutron* game, int map_idx, unsigned seed);
 // lobby screen (before a match even started).
 void end(neutron* game);
 
-// Lockstep gate, called from split_screen_match::tick() once per
-// simulation-tick attempt while a networked match is active. Submits the
-// local player's staged action (set by handle_key_down/
-// handle_controller_button_down below), pumps net_session, and -- only
-// once EVERY connected player's action for this exact tick has arrived --
-// applies every remote slot's direction change via
-// split_screen_match::apply_direction() and calls
-// split_screen_match::tick_local_only() to actually advance the
-// simulation. If the full set hasn't arrived yet, does nothing this call
-// (see this function's own body for the real, disclosed latency caveat).
+// Lockstep gate -- applies every remote slot's direction change via
+// split_screen_match::apply_direction() and calls split_screen_match::
+// tick_local_only() to actually advance the simulation, but ONLY once
+// EVERY connected player's action for this exact tick has arrived AND
+// this function's own internal pacing clock says enough real time has
+// passed since the last real advance (same 55/75ms cadence local play
+// uses via the difficulty slider) -- see this function's own body for
+// why that second condition exists. Safe to call more than once in
+// quick succession (both pump_network() below and the still-existing
+// gated split_screen_match::tick() dispatch call into this) -- whichever
+// call lands after both conditions are true does the real work, every
+// other call this same tick-window is a no-op.
 void drive_tick(neutron* game);
+
+// Called from split_screen_match::pump_network() every real render frame
+// (main.cpp's own outer loop, NOT gated by the ~55-75ms sim-tick cadence
+// main_loop() normally runs behind) while a networked match or its
+// match-over screen is showing.
+//
+// Real bug this fixes, in two parts, both found from real multiplayer
+// testing:
+//
+// Part 1 (match ran at roughly half speed, even on a real two-machine
+// LAN): submit_local_action()/net_session::update() used to only run as
+// often as main_loop() was invoked -- gated by the SAME ~55-75ms
+// outer-loop check used for the actual simulation step. Two peers' outer
+// loops are two independent while() loops on two different machines,
+// NOT phase-aligned with each other at all -- a given tick could easily
+// need to wait for the OTHER peer's own next ~55-75ms-gated pass before
+// its input even got sent or received, adding up to nearly one full
+// extra tick interval of latency PER tick on average. Fixed by this
+// function existing at all: pumping sockets every real frame (~16ms at
+// 60fps) instead of ~55-75ms shrinks that phase-misalignment window
+// roughly 3-5x.
+//
+// Part 2 (speed was fixed, but input STILL felt noticeably delayed): the
+// first fix above only made tick_ready() flip true SOONER -- it didn't
+// change how often the match actually CHECKED/consumed a now-ready tick,
+// since drive_tick() (the only thing that does) was still only reached
+// via the SAME gated main_loop() path. A tick resolving early (thanks to
+// part 1) still had to sit "ready" doing nothing until this peer's own
+// next ~55-75ms-gated slot came around to actually apply it -- a real,
+// separate source of latency layered on top of the inherent one-tick
+// lockstep delay this design always has by nature. Fixed by calling the
+// FULL drive_tick() (not just a raw socket pump) from here for the
+// live-match screen specifically, so a resolved tick can advance the
+// instant its own pacing window opens, checked every real frame instead
+// of once per outer-gate cycle.
+void pump_network(neutron* game);
 
 // Rendering, called from split_screen_match::print_match() once per
 // frame while a networked match is active -- just forwards to
@@ -78,6 +116,33 @@ void drive_print(neutron* game);
 // handle_controller_button_down() below when the host confirms on the
 // match-over screen. No-op if called on a client.
 void retry(neutron* game);
+
+// Ends the current match early and returns to the multiplayer LOBBY
+// (menu_multiplayer::enter_lobby()), not the main menu -- and, unlike
+// end() below, never calls net_session::leave_session(), so the
+// session/roster survive. On the host this also sends CANCEL to every
+// client (net_session::cancel_match()) so they follow along to their own
+// lobby screen instead of being left connected to a host that's silently
+// sitting on a different screen. A client calls this same function
+// itself once it notices the host's CANCEL arrived (see
+// net_session::cancel_token(), checked every frame by drive_tick()/
+// update_match_over() below) -- net_session::cancel_match()'s own
+// host-only guard makes that call a no-op for the client, so this one
+// function covers both sides.
+//
+// Real bug this (and the cancel_token()/role()==None checks below) fixes:
+// ESC during a live match used to always call end() -- for the HOST, that
+// tore the whole session down via leave_session(), closing every client's
+// TCP socket out from under them with no warning. Clients had no code
+// path anywhere that noticed a connection had been closed mid-match (only
+// menu_multiplayer's own lobby-screen update() checked for that, and a
+// live match never runs that code), so drive_tick() just kept returning
+// early forever (tick_ready() can never become true again) -- the match
+// visibly froze for every client, each needing a MANUAL Escape to get out
+// on their own, which still just dumped them to the main menu like a real
+// disconnect, i.e. the exact "the host leaves, everyone else freezes until
+// they also escape" behavior reported from real testing.
+void cancel(neutron* game);
 
 // Called every frame from split_screen_match::update_match_over() (see
 // its own delegation) while a networked match-over screen is showing --
@@ -102,5 +167,14 @@ void handle_controller_button_down(neutron* game, const SDL_ControllerButtonEven
 // screen shows "DANIEL WINS!" instead of "PLAYER N WINS!", without
 // split_screen_match.cpp needing to know net_session exists.
 const char* winner_display_name();
+
+// True if WE are the host of the active (or just-ended) networked match --
+// split_screen_match::print_match_over() uses this to show the right
+// prompt (only the host's Enter actually does anything on the match-over
+// screen; a client pressing Enter there was silently doing nothing, which
+// read as "retry doesn't work" when reported from real testing). Keeps
+// split_screen_match.cpp from needing to know net_session exists at all,
+// same reasoning as winner_display_name() above.
+bool local_is_host();
 
 } // namespace net_match

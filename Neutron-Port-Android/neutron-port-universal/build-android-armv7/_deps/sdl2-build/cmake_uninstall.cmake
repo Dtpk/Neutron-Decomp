@@ -1,8 +1,8 @@
-if (NOT EXISTS "/workspace/neutron-port-android-universal/build-android-armv7/install_manifest.txt")
-    message(FATAL_ERROR "Cannot find install manifest: \"/workspace/neutron-port-android-universal/build-android-armv7/install_manifest.txt\"")
-endif(NOT EXISTS "/workspace/neutron-port-android-universal/build-android-armv7/install_manifest.txt")
+if (NOT EXISTS "/workspace/fix-split/Neutron-Port-Android/neutron-port-universal/build-android-armv7/install_manifest.txt")
+    message(FATAL_ERROR "Cannot find install manifest: \"/workspace/fix-split/Neutron-Port-Android/neutron-port-universal/build-android-armv7/install_manifest.txt\"")
+endif(NOT EXISTS "/workspace/fix-split/Neutron-Port-Android/neutron-port-universal/build-android-armv7/install_manifest.txt")
 
-file(READ "/workspace/neutron-port-android-universal/build-android-armv7/install_manifest.txt" files)
+file(READ "/workspace/fix-split/Neutron-Port-Android/neutron-port-universal/build-android-armv7/install_manifest.txt" files)
 string(REGEX REPLACE "\n" ";" files "${files}")
 foreach (file ${files})
     message(STATUS "Uninstalling \"$ENV{DESTDIR}${file}\"")

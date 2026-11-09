@@ -2,6 +2,6 @@
 # The patch step will be re-executed if anything in this file changes.
 # No other meaning or use of this file is supported.
 
-command (connected)=/opt/cmake/bin/cmake;-Dcan_fetch=YES;-DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE;-P;/workspace/neutron-port-android-universal/build-android-armv7/_deps/sdl2_mixer-subbuild/sdl2_mixer-populate-prefix/tmp/sdl2_mixer-populate-gitupdate.cmake
-command (disconnected)=/opt/cmake/bin/cmake;-Dcan_fetch=NO;-DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE;-P;/workspace/neutron-port-android-universal/build-android-armv7/_deps/sdl2_mixer-subbuild/sdl2_mixer-populate-prefix/tmp/sdl2_mixer-populate-gitupdate.cmake
-work_dir=/workspace/neutron-port-android-universal/build-android-armv7/_deps/sdl2_mixer-src
+command (connected)=/opt/cmake/bin/cmake;-Dcan_fetch=YES;-DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE;-P;/workspace/fix-split/Neutron-Port-Android/neutron-port-universal/build-android-armv7/_deps/sdl2_mixer-subbuild/sdl2_mixer-populate-prefix/tmp/sdl2_mixer-populate-gitupdate.cmake
+command (disconnected)=/opt/cmake/bin/cmake;-Dcan_fetch=NO;-DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE;-P;/workspace/fix-split/Neutron-Port-Android/neutron-port-universal/build-android-armv7/_deps/sdl2_mixer-subbuild/sdl2_mixer-populate-prefix/tmp/sdl2_mixer-populate-gitupdate.cmake
+work_dir=/workspace/fix-split/Neutron-Port-Android/neutron-port-universal/build-android-armv7/_deps/sdl2_mixer-src

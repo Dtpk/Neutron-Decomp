@@ -33,3 +33,12 @@ inline const char* stage_display_name(int idx) {
     if (idx == 25 && g_custom_stage.loaded) return g_custom_stage.name;
     return "GRID";
 }
+
+// Cube count for miniature/level index idx, same indexing convention as
+// stage_display_name() above. menu_multiplayer.cpp uses this to filter out
+// maps too small for the current player count in its host-side map picker.
+inline int stage_cube_count(int idx) {
+    if (idx >= 0 && idx < 25) return LEVEL_TABLE[idx].cubes;
+    if (idx == 25 && g_custom_stage.loaded) return g_custom_stage.cube_count;
+    return 0;
+}

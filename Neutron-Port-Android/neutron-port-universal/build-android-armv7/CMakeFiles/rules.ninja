@@ -130,7 +130,7 @@ rule CXX_STATIC_LIBRARY_LINKER__SDL2_mixer_Release
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = /opt/cmake/bin/cmake --regenerate-during-build -S/workspace/neutron-port-android-universal -B/workspace/neutron-port-android-universal/build-android-armv7
+  command = /opt/cmake/bin/cmake --regenerate-during-build -S/workspace/fix-split/Neutron-Port-Android/neutron-port-universal -B/workspace/fix-split/Neutron-Port-Android/neutron-port-universal/build-android-armv7
   description = Re-running CMake...
   generator = 1
 

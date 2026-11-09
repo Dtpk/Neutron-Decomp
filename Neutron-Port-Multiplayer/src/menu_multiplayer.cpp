@@ -78,6 +78,54 @@ bool hit_band(float ly, float row_y, float half_height = 10.0f) {
 // (glOrtho(0,480,0,272,-1,1)) -- matches touch_input.cpp's own LOGICAL_W.
 const float LOGICAL_W = 480.0f;
 
+// Heuristic cap on how many players a map's cube count can reasonably
+// spread spawns/trails across without the whole thing turning into an
+// immediate pileup -- 6 players per cube, so e.g. "cube" (1 cube) only
+// supports up to 6, while "death star" (12 cubes, the biggest built-in
+// map) supports up to 72. Tuned for "feels playable," not derived from
+// anything exact; adjust this one constant if that balance feels wrong
+// in practice. Only applies to the multiplayer host's map picker below --
+// local split-screen is untouched and stays capped at 4 players regardless
+// of map, same as before this feature existed.
+const int PLAYERS_PER_CUBE = 6;
+
+bool stage_fits_player_count(int idx, int player_count) {
+    return stage_cube_count(idx) * PLAYERS_PER_CUBE >= player_count;
+}
+
+// Cycles s_host_map_idx by `direction` (-1 or +1), skipping over any
+// concrete map that doesn't fit the CURRENT connected player count --
+// RANDOM (-1) is always kept as a valid stop since it resolves to a
+// fitting map at start-match time (see resolve_random_map_idx() below),
+// never to a fixed one. Bounded to at most one full lap of every stage so
+// a degenerate "nothing fits" case (shouldn't happen -- even "cube" fits
+// up to 6, and this feature's own cap tops out at 12) can't spin forever.
+void step_host_map(int direction) {
+    int player_count = net_session::connected_player_count();
+    int n = total_stage_count();
+    for (int tries = 0; tries <= n; tries++) {
+        s_host_map_idx += direction;
+        if (s_host_map_idx < -1) s_host_map_idx = n - 1;
+        else if (s_host_map_idx >= n) s_host_map_idx = -1;
+        if (s_host_map_idx < 0 || stage_fits_player_count(s_host_map_idx, player_count)) break;
+    }
+}
+
+// Resolves "RANDOM" to a concrete index, picking only among maps that fit
+// player_count -- same reasoning as start_match_with_sources()'s own
+// comment on resolving RANDOM once on the host: a map too small for the
+// actual roster should never be the result, random or not.
+int resolve_random_map_idx(int player_count) {
+    int n = total_stage_count();
+    int candidates[26]; // n is at most 26 (25 built-in + 1 optional custom)
+    int count = 0;
+    for (int i = 0; i < n; i++) {
+        if (stage_fits_player_count(i, player_count)) candidates[count++] = i;
+    }
+    if (count == 0) return 0; // degenerate fallback, shouldn't happen -- see step_host_map()'s comment
+    return candidates[std::rand() % count];
+}
+
 } // namespace
 
 void reset(neutron* game) {
@@ -93,8 +141,47 @@ void reset(neutron* game) {
     net_session::init();
 }
 
+void enter_lobby(neutron* game) {
+    game->game_status = 30;
+    s_mode = (net_session::role() == net_session::Role::Host) ? Mode::HostLobby : Mode::JoinLobby;
+}
+
+int validate_map_choice(int map_idx, int player_count) {
+    // RANDOM is always valid as-is -- it resolves to a fitting map fresh
+    // at start-match time (resolve_random_map_idx() above) regardless of
+    // how the roster has changed since it was picked.
+    if (map_idx < 0 || stage_fits_player_count(map_idx, player_count)) return map_idx;
+    // Real gap this fixes: net_match.cpp's retry() used to replay
+    // s_last_map_idx completely unchecked -- a roster that grew past what
+    // that map could handle (mid-match joiners promoted in between, see
+    // net_session::notify_match_ended()) would silently replay an
+    // oversized match on the SAME too-small map, even though the
+    // HostLobby screen's own map picker would never have let that
+    // combination be chosen fresh. Same wrap-forward search as
+    // step_host_map(1), but starting from map_idx itself rather than
+    // s_host_map_idx, and never landing on RANDOM (-1) -- retry() always
+    // wants a concrete replacement, not a fresh roll.
+    int n = total_stage_count();
+    for (int tries = 0; tries < n; tries++) {
+        map_idx = (map_idx + 1) % n;
+        if (stage_fits_player_count(map_idx, player_count)) return map_idx;
+    }
+    return 0; // degenerate fallback, same reasoning as resolve_random_map_idx()
+}
+
 void update(neutron* game) {
     net_session::update();
+
+    // A map picked while the roster was small can stop fitting once more
+    // players join (see stage_fits_player_count()) -- bump off it onto the
+    // next map that still fits rather than leaving an unplayable selection
+    // sitting there silently. No-op whenever the current selection (or
+    // RANDOM, always valid) still fits, so this is safe to check every
+    // frame.
+    if (s_mode == Mode::HostLobby && s_host_map_idx >= 0 &&
+        !stage_fits_player_count(s_host_map_idx, net_session::connected_player_count())) {
+        step_host_map(1);
+    }
 
     if (s_mode == Mode::JoinSetup) {
         if (s_discovery_scan_cooldown <= 0) {
@@ -189,7 +276,15 @@ void print(neutron* game) {
         draw_text_hud("[UP/DOWN] PICK LAN GAME   [ENTER] CONNECT   [ESC] BACK", 20.0f, 20.0f, 1.0f, 180, 180, 180, 200);
 
     } else if (s_mode == Mode::JoinLobby) {
-        draw_text_hud("CONNECTED -- WAITING FOR HOST TO START", 60.0f, 200.0f, 1.4f, 255, 255, 0, 255);
+        // Real gap fixed here: a connection that arrives while a match is
+        // already live gets parked by the host (net_session::
+        // join_pending()) rather than folded in -- it used to show this
+        // EXACT same text with no roster rows either way, giving no
+        // indication a match was already running vs. just not started
+        // yet.
+        draw_text_hud(net_session::join_pending() ? "MATCH IN PROGRESS -- WAITING TO JOIN NEXT ONE"
+                                                    : "CONNECTED -- WAITING FOR HOST TO START",
+                      net_session::join_pending() ? 40.0f : 60.0f, 200.0f, 1.4f, 255, 255, 0, 255);
         for (int i = 0; i < net_session::connected_player_count(); i++) {
             std::string nm = net_session::player_name(i);
             if (nm.empty()) continue;
@@ -221,7 +316,7 @@ void handle_key_down(neutron* game, SDL_Keycode sym) {
     if (s_mode == Mode::EnterName) {
         if (sym == SDLK_RETURN) {
             if (s_role_cursor == 0) {
-                if (net_session::host_game(s_name_buf, 4)) {
+                if (net_session::host_game(s_name_buf, net_session::MAX_PLAYERS)) {
                     s_mode = Mode::HostLobby;
                 } else {
                     s_status_line = "COULD NOT START HOSTING";
@@ -240,13 +335,11 @@ void handle_key_down(neutron* game, SDL_Keycode sym) {
 
     if (s_mode == Mode::HostLobby) {
         if (sym == SDLK_LEFT || sym == SDLK_a) {
-            s_host_map_idx--;
-            if (s_host_map_idx < -1) s_host_map_idx = total_stage_count() - 1;
+            step_host_map(-1);
             return;
         }
         if (sym == SDLK_RIGHT || sym == SDLK_d) {
-            s_host_map_idx++;
-            if (s_host_map_idx >= total_stage_count()) s_host_map_idx = -1;
+            step_host_map(1);
             return;
         }
         if (sym == SDLK_RETURN && net_session::connected_player_count() >= 2) {
@@ -256,7 +349,9 @@ void handle_key_down(neutron* game, SDL_Keycode sym) {
             // each land on a DIFFERENT map for what's supposed to be the
             // same match (see net_match.h's own comment on the parallel
             // spawn-seed issue this same pattern would cause).
-            int resolved_map_idx = (s_host_map_idx < 0) ? (std::rand() % total_stage_count()) : s_host_map_idx;
+            int resolved_map_idx = (s_host_map_idx < 0)
+                ? resolve_random_map_idx(net_session::connected_player_count())
+                : s_host_map_idx;
             unsigned seed = (unsigned)SDL_GetTicks();
             net_session::start_match(resolved_map_idx, seed);
             net_match::start(game, resolved_map_idx, seed);

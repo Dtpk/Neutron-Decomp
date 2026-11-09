@@ -27,6 +27,27 @@ namespace menu_multiplayer {
 // game_status = 30, so a previous visit's state doesn't linger.
 void reset(neutron* game);
 
+// Called by net_match.cpp's cancel() when a live match is cancelled back
+// to the lobby (host-initiated, or a client reacting to the host's
+// CANCEL) -- unlike reset() above, this does NOT touch s_host_map_idx,
+// s_name_buf, or re-init the session: the whole point of cancelling
+// (rather than leave_session()-ing) is that the roster/connection survive,
+// so the lobby should come back exactly as it was, not blanked out. Sets
+// game_status = 30 itself and picks HostLobby or JoinLobby from
+// net_session::role() -- the caller doesn't need to know which.
+void enter_lobby(neutron* game);
+
+// Re-validates a map choice against a player count, auto-advancing
+// (same heuristic as the HostLobby map picker's own step_host_map()) to
+// the next map that fits if it no longer does. map_idx may be -1
+// (RANDOM), always returned unchanged -- it resolves fresh at
+// start-match time regardless. net_match.cpp's retry() calls this before
+// replaying, since a roster that grew since the map was first chosen
+// (mid-match joiners promoted in between) could otherwise silently
+// replay an oversized match on a too-small map -- only the HostLobby
+// screen itself used to re-check this.
+int validate_map_choice(int map_idx, int player_count);
+
 // Per-tick, called from main_loop()'s game_status 30 case. Pumps
 // net_session::update() and, on the join screen, re-triggers a LAN
 // discovery scan periodically so the list stays current.
