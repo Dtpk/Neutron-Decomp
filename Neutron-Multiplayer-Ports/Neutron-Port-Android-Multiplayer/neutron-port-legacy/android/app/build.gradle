@@ -1,0 +1,54 @@
+apply plugin: 'com.android.application'
+
+android {
+    namespace "com.neutronport.game"
+    compileSdkVersion 34
+    defaultConfig {
+        // Distinct applicationId (not just namespace) so this can be
+        // installed side-by-side with the arm64-only and universal builds
+        // on the same test device without colliding.
+        applicationId "com.neutronport.game.legacy"
+        // 21 is NDK r27c's own floor (android-ndk-r27c/meta/platforms.json)
+        // and is genuinely safe for armeabi-v7a here: this game only calls
+        // Mix_LoadWAV() on bundled plain .wav files (see sound_mixer.cpp),
+        // never Mix_LoadMUS()/streaming codecs, so SDL2_mixer's optional
+        // decoders (FLAC/MOD/MP3/MIDI/Opus/Vorbis/WavPack) are disabled in
+        // the root CMakeLists.txt's ANDROID branch. That matters because
+        // WavPack's decoder defines _FILE_OFFSET_BITS=64, which aliases
+        // fseeko/ftello to fseeko64/ftello64 -- gated to API 24+ on 32-bit
+        // ABIs (Bionic's __INTRODUCED_IN(24)). Without it, SDL2's own
+        // SDL_rwops.c uses the PLAIN fseeko/ftello (32-bit off_t, no LFS
+        // alias), which the NDK's own per-API libc.so stubs confirm have
+        // been exported since API 21 (checked directly: llvm-nm -D on
+        // sysroot/.../21/libc.so, .../22/libc.so, .../23/libc.so all show
+        // `T fseeko@@LIBC`/`T ftello@@LIBC`; only fseeko64/ftello64 are
+        // new at 24). Must match ANDROID_PLATFORM below.
+        minSdkVersion 21
+        targetSdkVersion 34
+        versionCode 1
+        versionName "1.0"
+        // 32-bit ARM only -- this variant targets older/budget devices that
+        // never got an arm64 chip. See neutron-port-android-universal for a
+        // build covering both ABIs in one APK.
+        ndk {
+            abiFilters 'armeabi-v7a'
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lint {
+        abortOnError false
+    }
+    // Prebuilt libneutron.so (compiled separately via the project's own
+    // CMake+NDK build, not Gradle's native build integration) lives under
+    // src/main/jniLibs/<abi>/ -- Gradle packages anything found there into
+    // the APK automatically, no externalNativeBuild step needed.
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+}
