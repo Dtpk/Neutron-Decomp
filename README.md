@@ -27,9 +27,7 @@ https://everythingdigital1.com/build/neutron.html
 
 ---
 
-Custom maps and in game audio using stock sounds is live.. I think the multiplayer build I might try to use the original menu for if I can recover that. "Control remapping is also later" 
-
-"Windows release for the map maker and game is bundled and released and can be played till completion. Below video was a non-released build but it is now live!!! Sorry the video is highly compressed to upload to github. This build has added split-screen touch support and controller. I will try to keep this version separate from the keyboard only one in case any regressions happen."
+"Sorry the video is highly compressed to upload to github. This build has added split-screen touch support and controller. I will try to keep this version separate from the keyboard only one in case any regressions happen."
 
 
 
