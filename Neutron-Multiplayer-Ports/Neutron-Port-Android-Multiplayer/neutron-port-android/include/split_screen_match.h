@@ -34,6 +34,17 @@ class player;
 // so these never collide with it or with each other).
 namespace split_screen_match {
 
+// Seeds roll_spawn_planes()'s internal PRNG (used for this match's spawn
+// plane shuffle + per-slot offsets). net_match.cpp calls this -- instead
+// of std::srand() -- with the network-synced seed before starting a
+// multiplayer match, so every peer's roll comes out identical regardless
+// of platform (see roll_spawn_planes()'s own comment in the .cpp for why
+// std::rand() itself can't be trusted to do that across platforms).
+// Local split-screen never calls this -- no cross-machine agreement is
+// needed there, so roll_spawn_planes() just self-seeds from time() on
+// first use instead.
+void seed_portable_rand(unsigned int seed);
+
 // Call from split_screen_menu once a map is confirmed. map_idx is a real
 // 0-based stage index, or -1 for "pick one at random" (the RANDOM
 // selection). Reads which input source (keyboard / controller index) is in

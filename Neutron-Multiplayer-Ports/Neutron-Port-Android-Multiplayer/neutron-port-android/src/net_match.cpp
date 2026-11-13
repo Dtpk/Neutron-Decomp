@@ -7,7 +7,6 @@
 #include "player.h"
 
 #include <string>
-#include <cstdlib>
 
 namespace net_match {
 
@@ -127,10 +126,19 @@ void start(neutron* game, int map_idx, unsigned seed, int difficulty) {
     }
 
     // See this function's own header comment for why this matters: every
-    // peer must srand() identically, right here, before anything that
-    // calls std::rand() for this match's setup (spawn-plane shuffling,
-    // in split_screen_match.cpp's roll_spawn_planes()).
-    std::srand(seed);
+    // peer must seed identically, right here, before anything that rolls
+    // this match's setup (spawn-plane shuffling, in
+    // split_screen_match.cpp's roll_spawn_planes()). std::srand()/
+    // std::rand() used to be what this called, but std::rand()'s actual
+    // algorithm isn't standardized -- MinGW/Windows's (forwarding to
+    // msvcrt) produces a different sequence than Linux/Android's from
+    // the identical seed, desyncing the spawn roll (and everything
+    // downstream of it, forever, since lockstep never resyncs
+    // positions) the instant a Windows peer played against either.
+    // seed_portable_rand() seeds a small xorshift32 implemented directly
+    // in split_screen_match.cpp instead -- bit-identical on every
+    // platform this project builds for.
+    split_screen_match::seed_portable_rand(seed);
 
     // input_sources[net_session::MAX_PLAYERS]: -3 marks a slot as
     // "externally driven" (see split_screen_match.h's own comment on

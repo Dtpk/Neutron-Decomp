@@ -16,6 +16,7 @@
 #include <GL/glu.h>
 #include <cstdio>
 #include <cstdlib>
+#include <ctime>
 #include <vector>
 #include <algorithm>
 
@@ -131,6 +132,48 @@ void cleanup_players() {
     }
 }
 
+// Portable, deterministic PRNG for roll_spawn_planes() below -- real bug
+// this fixes: reported cross-platform multiplayer desync (ship trails not
+// matching reported positions) between Windows and Linux/Android, but NOT
+// between Linux and Android. roll_spawn_planes() is seeded from the
+// network-synced match seed (net_match.cpp's seed_portable_rand() call,
+// made before start_match_with_sources()) specifically so every peer
+// rolls the same spawn layout -- but std::rand()'s actual algorithm isn't
+// standardized, it's whatever the platform's C runtime implements.
+// Android's Bionic libc deliberately mirrors glibc's classic LCG for
+// porting compatibility, which is why Linux and Android agreed by
+// accident; MinGW/Windows forwards std::rand() to msvcrt.dll's own
+// different LCG, so the identical seed produced a different shuffle --
+// different spawn planes/offsets from tick zero, never resynced after
+// (this is lockstep: nothing re-sends authoritative positions). A tiny
+// xorshift32 implemented directly here is bit-identical on every
+// platform/compiler that builds this file, closing the gap for good.
+unsigned int s_portable_rand_state = 0;
+
+unsigned int portable_rand() {
+    if (s_portable_rand_state == 0) {
+        // Never explicitly seeded (local split-screen's own call path --
+        // no cross-machine agreement needed there) -- self-seed from
+        // time() so local matches still get a varied layout each run,
+        // same as std::rand()'s own implicit default state did.
+        s_portable_rand_state = (unsigned int)std::time(nullptr) | 1u;
+    }
+    unsigned int x = s_portable_rand_state;
+    x ^= x << 13;
+    x ^= x >> 17;
+    x ^= x << 5;
+    s_portable_rand_state = x;
+    return x & 0x7fffffffu; // non-negative, same usable range as std::rand()
+}
+
+} // namespace (anonymous)
+
+void seed_portable_rand(unsigned int seed) {
+    s_portable_rand_state = seed ? seed : 1; // xorshift needs a nonzero state
+}
+
+namespace {
+
 // Builds this match's per-slot spawn plane + in-plane offset ONCE, before
 // any spawn_player() calls, so "distinct plane per player" is a real
 // guarantee (a Fisher-Yates shuffle of plane indices, consumed in order)
@@ -146,7 +189,7 @@ void roll_spawn_planes(terrain* ground) {
     std::vector<int> order(n);
     for (int i = 0; i < n; i++) order[i] = i;
     for (int i = n - 1; i > 0; i--) {
-        int j = std::rand() % (i + 1);
+        int j = portable_rand() % (i + 1);
         std::swap(order[i], order[j]);
     }
 
@@ -170,8 +213,8 @@ void roll_spawn_planes(terrain* ground) {
         int margin = side / 4;
         int safe_width = side - margin * 2;
         if (safe_width < 1) { margin = 0; safe_width = side; }
-        s_spawn_off_a[slot] = margin + (safe_width > 0 ? std::rand() % safe_width : 0);
-        s_spawn_off_b[slot] = margin + (safe_width > 0 ? std::rand() % safe_width : 0);
+        s_spawn_off_a[slot] = margin + (safe_width > 0 ? portable_rand() % safe_width : 0);
+        s_spawn_off_b[slot] = margin + (safe_width > 0 ? portable_rand() % safe_width : 0);
     }
 }
 

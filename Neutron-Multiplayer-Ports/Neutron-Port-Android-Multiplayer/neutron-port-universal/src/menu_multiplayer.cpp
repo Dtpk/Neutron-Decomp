@@ -77,6 +77,21 @@ bool edit_text_field(std::string& field, SDL_Keycode sym, size_t max_len) {
         if (!field.empty()) field.pop_back();
         return true;
     }
+    // Real bug this avoids: once a tap has focused the field (see
+    // s_text_input_focused above), SDL_TEXTINPUT is active -- and a
+    // PHYSICAL keyboard's printable keys reliably send both a matching
+    // SDL_KEYDOWN and SDL_TEXTINPUT for the same press (this function's
+    // own header comment already notes that), not just the on-screen
+    // keyboard's. With both this function and edit_text_field_text()
+    // (below) wired up, that meant every character got inserted twice
+    // ("test" -> "tteesstt") the moment a field was focused, regardless
+    // of which keyboard actually did the typing. Backspace above is
+    // unaffected -- it has no SDL_TEXTINPUT counterpart at all, so it
+    // only ever arrives here either way. Letters/digits/etc. below defer
+    // to edit_text_field_text() instead while focused; unfocused (no tap
+    // yet -- pure keyboard/controller navigation, SDL_TEXTINPUT never
+    // active) this function alone still handles them, unchanged.
+    if (s_text_input_focused) return false;
     if (field.size() >= max_len) return false;
     if (sym >= SDLK_a && sym <= SDLK_z) { field += (char)('A' + (sym - SDLK_a)); return true; }
     if (sym >= SDLK_0 && sym <= SDLK_9) { field += (char)('0' + (sym - SDLK_0)); return true; }
