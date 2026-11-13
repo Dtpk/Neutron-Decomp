@@ -10,13 +10,14 @@
 #include <hal/video.h>
 #include <pbkit/pbkit.h>
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_mixer.h> // resolves to shim/sdl_mixer_stub's no-op stub -- see that header's own comment for why.
+#include <SDL2/SDL_mixer.h> // resolves to shim/sdl_mixer_stub's real Mix_* backend -- see that header's own comment.
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
 #include "neutron.h"
+#include "asset_path.h"
 #include "save_data.h"
 #include "custom_stage.h"
 #include "controller_input.h"
@@ -179,6 +180,52 @@ static void SDL_SetupAudio() {
     if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
         std::fprintf(stderr, "Warning: Unable to open audio: %s\n", Mix_GetError());
     }
+}
+
+// Real hardware reported no sound at all, with no way to see stderr (no
+// debug console on a real-hardware run) -- writes exactly what happened
+// to a plain file instead, using the SAME E:\UDATA\neutron\ path/fopen
+// mechanism already proven working for save data and custom map.txt, so
+// there's no new uncertainty about whether THIS write path itself works.
+// FTP/dashboard-readable after a test run; safe to leave in permanently
+// (opens+writes a few lines once at startup, trivial cost) but easy to
+// pull once the real cause is found.
+// Kept in permanently, not just for the initial bug hunt -- genuinely
+// useful any time the music/travel/explosion files get swapped out
+// later (e.g. trying different music.wav sizes), so there's always a
+// quick, no-guessing way to see whether a new file actually loaded
+// instead of just getting silence with no reason shown anywhere.
+// Reads sound_mixer's own REAL load results (via its *_loaded()
+// accessors) rather than doing a second separate Mix_LoadWAV() just for
+// this report -- that would double the real load+convert cost at every
+// boot for no reason now that the path bug is fixed. Must run AFTER
+// sound_mixer exists (i.e. after `new neutron(...)`), not before.
+static void write_audio_debug_log(neutron* game) {
+    std::string path = asset_path("audio_debug.txt");
+    std::FILE* f = std::fopen(path.c_str(), "w");
+    if (!f) return; // can't even write the log -- nothing more to do here
+
+    int freq = 0; Uint16 fmt = 0; int chans = 0;
+    bool device_open = Mix_QuerySpec(&freq, &fmt, &chans) != 0;
+    std::fprintf(f, "Mix_OpenAudio: %s\n", device_open ? "device open" : "FAILED");
+    if (device_open) {
+        std::fprintf(f, "spec: freq=%d format=0x%04x channels=%d\n", freq, (unsigned)fmt, chans);
+    }
+
+    const char* names[] = {"travel.wav", "explosion.wav", "music.wav"};
+    bool loaded[] = {
+        game->mixer && game->mixer->travel_loaded(),
+        game->mixer && game->mixer->explosion_loaded(),
+        game->mixer && game->mixer->music_loaded(),
+    };
+    for (int i = 0; i < 3; i++) {
+        std::string resolved = asset_path_sound(names[i]);
+        std::fprintf(f, "%s -> resolved '%s': %s\n", names[i], resolved.c_str(), loaded[i] ? "LOADED OK" : "FAILED");
+    }
+    // Only meaningful if at least one of the above actually failed --
+    // Mix_GetError() just reports whatever the LAST Mix_* error was.
+    std::fprintf(f, "Mix_GetError (if anything above failed): %s\n", Mix_GetError());
+    std::fclose(f);
 }
 
 static void handle_input(SDL_Event& event) {
@@ -512,6 +559,28 @@ static void handle_input(SDL_Event& event) {
         // (HalQuickRebootRoutine) -- the standard homebrew dashboard-
         // return path -- so that's still the way to exit.)
 
+        // Back button: toggles nxdk-gles11's own on-screen FPS counter
+        // (glShowFPSNV2A) -- real, physically-wired button on original
+        // Xbox controllers (confirmed in the same raw joystick driver
+        // cited above: btn_map index 6 = XINPUT_GAMEPAD_BACK), unlike
+        // Guide, and not used anywhere else in this game's own input
+        // handling (grepped the whole shared src tree -- nothing).
+        // Defaults OFF so normal play never pays for it; look at
+        // calculate_and_display_fps() in nxdk-gles11's own
+        // nv2a_helper.c for what it actually costs when on -- a cheap
+        // twice-a-second text redraw, EXCEPT glFlipNV2A() also adds a
+        // pb_busy() wait specifically to get an accurate render-time
+        // reading, which is a real (if small) extra sync point that
+        // doesn't happen with the counter off. A toggle sidesteps that
+        // entirely: leave it off for normal play, flip it on only for
+        // the length of an actual before/after comparison.
+        if (event.cbutton.button == SDL_CONTROLLER_BUTTON_BACK) {
+            static bool fps_shown = false;
+            fps_shown = !fps_shown;
+            glShowFPSNV2A(fps_shown ? GL_TRUE : GL_FALSE);
+            return;
+        }
+
         // Reported backwards on real Xbox hardware (bumpers steer the
         // opposite direction from the d-pad, which IS correct) -- d-pad
         // left/right and the shoulder buttons both route through the exact
@@ -621,6 +690,7 @@ int main(int argc, char* argv[]) {
 
     g_game = new neutron(save.user_color, save.user_difficulty, save.user_stage, save.user_sound, save.user_volume, save.fullscreen);
     g_game->apply_save_data(save);
+    write_audio_debug_log(g_game); // after construction -- reads sound_mixer's real load results
     if (g_game->mixer) g_game->mixer->start_music();
 
     if (!test_mode) {
